@@ -109,7 +109,6 @@
 
 	body,
 	.body-font,
-	.thb-product-detail .product-title,
 	.accordion summary,
 	details.accordion summary,
 	.accordion summary strong,
@@ -130,6 +129,31 @@
 		font-family: "ABC Repro Medium", sans-serif;
 	}
 
+	/* Product title styles */
+	.product__title h1,
+	h1.aktiv,
+	.thb-product-detail .product-title,
+	.product-title {
+		font-family: "aktiv-grotesk-extended", sans-serif !important;
+		font-weight: 700 !important;
+		font-style: normal;
+		font-size: 24px !important;
+		letter-spacing: 0.96px !important;
+		line-height: 140% !important;
+		text-transform: uppercase !important;
+		margin: 0;
+		padding-right: 30px;
+		text-align: left;
+	}
+
+	/* Product card title styles */
+	.product-card-title {
+		font-family: "aktiv-grotesk-extended", sans-serif;
+		font-weight: 700 !important;
+		font-style: normal;
+	}
+
+	/* Section header specific styles */
 	.button,
 	.shopify-payment-button__button,
 	.product-form__submit,
@@ -143,6 +167,11 @@
 		font-weight: 400;
 		font-style: normal;
 		letter-spacing: 0.02em;
+	}
+
+	.section-header h2 {
+		font-weight: var(--font-body-bold-weight, 600);
+		margin-bottom: 0px;
 	}
 
 	:root {
