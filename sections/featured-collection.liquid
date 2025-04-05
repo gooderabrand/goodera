@@ -42,7 +42,7 @@
 	<div class="row{% if full_width %} full-width-row{% endif %}">
 		<div class="small-12 columns">
 			{% render 'section-header', section_heading: section_heading, section_description: section_description, section_heading_left: section_heading_left, section_heading_button: section_heading_button %}
-			<div class="featured-collection__inner display-type--{{ display_type }}">
+			<div class="featured-collection__inner display-type--{{ display_type }}" style="--columns-desktop: {{ columns_desktop }};">
 				<{{ element }} id="product-grid-{{ section.id }}" class="products row {{ display_type }}">
 					{%- if featured_collection != blank -%}
 						{%- for product in featured_collection.products limit: product_limit -%}
@@ -140,7 +140,7 @@
 			"type": "range",
 			"id": "columns_desktop",
 			"min": 2,
-			"max": 4,
+			"max": 8,
 			"step": 1,
 			"default": 4,
 			"label": "Number of columns on desktop"
