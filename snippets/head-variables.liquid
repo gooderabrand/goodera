@@ -61,6 +61,8 @@
 	assign color_footer_bg = settings.color_footer_bg
 -%}
 
+<link rel="stylesheet" href="https://use.typekit.net/bin0qyn.css">
+
 {% style %}
 	{{ body_font | font_face: font_display: 'swap' }}
 
@@ -89,6 +91,13 @@
 		{%- endif -%}
 	{%- endif -%}
 
+	@font-face {
+		font-family: "aktiv-grotesk-extended";
+		src: url("https://use.typekit.net/bin0qyn.css") format("woff2");
+		font-weight: 600;
+		font-style: normal;
+	}
+
 	h1,h2,h3,h4,h5,h6,
 	.h1,.h2,.h3,.h4,.h5,.h6,
 	.logolink.text-logo,
@@ -96,9 +105,9 @@
 	.h1-xlarge,
 	.h1-large,
 	.customer-addresses .my-address .address-index {
-		font-style: {{ heading_font.style }};
-		font-weight: {{ heading_font.weight }};
-		font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+		font-style: normal;
+		font-weight: 600;
+		font-family: "aktiv-grotesk-extended", sans-serif;
 	}
 	body,
 	.body-font,
