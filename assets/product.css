@@ -214,28 +214,38 @@
       color: transparent;
       cursor: pointer;
       z-index: 4;
-      box-shadow: 0 0 0 1px var(--color-border) inset; }
-      .variations .product-form__input--color input[type="radio"] + label:after {
-        content: "";
-        display: block;
-        position: absolute;
-        top: 14px;
-        left: 14px;
-        right: 14px;
-        bottom: 14px;
-        border-radius: 50%;
-        background-position: center;
-        background-size: cover;
-        background-color: var(--option-color);
-        background-image: var(--option-color-image); }
+      box-shadow: 0 0 0 1px var(--color-border) inset;
+      transition: all 0.25s cubic-bezier(0.104, 0.204, 0.492, 1);
+    }
+    .variations .product-form__input--color input[type="radio"] + label:after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-position: center;
+      background-size: cover;
+      background-color: var(--option-color);
+      background-image: var(--option-color-image);
+      transition: all 0.25s cubic-bezier(0.104, 0.204, 0.492, 1);
+    }
     .variations .product-form__input--color input[type="radio"]:checked + label {
       z-index: 5;
-      box-shadow: 0 0 0 1px var(--color-body) inset; }
+      box-shadow: 0 0 0 1px var(--color-body) inset;
+      border: 1px solid var(--color-body);
+      transition: border-color 0.25s cubic-bezier(0.104, 0.204, 0.492, 1), box-shadow 0.25s cubic-bezier(0.104, 0.204, 0.492, 1);
+    }
     .variations .product-form__input--color input[type="radio"]:hover:after {
-      transform: scale(0.9); }
+      transform: scale(0.95);
+      transition: all 0.25s cubic-bezier(0.104, 0.204, 0.492, 1);
+    }
     .variations .product-form__input--color input[type="radio"]:focus-visible + label {
-      transform: scale(0.9);
-      box-shadow: 0 0 0 2px #015ecc inset; }
+      transform: scale(0.95);
+      box-shadow: 0 0 0 2px #015ecc inset;
+      transition: all 0.25s cubic-bezier(0.104, 0.204, 0.492, 1);
+    }
     .variations .product-form__input--color--large input[type="radio"] + label {
       width: 64px;
       height: 64px; }
@@ -262,15 +272,15 @@
         content: "";
         display: block;
         position: absolute;
-        top: 14px;
-        left: 14px;
-        right: 14px;
-        bottom: 14px;
-        border-radius: 50%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         background-position: center;
         background-size: cover;
         background-color: var(--option-color);
-        background-image: var(--option-color-image); }
+        background-image: var(--option-color-image);
+      }
       .variations .product-form__input--siblings label a {
         display: block;
         position: absolute;
