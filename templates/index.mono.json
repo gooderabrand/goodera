@@ -209,7 +209,7 @@
         "full_width": true,
         "display_type": "carousel",
         "product_limit": 7,
-        "columns_desktop": 5,
+        "columns_desktop": 4,
         "show_view_all": true,
         "mobile_swipe": true,
         "show_progress_bar": true,
