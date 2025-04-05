@@ -23,10 +23,10 @@
 .products.carousel .product-card {
   flex-shrink: 0;
   width: 100%;
-  max-width: 275px;
+  max-width: 300px;
 }
 .products.carousel .carousel__slide {
-  width: 275px;
+  width: 300px;
   display: flex;
   min-height: 100%;
 }
@@ -41,6 +41,8 @@
 }
 .products.carousel.flickity-enabled .flickity-viewport {
   overflow: visible;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 .products.carousel .promotion-column {
   margin-bottom: 0;
