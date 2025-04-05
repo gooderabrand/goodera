@@ -7,13 +7,7 @@
 		assign body_font_500 = body_font | font_modify: 'weight', '600'
 	endunless
 
-	assign body_font_bold = body_font | font_modify: 'weight', '600'
-	unless body_font_bold
-		assign body_font_bold = body_font | font_modify: 'weight', '700'
-	endunless
-
 	assign body_font_italic = body_font | font_modify: 'style', 'italic'
-	assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
 
 	assign color_body_bg = settings.color_body_bg
 	assign color_body = settings.color_body
@@ -70,38 +64,14 @@
 	  {{ body_font_500 | font_face: font_display: 'swap' }}
 	{%- endif -%}
 
-	{%- if body_font_bold -%}
-	  {{ body_font_bold | font_face: font_display: 'swap' }}
-	{%- endif -%}
-
 	{%- if body_font_italic -%}
 	  {{ body_font_italic | font_face: font_display: 'swap' }}
-	{%- endif -%}
-
-	{%- if body_font_bold_italic -%}
-	  {{ body_font_bold_italic | font_face: font_display: 'swap' }}
-	{%- endif -%}
-
-	{% if body_font != heading_font %}
-		{{ heading_font | font_face: font_display: 'swap' }}
-		{%- assign heading_font_400 = heading_font | font_modify: 'weight', '400' -%}
-
-		{%- if heading_font_400 -%}
-		  {{ heading_font_400 | font_face: font_display: 'swap' }}
-		{%- endif -%}
 	{%- endif -%}
 
 	@font-face {
 		font-family: "aktiv-grotesk-extended";
 		src: url("https://use.typekit.net/bin0qyn.css") format("woff2");
 		font-weight: 600;
-		font-style: normal;
-	}
-
-	@font-face {
-		font-family: "aktiv-grotesk-extended";
-		src: url("https://use.typekit.net/bin0qyn.css") format("woff2");
-		font-weight: 700;
 		font-style: normal;
 	}
 
@@ -118,16 +88,12 @@
 	.heading-font,
 	.h1-xlarge,
 	.h1-large,
-	.customer-addresses .my-address .address-index {
-		font-style: normal;
-		font-weight: 600;
-		font-family: "aktiv-grotesk-extended", sans-serif;
-	}
-
-	/* Strong headings and UI elements */
+	.customer-addresses .my-address .address-index,
 	.side-panel__header,
 	.cart__header,
 	.cart-drawer__header,
+	.section-header__heading,
+	.section-header__heading strong,
 	.product__info-wrapper strong,
 	.product__title strong,
 	.product-form__heading,
@@ -137,75 +103,46 @@
 	.mega-menu-promotion--cover p,
 	.mega-menu-sidebar--button {
 		font-family: "aktiv-grotesk-extended", sans-serif;
-		font-weight: 700;
-		font-style: normal;
-		letter-spacing: 0.01em;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-	}
-
-	/* Section header specific styles */
-	.section-header__heading strong {
-		font-family: "aktiv-grotesk-extended", sans-serif;
-		font-weight: 600 !important;
-		font-style: normal;
-		letter-spacing: 0.01em;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-	}
-
-	/* Regular headings */
-	h1,h2,h3,h4,h5,h6,
-	.h1,.h2,.h3,.h4,.h5,.h6,
-	.logolink.text-logo,
-	.heading-font,
-	.h1-xlarge,
-	.h1-large,
-	.customer-addresses .my-address .address-index,
-	.section-header__heading {
-		font-family: "aktiv-grotesk-extended", sans-serif;
 		font-weight: 600;
 		font-style: normal;
-		letter-spacing: 0.01em;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
 	}
 
-	/* Body text */
 	body,
 	.body-font,
-	.thb-product-detail .product-title {
+	.thb-product-detail .product-title,
+	.accordion summary,
+	details.accordion summary,
+	.accordion summary strong,
+	details summary,
+	details > summary,
+	details.accordion > summary,
+	.side-panel__header h4,
+	h4.body-font,
+	.product-title-uppercase-true .product-add-to-cart-sticky--title,
+	.rte strong,
+	.rte p strong,
+	.section-header--content .rte,
+	.section-header--content .rte strong,
+	.section-header--content .rte p strong,
+	.thb-secondary-area .thb-item-count {
 		font-style: normal;
 		font-weight: 500;
 		font-family: "ABC Repro Medium", sans-serif;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
 	}
 
-	/* Buttons */
 	.button,
 	.shopify-payment-button__button,
 	.product-form__submit,
 	.shopify-challenge__button,
 	.customer button,
 	button[type="submit"],
-	.btn {
-		font-family: "space-mono", mono;
-		font-weight: 700;
-		font-style: normal;
-		letter-spacing: 0.02em;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-	}
-
+	.btn,
 	.button--secondary,
 	.button--outline {
 		font-family: "space-mono", mono;
 		font-weight: 400;
 		font-style: normal;
 		letter-spacing: 0.02em;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
 	}
 
 	:root {
@@ -214,9 +151,7 @@
 		--font-body-line-height-scale: {{ settings.body_font_line_height_scale | divided_by: 100.0 }};
 		--font-body-letter-spacing: {{ settings.body_font_letter_spacing | divided_by: 1000.0 }}em;
 		--font-body-medium-weight: 500;
-		--font-body-bold-weight: 700;
-		--font-heading-weight: 600;
-		--font-heading-bold-weight: 700;
+		--font-body-bold-weight: 600;
 		--font-announcement-scale: {{ settings.announcement_font_scale | divided_by: 100.0 }};
 		--font-heading-scale: {{ settings.heading_font_scale | divided_by: 100.0 }};
 		--font-heading-line-height-scale: {{ settings.heading_font_line_height_scale | divided_by: 100.0 }};
@@ -287,6 +222,18 @@
 		--color-footer-border: {{ color_footer_border }};
 		--color-footer-border-rgb: {{ color_footer_border.rgb | replace: ' ' , ',' }};
 		--color-footer-bg: {{ color_footer_bg }};
+	}
+
+	/* Override product.css accordion styles */
+	.accordion summary,
+	details.accordion summary,
+	.accordion summary strong,
+	details summary,
+	details > summary,
+	details.accordion > summary {
+		font-family: "ABC Repro Medium", sans-serif !important;
+		font-weight: 500 !important;
+		font-style: normal !important;
 	}
 
 	{%- for index in (1..4) -%}
