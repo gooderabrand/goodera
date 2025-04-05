@@ -98,6 +98,13 @@
 		font-style: normal;
 	}
 
+	@font-face {
+		font-family: "ABC Repro Medium";
+		src: url("https://cdn.shopify.com/s/files/1/0730/8509/2156/files/ABC_Repro_Medium.ttf?v=1743829873") format("truetype");
+		font-weight: 500;
+		font-style: normal;
+	}
+
 	h1,h2,h3,h4,h5,h6,
 	.h1,.h2,.h3,.h4,.h5,.h6,
 	.logolink.text-logo,
@@ -112,10 +119,32 @@
 	body,
 	.body-font,
 	.thb-product-detail .product-title {
-		font-style: {{ body_font.style }};
-		font-weight: {{ body_font.weight }};
-		font-family: {{ body_font.family }}, {{ body_font.fallback_families }};
+		font-style: normal;
+		font-weight: 500;
+		font-family: "ABC Repro Medium", sans-serif;
 	}
+
+	.button,
+	.shopify-payment-button__button,
+	.product-form__submit,
+	.shopify-challenge__button,
+	.customer button,
+	button[type="submit"],
+	.btn {
+		font-family: "space-mono", mono;
+		font-weight: 700;
+		font-style: normal;
+		letter-spacing: 0.02em;
+	}
+
+	.button--secondary,
+	.button--outline {
+		font-family: "space-mono", mono;
+		font-weight: 400;
+		font-style: normal;
+		letter-spacing: 0.02em;
+	}
+
 	:root {
 		--mobile-swipe-width: calc(90vw - 30px);
 		--font-body-scale: {{ settings.body_font_scale | divided_by: 100.0 }};
