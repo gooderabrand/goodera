@@ -8,7 +8,174 @@
  * ------------------------------------------------------------
  */
 {
-  "current": "Default",
+  "current": {
+    "heading_font": "archivo_narrow_n6",
+    "body_font": "archivo_narrow_n4",
+    "navigation_uppercase": true,
+    "product_title_uppercase": true,
+    "button_uppercase": true,
+    "color_accent": "#151515",
+    "outline_button_label": "#151515",
+    "color_dots": "#151515",
+    "section_spacing_desktop": 90,
+    "button_border_radius": 30,
+    "product_aspect_ratio": "portrait",
+    "product_image_fit": "contain",
+    "products_hover_images_count": 1,
+    "products_hover_dots": false,
+    "enable_quick_add": false,
+    "enable_quick_view": false,
+    "show_products_vendor": false,
+    "show_products_subtitle": false,
+    "show_products_rating": false,
+    "swatch_style": "always",
+    "show_size_options": true,
+    "size_options_limit": 5,
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "blocks": {
+          "03563edc-5c33-49b7-b848-878d67e0c6b4": {
+            "type": "text",
+            "settings": {
+              "icon": "ruler",
+              "text": "Add campaign text here.",
+              "link": ""
+            }
+          },
+          "b122c7d9-bfb2-4e2f-9044-8b7d1b325ec6": {
+            "type": "text",
+            "settings": {
+              "icon": "ruler",
+              "text": "Add campaign text here.",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "03563edc-5c33-49b7-b848-878d67e0c6b4",
+          "b122c7d9-bfb2-4e2f-9044-8b7d1b325ec6"
+        ],
+        "settings": {
+          "announcement_bar": true,
+          "announcement_bar_homepage_only": false,
+          "direction": "left",
+          "speed": "20s"
+        }
+      },
+      "header": {
+        "type": "header",
+        "blocks": {
+          "c947d47d-abab-4f58-b89e-58ad729f6986": {
+            "type": "megamenu",
+            "settings": {
+              "position": "2",
+              "promo_1_heading": "Promotion heading",
+              "promo_1_link_label": "Shop",
+              "promo_1_link": "",
+              "promo_2_heading": "Promotion heading",
+              "promo_2_link_label": "Shop",
+              "promo_2_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "c947d47d-abab-4f58-b89e-58ad729f6986"
+        ],
+        "settings": {
+          "logo_height_range": 24,
+          "logo_height_range_mobile": 24,
+          "style": "style3",
+          "header_shadow": "header--shadow-small",
+          "menu": "main-menu",
+          "transparent_header": true,
+          "show_language_switcher": true,
+          "show_currency_switcher": true,
+          "mobile_secondary_menu": "",
+          "mobile_promo_heading": "Alexandre Vauthier A/W 22 Haute Couture",
+          "mobile_promo_link_label": "Shop",
+          "mobile_promo_link": "shopify://collections/all"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "e9bfbc11-abdf-4291-b821-b57f5c59d29b": {
+            "type": "text",
+            "settings": {
+              "column_size": "large",
+              "title": "",
+              "text": "",
+              "text_size": "medium",
+              "button_text": "",
+              "button_link": "",
+              "show_social_links": true
+            }
+          },
+          "919dfa59-648f-4330-afcc-8bb0c24dab8f": {
+            "type": "text",
+            "settings": {
+              "column_size": "large",
+              "title": "",
+              "text": "<p>Add your store address here</p>",
+              "text_size": "large",
+              "button_text": "Add button link",
+              "button_link": "",
+              "show_social_links": false
+            }
+          },
+          "401e3886-6cb7-4742-8fda-45a0d97a26a3": {
+            "type": "menu",
+            "settings": {
+              "column_size": "medium",
+              "title": "COMPANY",
+              "menu": ""
+            }
+          },
+          "00a364e5-af4e-4073-871b-4d533bd4da06": {
+            "type": "menu",
+            "settings": {
+              "column_size": "medium",
+              "title": "RESOURCES",
+              "menu": ""
+            }
+          },
+          "a09a8a35-bedc-4119-aa04-3ce886faba9d": {
+            "type": "menu",
+            "settings": {
+              "column_size": "medium",
+              "title": "SUPPORT",
+              "menu": ""
+            }
+          },
+          "56d4ccfa-a515-4c26-9e64-c26ec5eea8d2": {
+            "type": "signup",
+            "settings": {
+              "column_size": "medium",
+              "title": "NEWSLETTER",
+              "text": "<p>Add a short description for this newsletter</p>"
+            }
+          }
+        },
+        "block_order": [
+          "e9bfbc11-abdf-4291-b821-b57f5c59d29b",
+          "919dfa59-648f-4330-afcc-8bb0c24dab8f",
+          "401e3886-6cb7-4742-8fda-45a0d97a26a3",
+          "00a364e5-af4e-4073-871b-4d533bd4da06",
+          "a09a8a35-bedc-4119-aa04-3ce886faba9d",
+          "56d4ccfa-a515-4c26-9e64-c26ec5eea8d2"
+        ],
+        "settings": {
+          "full_width": true,
+          "copyright_text": "All rights reserved.",
+          "show_language_switcher": true,
+          "show_currency_switcher": true,
+          "show_payment_icons": true
+        }
+      }
+    },
+    "content_for_index": []
+  },
   "presets": {
     "Default": {
       "heading_font": "archivo_narrow_n6",

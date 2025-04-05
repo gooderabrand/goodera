@@ -18,16 +18,17 @@
 			assign featured_media = featured_media.preview_image
 		endif
 	endif
-
-	assign sizes = '375x0,770x0'
 	if product_aspect_ratio == 'adapt'
 		if featured_media
 			assign ratio = featured_media.aspect_ratio
 		endif
+		assign sizes = '375x0,770x0'
 	elsif product_aspect_ratio == 'portrait'
 		assign ratio = 1 | divided_by: 1.25
+		assign sizes = '375x350,770x700'
 	elsif product_aspect_ratio == 'landscape'
 		assign ratio = 1 | divided_by: 0.75
+		assign sizes = '375x250,770x500'
 	endif
 	assign product_content_alignment = settings.product_content_alignment
 
@@ -41,14 +42,12 @@
 	assign size_options_variant_name = settings.size_options_variant_name
 	assign size_options_limit = settings.size_options_limit
 
-	# Product card image options
-	assign product_image_fit = settings.product_image_fit
 -%}
 <product-card class="product-card text-{{ product_content_alignment }}">
-  <figure class="product-card--featured-image product-card--featured-image--{{ product_image_fit }} {% if products_hover_images and product_card_product.images.size > 1 and products_hover_images_count > 0 %}thb-hover{% endif %}">
+  <figure class="product-featured-image {% if products_hover_images and product_card_product.images.size > 1 and products_hover_images_count > 0 %}thb-hover{% endif %}">
     {% render 'product-card-badge', product_card_product: product_card_product %}
 		
-    <a href="{{ product_card_product.url | within: collection }}" title="{{ product_card_product.title | escape }}" class="product-card--featured-image-link aspect-ratio aspect-ratio--{{ settings.product_aspect_ratio }}" style="--padding-bottom: {{ 1 | divided_by: ratio | times: 100 }}%;">
+    <a href="{{ product_card_product.url | within: collection }}" title="{{ product_card_product.title | escape }}" class="product-featured-image-link aspect-ratio aspect-ratio--{{ settings.product_aspect_ratio }}" style="--padding-bottom: {{ 1 | divided_by: ratio | times: 100 }}%;">
       {%- if products_hover_images and product_card_product.images.size > 1 -%}
         {%- for i in (1..products_hover_images_count) -%}
 					{%- if product_card_product.images[i] -%}
@@ -102,7 +101,7 @@
 		{%- endif -%}
 		{%- if settings.enable_quick_add -%}
 			{%- liquid
-				assign button_tag = 'button'
+				assign button_tag = 'quick-view'
 				if product_card_product.selected_or_first_available_variant.available == false
 					assign button_content = 'products.product.sold_out' | t
 				else
@@ -115,14 +114,10 @@
 							assign button_content = 'products.product.choose_options' | t
 						endif
 					endif
-
-					unless is_purchasable 
-						assign button_tag = 'quick-view'
-					endunless
 				endif
 			-%}
 			<div class="product-card--add-to-cart-button-container">
-				<{{ button_tag }} class="product-card--add-to-cart-button outline{% if is_purchasable %} product-card--add-to-cart-button-simple{% endif %} button accent" data-product-id="{{ product_card_product.selected_or_first_available_variant.id }}" data-product-handle="{{ product_card_product.handle }}" tabindex="-1" {% if product_card_product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+				<{{ button_tag }} class="product-card--add-to-cart-button outline{% if is_purchasable %} product-card--add-to-cart-button-simple{% endif %} button accent" data-product-handle="{{ product_card_product.handle }}" tabindex="-1" {% if product_card_product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
 					<span class="loading-overlay">{% render 'svg-icons' with 'thb-loading' %}</span>
 					<span class="product-card--add-to-cart-text">{{ button_content }}</span>
 				</{{ button_tag }}>
@@ -132,8 +127,8 @@
 </product-card>
 {%- else -%}
 <product-card class="product-card">
-	<figure class="product-card--featured-image {% if settings.products_hover_images %}thb-hover{% endif %}">
-		<a href="{{ product_card_product.url | within: collection }}" title="{{ product_card_product.title | escape }}" class="product-card--featured-image-link aspect-ratio aspect-ratio--{{ settings.product_aspect_ratio }}" style="--padding-bottom: {{ 1 | divided_by: 1 | times: 100 }}%;">
+	<figure class="product-featured-image {% if settings.products_hover_images %}thb-hover{% endif %}">
+		<a href="{{ product_card_product.url | within: collection }}" title="{{ product_card_product.title | escape }}" class="product-featured-image-link aspect-ratio aspect-ratio--{{ settings.product_aspect_ratio }}" style="--padding-bottom: {{ 1 | divided_by: 1 | times: 100 }}%;">
 			<div class="thb-placeholder">
 				{{ 'product-1' | placeholder_svg_tag }}
 			</div>
