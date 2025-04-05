@@ -99,6 +99,13 @@
 	}
 
 	@font-face {
+		font-family: "aktiv-grotesk-extended";
+		src: url("https://use.typekit.net/bin0qyn.css") format("woff2");
+		font-weight: 700;
+		font-style: normal;
+	}
+
+	@font-face {
 		font-family: "ABC Repro Medium";
 		src: url("https://cdn.shopify.com/s/files/1/0730/8509/2156/files/ABC_Repro_Medium.ttf?v=1743829873") format("truetype");
 		font-weight: 500;
@@ -116,14 +123,66 @@
 		font-weight: 600;
 		font-family: "aktiv-grotesk-extended", sans-serif;
 	}
+
+	/* Strong headings and UI elements */
+	.side-panel__header,
+	.cart__header,
+	.cart-drawer__header,
+	.product__info-wrapper strong,
+	.product__title strong,
+	.product-form__heading,
+	.drawer__heading,
+	.strong-heading,
+	.mega-menu-columns__heading,
+	.mega-menu-promotion--cover p,
+	.mega-menu-sidebar--button {
+		font-family: "aktiv-grotesk-extended", sans-serif;
+		font-weight: 700;
+		font-style: normal;
+		letter-spacing: 0.01em;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	/* Section header specific styles */
+	.section-header__heading strong {
+		font-family: "aktiv-grotesk-extended", sans-serif;
+		font-weight: 600 !important;
+		font-style: normal;
+		letter-spacing: 0.01em;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	/* Regular headings */
+	h1,h2,h3,h4,h5,h6,
+	.h1,.h2,.h3,.h4,.h5,.h6,
+	.logolink.text-logo,
+	.heading-font,
+	.h1-xlarge,
+	.h1-large,
+	.customer-addresses .my-address .address-index,
+	.section-header__heading {
+		font-family: "aktiv-grotesk-extended", sans-serif;
+		font-weight: 600;
+		font-style: normal;
+		letter-spacing: 0.01em;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	/* Body text */
 	body,
 	.body-font,
 	.thb-product-detail .product-title {
 		font-style: normal;
 		font-weight: 500;
 		font-family: "ABC Repro Medium", sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 	}
 
+	/* Buttons */
 	.button,
 	.shopify-payment-button__button,
 	.product-form__submit,
@@ -135,6 +194,8 @@
 		font-weight: 700;
 		font-style: normal;
 		letter-spacing: 0.02em;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 	}
 
 	.button--secondary,
@@ -143,6 +204,8 @@
 		font-weight: 400;
 		font-style: normal;
 		letter-spacing: 0.02em;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 	}
 
 	:root {
@@ -150,8 +213,10 @@
 		--font-body-scale: {{ settings.body_font_scale | divided_by: 100.0 }};
 		--font-body-line-height-scale: {{ settings.body_font_line_height_scale | divided_by: 100.0 }};
 		--font-body-letter-spacing: {{ settings.body_font_letter_spacing | divided_by: 1000.0 }}em;
-		--font-body-medium-weight: {{ body_font_500.weight | default: '500' }};
-    --font-body-bold-weight: {{ body_font_bold.weight | default: '600' }};
+		--font-body-medium-weight: 500;
+		--font-body-bold-weight: 700;
+		--font-heading-weight: 600;
+		--font-heading-bold-weight: 700;
 		--font-announcement-scale: {{ settings.announcement_font_scale | divided_by: 100.0 }};
 		--font-heading-scale: {{ settings.heading_font_scale | divided_by: 100.0 }};
 		--font-heading-line-height-scale: {{ settings.heading_font_line_height_scale | divided_by: 100.0 }};
