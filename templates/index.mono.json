@@ -187,7 +187,7 @@
         "image_3DwDFf"
       ],
       "settings": {
-        "columns_desktop": 5,
+        "columns_desktop": 4,
         "section_width": "full-width-row-full",
         "mobile_swipe": true,
         "image_ratio": "adapt",
