@@ -56,6 +56,7 @@
 -%}
 
 <link rel="stylesheet" href="https://use.typekit.net/bin0qyn.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap">
 
 {% style %}
 	{{ body_font | font_face: font_display: 'swap' }}
@@ -80,6 +81,13 @@
 		src: url("https://cdn.shopify.com/s/files/1/0730/8509/2156/files/ABC_Repro_Medium.ttf?v=1743829873") format("truetype");
 		font-weight: 500;
 		font-style: normal;
+	}
+
+	@font-face {
+		font-family: "JetBrains Mono";
+		font-style: normal;
+		font-weight: 700;
+		font-optical-sizing: auto;
 	}
 
 	h1,h2,h3,h4,h5,h6,
@@ -164,14 +172,14 @@
 	.btn,
 	.button--secondary,
 	.button--outline {
-		font-family: "space-mono", mono;
-		font-weight: 400;
-		font-style: normal;
-		letter-spacing: 0.02em;
+		font-family: "JetBrains Mono", monospace !important;
+		font-weight: 700 !important;
+		font-style: normal !important;
+		letter-spacing: 0.02em !important;
 	}
 
 	.section-header h2 {
-		font-weight: var(--font-body-bold-weight, 600);
+		font-weight: 700 !important;
 		margin-bottom: 0px;
 	}
 
@@ -293,4 +301,9 @@
 			}
 		{% endunless %}
 	{%- endfor -%}
+
+	/* Mega menu column headings */
+	.thb-full-menu .mega-menu-columns__heading {
+		font-weight: 700 !important;
+	}
 {% endstyle %}
