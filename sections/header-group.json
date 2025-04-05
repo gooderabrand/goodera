@@ -35,26 +35,99 @@
         "5b1ab378-833d-4a94-a02e-8325ec1551d0",
         "2f7893ee-7b84-4f15-911a-801b94ffa38e"
       ],
+      "disabled": true,
       "settings": {
         "announcement_bar": true,
         "announcement_bar_homepage_only": false,
         "announcement_bar_layout": "marquee",
         "direction": "left",
-        "speed": "20s"
+        "speed": "20s",
+        "autoplay": true,
+        "autoplay_length": 5
       }
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "megamenu_8NgKcU": {
+          "type": "megamenu",
+          "settings": {
+            "position": "1",
+            "promo_1_image": "shopify://shop_images/Good_Era_Tone_and_texture_face_mask_mockup_Feb24.png",
+            "promo_1_heading": "BESTSELLERS",
+            "promo_1_link_label": "Shop",
+            "promo_1_link": "",
+            "promo_2_heading": "Promotion heading",
+            "promo_2_link_label": "Shop",
+            "promo_2_link": "",
+            "promo_3_heading": "Promotion heading",
+            "promo_3_link_label": "Shop",
+            "promo_3_link": "",
+            "promo_4_heading": "Promotion heading",
+            "promo_4_link_label": "Shop",
+            "promo_4_link": ""
+          }
+        },
+        "megamenu_etj8HN": {
+          "type": "megamenu",
+          "settings": {
+            "position": "2",
+            "promo_1_image": "shopify://shop_images/AMIRI-Campaign-Pre-Spring-2023-Image-1-1.jpg",
+            "promo_1_heading": "BESTSELLERS",
+            "promo_1_link_label": "Shop",
+            "promo_1_link": "",
+            "promo_2_heading": "Promotion heading",
+            "promo_2_link_label": "Shop",
+            "promo_2_link": "",
+            "promo_3_heading": "Promotion heading",
+            "promo_3_link_label": "Shop",
+            "promo_3_link": "",
+            "promo_4_heading": "Promotion heading",
+            "promo_4_link_label": "Shop",
+            "promo_4_link": ""
+          }
+        },
+        "megamenu_eDfjMT": {
+          "type": "megamenu",
+          "settings": {
+            "position": "3",
+            "promo_1_image": "shopify://shop_images/password-page-background-black_and_white.png",
+            "promo_1_heading": "BESTSELLERS",
+            "promo_1_link_label": "Shop",
+            "promo_1_link": "",
+            "promo_2_heading": "Promotion heading",
+            "promo_2_link_label": "Shop",
+            "promo_2_link": "",
+            "promo_3_heading": "Promotion heading",
+            "promo_3_link_label": "Shop",
+            "promo_3_link": "",
+            "promo_4_heading": "Promotion heading",
+            "promo_4_link_label": "Shop",
+            "promo_4_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "megamenu_8NgKcU",
+        "megamenu_etj8HN",
+        "megamenu_eDfjMT"
+      ],
       "settings": {
         "sticky_header": true,
-        "logo_height_range": 30,
-        "logo_height_range_mobile": 30,
-        "style": "style3",
+        "logo": "shopify://shop_images/Good_Era_4.1.svg",
+        "logo_height_range": 20,
+        "logo_height_range_mobile": 20,
+        "style": "style2",
         "header_shadow": "header--shadow-small",
         "menu": "main-menu",
-        "transparent_header": true,
+        "cart_icon": "frame_bag",
+        "use_icon_account": true,
+        "transparent_header": false,
+        "transparent_header_border": false,
+        "transparent_header_background": false,
+        "transparent_header_background_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.01) 60%)",
         "show_language_switcher": false,
-        "show_currency_switcher": true,
+        "show_currency_switcher": false,
         "mobile_secondary_menu": "",
         "mobile_promo_heading": "Promotion heading",
         "mobile_promo_link_label": "Shop",
