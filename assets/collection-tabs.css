@@ -1,35 +1,41 @@
 .collection-tabs {
-overflow: hidden; }
+  overflow: hidden; }
+
 .collection-tabs__list {
-display: block;
-overflow-x: scroll;
-text-align: left;
-white-space: nowrap;
-width: fit-content; /* Updated width to fit-content */
-justify-content: center;
-scrollbar-width: none;
-margin-top: 15px;
-border: 1px solid var(--color-accent);
-border-radius: 30px;
-padding: 5px;
-background-color: #fff; }
-[dir="rtl"] .collection-tabs__list {
-text-align: right; }
-.collection-tabs__list::-webkit-scrollbar {
-display: none; }
-.collection-tabs__list-link {
-  margin: 0 12px;
-  color: #000; /* Changed text color to white */
-  font-weight: var(--font-body-medium-weight, 500);
-  opacity: 0.4;
+  display: inline-flex;
   position: relative;
-  padding: 10px 20px;
+  overflow: hidden;
+  text-align: center;
+  white-space: nowrap;
+  width: fit-content;
+  justify-content: center;
+  margin-top: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 30px;
+  padding: 3px;
+  background-color: #fff;
+}
+
+[dir="rtl"] .collection-tabs__list {
+  text-align: right; }
+
+.collection-tabs__list::-webkit-scrollbar {
+  display: none; }
+
+.collection-tabs__list-link {
+  margin: 0;
+  color: #000;
+  font-weight: var(--font-body-medium-weight, 500);
+  opacity: 0.7;
+  position: relative;
+  padding: 8px 24px;
   border: none;
   border-radius: 25px;
   background-color: transparent;
   cursor: pointer;
   display: inline-block;
-  transition: all 0.3s ease; /* Added a transition effect */
+  transition: all 0.25s cubic-bezier(0.104, 0.204, 0.492, 1);
+  z-index: 1;
 }
 
 @media only screen and (min-width: 768px) {
@@ -40,15 +46,12 @@ display: none; }
 
 .collection-tabs__list-link:hover {
   opacity: 1;
-  background-color: rgba(255, 255, 255, 0.2); /* Changed hover background color to a semi-transparent white */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Added a subtle box shadow on hover */
 }
 
 .collection-tabs__list-link.active {
   opacity: 1;
-  background-color: var(--color-accent);
-  color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Added a subtle box shadow on active state */
+  background-color: #F5F5F5;
+  color: #000;
 }
 
 .collection-tabs__list-link:first-child:before {

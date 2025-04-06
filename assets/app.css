@@ -1354,7 +1354,7 @@ blockquote {
     blockquote {
       padding: 100px 10% 65px; } }
   blockquote:before {
-    content: "“";
+    content: "";
     position: absolute;
     top: -30px;
     font-size: 9rem;
@@ -2039,7 +2039,6 @@ h6,
 
 .header {
   display: block;
-  border-bottom: 1px solid var(--color-header-border, var(--color-border));
   position: relative;
   background: var(--color-header-bg, var(--bg-body, #fff));
   z-index: 30;
