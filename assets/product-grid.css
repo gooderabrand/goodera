@@ -11,70 +11,54 @@
 .products {
   list-style: none;
 }
-.products.carousel {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow: hidden;
-  min-width: 100%;
-  padding: 0;
-  gap: 15px;
-  justify-content: center;
-}
-.products.carousel .product-card {
-  flex-shrink: 0;
-  width: 100%;
-  max-width: 300px;
-}
-.products.carousel .carousel__slide {
-  width: 300px;
-  display: flex;
-  min-height: 100%;
-}
-.products.carousel .product-card {
-  height: 100%;
-}
-.no-js .products.carousel {
-  overflow-x: scroll;
-}
-.products.carousel.flickity-enabled {
-  overflow: visible;
-}
-.products.carousel.flickity-enabled .flickity-viewport {
-  overflow: visible;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-}
-.products.carousel .promotion-column {
-  margin-bottom: 0;
-  height: 100%;
-}
-.products .promotion-column {
-  margin-bottom: 20px;
-}
-@media only screen and (min-width: 768px) {
-  .products {
-    gap: 15px;
-    grid-template-columns: repeat(auto-fit, minmax(225px, 275px));
-    justify-content: center;
-  }
-}
-@media only screen and (min-width: 1024px) {
-  .products {
-    grid-template-columns: repeat(auto-fit, minmax(225px, 275px));
-  }
-}
-@media only screen and (min-width: 1280px) {
-  .products {
-    grid-template-columns: repeat(auto-fit, minmax(225px, 275px));
-  }
-}
-.products .gallery__item {
-  height: 100%; }
-  .products .gallery__item figure {
-    height: 100%;
-    padding-bottom: 0; }
-  .products .gallery__item-content {
-    padding: 20px; }
+  .products.carousel {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    min-width: 100%;
+    padding: 0; }
+    .products.carousel .product-card {
+      flex-shrink: 0; }
+    .products.carousel .carousel__slide {
+      width: 100%;
+      display: flex;
+      min-height: 100%; }
+    .products.carousel .product-card {
+      height: 100%; }
+    .no-js .products.carousel {
+      overflow-x: scroll; }
+    .products.carousel.flickity-enabled {
+      overflow: visible; }
+      .products.carousel.flickity-enabled .flickity-viewport {
+        overflow: visible; }
+    .products.carousel .promotion-column {
+      margin-bottom: 0;
+      height: 100%; }
+  .products .promotion-column {
+    margin-bottom: 20px; }
+    @media only screen and (min-width: 768px) {
+      .products {
+        gap: 20px;
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    @media only screen and (min-width: 1024px) {
+      .products {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+    @media only screen and (min-width: 1280px) {
+      .products {
+        grid-template-columns: repeat(7, 1fr);
+      }
+    }
+  .products .gallery__item {
+    height: 100%; }
+    .products .gallery__item figure {
+      height: 100%;
+      padding-bottom: 0; }
+    .products .gallery__item-content {
+      padding: 20px; }
       .products .gallery__item-content p {
         font-size: 0.8125rem; }
         @media only screen and (min-width: 768px) {
@@ -87,8 +71,7 @@
   min-height: calc(100% - 20px);
   position: relative;
   margin-bottom: 20px;
-  width: 100%;
-  max-width: 275px; }
+  width: 100%; }
   @media only screen and (min-width: 768px) {
     .product-card {
       margin-bottom: 30px;
