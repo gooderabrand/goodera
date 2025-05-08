@@ -353,9 +353,9 @@
   }
 
   .section-hero-banner .button-group .button {
-    width: 100%;
-    max-width: 240px;
-    min-width: 180px;
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
   }
 
   .section-hero-banner .text-left .button-group {
