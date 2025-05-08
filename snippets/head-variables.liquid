@@ -182,6 +182,16 @@
 		margin-bottom: 0px;
 	}
 
+	/* Header height override */
+	.header > .row > .columns {
+		min-height: 57px !important;
+	}
+	@media only screen and (min-width: 1068px) {
+		.header > .row > .columns {
+			min-height: 57px !important;
+		}
+	}
+
 	:root {
 		--mobile-swipe-width: calc(90vw - 30px);
 		--font-body-scale: {{ settings.body_font_scale | divided_by: 100.0 }};
