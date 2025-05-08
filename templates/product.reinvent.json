@@ -11,6 +11,7 @@
   "sections": {
     "breadcrumbs": {
       "type": "breadcrumbs",
+      "disabled": true,
       "settings": {}
     },
     "main-product": {
@@ -18,6 +19,7 @@
       "blocks": {
         "e431a79e-9c7b-4a53-a79a-0cb918617ecf": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "text": "{{ product.vendor }}",
             "text_style": "style_vendor"
@@ -26,7 +28,7 @@
         "title": {
           "type": "title",
           "settings": {
-            "uppercase": true,
+            "uppercase": false,
             "show_products_rating": true,
             "show_custom_badges": true
           }
@@ -41,14 +43,6 @@
             "inventory_notice_bar": true,
             "inventory_notice_threshold": 10,
             "inventory_notice_base": 84
-          }
-        },
-        "0b3e272b-c86a-4dba-946c-c6912251371c": {
-          "type": "description",
-          "settings": {
-            "seo_text_max_height": 1000,
-            "seo_text_read_more": "Read more",
-            "seo_text_read_less": "Read less"
           }
         },
         "variant_picker": {
@@ -68,14 +62,23 @@
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_quantity_selector": true,
+            "show_quantity_selector": false,
             "outline_button": true,
-            "show_dynamic_checkout": true,
+            "show_dynamic_checkout": false,
             "show_gift_card_recipient": false
+          }
+        },
+        "0b3e272b-c86a-4dba-946c-c6912251371c": {
+          "type": "description",
+          "settings": {
+            "seo_text_max_height": 1000,
+            "seo_text_read_more": "Read more",
+            "seo_text_read_less": "Read less"
           }
         },
         "1c29dd76-669f-4b4a-9883-a577855921eb": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "heading": "How to Use",
             "open": false,
@@ -86,6 +89,7 @@
         },
         "0041f1e3-030f-4c9d-ae87-ddb7c2fa4b2b": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "heading": "Ingredients",
             "open": false,
@@ -96,6 +100,7 @@
         },
         "e49f0a1b-c60d-4e4a-b3c1-100c37771e4a": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "heading": "Other Details",
             "open": false,
@@ -123,6 +128,7 @@
         },
         "4fd23485-293f-46a0-8a4c-34d0e25ea41b": {
           "type": "share",
+          "disabled": true,
           "settings": {}
         }
       },
@@ -130,9 +136,9 @@
         "e431a79e-9c7b-4a53-a79a-0cb918617ecf",
         "title",
         "546f2cee-3532-473a-836f-21f14fde7cfe",
-        "0b3e272b-c86a-4dba-946c-c6912251371c",
         "variant_picker",
         "buy_buttons",
+        "0b3e272b-c86a-4dba-946c-c6912251371c",
         "1c29dd76-669f-4b4a-9883-a577855921eb",
         "0041f1e3-030f-4c9d-ae87-ddb7c2fa4b2b",
         "e49f0a1b-c60d-4e4a-b3c1-100c37771e4a",
@@ -143,18 +149,19 @@
         "full_width": false,
         "enable_sticky_info": true,
         "enable_sticky_add_to_cart": true,
-        "show_taxes_included": true,
+        "show_taxes_included": false,
         "media_layout": "thumbnails",
-        "display_slider_pagination": true,
-        "media_aspect_ratio": "adapt",
-        "display_captions": true,
+        "display_slider_pagination": false,
+        "media_aspect_ratio": "square",
+        "display_captions": false,
         "hide_variants": false,
-        "lightbox": true,
+        "lightbox": false,
         "enable_video_looping": false
       }
     },
     "16623877721f33fb14": {
       "type": "spacer",
+      "disabled": true,
       "settings": {
         "spacer_mobile": 35,
         "spacer_desktop": 90,
@@ -164,6 +171,7 @@
     },
     "b0489ba4-fdb2-4043-8efe-5d9739ec5323": {
       "type": "background-video",
+      "disabled": true,
       "settings": {
         "desktop_height": "desktop-height-550",
         "mobile_height": "mobile-height-500",
@@ -180,6 +188,7 @@
     },
     "f2006113-5255-4733-ba5e-2a112734dc3e": {
       "type": "spacer",
+      "disabled": true,
       "settings": {
         "spacer_mobile": 40,
         "spacer_desktop": 80,
@@ -258,6 +267,7 @@
         "template--17027745677627__c6d7b417-11dd-4a95-8367-4f6f0eb615a8-16698862611096ccc0-3",
         "fa31a1e8-25be-4ea1-a217-5593378d6336"
       ],
+      "disabled": true,
       "settings": {
         "heading": "Product information",
         "heading_left": true,
@@ -276,6 +286,7 @@
     },
     "2b3aa16d-fce3-49ff-8751-8618f0a7421d": {
       "type": "spacer",
+      "disabled": true,
       "settings": {
         "spacer_mobile": 50,
         "spacer_desktop": 40,
@@ -331,6 +342,7 @@
         "6bdc1221-3d9f-4be8-b482-80341e02abcf",
         "94831cdf-9641-4e12-9506-e140c83f2870"
       ],
+      "disabled": true,
       "settings": {
         "columns_desktop": 3,
         "section_width": "grid",
@@ -379,6 +391,7 @@
         "template--17027745677627__1d9ac32d-5b10-41c7-89b8-56067807f786-16698862613e3a24a1-1",
         "template--17027745677627__1d9ac32d-5b10-41c7-89b8-56067807f786-16698862613e3a24a1-2"
       ],
+      "disabled": true,
       "settings": {
         "height": "height-auto",
         "full_width": false,
@@ -398,6 +411,7 @@
     },
     "796d9b19-7417-4ca3-b804-7c7c9811c44a": {
       "type": "spacer",
+      "disabled": true,
       "settings": {
         "spacer_mobile": 10,
         "spacer_desktop": 20,
@@ -441,6 +455,7 @@
         "15d956da-4a4b-4c3a-990b-e8ce5fa853e0",
         "2167d66c-c63d-41c3-aa7c-4cb5455519e1"
       ],
+      "disabled": true,
       "settings": {
         "mobile_height": "mobile-height-350",
         "desktop_height": "desktop-height-550",
@@ -460,6 +475,7 @@
     },
     "16625458859c68803a": {
       "type": "apps",
+      "disabled": true,
       "settings": {
         "section_width": "full-width-row",
         "disable_top_spacing": false,
@@ -468,6 +484,7 @@
     },
     "1662552569cce2536d": {
       "type": "spacer",
+      "disabled": true,
       "settings": {
         "spacer_mobile": 0,
         "spacer_desktop": 5,
@@ -478,10 +495,23 @@
     "product-recommendations": {
       "type": "product-recommendations",
       "settings": {
-        "heading": "Product recommendations",
+        "heading": "Recommended For You",
         "heading_left": true,
-        "description": "<p>Product recommendations description</p>",
+        "description": "",
         "full_width": false,
+        "mobile_swipe": true,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "recently_viewed_products_pdPAhT": {
+      "type": "recently-viewed-products",
+      "name": "Recently viewed products",
+      "settings": {
+        "heading": "Recently Viewed",
+        "heading_left": true,
+        "description": "",
+        "full_width": true,
         "mobile_swipe": true,
         "disable_top_spacing": false,
         "disable_bottom_spacing": false
@@ -502,6 +532,7 @@
     "129f7137-f081-4054-9ac3-3719aa9c94bb",
     "16625458859c68803a",
     "1662552569cce2536d",
-    "product-recommendations"
+    "product-recommendations",
+    "recently_viewed_products_pdPAhT"
   ]
 }

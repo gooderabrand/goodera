@@ -11,8 +11,7 @@
   "sections": {
     "breadcrumbs": {
       "type": "breadcrumbs",
-      "settings": {
-      }
+      "settings": {}
     },
     "main-article": {
       "type": "main-article",
@@ -20,22 +19,24 @@
         "title": {
           "type": "title",
           "settings": {
+            "article_show_excerpt": false,
+            "excerpt_length": 30,
+            "article_show_sharing": false
           }
         },
         "featured_image": {
           "type": "featured_image",
           "settings": {
+            "image_ratio": "medium"
           }
         },
         "content": {
           "type": "content",
-          "settings": {
-          }
+          "settings": {}
         },
         "tags": {
           "type": "tags",
-          "settings": {
-          }
+          "settings": {}
         }
       },
       "block_order": [

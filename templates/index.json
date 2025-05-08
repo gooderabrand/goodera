@@ -9,19 +9,146 @@
  */
 {
   "sections": {
-    "hero_banner_FrVzRx": {
-      "type": "hero-banner",
+    "slideshow_iX6Xi7": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_P4TAWF": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/1965_6c28d449-b63c-4f2e-81d9-56e5143e600e.jpg",
+            "slide_link": "",
+            "video_background": false,
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "video_hosted": "shopify://files/videos/Hero Banner Demo.mp4",
+            "subheading": "",
+            "heading": "New Chapter Unlocked",
+            "heading_size": "h1",
+            "content": "Become more",
+            "description_size": "small",
+            "content_position": "middle-center",
+            "text_alignment": "center",
+            "content_size": "medium",
+            "overlay_color": "#000000",
+            "overlay_opacity": 70,
+            "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4) 100%)",
+            "button_1_text": "LOOKBOOK",
+            "button_1_link": "",
+            "button_1_outline": true,
+            "button_2_text": "Shop Now",
+            "button_2_link": "",
+            "button_2_outline": false
+          }
+        },
+        "slide_KPwN3G": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/hq720.jpg",
+            "slide_link": "",
+            "video_background": true,
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "video_hosted": "shopify://files/videos/ba306bbe6dc1428c8109995f0531e5fc.HD-720p-4.5Mbps-10315842.mp4",
+            "subheading": "",
+            "heading": "Your everyday uniform",
+            "heading_size": "h1",
+            "content": "Our beginning.",
+            "description_size": "small",
+            "content_position": "middle-center",
+            "text_alignment": "center",
+            "content_size": "medium",
+            "overlay_color": "#000000",
+            "overlay_opacity": 70,
+            "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4) 100%)",
+            "button_1_text": "Shop Now",
+            "button_1_link": "",
+            "button_1_outline": true,
+            "button_2_text": "Shop Now",
+            "button_2_link": "",
+            "button_2_outline": false
+          }
+        },
+        "slide_MYEcm4": {
+          "type": "slide",
+          "settings": {
+            "slide_link": "",
+            "video_background": false,
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "subheading": "Add a tagline",
+            "heading": "Slide Heading",
+            "heading_size": "h1-xlarge",
+            "content": "Add descriptive text for your slide here.",
+            "description_size": "medium",
+            "content_position": "middle-center",
+            "text_alignment": "center",
+            "content_size": "medium",
+            "overlay_color": "#000000",
+            "overlay_opacity": 70,
+            "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4) 100%)",
+            "button_1_text": "Shop Now",
+            "button_1_link": "",
+            "button_1_outline": true,
+            "button_2_text": "Shop Now",
+            "button_2_link": "",
+            "button_2_outline": false
+          }
+        },
+        "slide_ieX7rj": {
+          "type": "slide",
+          "settings": {
+            "slide_link": "",
+            "video_background": false,
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "subheading": "Add a tagline",
+            "heading": "Slide Heading",
+            "heading_size": "h1-xlarge",
+            "content": "Add descriptive text for your slide here.",
+            "description_size": "medium",
+            "content_position": "middle-center",
+            "text_alignment": "center",
+            "content_size": "medium",
+            "overlay_color": "#000000",
+            "overlay_opacity": 70,
+            "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4) 100%)",
+            "button_1_text": "Shop Now",
+            "button_1_link": "",
+            "button_1_outline": true,
+            "button_2_text": "Shop Now",
+            "button_2_link": "",
+            "button_2_outline": false
+          }
+        }
+      },
+      "block_order": [
+        "slide_P4TAWF",
+        "slide_KPwN3G",
+        "slide_MYEcm4",
+        "slide_ieX7rj"
+      ],
+      "disabled": true,
+      "name": "Slideshow",
       "settings": {
         "desktop_height": "desktop-height-650",
         "mobile_height": "mobile-height-500",
         "full_width": false,
-        "full_width_padding": 20,
-        "corner_radius": 20,
+        "autoplay": true,
+        "autoplay_length": 7,
+        "transition": "fade",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": false
+      }
+    },
+    "hero_banner_FrVzRx": {
+      "type": "hero-banner",
+      "settings": {
+        "desktop_height": "desktop-height-750",
+        "mobile_height": "mobile-height-500",
+        "full_width": true,
+        "full_width_padding": 0,
+        "corner_radius": 0,
         "content_position": "bottom-left",
         "text_alignment": "left",
         "content_width": "medium",
         "subheading": "INTRODUCING",
-        "heading": "YOUR EVERYDAY UNIFORM",
+        "heading": "Your Everyday Uniform",
         "text": "",
         "text_size": "text-size-extra-large",
         "button_1_text": "Shop now",
@@ -38,42 +165,11 @@
         "disable_bottom_spacing": false
       }
     },
-    "hero_banner_nHwEWV": {
-      "type": "hero-banner",
-      "disabled": true,
-      "settings": {
-        "desktop_height": "desktop-height-650",
-        "mobile_height": "mobile-height-500",
-        "full_width": false,
-        "full_width_padding": 20,
-        "corner_radius": 20,
-        "content_position": "bottom-left",
-        "text_alignment": "left",
-        "content_width": "medium",
-        "subheading": "INTRODUCING",
-        "heading": "YOUR EVERYDAY UNIFORM",
-        "text": "",
-        "text_size": "text-size-extra-large",
-        "button_1_text": "Shop now",
-        "button_1_link": "",
-        "button_1_outline": false,
-        "button_2_text": "",
-        "button_2_link": "",
-        "button_2_outline": true,
-        "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "video_hosted": "shopify://files/videos/104fb5333ccb4b09baee177f71c58a27.mov",
-        "fallback_image": "shopify://shop_images/Rose-whip-poster_jpg.webp",
-        "overlay_opacity": 25,
-        "disable_top_spacing": false,
-        "disable_bottom_spacing": false
-      }
-    },
     "1662389920b1295ea2": {
       "type": "spacer",
-      "disabled": true,
       "settings": {
         "spacer_mobile": 25,
-        "spacer_desktop": 80,
+        "spacer_desktop": 20,
         "border_separator": false,
         "border_separator_full": false
       }
@@ -129,45 +225,38 @@
         "columns_desktop": 4,
         "show_view_all": true,
         "show_progress_bar": false,
-        "disable_top_spacing": false,
+        "disable_top_spacing": true,
         "disable_bottom_spacing": true
       }
     },
     "rich_text_FeCiJ9": {
       "type": "rich-text",
       "blocks": {
-        "subheading_Lf6rey": {
-          "type": "subheading",
-          "settings": {
-            "text": "Our Mission"
-          }
-        },
         "heading_TBqfbU": {
           "type": "heading",
           "settings": {
-            "text": "Own The Moment",
+            "text": "",
             "size": "h3"
           }
         },
         "text_kUx7pq": {
           "type": "text",
           "settings": {
-            "text": "<h5>We create premium products that support your commitment to making good choices transforming daily decisions into the results you've been waiting for.</h5>",
+            "text": "<h6>We make good decision-making effortless with modern essentials that inspire  change  from the inside out.</h6>",
             "custom_liquid": "",
-            "size": "text-size-regular"
+            "size": "text-size-small"
           }
         },
         "button_fkqJLf": {
           "type": "button",
           "settings": {
             "link_label": "Learn More",
-            "link": "",
-            "button_outline": false
+            "link": "shopify://pages/our-story",
+            "button_outline": true
           }
         }
       },
       "block_order": [
-        "subheading_Lf6rey",
         "heading_TBqfbU",
         "text_kUx7pq",
         "button_fkqJLf"
@@ -177,7 +266,7 @@
         "text_width": "xlarge",
         "text_position": "left",
         "text_alignment": "left",
-        "color_bg": "transparent",
+        "color_bg": "rgba(0,0,0,0)",
         "color_text": "#151515",
         "color_links": "#151515",
         "disable_top_spacing": false,
@@ -229,20 +318,6 @@
     "166143150135dd97e2": {
       "type": "gallery",
       "blocks": {
-        "6a1c724d-715f-4918-acea-e9f4464d74de": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/B9A7427_1_jpg.webp",
-            "subheading": "Transforming Tomorrow",
-            "title": "Meet The Founder",
-            "text": "",
-            "link_label": "About Us",
-            "link": "",
-            "use_text_button": false,
-            "block_link": "",
-            "product_list": []
-          }
-        },
         "bbdd3a28-ed72-4073-b920-e0710a00f80b": {
           "type": "image",
           "settings": {
@@ -256,12 +331,27 @@
             "block_link": "",
             "product_list": []
           }
+        },
+        "6a1c724d-715f-4918-acea-e9f4464d74de": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Trell_West_Founder_Good_Era.png",
+            "subheading": "Transforming Tomorrow",
+            "title": "Meet The Founder",
+            "text": "",
+            "link_label": "About Us",
+            "link": "shopify://pages/our-story",
+            "use_text_button": false,
+            "block_link": "",
+            "product_list": []
+          }
         }
       },
       "block_order": [
-        "6a1c724d-715f-4918-acea-e9f4464d74de",
-        "bbdd3a28-ed72-4073-b920-e0710a00f80b"
+        "bbdd3a28-ed72-4073-b920-e0710a00f80b",
+        "6a1c724d-715f-4918-acea-e9f4464d74de"
       ],
+      "disabled": true,
       "settings": {
         "columns_desktop": 2,
         "section_width": "full-width-row",
@@ -272,7 +362,7 @@
         "column_spacing": "large",
         "heading_size": "h2",
         "overlay_color": "#000000",
-        "overlay_opacity": 20,
+        "overlay_opacity": 0,
         "disable_top_spacing": true,
         "disable_bottom_spacing": true
       }
@@ -294,15 +384,6 @@
         "show_progress_bar": false,
         "disable_top_spacing": false,
         "disable_bottom_spacing": false
-      }
-    },
-    "166366584621bc44f2": {
-      "type": "spacer",
-      "settings": {
-        "spacer_mobile": 20,
-        "spacer_desktop": 55,
-        "border_separator": false,
-        "border_separator_full": false
       }
     },
     "1661539188062a849e": {
@@ -331,6 +412,7 @@
     },
     "1647955648d6a0baee": {
       "type": "featured-blog",
+      "disabled": true,
       "settings": {
         "heading": "Latest News",
         "heading_left": true,
@@ -342,14 +424,15 @@
         "mobile_swipe": true,
         "image_ratio": "landscape",
         "show_date": true,
-        "show_excerpt": true,
+        "show_excerpt": false,
         "show_view_all": true,
-        "disable_top_spacing": true,
+        "disable_top_spacing": false,
         "disable_bottom_spacing": true
       }
     },
     "16626364694d37e9d5": {
       "type": "spacer",
+      "disabled": true,
       "settings": {
         "spacer_mobile": 0,
         "spacer_desktop": 20,
@@ -359,6 +442,7 @@
     },
     "1662459246bd099bb7": {
       "type": "spacer",
+      "disabled": true,
       "settings": {
         "spacer_mobile": 15,
         "spacer_desktop": 0,
@@ -526,15 +610,14 @@
     }
   },
   "order": [
+    "slideshow_iX6Xi7",
     "hero_banner_FrVzRx",
-    "hero_banner_nHwEWV",
     "1662389920b1295ea2",
     "16614195534fb74bc3",
     "rich_text_FeCiJ9",
     "1661426105a80f3333",
     "166143150135dd97e2",
     "166366563622039b3e",
-    "166366584621bc44f2",
     "1661539188062a849e",
     "1647955648d6a0baee",
     "16626364694d37e9d5",
