@@ -2119,10 +2119,10 @@ h6,
     display: grid;
     align-items: center;
     grid-template-columns: 1fr auto 1fr;
-    min-height: 60px; }
+    min-height: 57px; }
     @media only screen and (min-width: 1068px) {
       .header > .row > .columns {
-        min-height: 80px; } }
+        min-height: 57px; } }
   .header .logolink {
     position: relative; }
     .header .logolink .logoimg--light {
