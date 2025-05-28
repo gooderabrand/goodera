@@ -23,6 +23,12 @@ if (!customElements.get('slide-show')) {
         animations_enabled = document.body.classList.contains('animations-true') && typeof gsap !== 'undefined';
 
       if (slideshow_slides.length < 1) return;
+
+      // Set the autoplay duration as a CSS variable
+      if (autoplay) {
+        slideshow.style.setProperty('--autoplay-length', `${autoplay}ms`);
+      }
+
       const args = {
         wrapAround: true,
         cellAlign: align,
@@ -87,7 +93,12 @@ if (!customElements.get('slide-show')) {
                   flkty.select(i);
                 });
               });
-              dots[this.selectedIndex].classList.add('is-selected');
+              // Initialize the first dot
+              const firstDot = dots[this.selectedIndex];
+              firstDot.classList.add('is-selected');
+              if (autoplay) {
+                firstDot.classList.add('animate');
+              }
             }
             document.fonts.ready.then(function () {
               flkty.resize();
@@ -123,10 +134,17 @@ if (!customElements.get('slide-show')) {
             // Custom Dots.
             if (dots && custom_dots) {
               let dots = custom_dots.querySelectorAll('li');
-              dots.forEach((dot, i) => {
-                dot.classList.remove('is-selected');
-              });
-              dots[this.selectedIndex].classList.add('is-selected');
+              // Reset previous dot
+              const previousDot = dots[previousIndex];
+              previousDot.classList.remove('is-selected');
+              previousDot.classList.remove('animate');
+
+              // Activate current dot
+              const currentDot = dots[index];
+              currentDot.classList.add('is-selected');
+               if (autoplay) {
+                 currentDot.classList.add('animate');
+               }
             }
 
             // AutoPlay

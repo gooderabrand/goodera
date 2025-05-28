@@ -234,24 +234,41 @@
     left: 0;
     width: 100%;
     border: 0;
-    padding: 0;
+    padding: 0 15px;
     z-index: 20;
     justify-content: center;
-    align-items: center; }
+    align-items: center;
+    box-sizing: border-box;
+  }
     @media only screen and (min-width: 768px) {
       .slideshow .flickity-page-dots {
         bottom: 45px; } }
     .slideshow .flickity-page-dots li {
-      width: 30px;
+      display: block;
       height: 3px;
       margin: 0 5px;
       background-color: rgba(255, 255, 255, 0.5);
       border-radius: 0;
       opacity: 1;
-      transition: background-color 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      width: 30px;
     }
-      .slideshow .flickity-page-dots li.is-selected {
-        background-color: #fff; }
+      .slideshow .flickity-page-dots li::before {
+        content: '';
+        display: block;
+        height: 100%;
+        background-color: #fff;
+        width: 0;
+        transition: width 0s linear;
+      }
+      .slideshow .flickity-page-dots li.is-selected::before {
+        width: 100%;
+        transition: width 0s linear;
+      }
+      .slideshow .flickity-page-dots li.is-selected.animate::before {
+         transition: width var(--autoplay-length, 0s) linear;
+      }
   .slideshow .flickity-nav {
     border-color: #fff;
     background: transparent; }
