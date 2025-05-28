@@ -247,7 +247,7 @@
       display: block;
       height: 3px;
       margin: 0 5px;
-      background-color: rgba(255, 255, 255, 0.5);
+      background-color: rgba(255, 255, 255, 0.2);
       border-radius: 0;
       opacity: 1;
       position: relative;
@@ -260,14 +260,16 @@
         height: 100%;
         background-color: #fff;
         width: 0;
-        transition: width 0s linear;
-      }
-      .slideshow .flickity-page-dots li.is-selected::before {
-        width: 100%;
-        transition: width 0s linear;
+        transition: none;
+        opacity: 1;
       }
       .slideshow .flickity-page-dots li.is-selected.animate::before {
-         transition: width var(--autoplay-length, 0s) linear;
+        width: 100%;
+        transition: width var(--autoplay-length, 0s) linear;
+      }
+      .slideshow .flickity-page-dots li.filled::before {
+        width: 100%;
+        transition: none;
       }
   .slideshow .flickity-nav {
     border-color: #fff;

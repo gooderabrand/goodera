@@ -79,6 +79,8 @@ if (!customElements.get('slide-show')) {
           },
           ready: function () {
             let flkty = this;
+            console.log('Flickity ready event fired.');
+
             // Animations.
             if (animations_enabled && slideshow.classList.contains('main-slideshow')) {
               slideshow.animateSlides(0, animations);
@@ -87,17 +89,34 @@ if (!customElements.get('slide-show')) {
 
             // Custom Dots.
             if (dots && custom_dots) {
+              console.log('Custom dots are enabled and found.');
               let dots = custom_dots.querySelectorAll('li');
+              console.log('Number of dots found:', dots.length);
+
               dots.forEach((dot, i) => {
                 dot.addEventListener('click', (e) => {
                   flkty.select(i);
                 });
               });
-              // Initialize the first dot
+
+              // Initialize all dots to base state
+              dots.forEach(dot => {
+                dot.classList.remove('is-selected', 'animate', 'filled');
+              });
+
+              // Activate the first dot
               const firstDot = dots[this.selectedIndex];
+              console.log('First dot selected index:', this.selectedIndex, 'Element:', firstDot);
               firstDot.classList.add('is-selected');
+
               if (autoplay) {
-                firstDot.classList.add('animate');
+                console.log('Autoplay is on, attempting to animate first dot.');
+                slideshow.style.setProperty('--autoplay-length', `${autoplay}ms`);
+                console.log('Set --autoplay-length on slideshow container:', slideshow.style.getPropertyValue('--autoplay-length'));
+                setTimeout(() => {
+                  firstDot.classList.add('animate');
+                  console.log('Added animate class to first dot.');
+                }, 50);
               }
             }
             document.fonts.ready.then(function () {
@@ -119,9 +138,11 @@ if (!customElements.get('slide-show')) {
             }
           },
           change: function (index) {
+            console.log('Flickity change event fired to index:', index);
             flkty.cells[0].element.classList.remove('is-initial-selected');
             let previousIndex = fizzyUIUtils.modulo(this.selectedIndex - 1, this.slides.length),
               nextIndex = fizzyUIUtils.modulo(this.selectedIndex + 1, this.slides.length);
+            console.log('Previous index:', previousIndex, 'Next index:', nextIndex);
 
             // Animations.
             if (animations_enabled && slideshow.classList.contains('main-slideshow')) {
@@ -133,18 +154,35 @@ if (!customElements.get('slide-show')) {
 
             // Custom Dots.
             if (dots && custom_dots) {
+              console.log('Custom dots are enabled and found in change event.');
               let dots = custom_dots.querySelectorAll('li');
-              // Reset previous dot
-              const previousDot = dots[previousIndex];
-              previousDot.classList.remove('is-selected');
-              previousDot.classList.remove('animate');
+              console.log('Number of dots found in change event:', dots.length);
 
-              // Activate current dot
-              const currentDot = dots[index];
-              currentDot.classList.add('is-selected');
-               if (autoplay) {
-                 currentDot.classList.add('animate');
-               }
+              // First, remove animate class from all dots
+              dots.forEach(dot => {
+                dot.classList.remove('animate');
+              });
+
+              // Handle the state of all dots
+              dots.forEach((dot, i) => {
+                if (i < index) {
+                  // Previous dots should be filled
+                  dot.classList.remove('is-selected', 'animate');
+                  dot.classList.add('filled');
+                } else if (i === index) {
+                  // Current dot should be selected and animating if autoplay is on
+                  dot.classList.add('is-selected');
+                  dot.classList.remove('filled');
+                  if (autoplay) {
+                    setTimeout(() => {
+                      dot.classList.add('animate');
+                    }, 50);
+                  }
+                } else {
+                  // Future dots should be neither selected, filled, nor animating
+                  dot.classList.remove('is-selected', 'animate', 'filled');
+                }
+              });
             }
 
             // AutoPlay
