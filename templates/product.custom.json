@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "Complete The Look"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "product-recommendations"
+  ]
+} 
