@@ -46,6 +46,11 @@
         </div>
       </div>
       <div class="product-badges-row">
+        {%- if product.metafields.shopify.fabric != blank -%}
+          <div class="product--text style_vendor">
+            {{ product.metafields.shopify.fabric | metafield_text: field: 'label' }}
+          </div>
+        {%- endif -%}
         {%- if block.settings.show_products_rating and product.metafields.reviews.rating.value != blank -%}
           <a class="star-rating-container" href="#shopify-product-reviews">
             {%- liquid
@@ -56,11 +61,6 @@
             <span class="rating-number">{{ rating_value | round: 1 }}</span>
             <span class="review-count">({{ review_count }})</span>
           </a>
-        {%- endif -%}
-        {%- if product.metafields.shopify.fabric != blank -%}
-          <div class="product--text style_vendor">
-            {{ product.metafields.shopify.fabric | metafield_text: field: 'label' }}
-          </div>
         {%- endif -%}
       </div>
     {%- when 'description' -%}

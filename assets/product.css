@@ -194,14 +194,17 @@
       color: #333333;
       border-radius: 6px;
       border: none;
-      transition: all 0.2s ease; }
+      transition: all 0.2s ease;
+    }
     .variations .product-form__input--block input[type="radio"]:checked + label {
-      background: #e5e5e5;
-      color: #000000;
-      box-shadow: 0 0 0 1px #333333 inset; }
+      background: var(--solid-button-background, var(--color-accent));
+      color: var(--solid-button-label, #fff);
+      box-shadow: none;
+    }
     .variations .product-form__input--block input[type="radio"]:hover + label {
       background: #e5e5e5;
-      color: #000000; }
+      color: #000000;
+    }
     .variations .product-form__input--block input[type="radio"]:focus-visible + label {
       box-shadow: 0 0 0 2px #015ecc; }
   .variations .product-form__input--color {
@@ -563,7 +566,7 @@
   text-transform: uppercase;
   font-size: 0.6875rem;
   letter-spacing: 0.1em;
-  opacity: 0.6;
+  opacity: 1;
   margin-bottom: 0;
   display: inline-block;
   padding: 6px 12px;
@@ -572,6 +575,12 @@
   border-radius: 6px;
   border: 1px solid #e5e5e5;
   margin-right: 10px;
+  transition: all 0.2s ease;
+}
+
+.thb-product-detail .product--text.style_vendor:hover {
+  background: #e5e5e5;
+  color: #000000;
 }
 
 .thb-product-detail .star-rating-container {
@@ -606,11 +615,6 @@
   text-decoration: none;
 }
 
-.thb-product-detail .product--text.style_vendor:hover {
-  background: #e5e5e5;
-  color: #000000;
-}
-
 .thb-product-detail .product-info-row {
   display: flex;
   align-items: center;
@@ -620,26 +624,26 @@
 }
 
 .thb-product-detail .product-collection-badge {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .thb-product-detail .collection-badge {
-  background: #f5f5f5;
-  color: #333333;
-  border-radius: 6px;
+  color: var(--color-body);
   font-size: 12px;
   font-weight: 500;
-  padding: 6px 12px;
   text-transform: none;
   letter-spacing: 0;
-  height: auto;
   line-height: 1.2;
   transition: all 0.2s ease;
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: inline-block;
 }
 
 .thb-product-detail .collection-badge:hover {
-  background: #e5e5e5;
-  color: #000000;
+  color: var(--color-accent);
+  background: transparent;
 }
 
 .thb-product-detail .view-product-details {
@@ -1618,6 +1622,7 @@
   align-items: center;
   gap: 10px;
   margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .thb-product-detail .product-badges-row .star-rating-container,
