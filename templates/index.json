@@ -75,7 +75,7 @@
         "desktop_height": "desktop-height-full",
         "mobile_height": "mobile-height-full",
         "full_width": true,
-        "autoplay": false,
+        "autoplay": true,
         "autoplay_length": 10,
         "transition": "fade",
         "disable_top_spacing": true,

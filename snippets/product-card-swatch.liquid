@@ -1,6 +1,25 @@
 {%- if settings.show_products_swatches -%}
 	{%- assign swatch_style = settings.swatch_style -%}
 	{%- unless product.has_only_default_variant -%}
+		{%- liquid
+			assign active_color_value = ''
+			assign color_option = null
+
+			# Find the color option
+			for option in product.options_with_values
+				assign option_name = option.name | downcase | escape
+				if option_name contains 'color' or option_name contains 'colour' or option_name contains 'couleur' or option_name contains 'farbe'
+					assign color_option = option
+					break
+				endif
+			endfor
+
+			# Get the color value from the selected or first available variant
+			if color_option != null
+				assign option_index = 'option' | append: color_option.position
+				assign active_color_value = product.selected_or_first_available_variant[option_index]
+			endif
+		-%}
 		{%- for option in product.options_with_values -%}
 			{%- liquid
 				assign option_name = option.name | downcase | escape 
@@ -106,10 +125,11 @@
 							</div>
 						{%- endfor -%}
 					</div>
-					{%- if swatch_style == 'hover' -%}
-						<div class="product-card-swatches--title">{{ 'products.product.available' | t: count: option.values.size }}</div>
-					{%- endif -%}
 				</div>
+				<div class="product-card-color-info">{{ active_color_value }} | {{ option.values.size }} Colors</div>
+				{%- if swatch_style == 'hover' -%}
+					<div class="product-card-swatches--title">{{ 'products.product.available' | t: count: option.values.size }}</div>
+				{%- endif -%}
 				{%- endif -%}
 				{% break %}
 			{%- endif -%}

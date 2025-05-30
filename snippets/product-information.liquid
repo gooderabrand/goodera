@@ -12,6 +12,12 @@
     {%- when 'custom_liquid' -%}
       {{ block.settings.custom_liquid }}
     {%- when 'title' -%}
+      {%- if block.settings.show_products_rating and product.metafields.reviews.rating.value != blank -%}
+         <a class="star-rating-container" href="#shopify-product-reviews">
+           <div class="star-rating" style="--star-rating: {{ product.metafields.reviews.rating.value.rating }};"></div>
+           <span>{{ 'products.product.reviews' | t: count: product.metafields.reviews.rating_count }}</span>
+         </a>
+       {%- endif -%}
       <div class="product-title-container" {{ block.shopify_attributes }}>
         <h1 class="product-title uppercase--{{ block.settings.uppercase }}">{{ product.title }}</h1>
         <div class="product-price-container">
@@ -31,12 +37,6 @@
             {%- endif -%}
           {%- endif -%}
         </div>
-        {%- if block.settings.show_products_rating and product.metafields.reviews.rating.value != blank -%}
-          <a class="star-rating-container" href="#shopify-product-reviews">
-            <div class="star-rating" style="--star-rating: {{ product.metafields.reviews.rating.value.rating }};"></div>
-            <span>{{ 'products.product.reviews' | t: count: product.metafields.reviews.rating_count }}</span>
-          </a>
-        {%- endif -%}
       </div>
     {%- when 'description' -%}
       {%- liquid

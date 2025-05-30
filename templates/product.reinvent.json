@@ -64,7 +64,7 @@
           "settings": {
             "show_quantity_selector": false,
             "outline_button": true,
-            "show_dynamic_checkout": false,
+            "show_dynamic_checkout": true,
             "show_gift_card_recipient": false
           }
         },
@@ -147,14 +147,14 @@
       ],
       "settings": {
         "full_width": false,
-        "enable_sticky_info": true,
+        "enable_sticky_info": false,
         "enable_sticky_add_to_cart": true,
         "show_taxes_included": false,
         "media_layout": "thumbnails",
         "display_slider_pagination": false,
         "media_aspect_ratio": "square",
         "display_captions": false,
-        "hide_variants": false,
+        "hide_variants": true,
         "lightbox": false,
         "enable_video_looping": false
       }
@@ -506,7 +506,6 @@
     },
     "recently_viewed_products_pdPAhT": {
       "type": "recently-viewed-products",
-      "name": "Recently viewed products",
       "settings": {
         "heading": "Recently Viewed",
         "heading_left": true,

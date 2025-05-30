@@ -22,6 +22,7 @@
     "color_announcement_bar_text": "#151515",
     "color_announcement_bar_bg": "#ffffff",
     "outline_button_label": "#151515",
+    "color_stars": "#151515",
     "color_dots": "#151515",
     "color_footer_text": "#151515",
     "color_footer_link": "#151515",
@@ -38,7 +39,7 @@
     "enable_quick_add": false,
     "enable_quick_view": false,
     "show_products_vendor": false,
-    "show_products_subtitle": false,
+    "show_products_subtitle": true,
     "show_products_rating": true,
     "show_products_swatches": true,
     "swatch_style": "always",
@@ -47,6 +48,8 @@
     "badge_corner_radius": 13,
     "color_swatches_variant_option": "",
     "sibling_style": "swatch",
+    "free_shipping": true,
+    "free_shipping_minimum": "120",
     "favicon": "shopify://shop_images/Gradiant_Circle_Logo_v3.png",
     "sections": {
       "announcement-bar": {
@@ -197,6 +200,24 @@
         "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
         "disabled": false,
         "settings": {}
+      },
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      },
+      "17198465164502963513": {
+        "type": "shopify://apps/parcel-panel/blocks/app.embed/fc785c3f-90e0-4c98-a20c-7cde9ba5e4b5",
+        "disabled": false,
+        "settings": {}
+      },
+      "8962992520437913685": {
+        "type": "shopify://apps/yotpo-loyalty-rewards/blocks/loader-app-embed-block/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
+        "disabled": false,
+        "settings": {
+          "inject_modules_loader": true,
+          "inject_sdk_loader": false
+        }
       }
     }
   },

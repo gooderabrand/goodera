@@ -90,6 +90,35 @@
 		font-optical-sizing: auto;
 	}
 
+	/* Adding NeueHaas fonts */
+	@font-face {
+		font-family: "NeueHaas-Bold";
+		src: url("https://cdn.shopify.com/s/files/1/0730/8509/2156/files/NeueHaas-Bold.woff?v=1748495960") format("woff2");
+		font-weight: 700; /* Assigning a common bold weight */
+		font-style: normal;
+	}
+
+	@font-face {
+		font-family: "NeueHaas-Medium";
+		src: url("https://cdn.shopify.com/s/files/1/0730/8509/2156/files/NeueHaas-Medium.woff?v=1748495939") format("woff2");
+		font-weight: 500; /* Assigning a common medium weight */
+		font-style: normal;
+	}
+
+	@font-face {
+		font-family: "NeueHaas-Thin";
+		src: url("https://cdn.shopify.com/s/files/1/0730/8509/2156/files/NeueHaas-Thin.woff?v=1748495949") format("woff2");
+		font-weight: 100; /* Assigning a common thin weight */
+		font-style: normal;
+	}
+
+	@font-face {
+		font-family: "NeueHaas-Roman";
+		src: url("https://cdn.shopify.com/s/files/1/0730/8509/2156/files/NeueHaas-Roman.woff?v=1748497613") format("woff2");
+		font-weight: 400; /* Assigning a common regular weight */
+		font-style: normal;
+	}
+
 	h1,h2,h3,h4,h5,h6,
 	.h1,.h2,.h3,.h4,.h5,.h6,
 	.logolink.text-logo,
@@ -110,7 +139,7 @@
 	.mega-menu-columns__heading,
 	.mega-menu-promotion--cover p,
 	.mega-menu-sidebar--button {
-		font-family: "ABC_Repro_Medium", sans-serif;
+		font-family: "NeueHaas-Medium", sans-serif;
 		font-weight: 600;
 		font-style: normal;
 	}
@@ -135,7 +164,7 @@
 	.product-form__input .form__label {
 		font-style: normal;
 		font-weight: 500;
-		font-family: "ABC_Repro_Medium", sans-serif;
+		font-family: "NeueHaas-Roman", sans-serif !important;
 	}
 
 	/* Product title styles */
@@ -143,11 +172,11 @@
 	h1.aktiv,
 	.thb-product-detail .product-title,
 	.product-title {
-		font-family: "ABC_Repro_Medium", sans-serif !important;
+		font-family: "NeueHaas-Roman", sans-serif !important;
 		font-weight: 700 !important;
 		font-style: normal;
-		font-size: 24px !important;
-		letter-spacing: 0.96px !important;
+		font-size: 12px !important;
+		letter-spacing: 0.2px !important;
 		line-height: 140% !important;
 		margin: 0;
 		padding-right: 30px;
@@ -156,9 +185,24 @@
 
 	/* Product card title styles */
 	.product-card-title {
-		font-family: "ABC_Repro_Medium", sans-serif;
-		font-weight: 700 !important;
+		font-family: "NeueHaas-Roman", sans-serif !important;
+		font-weight: 500!important;
 		font-style: normal;
+	}
+
+	/* Price styles */
+	.thb-product-detail .product-price-container .price,
+	.price {
+		font-family: "NeueHaas-Roman", sans-serif !important;
+	}
+
+	.product-title-container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 20px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid var(--color-border);
 	}
 
 	/* Section header specific styles */
@@ -248,7 +292,6 @@
 		--color-badge-text: {{ color_badge_text }};
 		--color-badge-sold-out: {{ color_badge_soldout }};
 		--color-badge-sale: {{ color_badge_sale }};
-		
 		--color-badge-preorder: {{ color_badge_preorder }};
 		--badge-corner-radius: {{ badge_corner_radius | append: 'px' }};
 
@@ -268,7 +311,7 @@
 	details summary,
 	details > summary,
 	details.accordion > summary {
-		font-family: "ABC_Repro_Medium", sans-serif !important;
+		font-family: "NeueHaas-Medium", sans-serif !important;
 		font-weight: 500 !important;
 		font-style: normal !important;
 	}
