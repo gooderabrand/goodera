@@ -21,8 +21,8 @@ if (!customElements.get('product-slider-thumbnails')) {
     setOptions() {
       this.hide_variants = this.dataset.hideVariants == 'true';
       this.thumbnails = this.thumbnail_container.querySelectorAll('.product-thumbnail');
-      this.prev_button = this.querySelector('.flickity-prev');
-      this.next_button = this.querySelector('.flickity-next');
+      this.prev_button = this.querySelector('.slider-button--prev');
+      this.next_button = this.querySelector('.slider-button--next');
       this.options = {
         wrapAround: true,
         pageDots: false,

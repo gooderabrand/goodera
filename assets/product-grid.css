@@ -416,6 +416,7 @@
     margin-top: 7px;
     font-size: 0.8125rem;
     margin-bottom: 5px;
+    display: none;
   }
   .product-card .star-rating-container span {
     font-size: 0.625rem;
@@ -805,6 +806,25 @@
     width: 45px;
     height: 56.25px;
   }
+}
+
+/* Product card rating styles */
+.product-card-rating {
+  margin-bottom: 5px; /* Add space below the rating */
+  font-size: 0.8125rem; /* Match the previous star rating font size */
+}
+
+.product-card-rating .star-icon {
+  color: var(--color-star, #fd9a52); /* Use theme's star color */
+  margin-right: 4px; /* Space between star and number */
+}
+
+.product-card-rating .rating-number {
+  font-weight: bold; /* Make the rating number bold */
+}
+
+.product-card-rating .review-count {
+  color: rgba(var(--color-body-rgb), 0.75); /* Match subtitle/color info color */
 }
 
 

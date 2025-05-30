@@ -7,7 +7,13 @@
 		assign body_font_500 = body_font | font_modify: 'weight', '600'
 	endunless
 
+	assign body_font_bold = body_font | font_modify: 'weight', '600'
+	unless body_font_bold
+		assign body_font_bold = body_font | font_modify: 'weight', '700'
+	endunless
+
 	assign body_font_italic = body_font | font_modify: 'style', 'italic'
+	assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
 
 	assign color_body_bg = settings.color_body_bg
 	assign color_body = settings.color_body
@@ -55,9 +61,6 @@
 	assign color_footer_bg = settings.color_footer_bg
 -%}
 
-<link rel="stylesheet" href="https://use.typekit.net/bin0qyn.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap">
-
 {% style %}
 	{{ body_font | font_face: font_display: 'swap' }}
 
@@ -65,59 +68,38 @@
 	  {{ body_font_500 | font_face: font_display: 'swap' }}
 	{%- endif -%}
 
+	{%- if body_font_bold -%}
+	  {{ body_font_bold | font_face: font_display: 'swap' }}
+	{%- endif -%}
+
 	{%- if body_font_italic -%}
 	  {{ body_font_italic | font_face: font_display: 'swap' }}
 	{%- endif -%}
 
+	{%- if body_font_bold_italic -%}
+	  {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+	{%- endif -%}
+
+	{% comment %} Adding Typekit link for neue-haas-unica {% endcomment %}
+	<link rel="stylesheet" href="https://use.typekit.net/bin0qyn.css">
+
+	{% comment %} Adding font-face for EverydaySans-Medium {% endcomment %}
 	@font-face {
-		font-family: "aktiv-grotesk-extended";
-		src: url("https://use.typekit.net/bin0qyn.css") format("woff2");
-		font-weight: 600;
+		font-family: 'EverydaySans-Medium';
+		src: url('https://cdn.shopify.com/s/files/1/0730/8509/2156/files/EverydaySans-Medium.woff?v=1748611821') format('woff');
+		font-weight: 500; /* Assuming medium corresponds to 500 */
 		font-style: normal;
+		font-display: swap;
 	}
 
-	@font-face {
-		font-family: "ABC_Repro_Medium";
-		src: url("https://cdn.shopify.com/s/files/1/0730/8509/2156/files/ABC_Repro_Medium.ttf?v=1743829873") format("woff2");
-		font-weight: 600;
-		font-style: normal;
-	}
+	{% if body_font != heading_font %}
+		{{ heading_font | font_face: font_display: 'swap' }}
+		{%- assign heading_font_400 = heading_font | font_modify: 'weight', '400' -%}
 
-	@font-face {
-		font-family: "JetBrains Mono";
-		font-style: normal;
-		font-weight: 700;
-		font-optical-sizing: auto;
-	}
-
-	/* Adding NeueHaas fonts */
-	@font-face {
-		font-family: "NeueHaas-Bold";
-		src: url("https://cdn.shopify.com/s/files/1/0730/8509/2156/files/NeueHaas-Bold.woff?v=1748495960") format("woff2");
-		font-weight: 700; /* Assigning a common bold weight */
-		font-style: normal;
-	}
-
-	@font-face {
-		font-family: "NeueHaas-Medium";
-		src: url("https://cdn.shopify.com/s/files/1/0730/8509/2156/files/NeueHaas-Medium.woff?v=1748495939") format("woff2");
-		font-weight: 500; /* Assigning a common medium weight */
-		font-style: normal;
-	}
-
-	@font-face {
-		font-family: "NeueHaas-Thin";
-		src: url("https://cdn.shopify.com/s/files/1/0730/8509/2156/files/NeueHaas-Thin.woff?v=1748495949") format("woff2");
-		font-weight: 100; /* Assigning a common thin weight */
-		font-style: normal;
-	}
-
-	@font-face {
-		font-family: "NeueHaas-Roman";
-		src: url("https://cdn.shopify.com/s/files/1/0730/8509/2156/files/NeueHaas-Roman.woff?v=1748497613") format("woff2");
-		font-weight: 400; /* Assigning a common regular weight */
-		font-style: normal;
-	}
+		{%- if heading_font_400 -%}
+		  {{ heading_font_400 | font_face: font_display: 'swap' }}
+		{%- endif -%}
+	{%- endif -%}
 
 	h1,h2,h3,h4,h5,h6,
 	.h1,.h2,.h3,.h4,.h5,.h6,
@@ -125,77 +107,36 @@
 	.heading-font,
 	.h1-xlarge,
 	.h1-large,
-	.customer-addresses .my-address .address-index,
-	.side-panel__header,
-	.cart__header,
-	.cart-drawer__header,
-	.section-header__heading,
-	.section-header__heading strong,
-	.product__info-wrapper strong,
-	.product__title strong,
-	.product-form__heading,
-	.drawer__heading,
-	.strong-heading,
-	.mega-menu-columns__heading,
-	.mega-menu-promotion--cover p,
-	.mega-menu-sidebar--button {
-		font-family: "NeueHaas-Medium", sans-serif;
-		font-weight: 600;
-		font-style: normal;
+	.customer-addresses .my-address .address-index {
+		/* Using EverydaySans-Medium for headings with theme heading font as backup */
+		font-family: 'EverydaySans-Medium', {{ heading_font.family }}, {{ heading_font.fallback_families }};
+		font-weight: 500; /* Set primary weight for EverydaySans-Medium */
+		font-style: normal; /* Set primary style for EverydaySans-Medium */
 	}
 
 	body,
 	.body-font,
-	.accordion summary,
-	details.accordion summary,
-	.accordion summary strong,
-	details summary,
-	details > summary,
-	details.accordion > summary,
-	.side-panel__header h4,
-	h4.body-font,
-	.product-title-uppercase-true .product-add-to-cart-sticky--title,
-	.rte strong,
-	.rte p strong,
-	.section-header--content .rte,
-	.section-header--content .rte strong,
-	.section-header--content .rte p strong,
-	.thb-secondary-area .thb-item-count,
-	.product-form__input .form__label {
-		font-style: normal;
-		font-weight: 500;
-		font-family: "NeueHaas-Roman", sans-serif !important;
+	.thb-product-detail .product-title {
+		/* Using neue-haas-unica for body with theme body font as backup */
+		font-family: "neue-haas-unica", {{ body_font.family }}, {{ body_font.fallback_families }};
+		font-weight: 500; /* Set primary weight for neue-haas-unica */
+		font-style: normal; /* Set primary style for neue-haas-unica */
 	}
 
-	/* Product title styles */
 	.product__title h1,
 	h1.aktiv,
 	.thb-product-detail .product-title,
 	.product-title {
-		font-family: "NeueHaas-Roman", sans-serif !important;
-		font-weight: 700 !important;
-		font-style: normal;
-		font-size: 12px !important;
-		letter-spacing: 0.2px !important;
-		line-height: 140% !important;
-		margin: 0;
-		padding-right: 30px;
-		text-align: left;
+		font-family: var(--font-heading-family);
+		font-weight: var(--font-heading-weight);
+		font-style: var(--font-heading-style);
+		line-height: var(--font-heading-line-height);
+		font-size: 1.5rem calc(var(--font-heading-scale) * 1.5rem); /* Updated font size */
+		letter-spacing: var(--font-heading-letter-spacing);
+		word-spacing: var(--font-heading-word-spacing);
 	}
 
-	/* Product card title styles */
-	.product-card-title {
-		font-family: "NeueHaas-Roman", sans-serif !important;
-		font-weight: 500!important;
-		font-style: normal;
-	}
-
-	/* Price styles */
-	.thb-product-detail .product-price-container .price,
-	.price {
-		font-family: "NeueHaas-Roman", sans-serif !important;
-	}
-
+	/* Product title container styles for product detail page */
 	.product-title-container {
 		display: flex;
 		justify-content: space-between;
@@ -205,34 +146,13 @@
 		border-bottom: 1px solid var(--color-border);
 	}
 
-	/* Section header specific styles */
-	.button,
-	.shopify-payment-button__button,
-	.product-form__submit,
-	.shopify-challenge__button,
-	.customer button,
-	button[type="submit"],
-	.btn,
-	.button--secondary,
-	.button--outline {
-		font-family: "JetBrains Mono", monospace !important;
-		font-weight: 700 !important;
-		font-style: normal !important;
-		letter-spacing: 0.02em !important;
-	}
-
-	.section-header h2 {
-		font-weight: 700 !important;
-		margin-bottom: 0px;
-	}
-
 	:root {
 		--mobile-swipe-width: calc(90vw - 30px);
 		--font-body-scale: {{ settings.body_font_scale | divided_by: 100.0 }};
 		--font-body-line-height-scale: {{ settings.body_font_line_height_scale | divided_by: 100.0 }};
 		--font-body-letter-spacing: {{ settings.body_font_letter_spacing | divided_by: 1000.0 }}em;
-		--font-body-medium-weight: 500;
-		--font-body-bold-weight: 500;
+		--font-body-medium-weight: {{ body_font_500.weight | default: '500' }};
+    --font-body-bold-weight: {{ body_font_bold.weight | default: '600' }};
 		--font-announcement-scale: {{ settings.announcement_font_scale | divided_by: 100.0 }};
 		--font-heading-scale: {{ settings.heading_font_scale | divided_by: 100.0 }};
 		--font-heading-line-height-scale: {{ settings.heading_font_line_height_scale | divided_by: 100.0 }};
@@ -242,6 +162,7 @@
 		--font-product-title-scale: {{ settings.product_title_font_scale | divided_by: 100.0 }};
 		--font-product-title-line-height-scale: {{ settings.product_title_line_height_scale | divided_by: 100.0 }};
 		--button-letter-spacing: {{ settings.button_letter_spacing | divided_by: 1000.0 }}em;
+		--button-font-scale: {{ settings.button_font_scale | divided_by: 100.0 }};
 
 		--bg-body: {{ color_body_bg | default: '#fff' }};
 		--bg-body-rgb: {{ color_body_bg.rgb | default: '255 255 255' | replace: ' ' , ',' }};
@@ -292,6 +213,7 @@
 		--color-badge-text: {{ color_badge_text }};
 		--color-badge-sold-out: {{ color_badge_soldout }};
 		--color-badge-sale: {{ color_badge_sale }};
+		
 		--color-badge-preorder: {{ color_badge_preorder }};
 		--badge-corner-radius: {{ badge_corner_radius | append: 'px' }};
 
@@ -302,32 +224,6 @@
 		--color-footer-border: {{ color_footer_border }};
 		--color-footer-border-rgb: {{ color_footer_border.rgb | replace: ' ' , ',' }};
 		--color-footer-bg: {{ color_footer_bg }};
-	}
-
-	/* Override product.css accordion styles */
-	.accordion summary,
-	details.accordion summary,
-	.accordion summary strong,
-	details summary,
-	details > summary,
-	details.accordion > summary {
-		font-family: "NeueHaas-Medium", sans-serif !important;
-		font-weight: 500 !important;
-		font-style: normal !important;
-	}
-
-	/* Form label override */
-	.product-form__input .form__label {
-		font-family: "JetBrains Mono", sans-serif !important;
-		font-weight: 500 !important;
-		font-style: normal !important;
-		display: flex;
-		width: 100%;
-		align-items: center;
-		font-size: 0.8125rem;
-		letter-spacing: 0.02em;
-		margin-bottom: 9px;
-		text-transform: uppercase;
 	}
 
 	{%- for index in (1..4) -%}
@@ -343,9 +239,4 @@
 			}
 		{% endunless %}
 	{%- endfor -%}
-
-	/* Mega menu column headings */
-	.thb-full-menu .mega-menu-columns__heading {
-		font-weight: 700 !important;
-	}
 {% endstyle %}

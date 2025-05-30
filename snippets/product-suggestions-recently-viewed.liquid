@@ -1,0 +1,15 @@
+{%- comment -%}
+  This snippet renders a list of recently viewed products.
+  It is intended to be rendered via AJAX or populated by JavaScript.
+  It expects a list of product handles to be available, likely fetched client-side.
+{%- endcomment -%}
+
+{% comment %}
+  This snippet itself cannot directly fetch products based on handles passed to it
+  because Liquid executes on the server before the page loads and client-side data (like recently viewed handles in localStorage)
+  is available. The fetching and rendering of recently viewed products must happen via JavaScript.
+  The JavaScript in product-suggestions-tabs.js will handle fetching the HTML for recently viewed products
+  using the search URL approach found in recently-viewed-products.js and insert it here.
+{% endcomment %}
+
+{# The actual list of recently viewed products will be inserted here by JavaScript #} 

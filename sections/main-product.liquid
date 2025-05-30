@@ -83,6 +83,34 @@
 									{%- endfor -%}
 								</div>
 							</scroll-shadow>
+
+              {% # Include navigation buttons for mobile in thumbnail layout %}
+              {%- unless single_media_visible_mobile -%}
+              <div class="product-images-buttons product-images-buttons--mobile-only no-js-hidden">
+                <button
+                  type="button"
+                  class="slider-button slider-button--prev"
+                  name="previous"
+                  aria-label="Previous"
+                >
+                {% render 'svg-icons' with 'thb-caret-left' %}
+                </button>
+                <div class="slider-counter caption">
+                  <span class="slider-counter--current">1</span>
+                  <span aria-hidden="true"> / </span>
+                  <span class="slider-counter--total">{{ media_count }}</span>
+                </div>
+                <button
+                  type="button"
+                  class="slider-button slider-button--next"
+                  name="next"
+                  aria-label="Next"
+                >
+                  {% render 'svg-icons' with 'thb-caret-right' %}
+                </button>
+              </div>
+              {%- endunless -%}
+
             {%- else -%}
               {%- if display_slider_pagination -%}
                 {%- unless single_media_visible_mobile -%}
@@ -297,7 +325,7 @@
       "type": "checkbox",
       "id": "hide_variants",
       "default": false,
-      "label": "Hide unselected variants’ media",
+      "label": "Hide unselected variants' media",
 			"info": "Media for the unselected variants will be hidden."
     },
 		{
@@ -790,7 +818,7 @@
 			"settings": [
 				{
 					"type": "paragraph",
-					"content": "If you include a link in social media posts, the page’s featured image will be shown as the preview image. [Learn more](https://help.shopify.com/en/manual/online-store/images/showing-social-media-thumbnail-images)."
+					"content": "If you include a link in social media posts, the page's featured image will be shown as the preview image. [Learn more](https://help.shopify.com/en/manual/online-store/images/showing-social-media-thumbnail-images)."
 				},
 				{
 					"type": "paragraph",

@@ -494,6 +494,7 @@
     },
     "product-recommendations": {
       "type": "product-recommendations",
+      "disabled": true,
       "settings": {
         "heading": "Recommended For You",
         "heading_left": true,
@@ -506,6 +507,7 @@
     },
     "recently_viewed_products_pdPAhT": {
       "type": "recently-viewed-products",
+      "disabled": true,
       "settings": {
         "heading": "Recently Viewed",
         "heading_left": true,

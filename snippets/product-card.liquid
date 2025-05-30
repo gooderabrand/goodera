@@ -91,7 +91,15 @@
 		<div class="product-card-vendor"><a href="{{ product_card_product.vendor | url_for_vendor }}" title="{{ product_card_product.vendor | escape }}">{{ product_card_product.vendor }}</a></div>
 		{%- endif -%}
   	{%- if settings.show_products_rating and product_card_product.metafields.reviews.rating.value != blank -%}
-		<div class="star-rating" style="--star-rating: {{ product_card_product.metafields.reviews.rating.value.rating }};"></div>
+			{%- liquid
+				assign rating_value = product_card_product.metafields.reviews.rating.value.rating
+				assign review_count = product_card_product.metafields.reviews.rating_count
+			-%}
+			<div class="product-card-rating">
+				<span class="star-icon">★</span>
+				<span class="rating-number">{{ rating_value | round: 1 }}</span>
+				<span class="review-count">({{ review_count }})</span>
+			</div>
 		{%- endif -%}
     <div class="product-card-title-price-container">
 		<a href="{{ product_card_product.url | within: collection }}" title="{{ product_card_product.title | escape }}" class="product-card-title">{{ product_card_product.title }}</a>

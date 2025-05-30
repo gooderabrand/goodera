@@ -14,8 +14,13 @@
     {%- when 'title' -%}
       {%- if block.settings.show_products_rating and product.metafields.reviews.rating.value != blank -%}
          <a class="star-rating-container" href="#shopify-product-reviews">
-           <div class="star-rating" style="--star-rating: {{ product.metafields.reviews.rating.value.rating }};"></div>
-           <span>{{ 'products.product.reviews' | t: count: product.metafields.reviews.rating_count }}</span>
+			{%- liquid
+				assign rating_value = product.metafields.reviews.rating.value.rating
+				assign review_count = product.metafields.reviews.rating_count
+			-%}
+			<span class="star-icon">★</span>
+			<span class="rating-number">{{ rating_value | round: 1 }}</span>
+			<span class="review-count">({{ review_count }})</span>
          </a>
        {%- endif -%}
       <div class="product-title-container" {{ block.shopify_attributes }}>
