@@ -11,20 +11,11 @@
   "sections": {
     "breadcrumbs": {
       "type": "breadcrumbs",
-      "disabled": true,
       "settings": {}
     },
     "main-product": {
       "type": "main-product",
       "blocks": {
-        "e431a79e-9c7b-4a53-a79a-0cb918617ecf": {
-          "type": "text",
-          "disabled": true,
-          "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "style_vendor"
-          }
-        },
         "title": {
           "type": "title",
           "settings": {
@@ -50,7 +41,7 @@
           "settings": {
             "picker_type": "button",
             "color_picker": true,
-            "color_picker_size": "xlarge",
+            "color_picker_size": "large",
             "color_picker_use_variants": true,
             "variant_is_disabled": true,
             "sizing_guide_variant": "Size",
@@ -74,6 +65,13 @@
             "seo_text_max_height": 1000,
             "seo_text_read_more": "Read more",
             "seo_text_read_less": "Read less"
+          }
+        },
+        "complementary_cCC3WK": {
+          "type": "complementary",
+          "settings": {
+            "block_heading": "Pairs well with",
+            "product_list_limit": 3
           }
         },
         "1c29dd76-669f-4b4a-9883-a577855921eb": {
@@ -133,12 +131,12 @@
         }
       },
       "block_order": [
-        "e431a79e-9c7b-4a53-a79a-0cb918617ecf",
         "title",
         "546f2cee-3532-473a-836f-21f14fde7cfe",
         "variant_picker",
         "buy_buttons",
         "0b3e272b-c86a-4dba-946c-c6912251371c",
+        "complementary_cCC3WK",
         "1c29dd76-669f-4b4a-9883-a577855921eb",
         "0041f1e3-030f-4c9d-ae87-ddb7c2fa4b2b",
         "e49f0a1b-c60d-4e4a-b3c1-100c37771e4a",

@@ -6,23 +6,25 @@
     {%- when '@app' -%}
       {% render block %}
     {%- when 'text' -%}
-      <p class="product--text {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
-        {{- block.settings.text -}}
-      </p>
+      <div class="product-info-row">
+        <p class="product--text {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
+          {{- block.settings.text -}}
+        </p>
+      </div>
     {%- when 'custom_liquid' -%}
       {{ block.settings.custom_liquid }}
     {%- when 'title' -%}
-      {%- if block.settings.show_products_rating and product.metafields.reviews.rating.value != blank -%}
-         <a class="star-rating-container" href="#shopify-product-reviews">
-			{%- liquid
-				assign rating_value = product.metafields.reviews.rating.value.rating
-				assign review_count = product.metafields.reviews.rating_count
-			-%}
-			<span class="star-icon">★</span>
-			<span class="rating-number">{{ rating_value | round: 1 }}</span>
-			<span class="review-count">({{ review_count }})</span>
-         </a>
-       {%- endif -%}
+      {%- if product.metafields.custom.collection_name != blank -%}
+        {%- assign collection_id = product.metafields.custom.collection_name | split: '/' | last | remove: '"' | remove: ']' | plus: 0 -%}
+        {%- for collection in collections -%}
+          {%- if collection.id == collection_id -%}
+            <div class="product-collection-badge">
+              <a href="{{ collection.url }}" class="badge collection-badge">{{ collection.title }}</a>
+            </div>
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
       <div class="product-title-container" {{ block.shopify_attributes }}>
         <h1 class="product-title uppercase--{{ block.settings.uppercase }}">{{ product.title }}</h1>
         <div class="product-price-container">
@@ -42,6 +44,24 @@
             {%- endif -%}
           {%- endif -%}
         </div>
+      </div>
+      <div class="product-badges-row">
+        {%- if block.settings.show_products_rating and product.metafields.reviews.rating.value != blank -%}
+          <a class="star-rating-container" href="#shopify-product-reviews">
+            {%- liquid
+              assign rating_value = product.metafields.reviews.rating.value.rating
+              assign review_count = product.metafields.reviews.rating_count
+            -%}
+            <span class="star-icon">★</span>
+            <span class="rating-number">{{ rating_value | round: 1 }}</span>
+            <span class="review-count">({{ review_count }})</span>
+          </a>
+        {%- endif -%}
+        {%- if product.metafields.shopify.fabric != blank -%}
+          <div class="product--text style_vendor">
+            {{ product.metafields.shopify.fabric | metafield_text: field: 'label' }}
+          </div>
+        {%- endif -%}
       </div>
     {%- when 'description' -%}
       {%- liquid
