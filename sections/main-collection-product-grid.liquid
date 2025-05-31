@@ -11,13 +11,14 @@
 	assign products_per_page = section.settings.products_per_page
 	assign columns_desktop = section.settings.columns_desktop
 	assign facets_desktop = section.settings.facets_desktop
+	assign box_filter_list = section.settings.box_filter_list
 
 	unless enable_filtering
 		assign facets_desktop = 'drawer'
 	endunless
 -%}
 {%- for filter in collection.filters limit: 1 -%}{%- endfor -%}{%- comment -%} This is just to get rid of the "this theme does not support filters" message in the shopify admin {%- endcomment -%}
-{%- render 'facets-mobile', results: collection, enable_filtering: enable_filtering, enable_sorting: enable_sorting, show_counts: show_counts, filter_color_swatches: filter_color_swatches -%}
+{%- render 'facets-mobile', results: collection, enable_filtering: enable_filtering, enable_sorting: enable_sorting, show_counts: show_counts, filter_color_swatches: filter_color_swatches, box_filter_list: box_filter_list -%}
 <div class="row {% if full_width %}full-width-row{% endif %}">
 	<div class="small-12 columns">
 		{%- paginate collection.products by products_per_page -%}
@@ -25,7 +26,7 @@
 				<div id="ProductGridContainer">
 					<div class="sidebar-container facets--{{ facets_desktop }} facets--sidebar-{{ sidebar_size }} results--{{ collection.products.size }}">
 						{%- if facets_desktop == 'sidebar' -%}
-							{%- render 'facets-desktop', results: collection, enable_filtering: enable_filtering, enable_sorting: enable_sorting, show_counts: show_counts, filter_color_swatches: filter_color_swatches -%}
+							{%- render 'facets-desktop', results: collection, enable_filtering: enable_filtering, enable_sorting: enable_sorting, show_counts: show_counts, filter_color_swatches: filter_color_swatches, box_filter_list: box_filter_list -%}
 						{%- endif -%}
 						<div>
 							{%- render 'facets-bar', results: collection, enable_filtering: enable_filtering, enable_sorting: enable_sorting, facets_desktop: facets_desktop, filter_color_swatches: filter_color_swatches -%}
@@ -231,7 +232,19 @@
 	      "default": "medium",
 	      "label": "Sidebar size",
 	      "info": "Changes the width of the sidebar"
-	    }
+		  	    },
+	    {
+	      "type": "header",
+	      "content": "Filter boxes",
+				"info": "Show some filter options as boxes instead of checkboxes. Recommended only for very short filter labels."
+	    },
+			{
+				"type": "textarea",
+				"id": "box_filter_list",
+        "placeholder": "Size: 4",
+				"label": "Product options to box",
+				"info": "Follow the format: <Filter name>: <Columns>. Example: Size: 2. Each filter name should be in a new line. Enter the name of the option as it appears in the admin area."
+		  	    }
     ],
 		"blocks": [
       {
