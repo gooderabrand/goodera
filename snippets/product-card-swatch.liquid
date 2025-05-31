@@ -126,7 +126,7 @@
 						{%- endfor -%}
 					</div>
 				</div>
-				<div class="product-card-color-info">{{ active_color_value }} | {{ option.values.size }} Colors</div>
+				<div class="product-card-color-info">{% if current_color != blank %}{{ current_color }}{% else %}{{ active_color_value }}{% endif %} | {{ option.values.size }} Colors</div>
 				{%- if swatch_style == 'hover' -%}
 					<div class="product-card-swatches--title">{{ 'products.product.available' | t: count: option.values.size }}</div>
 				{%- endif -%}

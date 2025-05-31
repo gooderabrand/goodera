@@ -53,10 +53,20 @@
 }
 @media only screen and (min-width: 768px) {
   .products {
+    /* Remove or adjust gap when a spacing class is present */
     gap: 15px;
     grid-template-columns: repeat(auto-fit, minmax(225px, 275px));
     justify-content: center;
   }
+  /* Add spacing rules from original theme */
+  /*
+  .product-card-spacing-medium.products.row {
+    margin: 0 -10px;
+  }
+  .product-card-spacing-medium.products.row .column {
+    padding: 0 10px;
+  }
+  */
 }
 @media only screen and (min-width: 1024px) {
   .products {
