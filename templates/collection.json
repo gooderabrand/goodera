@@ -13,9 +13,11 @@
       "type": "main-collection-banner",
       "settings": {
         "show_collection_image": true,
-        "show_collection_description": true,
-        "show_subcollections": true,
-        "make_heading_uppercase": true,
+        "show_collection_description": false,
+        "show_subcollections": false,
+        "make_heading_uppercase": false,
+        "text_alignment": "center",
+        "image": "shopify://shop_images/W_homepage_16x9_36765194-2c51-457b-8820-ef5cb12ccde5_jpg.webp",
         "overlay_color": "#000000",
         "overlay_opacity": 40
       }
@@ -32,7 +34,11 @@
             "title": "PROMOTION BANNER",
             "text": "Add your description text for promotion banner here.",
             "link_label": "Explore",
+            "link": "",
             "use_text_button": true,
+            "block_link": "",
+            "content_position": "middle-center",
+            "text_alignment": "center",
             "overlay_color": "#000000",
             "overlay_opacity": 15
           }
@@ -49,7 +55,9 @@
         "enable_filtering": true,
         "enable_sorting": true,
         "show_counts": true,
-        "facets_desktop": "drawer"
+        "filter_color_swatches": true,
+        "facets_desktop": "drawer",
+        "sidebar_size": "medium"
       }
     },
     "166366972953e881f5": {
@@ -57,7 +65,7 @@
       "settings": {
         "heading": "",
         "heading_left": false,
-        "description": "<p><\/p>",
+        "description": "<p></p>",
         "full_width": true,
         "collection_list": [
           "clothing",
@@ -102,7 +110,8 @@
         "16636723131a14a571-2": {
           "type": "text",
           "settings": {
-            "text": "<p>Doing collections, doing fashion is like a non-stop dialogue. War taught me that not everything is glamorous. Luxury will be always around, no matter what happens in the world. I don't care about money. I really don't care. I just want to do what I do. I love to design things that people can actually buy. I'm staggered by what a boot costs today.<\/p>",
+            "text": "<p>Doing collections, doing fashion is like a non-stop dialogue. War taught me that not everything is glamorous. Luxury will be always around, no matter what happens in the world. I don't care about money. I really don't care. I just want to do what I do. I love to design things that people can actually buy. I'm staggered by what a boot costs today.</p>",
+            "custom_liquid": "",
             "size": "text-size-small"
           }
         }
@@ -116,7 +125,7 @@
         "text_width": "xlarge",
         "text_position": "center",
         "text_alignment": "center",
-        "color_bg": "transparent",
+        "color_bg": "rgba(0,0,0,0)",
         "color_text": "#151515",
         "color_links": "#151515",
         "disable_top_spacing": true,

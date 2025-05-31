@@ -158,6 +158,36 @@
         "name": "number_integer",
         "category": "NUMBER"
       }
+    },
+    {
+      "key": "collection_name",
+      "namespace": "custom",
+      "name": "Collection Name",
+      "description": "Product Collection",
+      "type": {
+        "name": "list.collection_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "subtitle",
+      "namespace": "descriptors",
+      "name": "Product subtitle",
+      "description": "Used as a shorthand for a product name",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "related_colors",
+      "namespace": "custom",
+      "name": "related colors",
+      "description": "Related Color Variants",
+      "type": {
+        "name": "list.product_reference",
+        "category": "REFERENCE"
+      }
     }
   ],
   "variant": [],
