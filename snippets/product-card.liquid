@@ -73,7 +73,7 @@
 			<span>{%- unless show_size_options -%}{{ 'products.product.quick_view' | t }}{%- else -%}{% render 'svg-icons' with 'thb-quick-view' %}{%- endunless -%}</span>
 		</quick-view>
 		{%- endif -%}
-		{%- if show_size_options -%}
+{%- if show_size_options -%}
 			{%- render 'product-card-size-options', product_card_product: product_card_product -%}
 		{%- endif -%}
 		{%- if products_hover_images and product_card_product.images.size > 1 and settings.products_hover_dots -%}
@@ -105,10 +105,13 @@
 		<a href="{{ product_card_product.url | within: collection }}" title="{{ product_card_product.title | escape }}" class="product-card-title">{{ product_card_product.title }}</a>
     {% render 'product-price', product: product_card_product %}
     </div>
-		{% render 'product-card-swatch', product: product_card_product, sizes: sizes %}
+
 		{%- if settings.show_products_subtitle and product_card_product.metafields.descriptors.subtitle != blank -%}
 			<p class="product-card-subtitle">{{ product_card_product.metafields.descriptors.subtitle }}</p>
 		{%- endif -%}
+
+		{% render 'product-card-swatch', product: product_card_product, sizes: sizes %}
+
 		{%- if settings.enable_quick_add -%}
 			{%- liquid
 				assign button_tag = 'quick-view'

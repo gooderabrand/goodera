@@ -182,9 +182,10 @@
     .product-card-vendor a {
       color: var(--color-body); }
   .product-card-title {
+    font-family: 'EverydaySans-Medium', sans-serif;
+    font-weight: normal;
     font-size: calc(var(--font-product-title-scale, 1) * 0.9375rem);
     line-height: calc(var(--font-product-title-line-height-scale, 1) * 1.5);
-    font-weight: var(--font-body-medium-weight, 500);
     letter-spacing: normal;
     display: block;
     margin-bottom: 0;
@@ -295,22 +296,24 @@
       .product-card .product-card-quickview.loading .loading-overlay .spinner-path {
         stroke: var(--bg-body, #fff); }
   .product-card-subtitle {
-    font-size: 0.8125rem;
+    font-family: "neue-haas-unica", sans-serif;
+    font-size: 0.75rem;
     color: rgba(var(--color-body-rgb), 0.8);
-    margin-top: 10px;
-    margin-bottom: 0; }
+    margin-top: 0;
+    margin-bottom: 0;
+  }
   .product-card-sizes {
-    padding: 15px 20px;
+    padding: 5px 0;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 8px;
+    gap: 4px;
   }
     .product-card-sizes--size {
       background: transparent;
       border: 1px solid rgba(255, 255, 255, 0.3);
       color: #fff;
-      padding: 10px 4px;
-      font-size: 13px;
+      padding: 2px 4px;
+      font-size: 11px;
       border-radius: 4px;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -334,13 +337,15 @@
       display: none !important;
     }
   .product-card-swatches {
+    font-family: "neue-haas-unica", sans-serif;
     line-height: 0;
     display: flex;
     flex-wrap: wrap;
     position: relative;
     width: 100%;
     justify-content: center;
-    gap: 8px;
+    gap: 4px;
+    margin-bottom: 0;
   }
     .product-card-swatches .product-card-swatch {
       cursor: pointer;

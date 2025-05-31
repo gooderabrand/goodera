@@ -24,6 +24,14 @@
             "show_custom_badges": true
           }
         },
+        "0b3e272b-c86a-4dba-946c-c6912251371c": {
+          "type": "description",
+          "settings": {
+            "seo_text_max_height": 1000,
+            "seo_text_read_more": "Read more",
+            "seo_text_read_less": "Read less"
+          }
+        },
         "546f2cee-3532-473a-836f-21f14fde7cfe": {
           "type": "inventory_level",
           "disabled": true,
@@ -57,14 +65,6 @@
             "outline_button": true,
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": false
-          }
-        },
-        "0b3e272b-c86a-4dba-946c-c6912251371c": {
-          "type": "description",
-          "settings": {
-            "seo_text_max_height": 1000,
-            "seo_text_read_more": "Read more",
-            "seo_text_read_less": "Read less"
           }
         },
         "complementary_cCC3WK": {
@@ -132,10 +132,10 @@
       },
       "block_order": [
         "title",
+        "0b3e272b-c86a-4dba-946c-c6912251371c",
         "546f2cee-3532-473a-836f-21f14fde7cfe",
         "variant_picker",
         "buy_buttons",
-        "0b3e272b-c86a-4dba-946c-c6912251371c",
         "complementary_cCC3WK",
         "1c29dd76-669f-4b4a-9883-a577855921eb",
         "0041f1e3-030f-4c9d-ae87-ddb7c2fa4b2b",
@@ -149,7 +149,7 @@
         "enable_sticky_add_to_cart": true,
         "show_taxes_included": false,
         "media_layout": "thumbnails",
-        "display_slider_pagination": false,
+        "display_slider_pagination": true,
         "media_aspect_ratio": "square",
         "display_captions": false,
         "hide_variants": true,

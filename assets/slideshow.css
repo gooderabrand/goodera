@@ -168,8 +168,8 @@
         z-index: 21; }
       .slideshow__slide-content--heading {
         color: #fff;
-        font-weight: var(--font-body-bold-weight, 600);
-        font-family: 'Inter', sans-serif;
+        font-size: 3.5rem;
+        line-height: 1.4;
       }
     .slideshow__slide .subheading {
       font-family: 'Inter', sans-serif;
@@ -299,3 +299,17 @@
   @media only screen and (min-width: 768px) {
     .slideshow-image--desktop {
       display: block; } }
+
+@media only screen and (min-width: 768px) {
+  .slideshow__slide-content--heading {
+    font-size: 2.5rem;
+    line-height: 1.4;
+  }
+}
+
+@media only screen and (min-width: 1068px) {
+  .slideshow__slide-content--heading {
+    font-size: 3rem;
+    line-height: 1.4;
+  }
+}

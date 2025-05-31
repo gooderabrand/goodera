@@ -193,23 +193,26 @@ template {
 
 html {
   box-sizing: border-box;
-  font-size: 100%; }
+  font-size: 100%;
+  font-family: "neue-haas-unica", sans-serif;
+}
 
 *,
 *::before,
 *::after {
-  box-sizing: inherit; }
+  box-sizing: inherit;
+}
 
 body {
   margin: 0;
-  padding: 0;
-  background: var(--bg-body, #fff);
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
-  font-weight: normal;
-  line-height: 1.6;
+  font-family: "neue-haas-unica", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
   color: var(--color-body);
+  background: var(--color-body-bg);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
+  -moz-osx-font-smoothing: grayscale;
+}
 
 img {
   display: inline-block;
@@ -311,18 +314,23 @@ h2, .h2,
 h3, .h3,
 h4, .h4,
 h5, .h5,
-h6, .h6 {
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  color: var(--color-body);
-  text-rendering: optimizeLegibility; }
-  h1 small, .h1 small, .h1-large small, .h1-xlarge small,
-  h2 small, .h2 small,
-  h3 small, .h3 small,
-  h4 small, .h4 small,
-  h5 small, .h5 small,
-  h6 small, .h6 small {
+h6, .h6,
+.product-card-title,
+.section-header h2,
+.cart-drawer--recommendations--heading {
+  font-family: 'EverydaySans-Medium', sans-serif;
+  font-weight: normal;
+  line-height: 1.2;
+  margin: 0 0 0.5em;
+  color: var(--color-heading);
+}
+
+h1 small, .h1 small, .h1-large small, .h1-xlarge small,
+h2 small, .h2 small,
+h3 small, .h3 small,
+h4 small, .h4 small,
+h5 small, .h5 small,
+h6 small, .h6 small {
     line-height: 0;
     color: #cacaca; }
 
@@ -1591,13 +1599,12 @@ table {
     padding: 17px 30px;
     height: 72px; }
     .side-panel-header h4 {
-      margin: 0;
-      line-height: 1;
-      font-size: 0.9375rem;
-      letter-spacing: 0.1em;
-      font-weight: var(--font-body-bold-weight, 600);
-      color: var(--color-body);
-      text-transform: uppercase; }
+      font-size: 1.0625rem;
+      line-height: 1.5rem;
+      font-weight: var(--font-heading-bold-weight, 600);
+      letter-spacing: 0.02em;
+      margin-bottom: 0;
+      text-transform: capitalize; }
       .side-panel-header h4 > span {
         display: block; }
       .side-panel-header h4 .facets__label {
@@ -1960,20 +1967,22 @@ h3, .h3 {
       line-height: calc( var(--font-heading-line-height-scale) * calc(var(--font-heading-scale) * 42px)); } }
 
 h4, .h4 {
-  font-size: calc(var(--font-heading-scale) * 20px);
-  line-height: calc( var(--font-heading-line-height-scale) * calc(var(--font-heading-scale) * 28px)); }
-  @media only screen and (min-width: 1068px) {
-    h4, .h4 {
-      font-size: calc(var(--font-heading-scale) * 28px);
-      line-height: calc( var(--font-heading-line-height-scale) * calc(var(--font-heading-scale) * 36px)); } }
+  font-size: 1.375rem;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  max-width: 65ch;
+  margin: 0 auto;
+}
 
 h5, .h5 {
   font-size: calc(var(--font-heading-scale) * 24px);
   line-height: calc( var(--font-heading-line-height-scale) * calc(var(--font-heading-scale) * 32px)); }
 
 h6, .h6 {
-  font-size: calc(var(--font-heading-scale) * 20px);
-  line-height: calc( var(--font-heading-line-height-scale) * calc(var(--font-heading-scale) * 26px)); }
+  font-size: 1.125rem;
+  line-height: 1.45;
+  margin-top: 0;
+  margin-bottom: 1.25rem; }
 
 @media only screen and (min-width: 768px) {
   .h1-large {
@@ -2120,9 +2129,9 @@ h6,
     align-items: center;
     grid-template-columns: 1fr auto 1fr;
     min-height: 60px; }
-    @media only screen and (min-width: 1068px) {
-      .header > .row > .columns {
-        min-height: 80px; } }
+  @media only screen and (min-width: 1068px) {
+    .header > .row > .columns {
+      min-height: 56px; } }
   .header .logolink {
     position: relative; }
     .header .logolink .logoimg--light {
@@ -2461,6 +2470,7 @@ h6,
         visibility: visible;
         transform: translateY(0px); }
       .thb-full-menu li.menu-item-has-children > a svg {
+        display: none;
         position: absolute;
         top: 50%;
         right: 0;
@@ -2529,7 +2539,7 @@ h6,
       margin: 0;
       padding: 0; }
     .thb-full-menu .mega-menu-columns__heading {
-      font-size: calc(var(--font-navigation-scale, 1) * 12px);
+      font-size: calc(var(--font-navigation-scale, 1) * 15px);
       text-transform: uppercase;
       font-weight: var(--font-body-bold-weight, 600);
       letter-spacing: 0.1em;
@@ -2732,7 +2742,7 @@ more-payment-options-link {
   height: 1.0625rem;
   line-height: 1.0625rem;
   margin-right: 15px;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: var(--button-letter-spacing, 0.02em);
   cursor: pointer;
   position: relative; }
@@ -3436,7 +3446,7 @@ select {
     display: block;
     font-size: calc(var(--font-product-title-scale, 1) * 0.9375rem);
     line-height: calc(var(--font-product-title-line-height-scale, 1) * 1.5);
-    font-weight: var(--font-body-medium-weight, 500);
+    font-weight: 500;
     display: block; }
     .product-title-uppercase-true .product-cart-item .cart-product-link {
       text-transform: uppercase; }
@@ -3530,7 +3540,7 @@ select {
       position: relative;
       font-size: 0.8125rem;
       line-height: 1.3;
-      font-weight: var(--font-body-bold-weight, 600);
+      font-weight: 500;
       text-transform: uppercase;
       margin-bottom: 20px; }
       @media only screen and (min-width: 1068px) {

@@ -72,7 +72,7 @@
 		        </product-slider{{ slider_prefix }}>
             {%- if media_layout == 'thumbnails' -%}
               <scroll-shadow>
-								<div id="Product-Thumbnails" class="product-thumbnail-container" data-hide-variants="{{ hide_variants }}">
+								<div id="Product-Thumbnails" class="product-thumbnail-container" data-hide-variants="{{ hide_variants }}" style="margin-bottom: 10px !important;">
 									{%- if featured_media != null -%}
 										{%- render 'product-thumbnail', product: product, media: featured_media, forloop: false, variant_images: variant_images, media_aspect_ratio: media_aspect_ratio, hide_variants: hide_variants -%}
 									{%- endif -%}
@@ -86,29 +86,6 @@
 
               {% # Include navigation buttons for mobile in thumbnail layout %}
               {%- unless single_media_visible_mobile -%}
-              <div class="product-images-buttons product-images-buttons--mobile-only no-js-hidden">
-                <button
-                  type="button"
-                  class="slider-button slider-button--prev"
-                  name="previous"
-                  aria-label="Previous"
-                >
-                {% render 'svg-icons' with 'thb-caret-left' %}
-                </button>
-                <div class="slider-counter caption">
-                  <span class="slider-counter--current">1</span>
-                  <span aria-hidden="true"> / </span>
-                  <span class="slider-counter--total">{{ media_count }}</span>
-                </div>
-                <button
-                  type="button"
-                  class="slider-button slider-button--next"
-                  name="next"
-                  aria-label="Next"
-                >
-                  {% render 'svg-icons' with 'thb-caret-right' %}
-                </button>
-              </div>
               {%- endunless -%}
 
             {%- else -%}

@@ -1,6 +1,3 @@
-
-
-
 .section-breadcrumbs + .product-section .thb-product-detail {
   margin-top: 0; }
 
@@ -17,6 +14,11 @@
     .breadcrumbs {
       padding: 20px 50px;
       overflow-x: hidden; } }
+  @media only screen and (max-width: 767px) {
+    .breadcrumbs {
+      display: none;
+    }
+  }
   .breadcrumbs i {
     opacity: 0.2;
     display: inline-block;
@@ -24,3 +26,9 @@
   .breadcrumbs a {
     text-decoration: underline;
     text-underline-offset: 3px; }
+
+@media only screen and (max-width: 767px) {
+  .section-breadcrumbs {
+    display: none;
+  }
+}

@@ -53,7 +53,6 @@
           "type": "megamenu",
           "settings": {
             "position": "1",
-            "promo_1_image": "shopify://shop_images/Good_Era_Tone_and_texture_face_mask_mockup_Feb24.png",
             "promo_1_heading": "BESTSELLERS",
             "promo_1_link_label": "Shop",
             "promo_1_link": "",
@@ -72,7 +71,6 @@
           "type": "megamenu",
           "settings": {
             "position": "2",
-            "promo_1_image": "shopify://shop_images/AMIRI-Campaign-Pre-Spring-2023-Image-1-1.jpg",
             "promo_1_heading": "BESTSELLERS",
             "promo_1_link_label": "Shop",
             "promo_1_link": "",
@@ -91,7 +89,6 @@
           "type": "megamenu",
           "settings": {
             "position": "3",
-            "promo_1_image": "shopify://shop_images/password-page-background-black_and_white.png",
             "promo_1_heading": "BESTSELLERS",
             "promo_1_link_label": "Shop",
             "promo_1_link": "",
@@ -113,11 +110,11 @@
         "megamenu_eDfjMT"
       ],
       "settings": {
-        "sticky_header": false,
+        "sticky_header": true,
         "logo": "shopify://shop_images/good_era_svg_logo_icon_desktop_black.svg",
-        "logo_height_range": 26,
-        "logo_height_range_mobile": 20,
-        "style": "style2",
+        "logo_height_range": 30,
+        "logo_height_range_mobile": 30,
+        "style": "style3",
         "header_shadow": "header--shadow-none",
         "menu": "main-menu",
         "cart_icon": "frame_bag",

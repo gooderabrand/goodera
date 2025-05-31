@@ -33,6 +33,19 @@
 		<link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
 	{%- endunless -%}
 
+	<!-- Custom Fonts -->
+	<link rel="preconnect" href="https://use.typekit.net" crossorigin>
+	<link rel="stylesheet" href="https://use.typekit.net/bin0qyn.css">
+	<style>
+		@font-face {
+			font-family: 'EverydaySans-Medium';
+			src: url('https://cdn.shopify.com/s/files/1/0730/8509/2156/files/EverydaySans-Medium.woff?v=1748611821') format('woff');
+			font-weight: normal;
+			font-style: normal;
+			font-display: swap;
+		}
+	</style>
+
 	{% render 'social-meta-tags' %}
 
 	{{ 'app.css' | asset_url | stylesheet_tag }}
