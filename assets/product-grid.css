@@ -11,6 +11,87 @@
 .products {
   list-style: none;
 }
+
+/* Base styles for small screens (2 columns) */
+.products.row {
+  display: flex;
+  flex-wrap: wrap;
+  /* Adjust margin based on original theme's base spacing for 2 columns */
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+.products.row .column {
+  flex: 0 0 50%; /* 2 columns */
+  max-width: 50%;
+  /* Adjust padding based on original theme's base spacing for 2 columns */
+  padding-left: 5px;
+  padding-right: 5px;
+  box-sizing: border-box;
+  margin-bottom: 15px; /* Vertical spacing - check original theme for exact value */
+}
+
+/* Styles for medium screens (e.g., 4 columns) */
+@media only screen and (min-width: 768px) {
+  .products.row {
+    /* Adjust margin for medium screens (e.g., 4 columns) */
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+  .products.row .column {
+    flex: 0 0 25%; /* 4 columns */
+    max-width: 25%;
+    /* Adjust padding for medium screens (e.g., 4 columns) */
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 30px; /* Vertical spacing - check original theme */
+  }
+}
+
+/* Styles for large screens (adjust columns and spacing as needed based on original theme) */
+@media only screen and (min-width: 1024px) {
+  .products.row .column {
+    /* Adjust for large-up-* columns - check original theme for exact values */
+    /* Example: flex: 0 0 25%; max-width: 25%; for 4 columns */
+  }
+   .product-card-spacing-medium .products.row .product-card {
+    margin-bottom: 30px; /* Check original theme */
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+   .products.row .column {
+    /* Adjust for larger screens if needed - check original theme */
+   }
+}
+
+/* Add media query to cap the gap on very large screens */
+@media only screen and (min-width: 1600px) {
+  .products.row {
+    /* Cap the negative margin */
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+  .products.row .column {
+    /* Cap the padding to match the negative margin */
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .products.row {
+    /* Further cap the negative margin if needed for ultra-wide screens */
+    margin-left: -25px;
+    margin-right: -25px;
+  }
+  .products.row .column {
+    /* Further cap the padding to match */
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+}
+
 .products.carousel {
   display: flex;
   flex-wrap: nowrap;
@@ -51,31 +132,17 @@
 .products .promotion-column {
   margin-bottom: 20px;
 }
-@media only screen and (min-width: 768px) {
-  .products {
-    /* Remove or adjust gap when a spacing class is present */
-    gap: 15px;
-    grid-template-columns: repeat(auto-fit, minmax(225px, 275px));
-    justify-content: center;
-  }
-  /* Add spacing rules from original theme */
-  /*
-  .product-card-spacing-medium.products.row {
-    margin: 0 -10px;
-  }
-  .product-card-spacing-medium.products.row .column {
-    padding: 0 10px;
-  }
-  */
-}
 @media only screen and (min-width: 1024px) {
   .products {
-    grid-template-columns: repeat(auto-fit, minmax(225px, 275px));
+    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+  }
+  .product-card-spacing-medium .products.row .product-card {
+    margin-bottom: 30px;
   }
 }
 @media only screen and (min-width: 1280px) {
   .products {
-    grid-template-columns: repeat(auto-fit, minmax(225px, 275px));
+    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
   }
 }
 .products .gallery__item {
