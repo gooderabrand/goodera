@@ -1,0 +1,67 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+1. Respect Existing Architecture
+
+Leverage the theme’s existing Liquid handles, CSS classes, components, and UI elements.
+Reuse before rebuilding. Avoid custom code that duplicates existing functionality.
+Preserve the original architecture and design system.
+2. Leverage Theme Customizer
+
+If the change can be controlled via theme settings (settings_schema.json), do it.
+Add toggles, selectors, ranges, or text inputs to allow control from Shopify’s customizer.
+Prioritize admin usability and non-technical maintainability.
+3. Maintain Theme Integrity
+
+Do not break or bypass global logic, responsive rules, or layout structures.
+Match the theme’s HTML structure, spacing units, font stacks, and component logic.
+Avoid shortcuts or overrides that conflict with other sections/pages.
+4. Code Review + Debug First
+
+Before editing, read and audit all relevant files (sections, snippets, assets).
+Don’t blindly patch. If something’s not working, diagnose root cause first.
+Always test changes across multiple pages and screen sizes.
+5. Version Control Discipline
+
+All edits must be committed with atomic commits.
+Use meaningful prefixes in commit messages: feat:, fix:, refactor:, style:, chore:.
+Work in branches, never commit directly to main.
+6. Avoid Hardcoding
+
+Avoid hardcoded values (URLs, labels, product handles).
+Use theme settings, Shopify objects (product, collection, etc.), or metafields.
+Always default values using the | default filter.
+7. Liquid Best Practices
+
+Use {% if %} or {% unless %} to wrap dynamic content.
+Use limit, offset, and paginate where appropriate in loops.
+Avoid verbose nesting. Extract complex logic into reusable snippets or partials.
+8. Performance & Accessibility
+
+Images must use loading="lazy" and width/height attributes.
+Scripts and styles must be deferred unless critical.
+Use semantic HTML and ensure keyboard navigability.
+Add aria-* attributes where needed.
+9. Preserve Updatability
+
+Avoid changing core theme files unless absolutely necessary.
+Use separate sections/snippets or wrap overrides in {% comment %} notes.
+Avoid blocking future theme updates or version upgrades.
+10. Global Consistency
+
+Match naming conventions across all layers (CSS, Liquid, JS).
+Reuse core utility classes (.section, .page-width, .grid, .h1, etc.).
+Use spacing tokens and design patterns from the base theme.
+11. Staging First
+
+Test all changes on a duplicate or unpublished theme, not the live store.
+Use ?preview_theme_id= links to simulate live behavior during preview.
+Confirm cart, dynamic checkout buttons, and metafield displays are functional.
+12. AI Behavior Rules (Specific to Cursor)
+
+Cursor must respect this ruleset when generating, editing, or suggesting code.
+If there are multiple valid approaches, present both with trade-offs.
+If unclear, ask for clarification rather than guessing.
+Cursor must not delete or override existing code silently — explain all changes.

@@ -1,0 +1,69 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "56d4ccfa-a515-4c26-9e64-c26ec5eea8d2": {
+          "type": "signup",
+          "settings": {
+            "column_size": "medium",
+            "title": "NEWSLETTER",
+            "text": "<p>Add a short description for this newsletter</p>"
+          }
+        },
+        "401e3886-6cb7-4742-8fda-45a0d97a26a3": {
+          "type": "menu",
+          "settings": {
+            "column_size": "medium",
+            "title": "COMPANY",
+            "menu": ""
+          }
+        },
+        "00a364e5-af4e-4073-871b-4d533bd4da06": {
+          "type": "menu",
+          "settings": {
+            "column_size": "medium",
+            "title": "RESOURCES",
+            "menu": ""
+          }
+        },
+        "a09a8a35-bedc-4119-aa04-3ce886faba9d": {
+          "type": "menu",
+          "settings": {
+            "column_size": "medium",
+            "title": "SUPPORT",
+            "menu": ""
+          }
+        }
+      },
+      "block_order": [
+        "56d4ccfa-a515-4c26-9e64-c26ec5eea8d2",
+        "401e3886-6cb7-4742-8fda-45a0d97a26a3",
+        "00a364e5-af4e-4073-871b-4d533bd4da06",
+        "a09a8a35-bedc-4119-aa04-3ce886faba9d"
+      ],
+      "settings": {
+        "full_width": false,
+        "copyright_text": "All rights reserved.",
+        "show_language_switcher": false,
+        "show_currency_switcher": false,
+        "show_payment_icons": false,
+        "enable_follow_on_shop": false
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}
