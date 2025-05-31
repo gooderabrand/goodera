@@ -1,0 +1,20 @@
+# macOS junk
+.DS_Store
+
+# Node modules
+node_modules/
+
+# Theme dev cache
+dist/
+.cache/
+*.tmp
+*.log
+
+# Shopify CLI stuff
+.env
+.env.* 
+.shopify/
+
+# Cursor config
+.vscode/
+.cursor/
