@@ -12,85 +12,167 @@
   list-style: none;
 }
 
-/* Base styles for small screens (2 columns) */
+/* --- BEGIN ORIGINAL THEME PRODUCT GRID LAYOUT AND SPACING STYLES --- */
+
 .products.row {
   display: flex;
   flex-wrap: wrap;
-  /* Adjust margin based on original theme's base spacing for 2 columns */
   margin-left: -5px;
   margin-right: -5px;
 }
 
+.products.row .columns,
 .products.row .column {
-  flex: 0 0 50%; /* 2 columns */
-  max-width: 50%;
-  /* Adjust padding based on original theme's base spacing for 2 columns */
-  padding-left: 5px;
-  padding-right: 5px;
+  padding: 0 5px;
   box-sizing: border-box;
-  margin-bottom: 15px; /* Vertical spacing - check original theme for exact value */
 }
 
-/* Styles for medium screens (e.g., 4 columns) */
+/* Base vertical spacing for product cards from original theme */
+.products.row .product-card {
+  margin-bottom: 15px;
+}
+
+/* Spacing classes from original theme */
+.product-card-spacing-pixel.products.row {
+  margin: 0 -0.5px;
+}
+.product-card-spacing-pixel.products.row .columns,
+.product-card-spacing-pixel.products.row .column {
+  padding: 0 0.5px;
+}
+.product-card-spacing-pixel .products.row .product-card {
+  margin-bottom: 15px;
+}
+
+.product-card-spacing-small.products.row {
+  margin: 0 -5px;
+}
+.product-card-spacing-small.products.row .columns,
+.product-card-spacing-small.products.row .column {
+  padding: 0 5px;
+}
+.product-card-spacing-small .products.row .product-card {
+  margin-bottom: 15px;
+}
+
 @media only screen and (min-width: 768px) {
-  .products.row {
-    /* Adjust margin for medium screens (e.g., 4 columns) */
-    margin-left: -10px;
-    margin-right: -10px;
+  .product-card-spacing-medium.products.row {
+    margin: 0 -10px;
   }
-  .products.row .column {
-    flex: 0 0 25%; /* 4 columns */
-    max-width: 25%;
-    /* Adjust padding for medium screens (e.g., 4 columns) */
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom: 30px; /* Vertical spacing - check original theme */
+  .product-card-spacing-medium.products.row .columns,
+  .product-card-spacing-medium.products.row .column {
+    padding: 0 10px;
+  }
+  .product-card-spacing-medium .products.row .product-card {
+    margin-bottom: 20px;
   }
 }
 
-/* Styles for large screens (adjust columns and spacing as needed based on original theme) */
 @media only screen and (min-width: 1024px) {
-  .products.row .column {
-    /* Adjust for large-up-* columns - check original theme for exact values */
-    /* Example: flex: 0 0 25%; max-width: 25%; for 4 columns */
+  .product-card-spacing-medium .products.row .product-card {
+    margin-bottom: 30px;
   }
-   .product-card-spacing-medium .products.row .product-card {
-    margin-bottom: 30px; /* Check original theme */
+}
+
+/* Responsive Column Widths based on Liquid classes from original theme */
+
+/* Small screens (default: 2 columns) */
+.small-up-2.products.row .columns,
+.small-up-2.products.row .column {
+  flex: 0 0 50% !important;
+  max-width: 50% !important;
+  box-sizing: border-box;
+}
+/* Add other small-up-* rules if they exist in original theme */
+
+/* Medium screens */
+@media only screen and (min-width: 768px) {
+  .medium-up-2.products.row .columns,
+  .medium-up-2.products.row .column {
+    flex: 0 0 50%;
+    max-width: 50%;
   }
+  .medium-up-3.products.row .columns,
+  .medium-up-3.products.row .column {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+  .medium-up-4.products.row .columns,
+  .medium-up-4.products.row .column {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+  .medium-up-5.products.row .columns,
+  .medium-up-5.products.row .column {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+  /* Add other medium-up-* rules if they exist in original theme */
+}
+
+/* Large screens */
+@media only screen and (min-width: 1024px) {
+  .large-up-2.products.row .columns,
+  .large-up-2.products.row .column {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  .large-up-3.products.row .columns,
+  .large-up-3.products.row .column {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+  .large-up-4.products.row .columns,
+  .large-up-4.products.row .column {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+  .large-up-5.products.row .columns,
+  .large-up-5.products.row .column {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+  /* Add other large-up-* rules if they exist */
 }
 
 @media only screen and (min-width: 1280px) {
-   .products.row .column {
-    /* Adjust for larger screens if needed - check original theme */
-   }
-}
-
-/* Add media query to cap the gap on very large screens */
-@media only screen and (min-width: 1600px) {
-  .products.row {
-    /* Cap the negative margin */
-    margin-left: -20px;
-    margin-right: -20px;
-  }
-  .products.row .column {
-    /* Cap the padding to match the negative margin */
-    padding-left: 20px;
-    padding-right: 20px;
+  /* Add any larger breakpoint rules if they exist in original theme */
+  .large-up-5.products.row .columns,
+  .large-up-5.products.row .column {
+    flex: 0 0 20%;
+    max-width: 20%;
   }
 }
 
-@media only screen and (min-width: 1920px) {
-  .products.row {
-    /* Further cap the negative margin if needed for ultra-wide screens */
-    margin-left: -25px;
-    margin-right: -25px;
-  }
-  .products.row .column {
-    /* Further cap the padding to match */
-    padding-left: 25px;
-    padding-right: 25px;
+/* Product card base size/margin from original theme */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100% - 20px);
+  position: relative;
+  width: 100%; /* Ensure full width within column */
+  margin-bottom: 20px; /* Base vertical spacing for card itself */
+}
+
+@media only screen and (min-width: 768px) {
+  .product-card {
+    min-height: calc(100% - 30px);
+    margin-bottom: 30px; /* Vertical spacing on medium/large */
   }
 }
+
+/* Remove any potentially conflicting grid or spacing rules on the base .products selector */
+@media only screen and (min-width: 768px) {
+  .products {
+    /* display: grid; */ /* Remove or comment this if it conflicts with flexbox .row */
+    /* gap: 15px; */ /* Remove or comment this if spacing is handled by padding/margin on columns */
+    /* grid-template-columns: repeat(auto-fit, minmax(225px, 1fr)); */ /* Remove or comment if column width is handled by flex on columns */
+    /* justify-content: center; */
+  }
+}
+
+/* --- END ORIGINAL THEME PRODUCT GRID LAYOUT AND SPACING STYLES --- */
+
 
 .products.carousel {
   display: flex;
@@ -907,6 +989,118 @@
 
 .product-card-rating .review-count {
   color: rgba(var(--color-body-rgb), 0.75); /* Match subtitle/color info color */
+}
+
+@media only screen and (max-width: 767px) {
+  /* Ensure products container and row are basic flex containers */
+  .products,
+  .products.row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    /* Re-add negative margin to offset column padding */
+    margin: 0 -5px !important;
+    gap: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  /* Force two-column layout on mobile with padding for spacing */
+  .products.row .columns,
+  .products.row .column {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+    /* Use padding for spacing like original theme's small spacing */
+    padding: 0 5px !important;
+    margin: 0 !important; /* Remove residual margin */
+    margin-bottom: 15px !important; /* Match original theme's vertical spacing between cards */
+    box-sizing: border-box !important;
+  }
+
+  /* Ensure product card fills its column */
+  .products.row .columns .product-card,
+  .products.row .column .product-card {
+    width: 100% !important;
+    /* Remove any default margin on the product card that might cause shrinking */
+    margin: 0 0 15px 0 !important; /* Keep bottom margin for vertical spacing between cards */
+    max-width: none !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Adjust vertical spacing within product info block on mobile */
+  .products.row .product-card .product-featured-image {
+    margin-bottom: 15px !important; /* Match original theme's mobile spacing for image bottom margin */
+    margin-top: 0 !important;
+    padding: 0 !important;
+  }
+
+  .products.row .product-card .product-card-info {
+    /* Ensure no top margin or padding is causing extra space */
+    margin-top: 0 !important; /* Explicitly ensure product info block has no top margin */
+    padding-top: 0 !important;
+    padding-right: 5px !important;
+    padding-left: 5px !important;
+  }
+
+  /* Explicitly remove top margin/padding from key elements within product info, including variations */
+  .products.row .product-card .product-card-info > *:first-child,
+  .products.row .product-card .product-card-title,
+  .products.row .product-card .product-card-vendor,
+  .products.row .product-card .product-card-sizes,
+  .products.row .product-card .product-card-swatches,
+  .products.row .product-card .product-card-color-info {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  /* Hide product size options on mobile to match original theme */
+  .products.row .product-card .product-card-sizes {
+    display: none !important;
+  }
+
+  /* Ensure images within the product card scale */
+  .products.row .product-card .product-featured-image img {
+    width: 100% !important;
+    height: auto !important; /* Maintain aspect ratio */
+    /* object-fit: cover !important; */
+  }
+
+  /* Fix padding-bottom for portrait aspect ratio images on mobile */
+  .products.row .product-card .product-featured-image-link.aspect-ratio--portrait {
+    padding-bottom: 125% !important;
+  }
+
+  /* Ensure other direct children also scale if they are images/media */
+   .products.row .columns .product-card > img,
+   .products.row .column .product-card > img,
+   .products.row .columns .product-card > video,
+   .products.row .column .product-card > video {
+     width: 100% !important;
+     height: auto !important;
+     max-width: 100% !important;
+   }
+
+}
+
+/* Add medium spacing for larger screens */
+@media only screen and (min-width: 768px) {
+  .products.row {
+    margin: 0 -10px !important;
+  }
+
+  .products.row .columns,
+  .products.row .column {
+    padding: 0 10px !important;
+    margin: 0 !important; /* Remove any residual margin on columns */
+    margin-bottom: 20px !important; /* Match original theme's vertical spacing */
+  }
+
+  /* Product card for larger screens */
+  .products.row .columns .product-card,
+  .products.row .column .product-card {
+    width: 100% !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
 }
 
 
