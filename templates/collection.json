@@ -57,15 +57,17 @@
         "show_counts": true,
         "filter_color_swatches": true,
         "facets_desktop": "drawer",
-        "sidebar_size": "medium"
+        "sidebar_size": "medium",
+        "box_filter_list": ""
       }
     },
     "166366972953e881f5": {
       "type": "collection-list",
+      "disabled": true,
       "settings": {
         "heading": "",
         "heading_left": false,
-        "description": "<p></p>",
+        "description": "",
         "full_width": true,
         "collection_list": [
           "clothing",
@@ -75,12 +77,12 @@
           "long",
           "pants"
         ],
-        "image_ratio": "square",
+        "image_ratio": "adapt",
         "layout": "grid",
-        "style": "style1",
+        "style": "style2",
         "columns_desktop": 6,
-        "columns_mobile": "1",
-        "show_progress_bar": true,
+        "columns_mobile": "2",
+        "show_progress_bar": false,
         "mobile_swipe": true,
         "overlay_color": "#000000",
         "overlay_opacity": 0,
@@ -90,6 +92,7 @@
     },
     "16636704759cbf64c5": {
       "type": "spacer",
+      "disabled": true,
       "settings": {
         "spacer_mobile": 50,
         "spacer_desktop": 125,
@@ -102,6 +105,7 @@
       "blocks": {
         "1fc06b12-e359-41a2-b694-099a6a7d4133": {
           "type": "heading",
+          "disabled": true,
           "settings": {
             "text": "USE IT TO ADD SEO TEXT",
             "size": "h4"
@@ -109,6 +113,7 @@
         },
         "16636723131a14a571-2": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "text": "<p>Doing collections, doing fashion is like a non-stop dialogue. War taught me that not everything is glamorous. Luxury will be always around, no matter what happens in the world. I don't care about money. I really don't care. I just want to do what I do. I love to design things that people can actually buy. I'm staggered by what a boot costs today.</p>",
             "custom_liquid": "",
@@ -120,6 +125,7 @@
         "1fc06b12-e359-41a2-b694-099a6a7d4133",
         "16636723131a14a571-2"
       ],
+      "disabled": true,
       "settings": {
         "section_width": "full-width-row-full",
         "text_width": "xlarge",
@@ -134,6 +140,7 @@
     },
     "166367228131c52c01": {
       "type": "spacer",
+      "disabled": true,
       "settings": {
         "spacer_mobile": 35,
         "spacer_desktop": 40,

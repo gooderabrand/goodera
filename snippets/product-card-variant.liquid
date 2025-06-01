@@ -71,7 +71,7 @@
 		</quick-view>
 		{%- endif -%}
 		{%- if show_size_options -%}
-			{%- render 'product-card-size-options', product_card_product: parent_product -%}
+			{% render 'product-card-size-options', product_card_product: parent_product %}
 		{%- endif -%}
 		{%- if products_hover_images and card_product.images.size > 1 and settings.products_hover_dots -%}
 			<ul class="product-secondary-images-nav">

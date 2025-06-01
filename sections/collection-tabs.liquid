@@ -33,6 +33,17 @@
 			assign section_heading_button = first_collection
 		endif
 	endif
+
+	# Get variant images for all products in the collections
+	assign variant_images = ''
+	for block in section.blocks
+		if block.settings.collection != blank
+			for product in block.settings.collection.products limit: product_limit
+				assign product_variant_images = product.images | where: "alt", "variant"
+				assign variant_images = variant_images | concat: product_variant_images
+			endfor
+		endif
+	endfor
 -%}
 <div class="collection-tabs section-spacing{% if disable_top_spacing %} section-spacing--disable-top{% endif %}{% if disable_bottom_spacing %} section-spacing--disable-bottom{% endif %}">
 	<div class="row{% if full_width %} full-width-row{% endif %}">
@@ -56,7 +67,7 @@
             {%- endif -%}
 						{%- for product in block.settings.collection.products limit: product_limit -%}
 							<div class="{{ columns_class }} columns{% if mainloop.first == true %} carousel__slide{% endif %}" data-collection="{{ block.settings.collection.handle }}">
-								{% render 'product-card', product_card_product: product %}
+								{% render 'product-card', product_card_product: product, variant_images: variant_images %}
 							</div>
 						{%- endfor -%}
 					{% else %}

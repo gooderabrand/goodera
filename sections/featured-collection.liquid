@@ -46,9 +46,43 @@
 				<{{ element }} id="product-grid-{{ section.id }}" class="products row {{ display_type }}">
 					{%- if featured_collection != blank -%}
 						{%- for product in featured_collection.products limit: product_limit -%}
-							<div class="{{ columns_class }} columns {% if display_type == 'carousel' %}carousel__slide{% endif %}">
-								{% render 'product-card', product_card_product: product %}
-							</div>
+							{% assign lazy_load = false %}
+							{%- if forloop.index > 2 -%}
+								{%- assign lazy_load = true -%}
+							{%- endif -%}
+
+							{% for option in product.options %}
+								{% if product.options_by_name['Color'].values == null %}
+									<div class="{{ columns_class }} columns {% if display_type == 'carousel' %}carousel__slide{% endif %}">
+										{% render 'product-card', product_card_product: product %}
+									</div>
+								{% endif %}
+								{% if option == 'Color' %}
+									{% assign index = forloop.index0 %}
+									{% assign colorlist = '' %}
+									{% assign color = '' %}
+									{% for variant in product.variants %}
+										{% capture color %}
+											{{ variant.options[index] }}
+										{% endcapture %}
+										{% unless colorlist contains color %}
+											<div class="{{ columns_class }} columns {% if display_type == 'carousel' %}carousel__slide{% endif %}">
+												{% render 'product-card-variant',
+													card_product: variant,
+													title: product.title,
+													color: color,
+													lazy_load: lazy_load,
+													parent_product: product
+												%}
+											</div>
+											{% capture tempList %}
+												{{colorlist | append: color | append: " " }}
+											{% endcapture %}
+											{% assign colorlist = tempList %}
+										{% endunless %}
+									{% endfor %}
+								{% endif %}
+							{% endfor %}
 						{%- endfor -%}
 					{%- else -%}
 						{%- for i in (1..product_limit) -%}
@@ -200,5 +234,4 @@
 		]
 	}
 }
-
 {% endschema %}

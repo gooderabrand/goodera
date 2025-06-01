@@ -49,65 +49,26 @@
     "header": {
       "type": "header",
       "blocks": {
-        "megamenu_8NgKcU": {
-          "type": "megamenu",
+        "megamenu_sidebar_adK63m": {
+          "type": "megamenu_sidebar",
           "settings": {
             "position": "1",
-            "promo_1_heading": "BESTSELLERS",
-            "promo_1_link_label": "Shop",
-            "promo_1_link": "",
-            "promo_2_heading": "Promotion heading",
-            "promo_2_link_label": "Shop",
-            "promo_2_link": "",
-            "promo_3_heading": "Promotion heading",
-            "promo_3_link_label": "Shop",
-            "promo_3_link": "",
-            "promo_4_heading": "Promotion heading",
-            "promo_4_link_label": "Shop",
-            "promo_4_link": ""
+            "content_collection_image": true,
+            "content_product_image": true
           }
         },
-        "megamenu_etj8HN": {
-          "type": "megamenu",
+        "megamenu_sidebar_MKEjGM": {
+          "type": "megamenu_sidebar",
           "settings": {
             "position": "2",
-            "promo_1_heading": "BESTSELLERS",
-            "promo_1_link_label": "Shop",
-            "promo_1_link": "",
-            "promo_2_heading": "Promotion heading",
-            "promo_2_link_label": "Shop",
-            "promo_2_link": "",
-            "promo_3_heading": "Promotion heading",
-            "promo_3_link_label": "Shop",
-            "promo_3_link": "",
-            "promo_4_heading": "Promotion heading",
-            "promo_4_link_label": "Shop",
-            "promo_4_link": ""
-          }
-        },
-        "megamenu_eDfjMT": {
-          "type": "megamenu",
-          "settings": {
-            "position": "3",
-            "promo_1_heading": "BESTSELLERS",
-            "promo_1_link_label": "Shop",
-            "promo_1_link": "",
-            "promo_2_heading": "Promotion heading",
-            "promo_2_link_label": "Shop",
-            "promo_2_link": "",
-            "promo_3_heading": "Promotion heading",
-            "promo_3_link_label": "Shop",
-            "promo_3_link": "",
-            "promo_4_heading": "Promotion heading",
-            "promo_4_link_label": "Shop",
-            "promo_4_link": ""
+            "content_collection_image": true,
+            "content_product_image": true
           }
         }
       },
       "block_order": [
-        "megamenu_8NgKcU",
-        "megamenu_etj8HN",
-        "megamenu_eDfjMT"
+        "megamenu_sidebar_adK63m",
+        "megamenu_sidebar_MKEjGM"
       ],
       "settings": {
         "sticky_header": true,

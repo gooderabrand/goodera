@@ -19,6 +19,15 @@
 				assign option_index = 'option' | append: color_option.position
 				assign active_color_value = product.selected_or_first_available_variant[option_index]
 			endif
+
+			# Get variant images
+			assign variant_images = product.images | where: "alt", "variant"
+			assign variant_attached_images = product.images | where: 'attached_to_variant?', true
+			assign variant_images = variant_images | concat: variant_attached_images
+			assign hide_variants = false
+			if settings.hide_variants and variant_images.size > 0
+				assign hide_variants = true
+			endif
 		-%}
 		{%- for option in product.options_with_values -%}
 			{%- liquid
@@ -118,7 +127,7 @@
 									assign bg_value = variant_image | image_url: width: 40
 								endif
 							-%}
-							<div class="product-card-swatch {{ active }}" style="--option-color: {{ color_value | downcase | escape }}; {%- if bg_value -%} --option-color-image: url('{{ bg_value | escape }}');{%- endif -%}" data-srcset="{{- srcset | slice: 0, l | strip_newlines -}}" data-href="{{ variant_url }}">
+							<div class="product-card-swatch {{ active }}{% if hide_variants and variant_images contains variant_image.src %} product-card-swatch--variant{% endif %}" style="--option-color: {{ color_value | downcase | escape }}; {%- if bg_value -%} --option-color-image: url('{{ bg_value | escape }}');{%- endif -%}" data-srcset="{{- srcset | slice: 0, l | strip_newlines -}}" data-href="{{ variant_url }}">
 								<span class="visually-hidden" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
 									{{ value }}
 								</span>

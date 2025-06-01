@@ -114,6 +114,7 @@
     },
     "1662389920b1295ea2": {
       "type": "spacer",
+      "disabled": true,
       "settings": {
         "spacer_mobile": 25,
         "spacer_desktop": 20,
@@ -121,11 +122,31 @@
         "border_separator_full": false
       }
     },
+    "featured_collection_zATU9a": {
+      "type": "featured-collection",
+      "name": "Featured collection",
+      "settings": {
+        "heading": "What's New",
+        "heading_left": true,
+        "description": "",
+        "full_width": true,
+        "collection": "self-care-club",
+        "display_type": "grid",
+        "product_limit": 4,
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "mobile_swipe": true,
+        "show_progress_bar": true,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
     "16614195534fb74bc3": {
       "type": "collection-tabs",
       "blocks": {
         "9dc5629d-3c1a-4dcc-b25a-0aa3972a2cb7": {
           "type": "collection",
+          "disabled": true,
           "settings": {
             "collection": "womens-shop-all",
             "enable_promotion": false,
@@ -143,6 +164,7 @@
         },
         "8695b758-8543-4e57-bb17-1249221a1269": {
           "type": "collection",
+          "disabled": true,
           "settings": {
             "collection": "mens-shop-all",
             "enable_promotion": false,
@@ -163,6 +185,7 @@
         "9dc5629d-3c1a-4dcc-b25a-0aa3972a2cb7",
         "8695b758-8543-4e57-bb17-1249221a1269"
       ],
+      "disabled": true,
       "settings": {
         "heading": "What's New",
         "heading_left": true,
@@ -509,7 +532,6 @@
     },
     "1662636493225665a2": {
       "type": "spacer",
-      "disabled": true,
       "settings": {
         "spacer_mobile": 20,
         "spacer_desktop": 40,
@@ -588,6 +610,7 @@
     "slideshow_iX6Xi7",
     "hero_banner_FrVzRx",
     "1662389920b1295ea2",
+    "featured_collection_zATU9a",
     "16614195534fb74bc3",
     "rich_text_FeCiJ9",
     "1661426105a80f3333",

@@ -9,6 +9,14 @@
 	assign is_video = false
 	assign use_video = settings.products_use_video
 
+	# Get variant images for color swatches
+	assign variant_images = product_card_product.images | where: "alt", "variant"
+	assign variant_attached_images = product_card_product.images | where: 'attached_to_variant?', true
+	assign variant_images = variant_images | concat: variant_attached_images
+	assign hide_variants = false
+	if settings.hide_variants and variant_images.size > 0
+		assign hide_variants = true
+	endif
 
 	if featured_media.media_type != 'image'
 		if featured_media.media_type == 'video' and use_video
@@ -110,7 +118,7 @@
 			<p class="product-card-subtitle">{{ product_card_product.metafields.descriptors.subtitle }}</p>
 		{%- endif -%}
 
-		{% render 'product-card-swatch', product: product_card_product, sizes: sizes %}
+		{% render 'product-card-swatch', product: product_card_product, sizes: sizes, hide_variants: hide_variants %}
 
 		{%- if settings.enable_quick_add -%}
 			{%- liquid

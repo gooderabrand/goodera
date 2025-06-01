@@ -11,11 +11,13 @@
   "sections": {
     "main-collection-banner": {
       "type": "main-collection-banner",
+      "disabled": true,
       "settings": {
         "show_collection_image": false,
         "show_collection_description": true,
         "show_subcollections": true,
         "make_heading_uppercase": true,
+        "text_alignment": "center",
         "overlay_color": "#000000",
         "overlay_opacity": 0
       }
@@ -34,6 +36,7 @@
             "link_label": "Shop collection",
             "link": "",
             "use_text_button": true,
+            "block_link": "",
             "content_position": "bottom-left",
             "text_alignment": "left",
             "overlay_color": "#15377c",
@@ -49,11 +52,13 @@
         "products_per_page": 14,
         "columns_desktop": 4,
         "pagination_type": "paginated",
-        "enable_filtering": true,
-        "enable_sorting": true,
+        "enable_filtering": false,
+        "enable_sorting": false,
         "show_counts": false,
-        "filter_color_swatches": true,
-        "facets_desktop": "sidebar"
+        "filter_color_swatches": false,
+        "facets_desktop": "sidebar",
+        "sidebar_size": "medium",
+        "box_filter_list": ""
       }
     }
   },
