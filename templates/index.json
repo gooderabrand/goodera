@@ -122,6 +122,21 @@
         "border_separator_full": false
       }
     },
+    "swiper_product_carousel_t9Bk6H": {
+      "type": "swiper-product-carousel",
+      "name": "Swiper Product Carousel",
+      "settings": {
+        "heading": "Featured Collection",
+        "heading_left": false,
+        "description": "",
+        "full_width": true,
+        "collection": "self-care-club",
+        "product_limit": 4,
+        "columns_desktop": 4,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
     "featured_collection_zATU9a": {
       "type": "featured-collection",
       "name": "Featured collection",
@@ -131,12 +146,12 @@
         "description": "",
         "full_width": true,
         "collection": "self-care-club",
-        "display_type": "grid",
-        "product_limit": 4,
+        "display_type": "carousel",
+        "product_limit": 5,
         "columns_desktop": 4,
         "show_view_all": true,
         "mobile_swipe": true,
-        "show_progress_bar": true,
+        "show_progress_bar": false,
         "disable_top_spacing": false,
         "disable_bottom_spacing": true
       }
@@ -610,6 +625,7 @@
     "slideshow_iX6Xi7",
     "hero_banner_FrVzRx",
     "1662389920b1295ea2",
+    "swiper_product_carousel_t9Bk6H",
     "featured_collection_zATU9a",
     "16614195534fb74bc3",
     "rich_text_FeCiJ9",

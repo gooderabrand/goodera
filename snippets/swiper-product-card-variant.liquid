@@ -1,0 +1,23 @@
+{% comment %}
+  Renders a product variant card for Swiper carousel
+
+  Accepts:
+  - product: {Object} The parent product object
+  - variant: {Object} The product variant object
+  - color: {String} The color of the variant
+{% endcomment %}
+
+<div class="swiper-product-card-variant">
+  <a href="{{ variant.url | within: product.collection }}" title="{{ product.title | escape }} - {{ color }}">
+    {% if variant.featured_media %}
+      <img src="{{ variant.featured_media | image_url: width: 400 }}" alt="{{ variant.featured_media.alt | escape }}">
+    {% else %}
+      {% comment %}
+        Placeholder image if no variant media
+      {% endcomment %}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {% endif %}
+    <h3>{{ product.title | escape }} - {{ color }}</h3>
+    {% render 'product-price', product: variant %}
+  </a>
+</div> 
