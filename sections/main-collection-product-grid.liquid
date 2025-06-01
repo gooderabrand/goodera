@@ -41,7 +41,7 @@
 									</p>
 								</div>
 							{%- else -%}
-								<ul id="product-grid" data-id="{{ section.id }}-{{ product_grid_id }}" class="products collection row small-up-{{ settings.products_per_row_mobile }} medium-up-{{ settings.products_per_row }} large-up-{{ settings.products_per_row_desktop }} pagination--{{ settings.pagination_type }}">
+								<ul id="product-grid" data-id="{{ section.id }}-{{ product_grid_id }}" class="products collection row small-up-{{ settings.products_per_row_mobile }} medium-up-{{ columns_desktop }} large-up-{{ columns_desktop }} pagination--{{ settings.pagination_type }}">
 									{%- for product in collection.products -%}
 										{%- assign product_loop = forloop -%}
 										{%- for block in section.blocks -%}

@@ -79,8 +79,8 @@
 /* Small screens (default: 2 columns) */
 .small-up-2.products.row .columns,
 .small-up-2.products.row .column {
-  flex: 0 0 50% !important;
-  max-width: 50% !important;
+  flex: 0 0 50%;
+  max-width: 50%;
   box-sizing: border-box;
 }
 /* Add other small-up-* rules if they exist in original theme */
@@ -108,6 +108,12 @@
     max-width: 20%;
   }
   /* Add other medium-up-* rules if they exist in original theme */
+
+  /* Ensure columns within the carousel size correctly on medium screens */
+  .products.carousel .medium-up-2.columns, .products.carousel .medium-up-2.column { flex: 0 0 50%; max-width: 50%; }
+  .products.carousel .medium-up-3.columns, .products.carousel .medium-up-3.column { flex: 0 0 33.333%; max-width: 33.333%; }
+  .products.carousel .medium-up-4.columns, .products.carousel .medium-up-4.column { flex: 0 0 25%; max-width: 25%; }
+  .products.carousel .medium-up-5.columns, .products.carousel .medium-up-5.column { flex: 0 0 20%; max-width: 20%; }
 }
 
 /* Large screens */
@@ -133,6 +139,12 @@
     max-width: 20%;
   }
   /* Add other large-up-* rules if they exist */
+
+  /* Ensure columns within the carousel size correctly on large screens */
+  .products.carousel .large-up-2.columns, .products.carousel .large-up-2.column { flex: 0 0 50%; max-width: 50%; }
+  .products.carousel .large-up-3.columns, .products.carousel .large-up-3.column { flex: 0 0 33.333%; max-width: 33.333%; }
+  .products.carousel .large-up-4.columns, .products.carousel .large-up-4.column { flex: 0 0 25%; max-width: 25%; }
+  .products.carousel .large-up-5.columns, .products.carousel .large-up-5.column { flex: 0 0 20%; max-width: 20%; }
 }
 
 @media only screen and (min-width: 1280px) {
@@ -179,38 +191,25 @@
   flex-wrap: nowrap;
   overflow: hidden;
   min-width: 100%;
-  padding: 0;
-  gap: 15px;
-  justify-content: center;
-}
-.products.carousel .product-card {
-  flex-shrink: 0;
-  width: 100%;
-  max-width: 300px;
-}
-.products.carousel .carousel__slide {
-  width: 300px;
-  display: flex;
-  min-height: 100%;
-}
-.products.carousel .product-card {
-  height: 100%;
-}
-.no-js .products.carousel {
-  overflow-x: scroll;
-}
-.products.carousel.flickity-enabled {
-  overflow: visible;
-}
-.products.carousel.flickity-enabled .flickity-viewport {
-  overflow: visible;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-}
-.products.carousel .promotion-column {
-  margin-bottom: 0;
-  height: 100%;
-}
+  padding: 0; }
+  .products.carousel .product-card {
+    flex-shrink: 0; }
+  .products.carousel .carousel__slide {
+    width: 100%;
+    display: flex; }
+  .products.carousel .product-card {
+    height: 100%; }
+  .no-js .products.carousel {
+    overflow-x: scroll; }
+  .products.carousel.flickity-enabled {
+    overflow: visible; }
+    .products.carousel.flickity-enabled .flickity-viewport {
+      overflow: visible; }
+    .products.carousel.flickity-enabled.flickity-resize .carousel__slide {
+      min-height: 100%; }
+    .products.carousel .promotion-column {
+      margin-bottom: 0;
+      height: 100%; }
 .products .promotion-column {
   margin-bottom: 20px;
 }
@@ -220,6 +219,13 @@
   }
   .product-card-spacing-medium .products.row .product-card {
     margin-bottom: 30px;
+  }
+
+  /* Ensure columns within the carousel size correctly on large screens */
+  .products.carousel .columns,
+  .products.carousel .column {
+    flex: 0 0 calc(100% / var(--columns-desktop)); /* Use CSS variable for flexibility */
+    max-width: calc(100% / var(--columns-desktop));
   }
 }
 @media only screen and (min-width: 1280px) {
@@ -246,8 +252,7 @@
   min-height: calc(100% - 20px);
   position: relative;
   margin-bottom: 20px;
-  width: 100%;
-  max-width: 275px; }
+  width: 100%; }
   @media only screen and (min-width: 768px) {
     .product-card {
       margin-bottom: 30px;
@@ -266,7 +271,7 @@
     position: relative;
     overflow: hidden;
     z-index: 0;
-  }
+    background: var(--bg-body, #fff); }
     @media only screen and (min-width: 768px) {
       .product-card .product-featured-image {
         margin-bottom: 20px; } }
@@ -505,6 +510,7 @@
     justify-content: center;
     gap: 4px;
     margin-bottom: 0;
+    padding: 10px;
   }
     .product-card-swatches .product-card-swatch {
       cursor: pointer;
@@ -542,14 +548,14 @@
     }
     .product-card-swatches--container {
       position: absolute;
-      top: -10px;
+      top: 0;
       left: 0;
       right: 0;
-      height: calc(100% + 20px);
+      height: 100%;
       background: #fff;
       border: 1px solid rgba(var(--color-body-rgb), 0.15);
       border-radius: 8px;
-      padding: 20px 15px;
+      padding: 10px;
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.2s ease;
@@ -889,14 +895,14 @@
 /* Swatch Container - Preserve your custom hover effect */
 .product-card-swatches--container {
   position: absolute;
-  top: -10px;
+  top: 0;
   left: 0;
   right: 0;
-  height: calc(100% + 20px);
+  height: 100%;
   background: #fff;
   border: 1px solid rgba(var(--color-body-rgb), 0.15);
   border-radius: 8px;
-  padding: 20px 15px;
+  padding: 10px;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s ease;
@@ -1078,6 +1084,21 @@
     margin: 0 !important;
     max-width: none !important;
   }
+}
+
+/* Ensure columns within the carousel size correctly on large screens */
+@media only screen and (min-width: 1024px) {
+  .products.carousel .large-up-2.columns, .products.carousel .large-up-2.column { flex: 0 0 50%; max-width: 50%; }
+  .products.carousel .large-up-3.columns, .products.carousel .large-up-3.column { flex: 0 0 33.333%; max-width: 33.333%; }
+  .products.carousel .large-up-4.columns, .products.carousel .large-up-4.column { flex: 0 0 25%; max-width: 25%; }
+  .products.carousel .large-up-5.columns, .products.carousel .large-up-5.column { flex: 0 0 20%; max-width: 20%; }
+}
+
+@media only screen and (min-width: 768px) {
+  .products.carousel .medium-up-2.columns, .products.carousel .medium-up-2.column { flex: 0 0 50%; max-width: 50%; }
+  .products.carousel .medium-up-3.columns, .products.carousel .medium-up-3.column { flex: 0 0 33.333%; max-width: 33.333%; }
+  .products.carousel .medium-up-4.columns, .products.carousel .medium-up-4.column { flex: 0 0 25%; max-width: 25%; }
+  .products.carousel .medium-up-5.columns, .products.carousel .medium-up-5.column { flex: 0 0 20%; max-width: 20%; }
 }
 
 

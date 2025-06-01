@@ -38,7 +38,7 @@
 	<div class="row{% if full_width %} full-width-row{% endif %}">
 		<div class="small-12 columns">
 			{% render 'section-header', section_heading: section_heading, section_description: section_description, section_heading_left: section_heading_left, section_heading_button: section_heading_button, section_id: section.id, blocks: section.blocks %}
-			<slide-show id="product-grid-{{ section.id }}" data-id="{{ section.id }}" class="products carousel row small-up-2 medium-up-{{ columns_desktop }}">
+			<slide-show id="product-grid-{{ section.id }}" data-id="{{ section.id }}" class="products carousel row small-up-2 medium-up-{{ columns_desktop }}" style="--columns-desktop: {{ columns_desktop }};">
 				{% for block in section.blocks %}
 					{% assign mainloop = forloop %}
 					{% if block.settings.collection != blank %}
