@@ -40,8 +40,24 @@
 {% endcomment %}
 {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
 
-<div class="swiper-section-container section-spacing{% if section.settings.disable_top_spacing %} section-spacing--disable-top{% endif %}{% if section.settings.disable_bottom_spacing %} section-spacing--disable-bottom{% endif %}">
-  <div class="row{% if section.settings.full_width %} full-width-row{% endif %}">
+<style>
+  .swiper-section-container .swiper-container {
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .swiper-section-container .swiper-slide {
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  .swiper-section-container .swiper-slide .columns {
+    width: 100%;
+  }
+</style>
+
+<div class="swiper-section-container featured-collection section-spacing{% if section.settings.disable_top_spacing %} section-spacing--disable-top{% endif %}{% if section.settings.disable_bottom_spacing %} section-spacing--disable-bottom{% endif %}>
+  <div class="row{% if section.settings.full_width %} full-width-row{% endif %}>
     <div class="small-12 columns">
       {% comment %}
         Section header
@@ -138,43 +154,35 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const swiper = new Swiper('.swiper-container', {
-      // Optional parameters
       loop: true,
       grabCursor: true,
-      // Disable snap and freeMode for more controlled sliding based on slidesPerView
       snap: false,
       freeMode: false,
 
       autoplay: {{ enable_autoplay }} ? { delay: {{ autoplay_delay | default: 5000 }} } : false,
 
-      // If we need pagination
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
       },
 
-      // Navigation arrows
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
 
-      // Responsive breakpoints
       breakpoints: {
-        // when window width is < 768px (mobile)
         0: {
-          slidesPerView: 2, // Default to 2 columns on mobile
-          spaceBetween: 0 // Let theme CSS handle spacing
+          slidesPerView: 2,
+          spaceBetween: 20
         },
-        // when window width is >= 768px (tablet)
         768: {
-          slidesPerView: 3, // Default to 3 columns on tablet
-          spaceBetween: 0 // Let theme CSS handle spacing
+          slidesPerView: 3,
+          spaceBetween: 20
         },
-        // when window width is >= 1024px (desktop)
         1024: {
-          slidesPerView: {{ columns_desktop }}, // Use columns_desktop setting for desktop
-          spaceBetween: 0 // Let theme CSS handle spacing
+          slidesPerView: {{ columns_desktop }},
+          spaceBetween: 20
         }
       }
     });
