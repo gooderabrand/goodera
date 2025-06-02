@@ -136,6 +136,12 @@
         "content": "Product card"
       },
       {
+        "type": "checkbox",
+        "id": "quick_add_theme_white",
+        "label": "Use white theme for quick add",
+        "default": true
+      },
+      {
         "type": "range",
         "id": "product_title_font_scale",
         "min": 100,
@@ -1022,7 +1028,7 @@
       {
         "type": "header",
         "content": "Promotion",
-        "info": "Promote products while a search hasn’t been made yet."
+        "info": "Promote products while a search hasn't been made yet."
       },
       {
         "type": "text",

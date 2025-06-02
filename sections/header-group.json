@@ -53,7 +53,7 @@
           "type": "megamenu_sidebar",
           "settings": {
             "position": "1",
-            "content_collection_image": true,
+            "content_collection_image": false,
             "content_product_image": true
           }
         },

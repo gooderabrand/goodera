@@ -82,36 +82,6 @@
         "disable_bottom_spacing": true
       }
     },
-    "hero_banner_FrVzRx": {
-      "type": "hero-banner",
-      "disabled": true,
-      "settings": {
-        "desktop_height": "desktop-height-full",
-        "mobile_height": "mobile-height-500",
-        "full_width": true,
-        "full_width_padding": 0,
-        "corner_radius": 0,
-        "content_position": "bottom-left",
-        "text_alignment": "left",
-        "content_width": "medium",
-        "subheading": "INTRODUCING",
-        "heading": "Your Everyday Uniform",
-        "text": "",
-        "text_size": "text-size-extra-large",
-        "button_1_text": "Shop now",
-        "button_1_link": "",
-        "button_1_outline": false,
-        "button_2_text": "",
-        "button_2_link": "",
-        "button_2_outline": true,
-        "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "video_hosted": "shopify://files/videos/Hero Banner Demo.mp4",
-        "fallback_image": "shopify://shop_images/hq720.jpg",
-        "overlay_opacity": 25,
-        "disable_top_spacing": false,
-        "disable_bottom_spacing": false
-      }
-    },
     "1662389920b1295ea2": {
       "type": "spacer",
       "disabled": true,
@@ -120,21 +90,6 @@
         "spacer_desktop": 20,
         "border_separator": false,
         "border_separator_full": false
-      }
-    },
-    "swiper_product_carousel_t9Bk6H": {
-      "type": "swiper-product-carousel",
-      "name": "Swiper Product Carousel",
-      "settings": {
-        "heading": "Featured Collection",
-        "heading_left": false,
-        "description": "",
-        "full_width": true,
-        "collection": "self-care-club",
-        "product_limit": 4,
-        "columns_desktop": 4,
-        "disable_top_spacing": false,
-        "disable_bottom_spacing": false
       }
     },
     "featured_collection_zATU9a": {
@@ -153,6 +108,103 @@
         "mobile_swipe": true,
         "show_progress_bar": false,
         "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
+    "rich_text_9KHWKc": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_3H7DM4": {
+          "type": "heading",
+          "settings": {
+            "text": "Discover Our Community's Favorite Products",
+            "size": "h4"
+          }
+        }
+      },
+      "block_order": [
+        "heading_3H7DM4"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "section_width": "grid",
+        "text_width": "large",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_text": "#151515",
+        "color_links": "#151515",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
+    "1662459246bd099bb7": {
+      "type": "spacer",
+      "settings": {
+        "spacer_mobile": 15,
+        "spacer_desktop": 35,
+        "border_separator": false,
+        "border_separator_full": true
+      }
+    },
+    "shoppable_view_reels_zePxJj": {
+      "type": "shoppable-view-reels",
+      "blocks": {
+        "video_dwmHpP": {
+          "type": "video",
+          "settings": {
+            "video_hosted": "shopify://files/videos/export_1746420306840.MOV",
+            "product_handle": "self-care-club-classic-hoodie-grey"
+          }
+        },
+        "video_bJqxg9": {
+          "type": "video",
+          "settings": {
+            "video_hosted": "shopify://files/videos/export_1746420476444.MOV",
+            "product_handle": "classic-crewneck-grey"
+          }
+        },
+        "video_7dFACF": {
+          "type": "video",
+          "settings": {
+            "video_hosted": "shopify://files/videos/export_1746420306840.MOV",
+            "product_handle": "self-care-club-classic-hoodie-grey"
+          }
+        },
+        "video_3RhNYQ": {
+          "type": "video",
+          "settings": {
+            "video_hosted": "shopify://files/videos/IMG_0177.MOV",
+            "product_handle": "classic-crewneck-grey"
+          }
+        },
+        "video_wYRPF9": {
+          "type": "video",
+          "settings": {
+            "video_hosted": "shopify://files/videos/v10033g50000d0ah2onog65r0k641d50.MP4",
+            "product_handle": "self-care-club-classic-hoodie-grey"
+          }
+        }
+      },
+      "block_order": [
+        "video_dwmHpP",
+        "video_bJqxg9",
+        "video_7dFACF",
+        "video_3RhNYQ",
+        "video_wYRPF9"
+      ],
+      "name": "Shoppable video reels",
+      "settings": {
+        "full_width": false,
+        "aspect_ratio": "custom",
+        "custom_aspect_ratio": 0.5,
+        "show_dots": true,
+        "controls_play_pause": false,
+        "controls_sound": true,
+        "show_quick_add_button": true,
+        "color_text": "#ffffff",
+        "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 85%)",
+        "disable_top_spacing": true,
         "disable_bottom_spacing": true
       }
     },
@@ -351,25 +403,6 @@
         "disable_bottom_spacing": true
       }
     },
-    "166366563622039b3e": {
-      "type": "featured-collection",
-      "disabled": true,
-      "settings": {
-        "heading": "Own The Moment",
-        "heading_left": true,
-        "description": "<p>Identity designed for visionaries ready to take on the world.</p>",
-        "full_width": true,
-        "collection": "womens-shop-all",
-        "display_type": "carousel",
-        "product_limit": 9,
-        "columns_desktop": 4,
-        "show_view_all": false,
-        "mobile_swipe": true,
-        "show_progress_bar": false,
-        "disable_top_spacing": false,
-        "disable_bottom_spacing": false
-      }
-    },
     "hero_banner_VYkrHK": {
       "type": "hero-banner",
       "settings": {
@@ -386,7 +419,7 @@
         "text": "",
         "text_size": "text-size-extra-large",
         "button_1_text": "Shop now",
-        "button_1_link": "",
+        "button_1_link": "shopify://collections/self-care-club",
         "button_1_outline": false,
         "button_2_text": "",
         "button_2_link": "",
@@ -451,16 +484,6 @@
         "spacer_desktop": 20,
         "border_separator": false,
         "border_separator_full": false
-      }
-    },
-    "1662459246bd099bb7": {
-      "type": "spacer",
-      "disabled": true,
-      "settings": {
-        "spacer_mobile": 15,
-        "spacer_desktop": 0,
-        "border_separator": true,
-        "border_separator_full": true
       }
     },
     "1662459178b0886a69": {
@@ -623,20 +646,19 @@
   },
   "order": [
     "slideshow_iX6Xi7",
-    "hero_banner_FrVzRx",
     "1662389920b1295ea2",
-    "swiper_product_carousel_t9Bk6H",
     "featured_collection_zATU9a",
+    "rich_text_9KHWKc",
+    "1662459246bd099bb7",
+    "shoppable_view_reels_zePxJj",
     "16614195534fb74bc3",
     "rich_text_FeCiJ9",
     "1661426105a80f3333",
     "166143150135dd97e2",
-    "166366563622039b3e",
     "hero_banner_VYkrHK",
     "1661539188062a849e",
     "1647955648d6a0baee",
     "16626364694d37e9d5",
-    "1662459246bd099bb7",
     "1662459178b0886a69",
     "16624594877292080f",
     "16615358507b6ff1a8",

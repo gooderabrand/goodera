@@ -14,14 +14,16 @@
 	assign show_progress_bar = section.settings.show_progress_bar
 	assign disable_top_spacing = section.settings.disable_top_spacing
 	assign disable_bottom_spacing = section.settings.disable_bottom_spacing
-	assign columns_class = 'small-6 medium-6 large-4'
+	assign columns_class = 'small-6 medium-4 large-3'
 	case columns_desktop
 		when 2
 			assign columns_class = 'small-6 medium-6'
 		when 3
 			assign columns_class = 'small-6 medium-4'
 		when 4
-			assign columns_class = 'small-6 medium-6 large-3'
+			assign columns_class = 'small-6 medium-4 large-3'
+		when 5
+			assign columns_class = 'small-6 medium-4 large-1/5'
 	endcase
 
 	if featured_collection.all_products_count > product_limit
@@ -42,47 +44,13 @@
 	<div class="row{% if full_width %} full-width-row{% endif %}">
 		<div class="small-12 columns">
 			{% render 'section-header', section_heading: section_heading, section_description: section_description, section_heading_left: section_heading_left, section_heading_button: section_heading_button %}
-			<div class="featured-collection__inner display-type--{{ display_type }}" style="--columns-desktop: {{ columns_desktop }};">
+			<div class="featured-collection__inner display-type--{{ display_type }}">
 				<{{ element }} id="product-grid-{{ section.id }}" class="products row {{ display_type }}">
 					{%- if featured_collection != blank -%}
 						{%- for product in featured_collection.products limit: product_limit -%}
-							{% assign lazy_load = false %}
-							{%- if forloop.index > 2 -%}
-								{%- assign lazy_load = true -%}
-							{%- endif -%}
-
-							{% for option in product.options %}
-								{% if product.options_by_name['Color'].values == null %}
-									<div class="{{ columns_class }} columns {% if display_type == 'carousel' %}carousel__slide{% endif %}">
-										{% render 'product-card', product_card_product: product %}
-									</div>
-								{% endif %}
-								{% if option == 'Color' %}
-									{% assign index = forloop.index0 %}
-									{% assign colorlist = '' %}
-									{% assign color = '' %}
-									{% for variant in product.variants %}
-										{% capture color %}
-											{{ variant.options[index] }}
-										{% endcapture %}
-										{% unless colorlist contains color %}
-											<div class="{{ columns_class }} columns {% if display_type == 'carousel' %}carousel__slide{% endif %}">
-												{% render 'product-card-variant',
-													card_product: variant,
-													title: product.title,
-													color: color,
-													lazy_load: lazy_load,
-													parent_product: product
-												%}
-											</div>
-											{% capture tempList %}
-												{{colorlist | append: color | append: " " }}
-											{% endcapture %}
-											{% assign colorlist = tempList %}
-										{% endunless %}
-									{% endfor %}
-								{% endif %}
-							{% endfor %}
+							<div class="{{ columns_class }} columns {% if display_type == 'carousel' %}carousel__slide{% endif %}">
+								{% render 'product-card', product_card_product: product %}
+							</div>
 						{%- endfor -%}
 					{%- else -%}
 						{%- for i in (1..product_limit) -%}
@@ -174,7 +142,7 @@
 			"type": "range",
 			"id": "columns_desktop",
 			"min": 2,
-			"max": 8,
+			"max": 5,
 			"step": 1,
 			"default": 4,
 			"label": "Number of columns on desktop"
@@ -234,4 +202,5 @@
 		]
 	}
 }
+
 {% endschema %}

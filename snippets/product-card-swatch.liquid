@@ -1,34 +1,6 @@
 {%- if settings.show_products_swatches -%}
 	{%- assign swatch_style = settings.swatch_style -%}
-	{%- unless product.has_only_default_variant -%}
-		{%- liquid
-			assign active_color_value = ''
-			assign color_option = null
-
-			# Find the color option
-			for option in product.options_with_values
-				assign option_name = option.name | downcase | escape
-				if option_name contains 'color' or option_name contains 'colour' or option_name contains 'couleur' or option_name contains 'farbe'
-					assign color_option = option
-					break
-				endif
-			endfor
-
-			# Get the color value from the selected or first available variant
-			if color_option != null
-				assign option_index = 'option' | append: color_option.position
-				assign active_color_value = product.selected_or_first_available_variant[option_index]
-			endif
-
-			# Get variant images
-			assign variant_images = product.images | where: "alt", "variant"
-			assign variant_attached_images = product.images | where: 'attached_to_variant?', true
-			assign variant_images = variant_images | concat: variant_attached_images
-			assign hide_variants = false
-			if settings.hide_variants and variant_images.size > 0
-				assign hide_variants = true
-			endif
-		-%}
+{%- unless product.has_only_default_variant -%}
 		{%- for option in product.options_with_values -%}
 			{%- liquid
 				assign option_name = option.name | downcase | escape 
@@ -90,7 +62,6 @@
 								  {%- for size in image_sizes -%}
 								    {%- assign small_size = '20x' -%}
 								    {%- assign size_array = size | split: "x" -%}
-								    {%- assign size_x = size_array[0] | append: 'x' -%}
 								    {% if size_array[1] != "0" %}
 								      {%- assign size_x = size -%}
 								      {%- assign small_x = size_array[1] | times: 20 | divided_by: size_array[0] | floor -%}
@@ -122,23 +93,16 @@
 								elsif value.swatch.color
 									assign color_value = 'rgb(' | append: value.swatch.color.rgb | append: ')'
 								endif
-
-								if variant_image
-									assign bg_value = variant_image | image_url: width: 40
-								endif
 							-%}
-							<div class="product-card-swatch {{ active }}{% if hide_variants and variant_images contains variant_image.src %} product-card-swatch--variant{% endif %}" style="--option-color: {{ color_value | downcase | escape }}; {%- if bg_value -%} --option-color-image: url('{{ bg_value | escape }}');{%- endif -%}" data-srcset="{{- srcset | slice: 0, l | strip_newlines -}}" data-href="{{ variant_url }}">
+							<div class="product-card-swatch {{ active }}" style="--option-color: {{ color_value | downcase | escape }}; {%- if bg_value -%} --option-color-image: url('{{ bg_value | escape }}');{%- endif -%}" data-srcset="{{- srcset | slice: 0, l | strip_newlines -}}" data-href="{{ variant_url }}">
 								<span class="visually-hidden" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
 									{{ value }}
 								</span>
 							</div>
 						{%- endfor -%}
 					</div>
-				</div>
-				<div class="product-card-color-info">{% if current_color != blank %}{{ current_color }}{% else %}{{ active_color_value }}{% endif %} | {{ option.values.size }} Colors</div>
-				{%- if swatch_style == 'hover' -%}
 					<div class="product-card-swatches--title">{{ 'products.product.available' | t: count: option.values.size }}</div>
-				{%- endif -%}
+				</div>
 				{%- endif -%}
 				{% break %}
 			{%- endif -%}

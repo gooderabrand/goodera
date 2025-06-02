@@ -46,6 +46,7 @@
         },
         "variant_picker": {
           "type": "variant_picker",
+          "disabled": true,
           "settings": {
             "picker_type": "button",
             "color_picker": true,
@@ -56,6 +57,15 @@
             "sizing_guide_text": "",
             "sizing_guide_icon": "none",
             "sizing_guide_page": ""
+          }
+        },
+        "siblings_EPcUyp": {
+          "type": "siblings",
+          "settings": {
+            "siblings_collection": "{{ product.metafields.theme.siblings.value }}",
+            "sibling_color": "{{ product.metafields.theme.sibling_color.value }}",
+            "color_picker_size": "xlarge",
+            "margin_bottom": 0
           }
         },
         "buy_buttons": {
@@ -76,31 +86,28 @@
         },
         "1c29dd76-669f-4b4a-9883-a577855921eb": {
           "type": "collapsible_tab",
-          "disabled": true,
           "settings": {
-            "heading": "How to Use",
+            "heading": "Details",
             "open": false,
-            "content": "<p>Apply evenly to face as the last part of your morning routine to help protect your skin. It is important to apply 15 minutes prior to UV exposure. Also, see Drug Facts panel(s) on the package. Can be used with Vitamin C Lotion 15% or 30% for added antioxidant benefits.</p>",
+            "content": "",
             "page": "",
             "custom_liquid": ""
           }
         },
         "0041f1e3-030f-4c9d-ae87-ddb7c2fa4b2b": {
           "type": "collapsible_tab",
-          "disabled": true,
           "settings": {
-            "heading": "Ingredients",
+            "heading": "Fit & Fabric",
             "open": false,
-            "content": "<p><strong>Active:</strong> Titanium Dioxide 4.4% (Sunscreen), Zinc Oxide 14.4% (Sunscreen).</p><p><strong>Inactive:</strong> Water (Aqua), Caprylic/Capric Triglyceride, Thermus Thermophillus Ferment, Polyglyceryl-2 Dipolyhydroxystearate, C12-15 Alkyl Benzoate, Dicaprylyl Carbonate, Cyclopentasiloxane, Dimethicone, Polyglyceryl-3 Diisostearate, Hydrogenated Starch Hydrolysate, Glycerin, Butylene Glycol, Aloe Barbadensis Leaf Juice, Betula Alba (White Birch) Bark Extract, Camellia Sinensis (Green Tea) Leaf Extract, Plankton Extract, Beeswax (Cera Alba), Acrylates/Dimethicone Copolymer</p>",
+            "content": "<p>{{ block.settings.page.metafields.custom.fitfabric.value }}</p>",
             "page": "",
             "custom_liquid": ""
           }
         },
         "e49f0a1b-c60d-4e4a-b3c1-100c37771e4a": {
           "type": "collapsible_tab",
-          "disabled": true,
           "settings": {
-            "heading": "Other Details",
+            "heading": "Shipping & Returns",
             "open": false,
             "content": "<p>Free delivery is available on all orders over $40. Please see our shipping information page for all available delivery options.</p>",
             "page": "",
@@ -109,6 +116,7 @@
         },
         "95b7e00a-0453-4eb0-9cf0-1dae84d8b822": {
           "type": "side_panel",
+          "disabled": true,
           "settings": {
             "side_panel_1_label": "Materials",
             "side_panel_1_icon": "leather",
@@ -135,6 +143,7 @@
         "0b3e272b-c86a-4dba-946c-c6912251371c",
         "546f2cee-3532-473a-836f-21f14fde7cfe",
         "variant_picker",
+        "siblings_EPcUyp",
         "buy_buttons",
         "complementary_cCC3WK",
         "1c29dd76-669f-4b4a-9883-a577855921eb",

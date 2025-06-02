@@ -37,7 +37,7 @@
 -%}
 <product-card class="product-card text-{{ product_content_alignment }}">
 	{%- if show_product_image -%}
-  <figure class="product-card--featured-image product-card--featured-image--{{ product_image_fit }}">
+  <figure class="product-card--featured-image {% if settings.products_hover_images %}thb-hover{% endif %}">
     {% render 'product-card-badge', product_card_product: product_card_product %}
     <a href="{{ product_card_product.url | within: collection }}" title="{{ product_card_product.title | escape }}" class="product-card--featured-image-link aspect-ratio aspect-ratio--{{ settings.product_aspect_ratio }}" style="--padding-bottom: {{ 1 | divided_by: ratio | times: 100 }}%;">
 			{%- if featured_media -%}
@@ -71,8 +71,8 @@
 {%- else -%}
 <product-card class="product-card">
 	{%- if show_product_image -%}
-	<figure class="product-featured-image {% if settings.products_hover_images %}thb-hover{% endif %}">
-		<a href="{{ product_card_product.url | within: collection }}" title="{{ product_card_product.title | escape }}" class="product-featured-image-link aspect-ratio aspect-ratio--{{ settings.product_aspect_ratio }}" style="--padding-bottom: {{ 1 | divided_by: 1 | times: 100 }}%;">
+	<figure class="product-card--featured-image {% if settings.products_hover_images %}thb-hover{% endif %}">
+		<a href="{{ product_card_product.url | within: collection }}" title="{{ product_card_product.title | escape }}" class="product-card--featured-image-link aspect-ratio aspect-ratio--{{ settings.product_aspect_ratio }}" style="--padding-bottom: {{ 1 | divided_by: 1 | times: 100 }}%;">
 			<div class="thb-placeholder">
 				{{ 'product-1' | placeholder_svg_tag }}
 			</div>

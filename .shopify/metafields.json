@@ -7,7 +7,28 @@
   "location": [],
   "market": [],
   "order": [],
-  "page": [],
+  "page": [
+    {
+      "key": "product_details",
+      "namespace": "custom",
+      "name": "product details",
+      "description": "Product description",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "fitfabric",
+      "namespace": "custom",
+      "name": "Fit and Fabric",
+      "description": "Fit and Fabric Details",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    }
+  ],
   "product": [
     {
       "key": "color-pattern",
@@ -197,6 +218,36 @@
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "siblings",
+      "namespace": "theme",
+      "name": "siblings",
+      "description": "Collection handle for siblings",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "sibling_color",
+      "namespace": "theme",
+      "name": "sibling color",
+      "description": "Collection for sibling color",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
+      }
+    },
+    {
+      "key": "details_product",
+      "namespace": "custom",
+      "name": "details product",
+      "description": "Product details",
+      "type": {
+        "name": "single_line_text_field",
+        "category": "TEXT"
       }
     }
   ],
