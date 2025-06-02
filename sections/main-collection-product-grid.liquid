@@ -43,29 +43,6 @@
 							{%- else -%}
 								<ul id="product-grid" data-id="{{ section.id }}-{{ product_grid_id }}" class="products collection row small-up-{{ settings.products_per_row_mobile }} medium-up-{{ columns_desktop }} large-up-{{ columns_desktop }} pagination--{{ settings.pagination_type }}">
 									{%- for product in collection.products -%}
-										{%- assign product_loop = forloop -%}
-										{%- for block in section.blocks -%}
-											{%- liquid
-												assign display_promotion = false
-												if product_loop.index == block.settings.promotion_position
-													assign display_promotion = true
-												endif
-
-												if block.settings.promotion_collection != blank
-													if collection.handle == block.settings.promotion_collection.handle and product_loop.index == block.settings.promotion_position
-														assign display_promotion = true
-													else
-														assign display_promotion = false
-													endif
-												endif
-											-%}
-											{%- if display_promotion -%}
-												{{- 'gallery.css' | asset_url | stylesheet_tag -}}
-												<li class="promotion-column column promotion-column-width--{{ block.settings.promotion_width }} product-columns-{{ columns_desktop }}">
-													{%- render 'product-promotion', block: block -%}
-												</li>
-											{%- endif -%}
-										{%- endfor -%}
 										<li class="column">
 											{%- render 'product-card', product_card_product: product -%}
 										</li>

@@ -1948,18 +1948,17 @@
 
 
 .product-card-sizes--size {
-  position: relative;
-  width: 32px;
-  height: 32px;
+  flex: 1; /* Make buttons fill available space */
+  height: 30px;
+  /* min-width: 30px; /* Removed */ */
+  padding: 0; /* Removed padding */
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.6875rem;
-  font-weight: var(--font-body-bold-weight, 600);
-  letter-spacing: 0.02em;
+  font-size: 0.75rem;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
+  position: relative;
+  border: 1px solid rgba(var(--color-body-rgb), 0.2);
 }
 
 .product-card-sizes--size:not(.is-disabled):hover {
