@@ -188,29 +188,15 @@
       ],
       "name": "Shoppable video reels",
       "settings": {
-        "heading": "Discover Our Community's Favorite Products",
-        "subheading": "Everybody's everyday uniform.",
         "full_width": true,
-        "content_width": "medium",
-        "content_position": "middle",
-        "text_alignment": "center",
         "aspect_ratio": "custom",
         "custom_aspect_ratio": 0.7,
         "show_dots": false,
         "controls_play_pause": false,
         "controls_sound": true,
         "show_quick_add_button": true,
-        "background_color": "#ffffff",
-        "text_color": "#000000",
-        "link_color": "#000000",
         "color_text": "#ffffff",
-        "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 85%)",
-        "spacer_mobile": 0,
-        "spacer_desktop": 0,
-        "heading_margin_mobile": 0,
-        "heading_margin_desktop": 20,
-        "subheading_margin_mobile": 15,
-        "subheading_margin_desktop": 20
+        "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 85%)"
       }
     },
     "16614195534fb74bc3": {

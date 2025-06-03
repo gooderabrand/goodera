@@ -1,0 +1,189 @@
+{%- if card_product and card_product != empty -%}
+{%- liquid
+	assign products_hover_images = settings.products_hover_images
+	assign products_hover_images_count = settings.products_hover_images_count
+	assign product_aspect_ratio = settings.product_aspect_ratio
+	assign featured_media = card_product.featured_media
+	assign ratio = 1
+	assign sizes = '375x375,770x770'
+	assign is_video = false
+	assign use_video = settings.products_use_video
+
+	if featured_media.media_type != 'image'
+		if featured_media.media_type == 'video' and use_video
+			assign is_video = true
+			assign featured_media = featured_media
+		else
+			assign featured_media = featured_media.preview_image
+		endif
+	endif
+	if product_aspect_ratio == 'adapt'
+		if featured_media
+			assign ratio = featured_media.aspect_ratio
+		endif
+		assign sizes = '375x0,770x0'
+	elsif product_aspect_ratio == 'portrait'
+		assign ratio = 1 | divided_by: 1.25
+		assign sizes = '375x350,770x700'
+	elsif product_aspect_ratio == 'landscape'
+		assign ratio = 1 | divided_by: 0.75
+		assign sizes = '375x250,770x500'
+	endif
+	assign product_content_alignment = settings.product_content_alignment
+
+	assign is_purchasable = false
+	if card_product.available and card_product.variants.size == 1
+		assign is_purchasable = true
+	endif
+
+	# Product card options
+	assign show_size_options = settings.show_size_options
+
+-%}
+<product-card class="product-card text-{{ product_content_alignment }}">
+  <figure class="product-featured-image {% if products_hover_images and card_product.images.size > 1 and products_hover_images_count > 0 %}thb-hover{% endif %}">
+    {% render 'product-card-badge', product_card_product: card_product %}
+		
+    <a href="{{ card_product.url | within: collection }}" title="{{ title | escape }}" class="product-featured-image-link aspect-ratio aspect-ratio--{{ settings.product_aspect_ratio }}" style="--padding-bottom: {{ 1 | divided_by: ratio | times: 100 }}%;">
+      {%- if products_hover_images and card_product.images.size > 1 -%}
+        {%- for i in (1..products_hover_images_count) -%}
+					{%- if card_product.images[i] -%}
+	          {%- render 'responsive-image', class: 'product-secondary-image', image: card_product.images[i], sizes: sizes, priority: 'low', defer: true -%}
+		      {%- endif -%}
+        {%- endfor %}
+      {%- endif -%}
+			{%- if featured_media -%}
+      	{%- if is_video and use_video -%}
+					{{ featured_media | video_tag: controls: false, loading: 'lazy', loop: true, autoplay: true, image_size: '770x' }}
+				{%- else -%}
+      	{%- render 'responsive-image', class: 'product-primary-image', image: featured_media, sizes: sizes -%}
+				{%- endif -%}
+			{%- else -%}
+				<div class="thb-placeholder">
+					{{ 'product-1' | placeholder_svg_tag }}
+				</div>
+			{%- endif -%}
+    </a>
+		{%- if settings.enable_quick_view -%}
+		<quick-view class="product-card-quickview product-card-quickview--{%- unless show_size_options -%}button{%- else -%}icon{%- endunless -%}" data-product-handle="{{ card_product.product.handle }}" tabindex="-1">
+			<div class="loading-overlay">{% render 'svg-icons' with 'thb-loading' %}</div>
+			<span>{%- unless show_size_options -%}{{ 'products.product.quick_view' | t }}{%- else -%}{% render 'svg-icons' with 'thb-quick-view' %}{%- endunless -%}</span>
+		</quick-view>
+		{%- endif -%}
+		{%- if show_size_options -%}
+			{%- render 'product-card-size-options', product_card_product: parent_product -%}
+		{%- endif -%}
+		{%- if products_hover_images and card_product.images.size > 1 and settings.products_hover_dots -%}
+			<ul class="product-secondary-images-nav">
+			{%- for i in (1..products_hover_images_count) -%}
+				{%- if card_product.images[i] -%}
+				<li></li>
+				{%- endif -%}
+			{%- endfor %}
+			</ul>
+		{%- endif -%}
+  </figure>
+	<div class="product-card-info">
+		{%- if settings.show_products_vendor -%}
+		<div class="product-card-vendor"><a href="{{ card_product.product.vendor | url_for_vendor }}" title="{{ card_product.product.vendor | escape }}">{{ card_product.product.vendor }}</a></div>
+		{%- endif -%}
+  	{%- if settings.show_products_rating and card_product.product.metafields.reviews.rating.value != blank -%}
+			{%- liquid
+				assign rating_value = card_product.product.metafields.reviews.rating.value.rating
+				assign review_count = card_product.product.metafields.reviews.rating_count
+			-%}
+			<div class="product-card-rating">
+				<span class="star-icon">★</span>
+				<span class="rating-number">{{ rating_value | round: 1 }}</span>
+				<span class="review-count">({{ review_count }})</span>
+			</div>	
+		{%- endif -%}
+    <div class="product-card-title-price-container">
+		<a href="{{ card_product.url | within: collection }}" title="{{ title | escape }}" class="product-card-title">{{ title | escape }}</a>
+    {% render 'product-price', product: card_product %}
+    </div>
+
+		{%- if settings.show_products_subtitle and card_product.product.metafields.descriptors.subtitle != blank -%}
+			<p class="product-card-subtitle">{{ card_product.product.metafields.descriptors.subtitle }}</p>
+		{%- endif -%}
+
+		{%- liquid
+			# Find the color option value for the current variant
+			assign current_variant_color_value = ''
+			assign color_option = null
+			for option in parent_product.options_with_values
+				assign option_name = option.name | downcase | escape
+				if option_name contains 'color' or option_name contains 'colour' or option_name contains 'couleur' or option_name contains 'farbe'
+					assign color_option = option
+					break
+				endif
+			endfor
+
+			if color_option != null
+				assign option_index = 'option' | append: color_option.position
+				assign current_variant_color_value = card_product[option_index]
+			endif
+		-%}
+
+		{% render 'product-card-swatch', product: parent_product, sizes: sizes, current_color: current_variant_color_value %}
+
+		{%- if settings.enable_quick_add -%}
+			{%- liquid
+				assign button_tag = 'quick-view'
+				if card_product.available == false
+					assign button_content = 'products.product.sold_out' | t
+				else
+					if card_product.product.metafields.theme.preorder and card_product.available
+						assign button_content = 'products.product.pre_order' | t
+					else
+						if is_purchasable
+							assign button_content = 'products.product.add_to_cart' | t
+						else
+							assign button_content = 'products.product.choose_options' | t
+						endif
+					endif
+				endif
+			-%}
+			<div class="product-card--add-to-cart-button-container">
+				<{{ button_tag }} class="product-card--add-to-cart-button outline{% if is_purchasable %} product-card--add-to-cart-button-simple{% endif %} button accent" data-product-handle="{{ card_product.product.handle }}" tabindex="-1" {% if card_product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+					<span class="loading-overlay">{% render 'svg-icons' with 'thb-loading' %}</span>
+					
+					<span class="product-card--add-to-cart-text">{{ button_content }}</span>
+				</{{ button_tag }}>
+			</div>
+		{%- endif -%}
+  </div>
+</product-card>
+{%- else -%}
+<product-card class="product-card">
+	<figure class="product-featured-image {% if settings.products_hover_images %}thb-hover{% endif %}>
+		<a href="#" title="{{ 'onboarding.product_title' | t }}" class="product-featured-image-link aspect-ratio aspect-ratio--{{ settings.product_aspect_ratio }}" style="--padding-bottom: {{ 1 | divided_by: 1 | times: 100 }}%;">
+			<div class="thb-placeholder">
+				{{ 'product-1' | placeholder_svg_tag }}
+			</div>
+			{%- if settings.enable_quick_view -%}
+			<button class="product-card-quickview product-card-quickview--{%- unless show_size_options -%}button{%- else -%}icon{%- endunless -%}" data-product-handle="{{ product_card_product.handle }}" tabindex="-1">
+				<div class="loading-overlay">{% render 'svg-icons' with 'thb-loading' %}</div>
+				<span>{{ 'products.product.quick_view' | t }}</span>
+			</button>
+			{%- endif -%}
+		</a>
+	</figure>
+	<div class="product-card-info">
+		<div class="product-card-vendor"><a href="#" title="{{ 'onboarding.product_vendor' | t }}">{{ 'onboarding.product_vendor' | t }}</a></div>
+		<a href="#" title="{{ product_card_product.title | escape }}" class="product-card-title">{{ 'onboarding.product_title' | t }}</a>
+		{% render 'product-price', product: card_product %}
+		{%- if settings.show_products_rating and card_product.product.metafields.reviews.rating.value != blank -%}
+		<div class="star-rating" style="--star-rating: 5;"></div>
+		{%- endif -%}
+		{%- if settings.enable_quick_add -%}
+		<div class="product-card--add-to-cart-button-container">
+			<quick-view class="product-card--add-to-cart-button button outline" data-product-handle="" tabindex="-1" disabled>
+				<span class="loading-overlay">{% render 'svg-icons' with 'thb-loading' %}</span>
+				<span class="product-card--add-to-cart-text">{{ 'products.product.choose_options' | t }}</span>
+			</quick-view>
+		</div>
+		{%- endif -%}
+	</div>
+</product-card>
+{%- endif -%} 

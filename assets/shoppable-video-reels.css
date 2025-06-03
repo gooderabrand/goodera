@@ -130,7 +130,10 @@
     margin: 0;
     color: var(--color-body);
     transform: translateY(20px);
-    transition: transform 0.25s cubic-bezier(0.104, 0.204, 0.492, 1); }
+    transition: transform 0.25s cubic-bezier(0.104, 0.204, 0.492, 1);
+    display: flex;
+    align-items: flex-end;
+  }
     .shoppable-video-reels .product-cart-item-image {
       margin-right: 15px; }
     .shoppable-video-reels .product-cart-item img,
@@ -181,6 +184,31 @@
 
   .shoppable-video-reels--video:hover .shoppable-video-reels--video-element {
     opacity: 1;
+  }
+
+  /* Always show product info on desktop */
+  .shoppable-video-reels--product {
+    opacity: 1 !important;
+    pointer-events: all !important;
+  }
+
+  /* Ensure product info is positioned correctly on all desktop cards */
+  .shoppable-video-reels .product-cart-item {
+    transform: translateY(0px);
+  }
+
+  /* Force product info to be visible and interactive on all desktop cards with a highly specific selector */
+  .shoppable-video-reels--slide > .shoppable-video-reels--product {
+    opacity: 1 !important;
+    pointer-events: all !important;
+  }
+
+  .variations .product-form__input--siblings label:after {
+    border-radius: 0; /* Remove circular shape */
+    top: 0; /* Make it cover the entire label */
+    left: 0; /* Make it cover the entire label */
+    right: 0; /* Make it cover the entire label */
+    bottom: 0; /* Make it cover the entire label */
   }
 }
 

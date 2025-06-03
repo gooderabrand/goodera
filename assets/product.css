@@ -31,7 +31,10 @@
       margin-right: 0;
       margin-left: 10px; }
   .add_to_cart_holder .button {
-    flex: 1; }
+    flex: 1;
+    font-weight: 700; /* Added medium font weight */
+    font-family: "Neue Haas Unica", sans-serif; /* Added Neue Haas Unica font */
+  }
   .add_to_cart_holder .swym-button-bar {
     margin-top: 0;
     margin-bottom: 0; }
@@ -51,7 +54,7 @@
     align-items: center;
     justify-content: center;
     height: 48px;
-    font-size: calc(var(--button-font-scale) * 0.875rem);
+    font-size: 0.875rem;
     font-weight: var(--font-body-bold-weight, 600);
     letter-spacing: 0.02em;
     color: var(--solid-button-label, #fff);
@@ -83,7 +86,7 @@
     align-items: center;
     justify-content: center;
     min-height: 48px !important;
-    font-size: calc(var(--button-font-scale) * 0.875rem) !important;
+    font-size: 0.875rem !important;
     font-weight: var(--font-body-bold-weight, 600);
     letter-spacing: 0.02em;
     color: var(--solid-button-label, #fff);
@@ -184,8 +187,9 @@
   .variations .product-form__input--block {
     display: flex;
     flex-wrap: wrap;
-    padding-left: 1px;
-    padding-top: 1px; }
+    gap: 8px;
+    padding: 0;
+  }
     .variations .product-form__input--block input[type="radio"] + label {
       width: auto;
       min-width: 48px;
@@ -193,20 +197,26 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 5px 15px;
+      padding: 6px 12px;
       font-size: 0.8125rem;
-      margin-left: -1px;
-      margin-top: -1px;
+      margin: 0;
       cursor: pointer;
-      box-shadow: 0 0 0 1px var(--color-border) inset; }
+      background: #f5f5f5;
+      color: #333333;
+      border-radius: 6px;
+      border: none;
+      transition: all 0.2s ease; }
       @media only screen and (min-width: 768px) {
         .variations .product-form__input--block input[type="radio"] + label {
           margin-right: 0; } }
     .variations .product-form__input--block input[type="radio"]:checked + label {
-      z-index: 5;
-      box-shadow: 0 0 0 1px var(--color-body) inset; }
+      background: var(--solid-button-background, var(--color-accent));
+      color: var(--solid-button-label, #fff);
+      box-shadow: none; }
+    .variations .product-form__input--block input[type="radio"]:hover + label {
+      background: #e5e5e5;
+      color: #000000; }
     .variations .product-form__input--block input[type="radio"]:focus-visible + label {
-      transform: scale(0.9);
       box-shadow: 0 0 0 2px #015ecc; }
   .variations .product-form__input--color {
     display: flex;
@@ -278,7 +288,8 @@
         background-position: center;
         background-size: cover;
         background-color: var(--option-color);
-        background-image: var(--option-color-image); }
+        background-image: var(--option-color-image);
+      }
       .variations .product-form__input--siblings label a {
         display: block;
         position: absolute;
@@ -303,6 +314,15 @@
     .variations .product-form__input--siblings--xlarge label {
       width: 80px;
       height: 80px; }
+
+    /* Style for the ::after pseudo-element of xlarge sibling labels */
+    .variations .product-form__input--siblings--xlarge label:after {
+      border-radius: 0; /* Remove circular shape */
+      top: 0; /* Make it cover the entire label */
+      left: 0; /* Make it cover the entire label */
+      right: 0; /* Make it cover the entire label */
+      bottom: 0; /* Make it cover the entire label */
+    }
 
 @media only screen and (min-width: 1068px) {
   .product-grid-container {
@@ -1948,10 +1968,9 @@
 
 
 .product-card-sizes--size {
-  flex: 1; /* Make buttons fill available space */
+  flex: 1;
   height: 30px;
-  /* min-width: 30px; /* Removed */ */
-  padding: 0; /* Removed padding */
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2011,4 +2030,20 @@
 
 .template-product .product-card .product-card--featured-image-link .product-secondary-image.hover {
   display: block;
+}
+
+@media only screen and (min-width: 1068px) {
+  /* Remove circular image effect for sibling labels on desktop */
+  .variations .product-form__input--siblings label:after {
+    border-radius: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  /* Add a clear border to selected xlarge sibling labels on desktop */
+  .variations .product-form__input--siblings--xlarge input[type="radio"]:checked + label {
+    box-shadow: 0 0 0 2px var(--color-accent) !important; /* Use !important to ensure override */
+  }
 }

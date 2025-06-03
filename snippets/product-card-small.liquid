@@ -25,12 +25,17 @@
 			endif
 		-%}
 		<a href="{{ product_small.url }}" title="{{ product_small.title | escape }}" class="cart-product-link">{{ product_title }}</a>
-		{% render 'product-price', product: product_small %}
-		{% if quick_add %}
 		<quick-view class="product-card-quickview text-button" data-product-handle="{{ product_small.handle }}" tabindex="-1">
 			<div class="loading-overlay">{% render 'svg-icons' with 'thb-loading' %}</div>
-			<span>{{ 'products.product.quick_view' | t }}</span>
+			{%- liquid
+				assign target = product_small.selected_or_first_available_variant | default: product_small
+				assign price = target.price | default: 1999
+				assign money_price = price | money
+				if settings.currency_code_enabled
+					assign money_price = price | money_with_currency
+				endif
+			-%}
+			<span>{{ money_price }} / {{ 'products.product.quick_view' | t }}</span>
 		</quick-view>
-		{% endif %}
 	</div>
 </product-card>
