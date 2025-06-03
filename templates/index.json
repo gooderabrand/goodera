@@ -113,18 +113,6 @@
     },
     "rich_text_9KHWKc": {
       "type": "rich-text",
-      "blocks": {
-        "heading_3H7DM4": {
-          "type": "heading",
-          "settings": {
-            "text": "Discover Our Community's Favorite Products",
-            "size": "h4"
-          }
-        }
-      },
-      "block_order": [
-        "heading_3H7DM4"
-      ],
       "name": "Rich text",
       "settings": {
         "section_width": "grid",
@@ -138,15 +126,6 @@
         "disable_bottom_spacing": true
       }
     },
-    "1662459246bd099bb7": {
-      "type": "spacer",
-      "settings": {
-        "spacer_mobile": 15,
-        "spacer_desktop": 35,
-        "border_separator": false,
-        "border_separator_full": true
-      }
-    },
     "shoppable_view_reels_zePxJj": {
       "type": "shoppable-view-reels",
       "blocks": {
@@ -154,40 +133,54 @@
           "type": "video",
           "settings": {
             "video_hosted": "shopify://files/videos/export_1746420306840.MOV",
-            "product_handle": "self-care-club-classic-hoodie-grey"
+            "product_handle": "self-care-club-classic-hoodie-grey",
+            "featured_image": "shopify://shop_images/26032024_ADANOLA_RR_SHOT_17_031_jpg.webp"
+          }
+        },
+        "video_TAat7K": {
+          "type": "video",
+          "settings": {
+            "video_hosted": "shopify://files/videos/v10033g50000d0ah2onog65r0k641d50.MP4",
+            "product_handle": "self-care-club-classic-hoodie-grey",
+            "featured_image": "shopify://shop_images/25032024_ADANOLA_RR_SHOT_29_007_3fdf78a4-14dd-46b7-8e44-a533992f7d08_jpg.webp"
           }
         },
         "video_bJqxg9": {
           "type": "video",
           "settings": {
             "video_hosted": "shopify://files/videos/export_1746420476444.MOV",
-            "product_handle": "classic-crewneck-grey"
+            "product_handle": "classic-crewneck-grey",
+            "featured_image": "shopify://shop_images/26032024_ADANOLA_RR_SHOT_10_021_jpg.webp"
           }
         },
         "video_7dFACF": {
           "type": "video",
           "settings": {
             "video_hosted": "shopify://files/videos/export_1746420306840.MOV",
-            "product_handle": "self-care-club-classic-hoodie-grey"
+            "product_handle": "self-care-club-classic-hoodie-grey",
+            "featured_image": "shopify://shop_images/ADANOLA_003_002_7093de4b-ad1e-4681-972b-790ae6cd4ed4_jpg.webp"
           }
         },
         "video_3RhNYQ": {
           "type": "video",
           "settings": {
             "video_hosted": "shopify://files/videos/IMG_0177.MOV",
-            "product_handle": "classic-crewneck-grey"
+            "product_handle": "classic-crewneck-grey",
+            "featured_image": "shopify://shop_images/black_pocket_png.webp"
           }
         },
         "video_wYRPF9": {
           "type": "video",
           "settings": {
             "video_hosted": "shopify://files/videos/v10033g50000d0ah2onog65r0k641d50.MP4",
-            "product_handle": "self-care-club-classic-hoodie-grey"
+            "product_handle": "self-care-club-classic-hoodie-grey",
+            "featured_image": "shopify://shop_images/25032024_ADANOLA_RR_SHOT_29_018_jpg.webp"
           }
         }
       },
       "block_order": [
         "video_dwmHpP",
+        "video_TAat7K",
         "video_bJqxg9",
         "video_7dFACF",
         "video_3RhNYQ",
@@ -195,17 +188,29 @@
       ],
       "name": "Shoppable video reels",
       "settings": {
-        "full_width": false,
+        "heading": "Discover Our Community's Favorite Products",
+        "subheading": "Everybody's everyday uniform.",
+        "full_width": true,
+        "content_width": "medium",
+        "content_position": "middle",
+        "text_alignment": "center",
         "aspect_ratio": "custom",
-        "custom_aspect_ratio": 0.5,
-        "show_dots": true,
+        "custom_aspect_ratio": 0.7,
+        "show_dots": false,
         "controls_play_pause": false,
         "controls_sound": true,
         "show_quick_add_button": true,
+        "background_color": "#ffffff",
+        "text_color": "#000000",
+        "link_color": "#000000",
         "color_text": "#ffffff",
         "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 85%)",
-        "disable_top_spacing": true,
-        "disable_bottom_spacing": true
+        "spacer_mobile": 0,
+        "spacer_desktop": 0,
+        "heading_margin_mobile": 0,
+        "heading_margin_desktop": 20,
+        "subheading_margin_mobile": 15,
+        "subheading_margin_desktop": 20
       }
     },
     "16614195534fb74bc3": {
@@ -649,7 +654,6 @@
     "1662389920b1295ea2",
     "featured_collection_zATU9a",
     "rich_text_9KHWKc",
-    "1662459246bd099bb7",
     "shoppable_view_reels_zePxJj",
     "16614195534fb74bc3",
     "rich_text_FeCiJ9",

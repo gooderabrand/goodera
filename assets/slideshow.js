@@ -419,3 +419,33 @@ if (!customElements.get('slide-show')) {
   }
   customElements.define('slide-show', SlideShow);
 }
+
+// Select all video containers
+const videoContainers = document.querySelectorAll('.shoppable-video-reels--video');
+
+// Loop through each container
+videoContainers.forEach(container => {
+  // Find the video element within this container
+  const video = container.querySelector('.shoppable-video-reels--video-element');
+
+  // Check if a video element exists to avoid errors
+  if (video) {
+    // Add event listener for when the mouse enters the container
+    container.addEventListener('mouseenter', () => {
+      // Only play on hover if on desktop
+      if (window.innerWidth >= 1068) {
+        video.play();
+      }
+    });
+
+    // Add event listener for when the mouse leaves the container
+    container.addEventListener('mouseleave', () => {
+      // Only pause on mouse leave if on desktop
+      if (window.innerWidth >= 1068) {
+        video.pause();
+        // Optional: Reset video to the beginning
+        // video.currentTime = 0;
+      }
+    });
+  }
+});
