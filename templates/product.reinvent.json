@@ -25,36 +25,13 @@
             "show_custom_badges": true
           }
         },
-        "0b3e272b-c86a-4dba-946c-c6912251371c": {
-          "type": "description",
-          "settings": {
-            "seo_text_max_height": 250,
-            "seo_text_read_more": "Read more",
-            "seo_text_read_less": "Read less"
-          }
-        },
-        "variant_picker_cFXCwE": {
-          "type": "variant_picker",
-          "settings": {
-            "picker_type": "button",
-            "color_picker": false,
-            "color_picker_size": "regular",
-            "color_picker_use_variants": false,
-            "variant_is_disabled": true,
-            "sizing_guide_variant": "Size",
-            "sizing_guide_text": "Sizing guide",
-            "sizing_guide_icon": "ruler",
-            "sizing_guide_page": "",
-            "custom_liquid": ""
-          }
-        },
         "siblings_ERtKNQ": {
           "type": "siblings",
           "settings": {
             "siblings_collection": "{{ product.metafields.theme.siblings.value }}",
             "sibling_color": "{{ product.metafields.theme.sibling_color.value }}",
             "color_picker_size": "regular",
-            "margin_bottom": 0
+            "margin_bottom": 20
           }
         },
         "buy_buttons": {
@@ -64,6 +41,14 @@
             "outline_button": true,
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": false
+          }
+        },
+        "0b3e272b-c86a-4dba-946c-c6912251371c": {
+          "type": "description",
+          "settings": {
+            "seo_text_max_height": 250,
+            "seo_text_read_more": "Read more",
+            "seo_text_read_less": "Read less"
           }
         },
         "95b7e00a-0453-4eb0-9cf0-1dae84d8b822": {
@@ -86,10 +71,9 @@
       },
       "block_order": [
         "title",
-        "0b3e272b-c86a-4dba-946c-c6912251371c",
-        "variant_picker_cFXCwE",
         "siblings_ERtKNQ",
         "buy_buttons",
+        "0b3e272b-c86a-4dba-946c-c6912251371c",
         "95b7e00a-0453-4eb0-9cf0-1dae84d8b822"
       ],
       "settings": {

@@ -1,8 +1,7 @@
-
-
 .product-image-container.product-image-container--thumbnails .product-thumbnail-container .product-thumbnail:after {
-  transition: all 0.25s cubic-bezier(0.104, 0.204, 0.492, 1); }
-
+  transition: all 0.25s cubic-bezier(0.104, 0.204, 0.492, 1);
+  box-shadow: none !important;
+}
 
 .product-image-container.product-image-container--thumbnails {
   position: relative;
@@ -53,13 +52,18 @@
     .product-image-container.product-image-container--thumbnails .product-thumbnail-container::-webkit-scrollbar {
       display: none; }
     .product-image-container.product-image-container--thumbnails .product-thumbnail-container .product-thumbnail {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: relative;
       overflow: hidden;
-      cursor: pointer;
-      width: 80px;
-      height: auto; }
+      cursor: pointer; }
       .product-image-container.product-image-container--thumbnails .product-thumbnail-container .product-thumbnail img {
-        object-fit: contain; }
+        width: 100%;
+        height: 100%;
+        object-fit: cover; }
       .product-image-container.product-image-container--thumbnails .product-thumbnail-container .product-thumbnail:after {
         content: "";
         display: block;
@@ -68,7 +72,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        box-shadow: inset 0 0 0 1px transparent; }
+        box-shadow: inset 0 0 0 2px var(--color-body); }
       .product-image-container.product-image-container--thumbnails .product-thumbnail-container .product-thumbnail-icon {
         width: 21px;
         height: 21px;
@@ -87,7 +91,7 @@
       .product-image-container.product-image-container--thumbnails .product-thumbnail-container .product-thumbnail:hover svg {
         opacity: 1; }
       .product-image-container.product-image-container--thumbnails .product-thumbnail-container .product-thumbnail.is-initial-selected:after {
-        box-shadow: inset 0 0 0 1px var(--color-body), inset 0 0 0 3px var(--bg-body, #fff); }
+        box-shadow: inset 0 0 0 1px var(--color-body) !important; }
     .product-image-container.product-image-container--thumbnails .product-thumbnail-container[data-hide-variants="true"] .product-thumbnail {
       display: none; }
       .product-image-container.product-image-container--thumbnails .product-thumbnail-container[data-hide-variants="true"] .product-thumbnail.is-active, .product-image-container.product-image-container--thumbnails .product-thumbnail-container[data-hide-variants="true"] .product-thumbnail.is-initial-selected {

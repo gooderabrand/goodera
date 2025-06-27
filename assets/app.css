@@ -2039,7 +2039,8 @@ h6,
 
 .header {
   display: block;
-  border-bottom: 1px solid var(--color-header-border, var(--color-border));
+  border-bottom: none !important;
+  box-shadow: none !important;
   position: relative;
   background: var(--color-header-bg, var(--bg-body, #fff));
   z-index: 30;
@@ -4006,3 +4007,9 @@ input[type="radio"], .field label, .custom-checkbox[type="checkbox"], .custom-ch
   .section-header h2 {
     font-weight: normal;
     margin-bottom: 0px; }
+
+/* Remove border and shadow from header when sticky */
+.header.is-sticky {
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
