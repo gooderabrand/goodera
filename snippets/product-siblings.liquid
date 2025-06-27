@@ -140,6 +140,31 @@
             </label>
           {%- endfor -%}
         </fieldset>
+        {%- assign size_option = false -%}
+        {%- assign size_option_index = 0 -%}
+        {%- for option in product.options_with_values -%}
+          {%- if option.name contains 'Size' or option.name contains 'size' -%}
+            {%- assign size_option = option -%}
+            {%- assign size_option_index = forloop.index0 -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if size_option -%}
+          <div class="variations">
+            <fieldset class="product-form__input product-form__input--block">
+              <div class="form__label">{{ size_option.name }}: <span class="form__label__value">{{ product.selected_or_first_available_variant.options[size_option_index] }}</span></div>
+              {%- for value in size_option.values -%}
+                {%- assign variant_for_size = false -%}
+                {%- for variant in product.variants -%}
+                  {%- if variant.options contains value -%}
+                    {%- assign variant_for_size = variant -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                <input type="radio" id="sibling-size-{{ forloop.index }}" name="sibling-size" value="{{ variant_for_size.id }}" {% if variant_for_size.available == false %}disabled{% endif %} {% if variant_for_size.id == product.selected_or_first_available_variant.id %}checked{% endif %}>
+                <label for="sibling-size-{{ forloop.index }}">{{ value }}</label>
+              {%- endfor -%}
+            </fieldset>
+          </div>
+        {%- endif -%}
       {%- endif -%}
     </div>
   {%- endif -%}
