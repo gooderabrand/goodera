@@ -28,7 +28,7 @@
         "202be592-39f4-4163-b706-faa1ae351b67": {
           "type": "text",
           "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>"
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
           }
         }
       },
@@ -71,7 +71,7 @@
         "f22f9e2a-b1d4-41e6-aba8-11cfcb2db4dc": {
           "type": "text",
           "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>",
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
             "size": "text-size-regular"
           }
         }
@@ -111,7 +111,6 @@
             "title": "Column",
             "text": "Pair text with an image to focus on your chosen image",
             "link_label": "Explore",
-            "link": "",
             "use_text_button": false
           }
         },
@@ -122,7 +121,6 @@
             "title": "Column",
             "text": "Pair text with an image to focus on your chosen image",
             "link_label": "Explore",
-            "link": "",
             "use_text_button": false
           }
         },
@@ -133,7 +131,6 @@
             "title": "Column",
             "text": "Pair text with an image to focus on your chosen image",
             "link_label": "Explore",
-            "link": "",
             "use_text_button": false
           }
         }
@@ -177,7 +174,7 @@
         "1663079744071e415c-2": {
           "type": "text",
           "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>",
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
             "size": "text-size-regular"
           }
         },
@@ -185,7 +182,7 @@
           "type": "button",
           "settings": {
             "link_label": "Learn More",
-            "link": "shopify:\/\/pages\/materials",
+
             "button_outline": false
           }
         }
@@ -216,8 +213,7 @@
           "settings": {
             "heading": "Slide Heading",
             "content": "Add a descriptive text here for your slide.",
-            "button_text": "Shop Now",
-            "button_link": ""
+            "button_text": "Shop Now"
           }
         },
         "fea7ee08-227d-4d4f-908e-45740d2c08d0": {
@@ -225,8 +221,7 @@
           "settings": {
             "heading": "Slide Heading",
             "content": "Add a descriptive text here for your slide.",
-            "button_text": "Shop Now",
-            "button_link": ""
+            "button_text": "Shop Now"
           }
         },
         "5ca44dca-974c-412f-96af-7ef4274450e5": {
@@ -234,8 +229,7 @@
           "settings": {
             "heading": "Slide Heading",
             "content": "Add a descriptive text here for your slide.",
-            "button_text": "Shop Now",
-            "button_link": ""
+            "button_text": "Shop Now"
           }
         }
       },
@@ -267,7 +261,6 @@
           "type": "text",
           "settings": {
             "text": "Add campaign text here.",
-            "link": "",
             "outline_text": false
           }
         },
@@ -275,7 +268,6 @@
           "type": "text",
           "settings": {
             "text": "Add campaign text here.",
-            "link": "",
             "outline_text": false
           }
         },
@@ -283,7 +275,6 @@
           "type": "text",
           "settings": {
             "text": "Add campaign text here.",
-            "link": "",
             "outline_text": false
           }
         },
@@ -291,7 +282,6 @@
           "type": "text",
           "settings": {
             "text": "Add campaign text here.",
-            "link": "",
             "outline_text": false
           }
         },
@@ -299,7 +289,6 @@
           "type": "text",
           "settings": {
             "text": "Add campaign text here.",
-            "link": "",
             "outline_text": false
           }
         }
@@ -334,9 +323,7 @@
             "image_full_width": false,
             "retina": true,
             "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
           }
         },
         "cd92bd1f-0097-47c0-826b-cc974ec2d339": {
@@ -345,9 +332,7 @@
             "image_full_width": false,
             "retina": true,
             "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
           }
         }
       },
@@ -356,7 +341,6 @@
         "cd92bd1f-0097-47c0-826b-cc974ec2d339"
       ],
       "settings": {
-        "heading": "",
         "heading_left": false,
         "description": "",
         "full_width": true,

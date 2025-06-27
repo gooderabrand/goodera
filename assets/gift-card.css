@@ -30,7 +30,8 @@
 .gift-card__copy-code {
   margin-bottom: 60px;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  align-items: center; }
   .gift-card__copy-code .form-notification {
     margin: 30px auto 0; }
 

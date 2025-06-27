@@ -40,9 +40,10 @@
 						{%- endfor -%}
 					{% when 'price_range' %}
 						{%- liquid
-							assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,UYU,VES,VND' | split: ','
 							assign uses_comma_decimals = false
-							if currencies_using_comma_decimals contains cart.currency.iso_code
+							assign currency_test_string = 101 | money_without_currency
+
+							if currency_test_string == '1,01'
 								assign uses_comma_decimals = true
 							endif
 						-%}

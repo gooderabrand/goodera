@@ -22,7 +22,7 @@
         "166161938159ca8988-2": {
           "type": "text",
           "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>",
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
             "size": "text-size-regular"
           }
         }
@@ -46,7 +46,6 @@
     "1652268757b7c53383": {
       "type": "contact-form",
       "settings": {
-        "heading": "",
         "description": "",
         "show_phone_number": true,
         "disable_top_spacing": true,
@@ -63,7 +62,7 @@
             "pin_lat": "41.510395",
             "pin_long": "-87.644287",
             "pin_title": "PIN HEADING",
-            "pin_desc": "6100 Wilshire Blvd 2nd Floor CA 9004  +1 310 499 7700<br><br><strong>Opening hours<\/strong>\nMonday-Saturday 11am–7pm ET\nSunday 11am–6pm ET"
+            "pin_desc": "6100 Wilshire Blvd 2nd Floor CA 9004  +1 310 499 7700<br><br><strong>Opening hours</strong>\nMonday-Saturday 11am–7pm ET\nSunday 11am–6pm ET"
           }
         }
       },

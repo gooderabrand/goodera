@@ -1,6 +1,6 @@
 {%- if settings.show_products_swatches -%}
 	{%- assign swatch_style = settings.swatch_style -%}
-{%- unless product.has_only_default_variant -%}
+	{%- unless product.has_only_default_variant -%}
 		{%- for option in product.options_with_values -%}
 			{%- liquid
 				assign option_name = option.name | downcase | escape 

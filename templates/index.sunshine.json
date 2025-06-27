@@ -28,7 +28,7 @@
         "16626591558bfa623a-2": {
           "type": "text",
           "settings": {
-            "text": "<p>Perfect to protect yourself during those long days in the sun, this good coverage swimsuit features a keyhole front.<\/p>"
+            "text": "<p>Perfect to protect yourself during those long days in the sun, this good coverage swimsuit features a keyhole front.</p>"
           }
         },
         "ab838a98-f1d4-4333-a95b-8835b603b195": {
@@ -40,8 +40,7 @@
         "dcbbd95d-6217-425d-9a60-e74072277ee1": {
           "type": "button",
           "settings": {
-            "button_text": "Shop The Collection",
-            "button_link": ""
+            "button_text": "Shop The Collection"
           }
         }
       },
@@ -73,8 +72,7 @@
           "settings": {
             "icon": "ruler",
             "image": "",
-            "heading": "UNREAL COMFORT",
-            "text": ""
+            "heading": "UNREAL COMFORT"
           }
         },
         "1662098307788ca717-1": {
@@ -82,8 +80,7 @@
           "settings": {
             "icon": "ruler",
             "image": "",
-            "heading": "GOOD FOR PLANET",
-            "text": ""
+            "heading": "GOOD FOR PLANET"
           }
         },
         "1662098307788ca717-2": {
@@ -91,8 +88,7 @@
           "settings": {
             "icon": "ruler",
             "image": "",
-            "heading": "7 SIZES IN ONE",
-            "text": ""
+            "heading": "7 SIZES IN ONE"
           }
         },
         "2c4a636c-cb89-4faf-82e6-13a0e7241006": {
@@ -100,8 +96,7 @@
           "settings": {
             "icon": "ruler",
             "image": "",
-            "heading": "UNLIMITED COLORS",
-            "text": ""
+            "heading": "UNLIMITED COLORS"
           }
         }
       },
@@ -145,15 +140,14 @@
         "b32f55b3-0592-4927-aefa-3269895f10d7": {
           "type": "text",
           "settings": {
-            "text": "<p>Everything necessary is all you got. Excellence in all it’s forms. Fab in the sun. Fashion that flatters. Feel free feel yourself.<\/p>",
+            "text": "<p>Everything necessary is all you got. Excellence in all it’s forms. Fab in the sun. Fashion that flatters. Feel free feel yourself.</p>",
             "size": "text-size-large"
           }
         },
         "79ad5fdb-b8ff-48ef-a444-3afd7061b1a8": {
           "type": "text-button",
           "settings": {
-            "link_label": "Learn More",
-            "link": ""
+            "link_label": "Learn More"
           }
         }
       },
@@ -177,7 +171,6 @@
     "16627135115dc334fb": {
       "type": "collection-list",
       "settings": {
-        "heading": "",
         "heading_left": false,
         "description": "",
         "full_width": false,
@@ -220,14 +213,13 @@
         "1662914873f53b9bad-2": {
           "type": "text",
           "settings": {
-            "text": "<p>Save up to 30% at the summer sale.<\/p>"
+            "text": "<p>Save up to 30% at the summer sale.</p>"
           }
         },
         "1662914873f53b9bad-3": {
           "type": "button",
           "settings": {
             "button_text": "Shop Now",
-            "button_link": "",
             "button_outline": true
           }
         }
@@ -317,7 +309,6 @@
           "type": "text",
           "settings": {
             "text": "MAKES FASHION SENSE",
-            "link": "",
             "outline_text": false
           }
         },
@@ -325,7 +316,6 @@
           "type": "text",
           "settings": {
             "text": "STAR IN A BRA",
-            "link": "",
             "outline_text": false
           }
         },
@@ -333,7 +323,6 @@
           "type": "text",
           "settings": {
             "text": "THE BATHING SUIT OF THE FUTURE",
-            "link": "",
             "outline_text": false
           }
         },
@@ -341,7 +330,6 @@
           "type": "text",
           "settings": {
             "text": "WATER INSTINCT",
-            "link": "",
             "outline_text": false
           }
         }
@@ -377,7 +365,6 @@
             "title": "Look Bold Swim <br>Elegant",
             "text": "Never satisfied with myself and that is what keeps me going.",
             "link_label": "Shop The Collection",
-            "link": "",
             "use_text_button": false
           }
         },
@@ -389,7 +376,6 @@
             "title": "Excellence In All <br>Its Forms",
             "text": "The swim line that fits all sizes and shapes.",
             "link_label": "Explore",
-            "link": "",
             "use_text_button": false
           }
         }
@@ -420,7 +406,6 @@
           "type": "text",
           "settings": {
             "text": "ONLY THE BEST MATERIAL",
-            "link": "",
             "outline_text": false
           }
         },
@@ -428,7 +413,6 @@
           "type": "text",
           "settings": {
             "text": "LOVE WHAT YOU WEAR",
-            "link": "",
             "outline_text": false
           }
         },
@@ -436,7 +420,6 @@
           "type": "text",
           "settings": {
             "text": "SWIM AS YOU PLEASE",
-            "link": "",
             "outline_text": false
           }
         },
@@ -444,7 +427,6 @@
           "type": "text",
           "settings": {
             "text": "FOR MERMAIDS IN TRAINING",
-            "link": "",
             "outline_text": false
           }
         }
@@ -474,7 +456,7 @@
       "settings": {
         "heading": "Featured Collection",
         "heading_left": false,
-        "description": "<p>Latest swimwear designs for Summer 23<\/p>",
+        "description": "<p>Latest swimwear designs for Summer 23</p>",
         "full_width": false,
         "collection": "swimwears",
         "display_type": "grid",
@@ -505,7 +487,7 @@
             "product_handle": "",
             "image": "",
             "stars": "5",
-            "text": "\"I visited their outlet store and they were so nice, helpful, and welcoming. they even threw in a free scrunchie with my purchase. the suit is amazing and so comfortable. I feel so secure in the top and comfortable. I also purchased the swim\/hiking shorts and they are everything.\"",
+            "text": "\"I visited their outlet store and they were so nice, helpful, and welcoming. they even threw in a free scrunchie with my purchase. the suit is amazing and so comfortable. I feel so secure in the top and comfortable. I also purchased the swim/hiking shorts and they are everything.\"",
             "author": "Nancy Paola"
           }
         },
@@ -561,9 +543,8 @@
             "image_full_width": true,
             "retina": true,
             "title": "Lookbook",
-            "text": "<p>Check out our fashion lookbook selection for the very best in unique.<\/p>",
-            "link_label": "Go to lookbook",
-            "link": ""
+            "text": "<p>Check out our fashion lookbook selection for the very best in unique.</p>",
+            "link_label": "Go to lookbook"
           }
         },
         "166298120739691a69-1": {
@@ -573,9 +554,8 @@
             "image_full_width": true,
             "retina": true,
             "title": "Our Store",
-            "text": "<p>Make it easy for customers to find your boutique by choosing a location that is close-by.<\/p>",
-            "link_label": "Find a store",
-            "link": ""
+            "text": "<p>Make it easy for customers to find your boutique by choosing a location that is close-by.</p>",
+            "link_label": "Find a store"
           }
         },
         "166298120739691a69-2": {
@@ -585,9 +565,8 @@
             "image_full_width": true,
             "retina": true,
             "title": "Upgrade Your Bikinis",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post.<\/p>",
-            "link_label": "View collection",
-            "link": ""
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post.</p>",
+            "link_label": "View collection"
           }
         }
       },
@@ -599,7 +578,7 @@
       "settings": {
         "heading": "Believe the hype",
         "heading_left": false,
-        "description": "<p>Everything I do is a matter of heart, body and soul.<\/p>",
+        "description": "<p>Everything I do is a matter of heart, body and soul.</p>",
         "full_width": false,
         "display_type": "grid",
         "image_ratio": "adapt",
@@ -625,7 +604,7 @@
       "type": "email-signup",
       "settings": {
         "heading": "Newsletter",
-        "description": "<p>Add a short description for this section<\/p>",
+        "description": "<p>Add a short description for this section</p>",
         "color_bg": "#fff7ea",
         "color_text": "#fd5252",
         "disable_top_spacing": false,

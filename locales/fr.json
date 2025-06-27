@@ -447,5 +447,11 @@
       "send_on": "AAAA-MM-JJ",
       "send_on_label": "Envoyer le (facultatif)"
     }
+  },
+  "discounts": {
+    "discount_code": "Appliquer le code de réduction",
+    "discount_code_error": "Le code de réduction ne peut pas être appliqué à votre panier",
+    "discounts": "Réductions",
+    "apply": "Appliquer"
   }
 }

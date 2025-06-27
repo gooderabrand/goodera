@@ -62,8 +62,7 @@
 		  <li role="menuitem" class="{% if has_sub_menu or has_mega_menu %}menu-item-has-children{% endif %}{% if has_mega_menu %} menu-item-has-megamenu{% endif %}{% if link.active %} active{% endif %}" {% if has_sub_menu %}data-item-title="{{ link.title | escape }}"{% endif %}>
 		    <a href="{{ link.url }}" class="thb-full-menu--link"{%- if link.active %} aria-current="page"{% endif -%}>
 					{{- link.title -}}
-					{%- if has_sub_menu or has_mega_menu -%}{%- render 'svg-icons' with 'thb-dropdown-bottom' -%}{%- endif -%}
-				</a>
+		    </a>
 				{%- if has_menu_badge -%}
 					{%- assign menu_badge_block = menu_badge_blocks[menu_badge_index] -%}
 					<span class="menu-item-badge" style="--menu-badge-bg: {{ menu_badge_block.settings.color_bg }};--menu-badge-text: {{ menu_badge_block.settings.color_text }};">{{ menu_badge_block.settings.text }}</span>

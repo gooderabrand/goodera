@@ -1,0 +1,451 @@
+/**
+ *  @class
+ *  @function SlideShow
+ */
+if (!customElements.get('slide-show')) {
+  class SlideShow extends HTMLElement {
+    constructor() {
+      super();
+      const slideshow = this,
+        dataset = slideshow.dataset;
+
+      let dots = dataset.dots === 'true',
+        slideshow_slides = Array.from(slideshow.querySelectorAll('.carousel__slide')),
+        autoplay = dataset.autoplay == 'false' ? false : parseInt(dataset.autoplay, 10),
+        align = dataset.align == 'center' ? 'center' : 'left',
+        fade = dataset.fade == 'true' ? true : false,
+        prev_button = slideshow.querySelector('.flickity-prev'),
+        next_button = slideshow.querySelector('.flickity-next'),
+        custom_dots = slideshow.querySelector('.flickity-page-dots'),
+        progress_bar = slideshow.parentNode.querySelector('.flickity-progress--bar'),
+        animations = [],
+        rightToLeft = document.dir === 'rtl',
+        animations_enabled = document.body.classList.contains('animations-true') && typeof gsap !== 'undefined';
+
+      if (slideshow_slides.length < 1) return;
+
+      // Set the autoplay duration as a CSS variable
+      if (autoplay) {
+        slideshow.style.setProperty('--autoplay-length', `${autoplay}ms`);
+      }
+
+      const args = {
+        wrapAround: true,
+        cellAlign: align,
+        pageDots: false,
+        contain: true,
+        fade: fade,
+        autoPlay: autoplay,
+        rightToLeft: rightToLeft,
+        prevNextButtons: false,
+        cellSelector: '.carousel__slide',
+        on: {}
+      };
+
+
+      if (slideshow.classList.contains('image-with-text-slideshow__image')) {
+        let main_slideshow = slideshow.parentNode.querySelector('.image-with-text-slideshow__content'),
+          image_slideshow_slides = slideshow.querySelectorAll('.image-with-text-slideshow__image-media');
+        args.draggable = false;
+        args.asNavFor = main_slideshow;
+
+        if (image_slideshow_slides.length) {
+          if (image_slideshow_slides[0].classList.contains('desktop-height-auto')) {
+            args.adaptiveHeight = true;
+          }
+        }
+      }
+      if (slideshow.classList.contains('customer-reviews__image')) {
+        let main_slideshow = slideshow.parentNode.querySelector('.customer-reviews__content');
+        args.draggable = false;
+        args.asNavFor = main_slideshow;
+      }
+      if (slideshow.classList.contains('image-with-text-slideshow__content') ||
+        slideshow.classList.contains('testimonials__carousel') ||
+        slideshow.classList.contains('customer-reviews__content') ||
+        slideshow.classList.contains('customer-reviews__image')) {
+        args.adaptiveHeight = true;
+      }
+      if (slideshow.classList.contains('custom-dots')) {
+
+        if (animations_enabled && slideshow.classList.contains('main-slideshow')) {
+          this.prepareAnimations(slideshow, animations);
+        }
+        args.pauseAutoPlayOnHover = false;
+
+        args.on = {
+          staticClick: function () {
+            this.unpausePlayer();
+          },
+          ready: function () {
+            let flkty = this;
+            console.log('Flickity ready event fired.');
+
+            // Animations.
+            if (animations_enabled && slideshow.classList.contains('main-slideshow')) {
+              slideshow.animateSlides(0, animations);
+              gsap.set(slideshow.querySelectorAll('.subheading,.split-text,.button'), { visibility: 'visible' });
+            }
+
+            // Custom Dots.
+            if (dots && custom_dots) {
+              console.log('Custom dots are enabled and found.');
+              let dots = custom_dots.querySelectorAll('li');
+              console.log('Number of dots found:', dots.length);
+
+              dots.forEach((dot, i) => {
+                dot.addEventListener('click', (e) => {
+                  flkty.select(i);
+                });
+              });
+
+              // Initialize all dots to base state
+              dots.forEach(dot => {
+                dot.classList.remove('is-selected', 'animate', 'filled');
+              });
+
+              // Activate the first dot
+              const firstDot = dots[this.selectedIndex];
+              console.log('First dot selected index:', this.selectedIndex, 'Element:', firstDot);
+              firstDot.classList.add('is-selected');
+
+              if (autoplay) {
+                console.log('Autoplay is on, attempting to animate first dot.');
+                slideshow.style.setProperty('--autoplay-length', `${autoplay}ms`);
+                console.log('Set --autoplay-length on slideshow container:', slideshow.style.getPropertyValue('--autoplay-length'));
+                setTimeout(() => {
+                  firstDot.classList.add('animate');
+                  console.log('Added animate class to first dot.');
+                }, 50);
+              }
+            }
+            document.fonts.ready.then(function () {
+              flkty.resize();
+            });
+
+            // Video Support.
+            let video_container = flkty.cells[0].element.querySelector('.slideshow__slide-video-bg');
+            if (video_container) {
+              if (video_container.querySelector('iframe')) {
+                video_container.querySelector('iframe').onload = function () {
+                  slideshow.videoPlay(video_container);
+                };
+              } else if (video_container.querySelector('video')) {
+                video_container.querySelector('video').onloadstart = function () {
+                  slideshow.videoPlay(video_container);
+                };
+              }
+            }
+          },
+          change: function (index) {
+            console.log('Flickity change event fired to index:', index);
+            flkty.cells[0].element.classList.remove('is-initial-selected');
+            let previousIndex = fizzyUIUtils.modulo(this.selectedIndex - 1, this.slides.length),
+              nextIndex = fizzyUIUtils.modulo(this.selectedIndex + 1, this.slides.length);
+            console.log('Previous index:', previousIndex, 'Next index:', nextIndex);
+
+            // Animations.
+            if (animations_enabled && slideshow.classList.contains('main-slideshow')) {
+              setTimeout(() => {
+                slideshow.animateReverse(previousIndex, animations);
+              }, 300);
+              slideshow.animateSlides(index, animations);
+            }
+
+            // Custom Dots.
+            if (dots && custom_dots) {
+              console.log('Custom dots are enabled and found in change event.');
+              let dots = custom_dots.querySelectorAll('li');
+              console.log('Number of dots found in change event:', dots.length);
+
+              // First, remove animate class from all dots
+              dots.forEach(dot => {
+                dot.classList.remove('animate');
+              });
+
+              // Handle the state of all dots
+              dots.forEach((dot, i) => {
+                if (i < index) {
+                  // Previous dots should be filled
+                  dot.classList.remove('is-selected', 'animate');
+                  dot.classList.add('filled');
+                } else if (i === index) {
+                  // Current dot should be selected and animating if autoplay is on
+                  dot.classList.add('is-selected');
+                  dot.classList.remove('filled');
+                  if (autoplay) {
+                    setTimeout(() => {
+                      dot.classList.add('animate');
+                    }, 50);
+                  }
+                } else {
+                  // Future dots should be neither selected, filled, nor animating
+                  dot.classList.remove('is-selected', 'animate', 'filled');
+                }
+              });
+            }
+
+            // AutoPlay
+            if (autoplay) {
+              this.stopPlayer();
+              this.playPlayer();
+            }
+
+            // Video Support.
+            // previous slide
+            let video_container_prev = flkty.cells[previousIndex].element.querySelector('.slideshow__slide-video-bg');
+            if (video_container_prev) {
+              slideshow.videoPause(video_container_prev);
+            }
+            // next slide
+            let video_container_next = flkty.cells[nextIndex].element.querySelector('.slideshow__slide-video-bg');
+            if (video_container_next) {
+              slideshow.videoPause(video_container_next);
+            }
+            // current slide
+            let video_container = flkty.cells[index].element.querySelector('.slideshow__slide-video-bg');
+            if (video_container) {
+              if (video_container.querySelector('iframe')) {
+                if (video_container.querySelector('iframe').classList.contains('lazyload')) {
+                  video_container.querySelector('iframe').addEventListener('lazybeforeunveil', slideshow.videoPlay(video_container));
+                  lazySizes.loader.checkElems();
+                } else {
+                  slideshow.videoPlay(video_container);
+                }
+              } else if (video_container.querySelector('video')) {
+                slideshow.videoPlay(video_container);
+              }
+            }
+
+          }
+        };
+      }
+      if (slideshow.classList.contains('shoppable-video-reels--carousel')) {
+        args.on.staticClick = function (event, pointer, cellElement, cellIndex) {
+          if (typeof cellIndex == 'number') {
+            flkty.select(cellIndex);
+          }
+        };
+      }
+      if (slideshow.classList.contains('main-slideshow')) {
+        if (slideshow.classList.contains('desktop-height-image') || slideshow.classList.contains('mobile-height-image')) {
+          args.adaptiveHeight = true;
+        }
+      }
+      if (slideshow.classList.contains('products')) {
+        args.wrapAround = false;
+        args.on.ready = function () {
+          var flickity = this;
+          if (next_button) {
+            window.addEventListener('resize', function () {
+              slideshow.centerArrows(flickity, prev_button, next_button);
+            });
+          }
+          window.dispatchEvent(new Event('resize'));
+        };
+      }
+      if (progress_bar) {
+        args.wrapAround = false;
+        args.on.scroll = function (progress) {
+          progress = Math.max(0, Math.min(1, progress));
+
+          progress_bar.style.width = progress * 100 + '%';
+
+        };
+      }
+      const flkty = new Flickity(slideshow, args);
+
+      slideshow.dataset.initiated = true;
+
+
+      if (prev_button) {
+        prev_button.addEventListener('click', (event) => {
+          flkty.previous();
+        });
+        prev_button.addEventListener('keyup', (event) => {
+          flkty.previous();
+        });
+        next_button.addEventListener('click', (event) => {
+          flkty.next();
+        });
+        next_button.addEventListener('keyup', (event) => {
+          flkty.next();
+        });
+      }
+      if (Shopify.designMode) {
+        slideshow.addEventListener('shopify:block:select', (event) => {
+          let index = slideshow_slides.indexOf(event.target);
+          flkty.select(index);
+        });
+      }
+
+    }
+    videoPause(video_container) {
+      setTimeout(() => {
+        if (video_container.dataset.provider === 'hosted') {
+          video_container.querySelector('video').pause();
+        } else if (video_container.dataset.provider === 'youtube') {
+          video_container.querySelector('iframe').contentWindow.postMessage(JSON.stringify({
+            event: "command",
+            func: "pauseVideo",
+            args: ""
+          }), "*");
+        } else if (video_container.dataset.provider === 'vimeo') {
+          video_container.querySelector('iframe').contentWindow.postMessage(JSON.stringify({
+            method: "pause"
+          }), "*");
+        }
+      }, 10);
+    }
+    videoPlay(video_container) {
+      setTimeout(() => {
+        if (video_container.dataset.provider === 'hosted') {
+          video_container.querySelector('video').play();
+        } else if (video_container.dataset.provider === 'youtube') {
+          video_container.querySelector('iframe').contentWindow.postMessage(JSON.stringify({
+            event: "command",
+            func: "playVideo",
+            args: ""
+          }), "*");
+        } else if (video_container.dataset.provider === 'vimeo') {
+          video_container.querySelector('iframe').contentWindow.postMessage(JSON.stringify({
+            method: "play"
+          }), "*");
+        }
+      }, 10);
+    }
+    prepareAnimations(slideshow, animations) {
+      if (!slideshow.dataset.animationsReady) {
+        new SplitText(slideshow.querySelectorAll('.split-text'), {
+          type: 'lines, words',
+          linesClass: 'line-child'
+        });
+        slideshow.querySelectorAll('.slideshow__slide').forEach((item, i) => {
+          let tl = gsap.timeline({
+            paused: true
+          }),
+            button_offset = 0;
+
+          animations[i] = tl;
+
+          if (slideshow.dataset.transition == 'swipe') {
+            tl
+              .fromTo(item, {
+                clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)'
+              }, {
+                duration: 0.7,
+                clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)"
+              }, "start");
+          }
+          tl
+            .to(item.querySelector('.slideshow__slide-bg'), {
+              duration: 1.5,
+              scale: 1
+            }, "start");
+
+          if (item.querySelector('.subheading')) {
+            tl
+              .to(item.querySelector('.subheading'), {
+                duration: 0.5,
+                autoAlpha: 1
+              }, 0);
+
+            button_offset += 0.5;
+          }
+          if (item.querySelector('.slideshow__slide-content--heading')) {
+            let h1_duration = 0.5 + ((item.querySelectorAll('.slideshow__slide-content--heading .line-child div').length - 1) * 0.05);
+            tl
+              .from(item.querySelectorAll('.slideshow__slide-content--heading .line-child div'), {
+                duration: h1_duration,
+                yPercent: '100',
+                stagger: 0.05
+              }, 0);
+            button_offset += h1_duration;
+          }
+          if (item.querySelector('p:not(.subheading)')) {
+
+            let p_duration = 0.5 + ((item.querySelectorAll('p:not(.subheading) .line-child div').length - 1) * 0.02);
+            tl
+              .from(item.querySelectorAll('p:not(.subheading) .line-child div'), {
+                duration: p_duration,
+                yPercent: '100',
+                stagger: 0.02
+              }, 0);
+            button_offset += p_duration;
+          }
+          if (item.querySelectorAll('.button')) {
+            tl
+              .fromTo(item.querySelectorAll('.button'), {
+                y: '100%'
+              }, {
+                duration: 0.5,
+                y: '0%',
+                stagger: 0.1,
+              }, button_offset * 0.2);
+          }
+          item.dataset.timeline = tl;
+        });
+        slideshow.dataset.animationsReady = true;
+      }
+    }
+    animateSlides(i, animations) {
+      document.fonts.ready.then(function () {
+        animations[i].timeScale(1).restart();
+      });
+    }
+    animateReverse(i, animations) {
+      animations[i].timeScale(3).reverse();
+    }
+    centerArrows(flickity, prev_button, next_button) {
+      let first_cell = flickity.cells[0],
+        max_height = 0,
+
+        image_height = first_cell.element.querySelector('.product-featured-image').clientHeight;
+
+      flickity.cells.forEach((item, i) => {
+        if (item.size.height > max_height) {
+          max_height = item.size.height;
+        }
+      });
+
+
+      if (max_height > image_height) {
+        let difference = (max_height - image_height) / -2;
+
+        prev_button.style.transform = 'translateY(' + difference + 'px)';
+        next_button.style.transform = 'translateY(' + difference + 'px)';
+      }
+    }
+  }
+  customElements.define('slide-show', SlideShow);
+}
+
+// Select all video containers
+const videoContainers = document.querySelectorAll('.shoppable-video-reels--video');
+
+// Loop through each container
+videoContainers.forEach(container => {
+  // Find the video element within this container
+  const video = container.querySelector('.shoppable-video-reels--video-element');
+
+  // Check if a video element exists to avoid errors
+  if (video) {
+    // Add event listener for when the mouse enters the container
+    container.addEventListener('mouseenter', () => {
+      // Only play on hover if on desktop
+      if (window.innerWidth >= 1068) {
+        video.play();
+      }
+    });
+
+    // Add event listener for when the mouse leaves the container
+    container.addEventListener('mouseleave', () => {
+      // Only pause on mouse leave if on desktop
+      if (window.innerWidth >= 1068) {
+        video.pause();
+        // Optional: Reset video to the beginning
+        // video.currentTime = 0;
+      }
+    });
+  }
+});

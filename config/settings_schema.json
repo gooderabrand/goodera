@@ -3,7 +3,7 @@
     "name": "theme_info",
     "theme_name": "Reformation",
     "theme_author": "Fuel Themes",
-    "theme_version": "8.3.0",
+    "theme_version": "9.0.0",
     "theme_documentation_url": "https:\/\/documentation.fuelthemes.net\/article-categories\/reformation\/",
     "theme_support_url": "https:\/\/fuelthemes.net\/contact\/"
   },
@@ -136,12 +136,6 @@
         "content": "Product card"
       },
       {
-        "type": "checkbox",
-        "id": "quick_add_theme_white",
-        "label": "Use white theme for quick add",
-        "default": true
-      },
-      {
         "type": "range",
         "id": "product_title_font_scale",
         "min": 100,
@@ -185,6 +179,16 @@
         "id": "button_uppercase",
         "label": "Make buttons uppercase",
         "default": false
+      },
+      {
+        "type": "range",
+        "id": "button_font_scale",
+        "min": 100,
+        "max": 150,
+        "step": 5,
+        "unit": "%",
+        "label": "Font size scale",
+        "default": 100
       }
     ]
   },
@@ -968,8 +972,14 @@
       },
       {
         "type": "checkbox",
+        "id": "cart_drawer_add_discounts",
+        "label": "Show add discount form",
+        "default": true
+      },
+      {
+        "type": "checkbox",
         "id": "cart_drawer_notes",
-        "label": "Enable cart notes",
+        "label": "Show cart notes",
         "default": true
       },
       {
@@ -1028,7 +1038,7 @@
       {
         "type": "header",
         "content": "Promotion",
-        "info": "Promote products while a search hasn't been made yet."
+        "info": "Promote products while a search hasn’t been made yet."
       },
       {
         "type": "text",

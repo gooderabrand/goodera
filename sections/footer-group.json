@@ -14,10 +14,10 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "00a364e5-af4e-4073-871b-4d533bd4da06": {
+        "401e3886-6cb7-4742-8fda-45a0d97a26a3": {
           "type": "menu",
           "settings": {
-            "column_size": "small",
+            "column_size": "medium",
             "title": "Information",
             "menu": "account"
           }
@@ -25,8 +25,8 @@
         "a09a8a35-bedc-4119-aa04-3ce886faba9d": {
           "type": "menu",
           "settings": {
-            "column_size": "small",
-            "title": "Customer Care",
+            "column_size": "medium",
+            "title": "Account",
             "menu": "information"
           }
         },
@@ -34,13 +34,13 @@
           "type": "signup",
           "settings": {
             "column_size": "medium",
-            "title": "JOIN THE CLUB",
+            "title": "Join The Club",
             "text": ""
           }
         }
       },
       "block_order": [
-        "00a364e5-af4e-4073-871b-4d533bd4da06",
+        "401e3886-6cb7-4742-8fda-45a0d97a26a3",
         "a09a8a35-bedc-4119-aa04-3ce886faba9d",
         "56d4ccfa-a515-4c26-9e64-c26ec5eea8d2"
       ],

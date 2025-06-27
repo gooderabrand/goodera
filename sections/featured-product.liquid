@@ -22,14 +22,7 @@
 	assign disable_top_spacing = section.settings.disable_top_spacing
 	assign disable_bottom_spacing = section.settings.disable_bottom_spacing
 
-	assign sizes = '375x375,640x640,960x960,1280x1280'
-	if media_aspect_ratio == 'adapt'
-		assign sizes = '375x0,640x0,960x0,1280x0'
-	elsif media_aspect_ratio == 'portrait'
-		assign sizes = '375x469,640x800,960x1200,1280x1600'
-	elsif media_aspect_ratio == 'landscape'
-		assign sizes = '375x281,640x480,960x720,1280x960'
-	endif
+	assign sizes = '375x0,640x0,960x0,1280x0'
 
   if hide_variants and variant_images.size == product.media.size
     assign single_media_visible = true
@@ -640,6 +633,12 @@
           "type": "page",
 	        "id": "sizing_guide_page",
           "label": "Sizing guide page"
+        },
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "Custom liquid",
+          "info": "Add app snippets or other Liquid code to create advanced customizations. For product description, you can use {{ product.description }}"
         }
       ]
     },

@@ -1,3 +1,6 @@
+
+
+
 .rich-text {
   background: var(--color-bg, var(--bg-body, #fff));
   color: var(--color-text, var(--color-body)); }
@@ -14,9 +17,6 @@
       display: inline-block;
       width: 120px;
       height: 120px; }
-    .rich-text__inner h4 {
-      margin: 0;
-    }
   .rich-text .rte {
     margin-bottom: 35px; }
     .rich-text .rte p:last-child {
@@ -33,9 +33,3 @@
     max-width: 1000px; }
   .rich-text.text-width-grid .rich-text__inner {
     max-width: 1380px; }
-
-.rich-text.full-width-row .rich-text__inner, 
-.rich-text.full-width-row-full .rich-text__inner {
-  padding: 0;
-  margin: 0;
-}

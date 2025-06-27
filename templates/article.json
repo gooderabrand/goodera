@@ -18,17 +18,11 @@
       "blocks": {
         "title": {
           "type": "title",
-          "settings": {
-            "article_show_excerpt": false,
-            "excerpt_length": 30,
-            "article_show_sharing": false
-          }
+          "settings": {}
         },
         "featured_image": {
           "type": "featured_image",
-          "settings": {
-            "image_ratio": "medium"
-          }
+          "settings": {}
         },
         "content": {
           "type": "content",

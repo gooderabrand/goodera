@@ -172,6 +172,7 @@ if (!customElements.get('product-card')) {
             }
           }
         }
+
       };
       const mouseleave = function (e) {
         images.forEach((image, index) => {
@@ -207,6 +208,7 @@ if (!customElements.get('product-card')) {
           lazySizes.loader.unveil(image);
         });
       });
+
     }
     enableSwatches(swatches, image) {
       let swatch_list = swatches.querySelectorAll('.product-card-swatch'),
@@ -648,9 +650,7 @@ if (!customElements.get('cart-drawer')) {
     }
 
     connectedCallback() {
-
       let button = document.getElementById('cart-drawer-toggle');
-
 
       // Add functionality to buttons
       button.addEventListener('click', (e) => {
@@ -712,7 +712,7 @@ if (!customElements.get('cart-drawer')) {
         .querySelector(selector).innerHTML;
     }
     notesToggle() {
-      let notes_toggle = document.getElementById('order-note-toggle');
+      const notes_toggle = document.getElementById('order-note-toggle');
 
       if (!notes_toggle) {
         return;

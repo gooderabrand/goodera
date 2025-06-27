@@ -443,5 +443,11 @@
       "send_on": "YYYY-AA-GG",
       "send_on_label": "Şu tarihte gönder (isteğe bağlı)"
     }
+  },
+  "discounts": {
+    "discount_code": "İndirim kodunu uygula",
+    "discount_code_error": "İndirim kodu sepetinize uygulanamıyor",
+    "discounts": "İndirimler",
+    "apply": "Uygula"
   }
 }
