@@ -4004,5 +4004,5 @@ input[type="radio"], .field label, .custom-checkbox[type="checkbox"], .custom-ch
     .section-header-left--false .section-header--button {
       justify-content: center; }
   .section-header h2 {
-    font-weight: var(--font-body-bold-weight, 600);
+    font-weight: normal;
     margin-bottom: 0px; }

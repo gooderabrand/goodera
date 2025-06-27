@@ -389,9 +389,14 @@ if (!customElements.get('variant-selects')) {
       let dataSetEl = this.productSlider.querySelector('[data-set-name]');
       if (dataSetEl) {
         this.imageSetName = dataSetEl.dataset.setName;
-        this.imageSetIndex = this.querySelector('.product-form__input[data-handle="' + this.imageSetName + '"]').dataset.index;
-        this.dataset.imageSetIndex = this.imageSetIndex;
-        this.setImageSetMedia();
+        const inputEl = this.querySelector('.product-form__input[data-handle="' + this.imageSetName + '"]');
+        if (inputEl) {
+          this.imageSetIndex = inputEl.dataset.index;
+          this.dataset.imageSetIndex = this.imageSetIndex;
+          this.setImageSetMedia();
+        } else {
+          console.warn('No .product-form__input[data-handle="' + this.imageSetName + '"] found in setImageSet');
+        }
       }
     }
 

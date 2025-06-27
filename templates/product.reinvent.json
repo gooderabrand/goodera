@@ -11,6 +11,7 @@
   "sections": {
     "breadcrumbs": {
       "type": "breadcrumbs",
+      "disabled": true,
       "settings": {}
     },
     "main-product": {
@@ -26,28 +27,9 @@
         "title": {
           "type": "title",
           "settings": {
-            "uppercase": true,
+            "uppercase": false,
             "show_products_rating": true,
             "show_custom_badges": true
-          }
-        },
-        "546f2cee-3532-473a-836f-21f14fde7cfe": {
-          "type": "inventory_level",
-          "settings": {
-            "show_inventory_notice": "always",
-            "show_inventory_count": "always",
-            "inventory_notice_pulse": true,
-            "inventory_notice_bar": true,
-            "inventory_notice_threshold": 10,
-            "inventory_notice_base": 84
-          }
-        },
-        "0b3e272b-c86a-4dba-946c-c6912251371c": {
-          "type": "description",
-          "settings": {
-            "seo_text_max_height": 1000,
-            "seo_text_read_more": "Read more",
-            "seo_text_read_less": "Read less"
           }
         },
         "siblings_ERtKNQ": {
@@ -62,10 +44,18 @@
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_quantity_selector": true,
+            "show_quantity_selector": false,
             "outline_button": true,
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": false
+          }
+        },
+        "0b3e272b-c86a-4dba-946c-c6912251371c": {
+          "type": "description",
+          "settings": {
+            "seo_text_max_height": 1000,
+            "seo_text_read_more": "Read more",
+            "seo_text_read_less": "Read less"
           }
         },
         "1c29dd76-669f-4b4a-9883-a577855921eb": {
@@ -123,10 +113,9 @@
       "block_order": [
         "e431a79e-9c7b-4a53-a79a-0cb918617ecf",
         "title",
-        "546f2cee-3532-473a-836f-21f14fde7cfe",
-        "0b3e272b-c86a-4dba-946c-c6912251371c",
         "siblings_ERtKNQ",
         "buy_buttons",
+        "0b3e272b-c86a-4dba-946c-c6912251371c",
         "1c29dd76-669f-4b4a-9883-a577855921eb",
         "0041f1e3-030f-4c9d-ae87-ddb7c2fa4b2b",
         "e49f0a1b-c60d-4e4a-b3c1-100c37771e4a",
