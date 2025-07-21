@@ -547,6 +547,26 @@ if (!customElements.get('product-slider')) {
       this.pagination = this.parentElement.querySelector('.product-images-buttons');
       this.sliderItems = this.querySelectorAll('[id^="Slide-"]');
       this.video_containers = this.querySelectorAll('.product-single__media-external-video--play');
+      this.dots = this.querySelectorAll('.product-slider-dots li');
+
+      // Flickity integration for slide change events
+      let flickityEl = this.querySelector('.flickity-enabled') || this.querySelector('.product-images') || this;
+      let flkty = window.Flickity && window.Flickity.data ? window.Flickity.data(flickityEl) : null;
+      console.log('Flickity instance found on:', flickityEl, flkty);
+      if (flkty) {
+        flkty.on('select', () => {
+          const currentIndex = flkty.selectedIndex + 1;
+          // Update counter
+          const counter = this.querySelector('.product-slider-counter-mobile .product-slider-counter-current');
+          if (counter) counter.textContent = currentIndex;
+          // Update dots
+          if (this.dots && this.dots.length > 0) {
+            this.dots.forEach((dot, index) => {
+              dot.classList.toggle('active', index === flkty.selectedIndex);
+            });
+          }
+        });
+      }
 
       // Start Gallery
       let observer = new MutationObserver(() => {
@@ -568,6 +588,14 @@ if (!customElements.get('product-slider')) {
         this.resizeObserver = new ResizeObserver(entries => this.onPaginationResize());
         this.resizeObserver.observe(this);
         this.addEventListener('scroll', this.updatePagination.bind(this));
+      }
+
+      // Listen for slide changes to update dots
+      this.addEventListener('slideChanged', this.updateDots.bind(this));
+      
+      // Initialize dots if they exist
+      if (this.dots.length > 0) {
+        this.updateDots({ detail: { currentPage: 1 } });
       }
     }
     setupProductGallery() {
@@ -689,16 +717,36 @@ if (!customElements.get('product-slider')) {
       });
     }
     updatePagination() {
+      console.log('updatePagination called');
       if (!this.nextButton) return;
 
       const previousPage = this.currentPage;
       this.currentPage = Math.round(this.scrollLeft / this.sliderItemOffset) + 1;
+      console.log('Current page:', this.currentPage);
 
       if (this.currentPageElement) {
         this.currentPageElement.textContent = this.currentPage;
       }
       if (this.pageTotalElement) {
         this.pageTotalElement.textContent = this.sliderItemsToShow.length;
+      }
+
+      // Update dots directly here
+      if (this.dots && this.dots.length > 0) {
+        this.dots.forEach((dot, index) => {
+          if (index === this.currentPage - 1) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+      }
+
+      // Update mobile counter directly here
+      const counter = this.querySelector('.product-slider-counter-mobile .product-slider-counter-current');
+      console.log('Counter element:', counter);
+      if (counter) {
+        counter.textContent = this.currentPage;
       }
 
       if (this.currentPage != previousPage) {
@@ -726,8 +774,26 @@ if (!customElements.get('product-slider')) {
       const lastVisibleSlide = this.clientWidth + this.scrollLeft - offset;
       return (element.offsetLeft + element.clientWidth) <= lastVisibleSlide && element.offsetLeft >= this.scrollLeft;
     }
+    updateDots(event) {
+      const currentPage = event.detail.currentPage;
+      this.dots.forEach((dot, index) => {
+        if (index === currentPage - 1) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+      // Update mobile counter
+      const counter = this.querySelector('.product-slider-counter-mobile .product-slider-counter-current');
+      if (counter) {
+        counter.textContent = currentPage;
+      }
+    }
   }
   customElements.define('product-slider', ProductSlider);
+  if (!customElements.get('product-slider-thumbnails')) {
+    customElements.define('product-slider-thumbnails', ProductSlider);
+  }
 }
 
 /**

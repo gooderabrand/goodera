@@ -655,6 +655,9 @@
   margin-bottom: 25px; }
   .thb-product-detail .product-short-description p,
   .thb-product-detail .product-short-description ul {
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Everyday Sans', sans-serif;
     margin-bottom: 10px; }
   .thb-product-detail .product-short-description iframe,
   .thb-product-detail .product-short-description video {

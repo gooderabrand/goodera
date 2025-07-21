@@ -45,73 +45,53 @@
 			<div class="product-grid-container">
 		    <div id="MediaGallery-{{ section.id }}" data-hide-variants="{{ hide_variants }}">
 					<div class="product-image-container product-image-container--{{ media_layout }}">
-		        <product-slider{{ slider_prefix }} id="Product-Slider" class="product-images product-images--{{ media_layout }}" data-captions="{{ display_captions }}" data-hide-variants="{{ hide_variants }}">
-							{%- if featured_media != null -%}
-	              {%- liquid
-									assign image_index = image_index | plus: 1
-									assign first_image = featured_media.preview_image
-								-%}
-	              {%- render 'product-media', product: product, section: section, forloop: false, media: featured_media, sizes: sizes, variant_images: variant_images, media_aspect_ratio: media_aspect_ratio, hide_variants: hide_variants, priority: 'high', display_captions: display_captions -%}
-	            {%- endif -%}
-		          {%- for media in product.media -%}
-								{%- unless media.id == featured_media.id -%}
+						<scroll-shadow>
+							<div id="Product-Thumbnails" class="product-thumbnail-container" data-hide-variants="{{ hide_variants }}">
+								{%- if featured_media != null -%}
+									{%- render 'product-thumbnail', product: product, media: featured_media, forloop: false, variant_images: variant_images, media_aspect_ratio: media_aspect_ratio, hide_variants: hide_variants -%}
+								{%- endif -%}
+								{%- for media in product.media -%}
+									{%- unless media.id == featured_media.id -%}
+										{%- render 'product-thumbnail', product: product, media: media, forloop: forloop, variant_images: variant_images, media_aspect_ratio: media_aspect_ratio, hide_variants: hide_variants -%}
+									{%- endunless -%}
+								{%- endfor -%}
+							</div>
+						</scroll-shadow>
+						<div class="main-image-column">
+							<product-slider{{ slider_prefix }} id="Product-Slider" class="product-images product-images--{{ media_layout }}" data-captions="{{ display_captions }}" data-hide-variants="{{ hide_variants }}">
+								{%- if featured_media != null -%}
 									{%- liquid
-                    if media.media_type == 'image'
-                      assign image_index = image_index | default: 0 | plus: 1
-                    endif
-
-                    assign priority = false
-                    if image_index == 0
-                      assign first_image = media.preview_image
-                      assign priority = 'high'
-                    endif
-                  -%}
-                  {%- render 'product-media', product: product, section: section, forloop: forloop, media: media, sizes: sizes, variant_images: variant_images, media_aspect_ratio: media_aspect_ratio, hide_variants: hide_variants, priority: priority, display_captions: display_captions -%}
-								{%- endunless -%}
-		          {%- endfor -%}
-		        </product-slider{{ slider_prefix }}>
-            {%- if media_layout == 'thumbnails' -%}
-              <scroll-shadow>
-								<div id="Product-Thumbnails" class="product-thumbnail-container" data-hide-variants="{{ hide_variants }}">
-									{%- if featured_media != null -%}
-										{%- render 'product-thumbnail', product: product, media: featured_media, forloop: false, variant_images: variant_images, media_aspect_ratio: media_aspect_ratio, hide_variants: hide_variants -%}
-									{%- endif -%}
-									{%- for media in product.media -%}
-										{%- unless media.id == featured_media.id -%}
-                    {%- render 'product-thumbnail', product: product, media: media, forloop: forloop, variant_images: variant_images, media_aspect_ratio: media_aspect_ratio, hide_variants: hide_variants -%}
-										{%- endunless -%}
+										assign image_index = image_index | plus: 1
+										assign first_image = featured_media.preview_image
+									-%}
+									<div class="product-images__slide product-images__slide--image is-active is-selected" data-media-id="{{ featured_media.id }}">
+										{%- render 'product-media', product: product, section: section, forloop: false, media: featured_media, sizes: sizes, variant_images: variant_images, media_aspect_ratio: media_aspect_ratio, hide_variants: hide_variants, priority: 'high', display_captions: display_captions -%}
+									</div>
+								{%- endif -%}
+								{%- for media in product.media -%}
+									{%- unless media.id == featured_media.id -%}
+										{%- liquid
+											if media.media_type == 'image'
+												assign image_index = image_index | default: 0 | plus: 1
+											endif
+											assign priority = false
+											if image_index == 0
+												assign first_image = media.preview_image
+												assign priority = 'high'
+											endif
+										-%}
+										<div class="product-images__slide product-images__slide--image" data-media-id="{{ media.id }}">
+											{%- render 'product-media', product: product, section: section, forloop: forloop, media: media, sizes: sizes, variant_images: variant_images, media_aspect_ratio: media_aspect_ratio, hide_variants: hide_variants, priority: priority, display_captions: display_captions -%}
+										</div>
+									{%- endunless -%}
+								{%- endfor -%}
+								<ul class="product-secondary-images-nav product-slider-dots" aria-hidden="true">
+									{%- for i in (1..media_count) -%}
+										<li{% if forloop.first %} class="active"{% endif %}></li>
 									{%- endfor -%}
-								</div>
-							</scroll-shadow>
-            {%- else -%}
-              {%- if display_slider_pagination -%}
-                {%- unless single_media_visible_mobile -%}
-                <div class="product-images-buttons no-js-hidden">
-                  <button
-                    type="button"
-                    class="slider-button slider-button--prev"
-                    name="previous"
-                    aria-label="Previous"
-                  >
-                  {% render 'svg-icons' with 'thb-caret-left' %}
-                  </button>
-                  <div class="slider-counter caption">
-                    <span class="slider-counter--current">1</span>
-                    <span aria-hidden="true"> / </span>
-                    <span class="slider-counter--total">{{ media_count }}</span>
-                  </div>
-                  <button
-                    type="button"
-                    class="slider-button slider-button--next"
-                    name="next"
-                    aria-label="Next"
-                  >
-                    {% render 'svg-icons' with 'thb-caret-right' %}
-                  </button>
-                </div>
-                {%- endunless -%}
-              {%- endif -%}
-            {%- endif -%}
+								</ul>
+							</product-slider{{ slider_prefix }}>
+						</div>
 					</div>
 		    </div>
 		    <div class="product-information">
@@ -297,7 +277,7 @@
       "type": "checkbox",
       "id": "hide_variants",
       "default": false,
-      "label": "Hide unselected variants’ media",
+      "label": "Hide unselected variants' media",
 			"info": "Media for the unselected variants will be hidden."
     },
 		{
@@ -796,7 +776,7 @@
 			"settings": [
 				{
 					"type": "paragraph",
-					"content": "If you include a link in social media posts, the page’s featured image will be shown as the preview image. [Learn more](https://help.shopify.com/en/manual/online-store/images/showing-social-media-thumbnail-images)."
+					"content": "If you include a link in social media posts, the page's featured image will be shown as the preview image. [Learn more](https://help.shopify.com/en/manual/online-store/images/showing-social-media-thumbnail-images)."
 				},
 				{
 					"type": "paragraph",
