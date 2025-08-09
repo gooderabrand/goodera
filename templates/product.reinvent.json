@@ -49,13 +49,22 @@
           "settings": {
             "picker_type": "button",
             "color_picker": true,
-            "color_picker_size": "large",
+            "color_picker_size": "xlarge",
             "color_picker_use_variants": true,
             "variant_is_disabled": true,
             "sizing_guide_variant": "Size",
             "sizing_guide_text": "",
             "sizing_guide_icon": "none",
             "sizing_guide_page": ""
+          }
+        },
+        "siblings_Czmpgn": {
+          "type": "siblings",
+          "settings": {
+            "siblings_collection": "{{ product.metafields.theme.siblings.value }}",
+            "sibling_color": "{{ product.metafields.theme.sibling_color.value }}",
+            "color_picker_size": "regular",
+            "margin_bottom": 20
           }
         },
         "buy_buttons": {
@@ -135,6 +144,7 @@
         "0b3e272b-c86a-4dba-946c-c6912251371c",
         "546f2cee-3532-473a-836f-21f14fde7cfe",
         "variant_picker",
+        "siblings_Czmpgn",
         "buy_buttons",
         "complementary_cCC3WK",
         "1c29dd76-669f-4b4a-9883-a577855921eb",
