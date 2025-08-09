@@ -12,66 +12,86 @@
     "16479477632637c9a7": {
       "type": "slideshow",
       "blocks": {
-        "164794776393e76b8e-0": {
+        "164794776393e76b8e-2": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/Render.png",
-            "mobile_image": "shopify://shop_images/Render.png",
             "slide_link": "",
             "video_background": true,
             "video": "",
-            "video_hosted": "shopify://files/videos/video-5-2.mp4",
-            "subheading": "INTRODUCING",
-            "heading": "Your Everyday Uniform",
-            "heading_size": "h1",
-            "content": "",
-            "description_size": "medium",
-            "content_position": "bottom-left",
-            "text_alignment": "left",
+            "subheading": "ADD A SUBHEADER",
+            "heading": "SLIDE HEADING",
+            "heading_size": "h1-xlarge",
+            "content": "It’s hard to be nice if you don’t feel comfortable.",
+            "description_size": "large",
+            "content_position": "middle-center",
+            "text_alignment": "center",
             "content_size": "medium",
             "overlay_color": "#000000",
-            "overlay_opacity": 11,
-            "overlay_gradient": "",
-            "button_1_text": "SHOP NOW",
+            "overlay_opacity": 70,
+            "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4) 100%)",
+            "button_1_text": "SHOP COLLECTION",
             "button_1_link": "",
             "button_1_outline": true,
-            "button_2_text": "",
+            "button_2_text": "Shop Now",
             "button_2_link": "",
             "button_2_outline": false
           }
         },
-        "slide_AbrxKn": {
+        "164794776393e76b8e-1": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/Render.png",
-            "mobile_image": "shopify://shop_images/Render.png",
             "slide_link": "",
-            "video_background": true,
+            "video_background": false,
             "video": "",
-            "video_hosted": "shopify://files/videos/video-5-2.mp4",
-            "subheading": "INTRODUCING",
-            "heading": "Your Everyday Uniform",
-            "heading_size": "h1",
-            "content": "",
+            "subheading": "ADD A SUBHEADER",
+            "heading": "SLIDE HEADING",
+            "heading_size": "h1-xlarge",
+            "content": "All the Spring 2022 Ready-to-Wear fashion show coverage in one place.",
             "description_size": "medium",
-            "content_position": "bottom-left",
-            "text_alignment": "left",
+            "content_position": "middle-center",
+            "text_alignment": "center",
+            "content_size": "medium",
+            "overlay_color": "#000000",
+            "overlay_opacity": 20,
+            "overlay_gradient": "",
+            "button_1_text": "Shop Tops",
+            "button_1_link": "",
+            "button_1_outline": true,
+            "button_2_text": "Shop Denim",
+            "button_2_link": "",
+            "button_2_outline": false
+          }
+        },
+        "164794776393e76b8e-0": {
+          "type": "slide",
+          "settings": {
+            "slide_link": "",
+            "video_background": false,
+            "video": "",
+            "subheading": "ADD A SUBHEADER",
+            "heading": "SLIDE HEADING",
+            "heading_size": "h1-xlarge",
+            "content": "Save up to 60% through October 15.",
+            "description_size": "medium",
+            "content_position": "middle-center",
+            "text_alignment": "center",
             "content_size": "medium",
             "overlay_color": "#000000",
             "overlay_opacity": 43,
             "overlay_gradient": "",
-            "button_1_text": "SHOP NOW",
+            "button_1_text": "Shop Dresses",
             "button_1_link": "",
             "button_1_outline": true,
-            "button_2_text": "",
+            "button_2_text": "Shop Sale",
             "button_2_link": "",
             "button_2_outline": false
           }
         }
       },
       "block_order": [
-        "164794776393e76b8e-0",
-        "slide_AbrxKn"
+        "164794776393e76b8e-2",
+        "164794776393e76b8e-1",
+        "164794776393e76b8e-0"
       ],
       "settings": {
         "desktop_height": "desktop-height-full",
@@ -96,19 +116,75 @@
     "166366563622039b3e": {
       "type": "featured-collection",
       "settings": {
-        "heading": "What's New",
+        "heading": "FEATURED COLLECTION",
         "heading_left": true,
-        "description": "",
+        "description": "<p>Best dresses for the upcoming fall season</p>",
         "full_width": true,
-        "collection": "self-care-club",
+        "collection": "",
         "display_type": "carousel",
         "product_limit": 8,
         "columns_desktop": 4,
         "show_view_all": true,
         "mobile_swipe": true,
-        "show_progress_bar": false,
+        "show_progress_bar": true,
         "disable_top_spacing": true,
-        "disable_bottom_spacing": false
+        "disable_bottom_spacing": true
+      }
+    },
+    "16614195534fb74bc3": {
+      "type": "collection-tabs",
+      "blocks": {
+        "9dc5629d-3c1a-4dcc-b25a-0aa3972a2cb7": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "enable_promotion": false,
+            "title": "Promotion heading",
+            "text": "Advertise a promotion or a sale",
+            "link_label": "Explore",
+            "content_position": "bottom-left",
+            "text_alignment": "left",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "overlay_color": "#000000",
+            "overlay_opacity": 70
+          }
+        },
+        "8695b758-8543-4e57-bb17-1249221a1269": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "enable_promotion": false,
+            "title": "Promotion heading",
+            "text": "Advertise a promotion or a sale",
+            "link_label": "Explore",
+            "content_position": "bottom-left",
+            "text_alignment": "left",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "overlay_color": "#000000",
+            "overlay_opacity": 70
+          }
+        }
+      },
+      "block_order": [
+        "9dc5629d-3c1a-4dcc-b25a-0aa3972a2cb7",
+        "8695b758-8543-4e57-bb17-1249221a1269"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "COLLECTION TABS",
+        "heading_left": true,
+        "description": "<p>Collection tabs description</p>",
+        "full_width": true,
+        "product_limit": 8,
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "show_progress_bar": true,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
       }
     },
     "166143150135dd97e2": {
@@ -161,30 +237,135 @@
         "disable_bottom_spacing": false
       }
     },
-    "rich_text_gxJdcm": {
-      "type": "rich-text",
+    "1661512437fd38dfb2": {
+      "type": "featured-collection-list",
       "blocks": {
-        "heading_r9f7xF": {
-          "type": "heading",
+        "0da7006d-3f7c-445e-beea-4a390b373aad": {
+          "type": "collection",
           "settings": {
-            "text": "Discover Our Community's Favorite Products",
-            "size": "h4"
+            "collection": ""
           }
         },
-        "text_RaDAj3": {
-          "type": "text",
+        "55dc7437-dab4-4e15-b317-316d02faadb7": {
+          "type": "collection",
           "settings": {
-            "text": "<p>Everybody's everyday uniform</p>",
-            "custom_liquid": "",
-            "size": "text-size-regular"
+            "collection": ""
+          }
+        },
+        "71a1e8d7-01d1-40d2-9ef1-6f2631328763": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "6f36cf8f-9b45-49f6-9ceb-e098c331d610": {
+          "type": "collection",
+          "settings": {
+            "collection": ""
           }
         }
       },
       "block_order": [
-        "heading_r9f7xF",
-        "text_RaDAj3"
+        "0da7006d-3f7c-445e-beea-4a390b373aad",
+        "55dc7437-dab4-4e15-b317-316d02faadb7",
+        "71a1e8d7-01d1-40d2-9ef1-6f2631328763",
+        "6f36cf8f-9b45-49f6-9ceb-e098c331d610"
       ],
-      "name": "Rich text",
+      "disabled": true,
+      "settings": {
+        "desktop_height": "desktop-height-550",
+        "mobile_height": "mobile-height-500",
+        "full_width": true,
+        "content_position": "middle-center",
+        "heading_size": "h1-large",
+        "color_text": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 15,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": false
+      }
+    },
+    "16624658277b7c3abc": {
+      "type": "countdown-banner",
+      "disabled": true,
+      "settings": {
+        "section_width": "full-width-row",
+        "section_layout": "horizontal",
+        "desktop_height": "desktop-height-auto",
+        "mobile_height": "mobile-height-auto",
+        "subheading": "",
+        "heading": "LABOR DAY SALE",
+        "heading_size": "h2",
+        "content": "",
+        "content_size": "medium",
+        "button_text": "Shop Now",
+        "button_link": "",
+        "timer_year": 2023,
+        "timer_month": "03",
+        "timer_day": "01",
+        "timer_hour": "00",
+        "timer_minute": "00",
+        "color_bg": "#ae1b1b",
+        "color_text": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "1647955648d6a0baee": {
+      "type": "featured-blog",
+      "disabled": true,
+      "settings": {
+        "heading": "Latest News",
+        "heading_left": true,
+        "description": "<p>Latest news from Reformation!</p>",
+        "full_width": true,
+        "blog": "news",
+        "post_limit": 3,
+        "columns_desktop": 3,
+        "mobile_swipe": true,
+        "image_ratio": "landscape",
+        "show_date": true,
+        "show_excerpt": true,
+        "show_view_all": true,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
+    "16626364694d37e9d5": {
+      "type": "spacer",
+      "disabled": true,
+      "settings": {
+        "spacer_mobile": 0,
+        "spacer_desktop": 20,
+        "border_separator": false,
+        "border_separator_full": false
+      }
+    },
+    "1662459246bd099bb7": {
+      "type": "spacer",
+      "settings": {
+        "spacer_mobile": 15,
+        "spacer_desktop": 0,
+        "border_separator": true,
+        "border_separator_full": true
+      }
+    },
+    "1662459178b0886a69": {
+      "type": "rich-text",
+      "blocks": {
+        "4551cbda-76ff-4a07-a279-a29df7956af6": {
+          "type": "subheading",
+          "settings": {
+            "text": "IN THE PRESS"
+          }
+        }
+      },
+      "block_order": [
+        "4551cbda-76ff-4a07-a279-a29df7956af6"
+      ],
+      "disabled": true,
       "settings": {
         "section_width": "grid",
         "text_width": "medium",
@@ -193,159 +374,140 @@
         "color_bg": "rgba(0,0,0,0)",
         "color_text": "#151515",
         "color_links": "#151515",
-        "disable_top_spacing": true,
+        "disable_top_spacing": false,
         "disable_bottom_spacing": true
       }
     },
-    "shoppable_view_reels_6Vpfrx": {
-      "type": "shoppable-view-reels",
+    "16624594877292080f": {
+      "type": "spacer",
+      "disabled": true,
+      "settings": {
+        "spacer_mobile": 0,
+        "spacer_desktop": 20,
+        "border_separator": false,
+        "border_separator_full": false
+      }
+    },
+    "16615358507b6ff1a8": {
+      "type": "testimonials",
       "blocks": {
-        "video_UfhkBg": {
-          "type": "video",
+        "60961cb1-416e-4c98-a9ec-2a41dfae8911": {
+          "type": "quote",
           "settings": {
-            "video_hosted": "shopify://files/videos/export_1746420306840.MOV",
-            "product_handle": "classic-crewneck-grey",
-            "featured_image": "shopify://shop_images/25032024_ADANOLA_RR_SHOT_29_018_jpg.webp"
+            "stars": "",
+            "text": "Add your customer or client quote here to showcase them.",
+            "author": "Testimonial author"
           }
         },
-        "video_MNHUVP": {
-          "type": "video",
+        "2bf39bcc-dfc9-43ae-b6a4-9cecdb3197c9": {
+          "type": "quote",
           "settings": {
-            "video_hosted": "shopify://files/videos/export_1746420476444.MOV",
-            "product_handle": "self-care-club-classic-hoodie-black",
-            "featured_image": "shopify://shop_images/26032024_ADANOLA_RR_SHOT_17_031_jpg.webp"
+            "stars": "",
+            "text": "Add your customer or client quote here to showcase them.",
+            "author": "Testimonial author"
           }
         },
-        "video_Kkjcmk": {
-          "type": "video",
+        "f0e5414e-308c-4a64-91b5-1f08b8650731": {
+          "type": "quote",
           "settings": {
-            "video_hosted": "shopify://files/videos/export_1746420306840.MOV",
-            "product_handle": "classic-crewneck-grey",
-            "featured_image": "shopify://shop_images/25032024_ADANOLA_RR_SHOT_29_018_jpg.webp"
-          }
-        },
-        "video_z9xGeN": {
-          "type": "video",
-          "settings": {
-            "video_hosted": "shopify://files/videos/ScreenRecording_01-26-2025 15-09-03_1.mov",
-            "product_handle": "self-care-club-classic-crewneck-black",
-            "featured_image": "shopify://shop_images/25032024_ADANOLA_RR_SHOT_29_007_3fdf78a4-14dd-46b7-8e44-a533992f7d08_jpg.webp"
-          }
-        },
-        "video_xhtXph": {
-          "type": "video",
-          "settings": {
-            "video_hosted": "shopify://files/videos/ScreenRecording_01-26-2025 15-09-03_1.mov",
-            "product_handle": "self-care-club-classic-crewneck-black",
-            "featured_image": "shopify://shop_images/25032024_ADANOLA_RR_SHOT_29_007_3fdf78a4-14dd-46b7-8e44-a533992f7d08_jpg.webp"
-          }
-        },
-        "video_JByAPg": {
-          "type": "video",
-          "settings": {
-            "video_hosted": "shopify://files/videos/v10033g50000d0ah2onog65r0k641d50.MP4",
-            "product_handle": "self-care-club-classic-hoodie-grey",
-            "featured_image": "shopify://shop_images/ADANOLA_003_002_7093de4b-ad1e-4681-972b-790ae6cd4ed4_jpg.webp"
-          }
-        },
-        "video_4cMCCH": {
-          "type": "video",
-          "settings": {
-            "video_hosted": "shopify://files/videos/ScreenRecording_01-26-2025 15-09-03_1.mov",
-            "product_handle": "self-care-club-classic-hoodie-grey",
-            "featured_image": "shopify://shop_images/26032024_ADANOLA_RR_SHOT_10_021_jpg.webp"
+            "stars": "",
+            "text": "Add your customer or client quote here to showcase them.",
+            "author": "Testimonial author"
           }
         }
       },
       "block_order": [
-        "video_UfhkBg",
-        "video_MNHUVP",
-        "video_Kkjcmk",
-        "video_z9xGeN",
-        "video_xhtXph",
-        "video_JByAPg",
-        "video_4cMCCH"
+        "60961cb1-416e-4c98-a9ec-2a41dfae8911",
+        "2bf39bcc-dfc9-43ae-b6a4-9cecdb3197c9",
+        "f0e5414e-308c-4a64-91b5-1f08b8650731"
       ],
-      "name": "Shoppable video reels",
+      "disabled": true,
       "settings": {
         "full_width": true,
-        "aspect_ratio": "custom",
-        "custom_aspect_ratio": 0.7,
-        "show_dots": false,
-        "controls_play_pause": false,
-        "controls_sound": true,
-        "show_quick_add_button": true,
-        "color_text": "#ffffff",
-        "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 85%)",
+        "text_size": "large",
+        "pagination": "dots",
+        "autoplay": true,
+        "autoplay_length": 5,
+        "color_bg": "rgba(0,0,0,0)",
+        "color_text": "#151515",
         "disable_top_spacing": true,
         "disable_bottom_spacing": true
       }
     },
-    "rich_text_YXyg4K": {
-      "type": "rich-text",
+    "1662636493225665a2": {
+      "type": "spacer",
+      "disabled": true,
+      "settings": {
+        "spacer_mobile": 20,
+        "spacer_desktop": 40,
+        "border_separator": false,
+        "border_separator_full": false
+      }
+    },
+    "1662368401fce27368": {
+      "type": "spacer",
+      "disabled": true,
+      "settings": {
+        "spacer_mobile": 0,
+        "spacer_desktop": 0,
+        "border_separator": true,
+        "border_separator_full": true
+      }
+    },
+    "16620983071df6eb29": {
+      "type": "text-with-icons",
       "blocks": {
-        "text_TKWDdJ": {
-          "type": "text",
+        "1662098307788ca717-0": {
+          "type": "icon",
           "settings": {
-            "text": "<h4>We make good decision-making effortless with modern essentials that inspire  change  from the inside out.</h4>",
-            "custom_liquid": "",
-            "size": "text-size-small"
+            "icon": "ruler",
+            "heading": "Customer Support",
+            "text": "<p>Mon - Sat, 10am - 9pm</p>"
           }
         },
-        "button_ahnCmH": {
-          "type": "button",
+        "1662098307788ca717-1": {
+          "type": "icon",
           "settings": {
-            "link_label": "Learn More",
-            "link": "",
-            "button_outline": true
+            "icon": "ruler",
+            "heading": "Easy Returns",
+            "text": "<p>Returns extended to 60 days</p>"
+          }
+        },
+        "1662098307788ca717-2": {
+          "type": "icon",
+          "settings": {
+            "icon": "ruler",
+            "heading": "Gift Package",
+            "text": "<p>Free packaging over $100</p>"
+          }
+        },
+        "2c4a636c-cb89-4faf-82e6-13a0e7241006": {
+          "type": "icon",
+          "settings": {
+            "icon": "ruler",
+            "heading": "One-year Warranty",
+            "text": "<p>No questions asked</p>"
           }
         }
       },
       "block_order": [
-        "text_TKWDdJ",
-        "button_ahnCmH"
+        "1662098307788ca717-0",
+        "1662098307788ca717-1",
+        "1662098307788ca717-2",
+        "2c4a636c-cb89-4faf-82e6-13a0e7241006"
       ],
-      "name": "Rich text",
+      "disabled": true,
       "settings": {
-        "section_width": "full-width-row",
-        "text_width": "xlarge",
-        "text_position": "left",
         "text_alignment": "left",
-        "color_bg": "rgba(0,0,0,0)",
+        "icon_position": "left",
+        "icon_size": "large",
+        "heading_size": "medium",
+        "mobile_swipe": true,
+        "color_bg": "#ffffff",
+        "color_heading": "#151515",
         "color_text": "#151515",
-        "color_links": "#151515",
-        "disable_top_spacing": false,
-        "disable_bottom_spacing": false
-      }
-    },
-    "hero_banner_hLhDm3": {
-      "type": "hero-banner",
-      "name": "Hero banner",
-      "settings": {
-        "desktop_height": "desktop-height-750",
-        "mobile_height": "mobile-height-500",
-        "full_width": false,
-        "full_width_padding": 0,
-        "corner_radius": 24,
-        "content_position": "bottom-left",
-        "text_alignment": "left",
-        "content_width": "medium",
-        "subheading": "INTRODUCING",
-        "heading": "Your Everyday Uniform",
-        "text": "",
-        "text_size": "text-size-extra-large",
-        "button_1_text": "Shop now",
-        "button_1_link": "",
-        "button_1_outline": true,
-        "button_2_text": "",
-        "button_2_link": "",
-        "button_2_outline": false,
-        "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "video_hosted": "shopify://files/videos/video-3.mp4",
-        "fallback_image": "shopify://shop_images/Render.png",
-        "overlay_opacity": 25,
-        "disable_top_spacing": false,
-        "disable_bottom_spacing": false
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
       }
     }
   },
@@ -353,10 +515,18 @@
     "16479477632637c9a7",
     "1662389920b1295ea2",
     "166366563622039b3e",
+    "16614195534fb74bc3",
     "166143150135dd97e2",
-    "rich_text_gxJdcm",
-    "shoppable_view_reels_6Vpfrx",
-    "rich_text_YXyg4K",
-    "hero_banner_hLhDm3"
+    "1661512437fd38dfb2",
+    "16624658277b7c3abc",
+    "1647955648d6a0baee",
+    "16626364694d37e9d5",
+    "1662459246bd099bb7",
+    "1662459178b0886a69",
+    "16624594877292080f",
+    "16615358507b6ff1a8",
+    "1662636493225665a2",
+    "1662368401fce27368",
+    "16620983071df6eb29"
   ]
 }

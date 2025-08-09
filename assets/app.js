@@ -330,7 +330,9 @@ if (!customElements.get('product-card')) {
           return this.current_options[index] === option;
         }).includes(false);
       });
-      this.setDisabled();
+      setTimeout(() => {
+        this.setDisabled();
+      }, 100);
     }
     getVariantData() {
       this.variantData = this.variantData || JSON.parse(this.querySelector('[type="application/json"]').textContent);

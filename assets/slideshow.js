@@ -23,12 +23,6 @@ if (!customElements.get('slide-show')) {
         animations_enabled = document.body.classList.contains('animations-true') && typeof gsap !== 'undefined';
 
       if (slideshow_slides.length < 1) return;
-
-      // Set the autoplay duration as a CSS variable
-      if (autoplay) {
-        slideshow.style.setProperty('--autoplay-length', `${autoplay}ms`);
-      }
-
       const args = {
         wrapAround: true,
         cellAlign: align,
@@ -79,8 +73,6 @@ if (!customElements.get('slide-show')) {
           },
           ready: function () {
             let flkty = this;
-            console.log('Flickity ready event fired.');
-
             // Animations.
             if (animations_enabled && slideshow.classList.contains('main-slideshow')) {
               slideshow.animateSlides(0, animations);
@@ -89,35 +81,13 @@ if (!customElements.get('slide-show')) {
 
             // Custom Dots.
             if (dots && custom_dots) {
-              console.log('Custom dots are enabled and found.');
               let dots = custom_dots.querySelectorAll('li');
-              console.log('Number of dots found:', dots.length);
-
               dots.forEach((dot, i) => {
                 dot.addEventListener('click', (e) => {
                   flkty.select(i);
                 });
               });
-
-              // Initialize all dots to base state
-              dots.forEach(dot => {
-                dot.classList.remove('is-selected', 'animate', 'filled');
-              });
-
-              // Activate the first dot
-              const firstDot = dots[this.selectedIndex];
-              console.log('First dot selected index:', this.selectedIndex, 'Element:', firstDot);
-              firstDot.classList.add('is-selected');
-
-              if (autoplay) {
-                console.log('Autoplay is on, attempting to animate first dot.');
-                slideshow.style.setProperty('--autoplay-length', `${autoplay}ms`);
-                console.log('Set --autoplay-length on slideshow container:', slideshow.style.getPropertyValue('--autoplay-length'));
-                setTimeout(() => {
-                  firstDot.classList.add('animate');
-                  console.log('Added animate class to first dot.');
-                }, 50);
-              }
+              dots[this.selectedIndex].classList.add('is-selected');
             }
             document.fonts.ready.then(function () {
               flkty.resize();
@@ -138,11 +108,9 @@ if (!customElements.get('slide-show')) {
             }
           },
           change: function (index) {
-            console.log('Flickity change event fired to index:', index);
             flkty.cells[0].element.classList.remove('is-initial-selected');
             let previousIndex = fizzyUIUtils.modulo(this.selectedIndex - 1, this.slides.length),
               nextIndex = fizzyUIUtils.modulo(this.selectedIndex + 1, this.slides.length);
-            console.log('Previous index:', previousIndex, 'Next index:', nextIndex);
 
             // Animations.
             if (animations_enabled && slideshow.classList.contains('main-slideshow')) {
@@ -154,35 +122,11 @@ if (!customElements.get('slide-show')) {
 
             // Custom Dots.
             if (dots && custom_dots) {
-              console.log('Custom dots are enabled and found in change event.');
               let dots = custom_dots.querySelectorAll('li');
-              console.log('Number of dots found in change event:', dots.length);
-
-              // First, remove animate class from all dots
-              dots.forEach(dot => {
-                dot.classList.remove('animate');
-              });
-
-              // Handle the state of all dots
               dots.forEach((dot, i) => {
-                if (i < index) {
-                  // Previous dots should be filled
-                  dot.classList.remove('is-selected', 'animate');
-                  dot.classList.add('filled');
-                } else if (i === index) {
-                  // Current dot should be selected and animating if autoplay is on
-                  dot.classList.add('is-selected');
-                  dot.classList.remove('filled');
-                  if (autoplay) {
-                    setTimeout(() => {
-                      dot.classList.add('animate');
-                    }, 50);
-                  }
-                } else {
-                  // Future dots should be neither selected, filled, nor animating
-                  dot.classList.remove('is-selected', 'animate', 'filled');
-                }
+                dot.classList.remove('is-selected');
               });
+              dots[this.selectedIndex].classList.add('is-selected');
             }
 
             // AutoPlay
@@ -400,7 +344,7 @@ if (!customElements.get('slide-show')) {
       let first_cell = flickity.cells[0],
         max_height = 0,
 
-        image_height = first_cell.element.querySelector('.product-featured-image').clientHeight;
+        image_height = first_cell.element.querySelector('.product-card--featured-image')?.clientHeight || 0;
 
       flickity.cells.forEach((item, i) => {
         if (item.size.height > max_height) {
@@ -419,33 +363,3 @@ if (!customElements.get('slide-show')) {
   }
   customElements.define('slide-show', SlideShow);
 }
-
-// Select all video containers
-const videoContainers = document.querySelectorAll('.shoppable-video-reels--video');
-
-// Loop through each container
-videoContainers.forEach(container => {
-  // Find the video element within this container
-  const video = container.querySelector('.shoppable-video-reels--video-element');
-
-  // Check if a video element exists to avoid errors
-  if (video) {
-    // Add event listener for when the mouse enters the container
-    container.addEventListener('mouseenter', () => {
-      // Only play on hover if on desktop
-      if (window.innerWidth >= 1068) {
-        video.play();
-      }
-    });
-
-    // Add event listener for when the mouse leaves the container
-    container.addEventListener('mouseleave', () => {
-      // Only pause on mouse leave if on desktop
-      if (window.innerWidth >= 1068) {
-        video.pause();
-        // Optional: Reset video to the beginning
-        // video.currentTime = 0;
-      }
-    });
-  }
-});

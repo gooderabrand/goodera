@@ -44,9 +44,6 @@ if (!customElements.get('product-slider-thumbnails')) {
 
       // Start Gallery
       this.setupProductGallery();
-      
-      // Initialize dots and counter
-      this.updateProductSliderDotsAndCounter(this.selectedIndex);
     }
     reInit(imageSetIndex) {
 
@@ -119,9 +116,6 @@ if (!customElements.get('product-slider-thumbnails')) {
             behavior: 'smooth'
           });
         });
-
-        // Update dots and counter - same logic as homepage product cards
-        this.updateProductSliderDotsAndCounter(index);
 
         // Stop previous video
         if (previous_media.classList.contains('product-single__media-external-video')) {
@@ -242,24 +236,6 @@ if (!customElements.get('product-slider-thumbnails')) {
         pswp.init();
       }
       e.preventDefault();
-    }
-    
-    updateProductSliderDotsAndCounter(selectedIndex) {
-      // Update dots - same logic as homepage product cards
-      const dots = this.querySelectorAll('.product-secondary-images-nav.product-slider-dots li');
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === selectedIndex);
-      });
-
-      // Update all counters in the DOM (not just inside the slider)
-      const counters = document.querySelectorAll('.product-slider-counter-mobile');
-      counters.forEach(counter => {
-        const current = counter.querySelector('.product-slider-counter-current');
-        const total = counter.querySelector('.product-slider-counter-total');
-        if (current) current.textContent = selectedIndex + 1;
-        // total is static, but update for robustness
-        if (total) total.textContent = this.flkty.slides.length;
-      });
     }
   }
   customElements.define('product-slider-thumbnails', ProductSliderThumbnails);

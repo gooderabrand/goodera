@@ -62,6 +62,7 @@
 								  {%- for size in image_sizes -%}
 								    {%- assign small_size = '20x' -%}
 								    {%- assign size_array = size | split: "x" -%}
+								    {%- assign size_x = size_array[0] | append: 'x' -%}
 								    {% if size_array[1] != "0" %}
 								      {%- assign size_x = size -%}
 								      {%- assign small_x = size_array[1] | times: 20 | divided_by: size_array[0] | floor -%}
@@ -101,7 +102,9 @@
 							</div>
 						{%- endfor -%}
 					</div>
-					<div class="product-card-swatches--title">{{ 'products.product.available' | t: count: option.values.size }}</div>
+					{%- if swatch_style == 'hover' -%}
+						<div class="product-card-swatches--title">{{ 'products.product.available' | t: count: option.values.size }}</div>
+					{%- endif -%}
 				</div>
 				{%- endif -%}
 				{% break %}

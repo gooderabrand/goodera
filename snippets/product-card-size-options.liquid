@@ -22,7 +22,6 @@
       
     -%}
     <div class="product-card-sizes--container no-js-hidden">
-      <div class="quick-add-title">ADD TO BAG</div>
       <div class="product-card-sizes" data-options="{{ option_values | escape }}" data-index="{{ index }}">
         {%- for value in option.values limit: size_options_limit -%}
           <div class="product-card-sizes--size">

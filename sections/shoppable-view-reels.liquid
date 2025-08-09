@@ -23,7 +23,6 @@
 					{%- liquid
 						assign product_handle = block.settings.product_handle
 						assign video_hosted = block.settings.video_hosted
-						assign featured_image = block.settings.featured_image
 						assign index_c = forloop.index | default: 1 | modulo: 4 | plus: 1
 						assign autoplay = false
 						if forloop.index == 1
@@ -32,22 +31,11 @@
 					-%}
 					<div class="shoppable-video-reels--slide carousel__slide" {{ block.shopify_attributes }}>
 						<div class="shoppable-video-reels--video">
-							{% comment %}
-								Render featured image if available, otherwise render placeholder.
-							{% endcomment %}
-							{% if featured_image != null and featured_image.src != blank %}
-								{% render 'responsive-image', image: featured_image, class: 'shoppable-video-reels--featured-image', loading: 'lazy' %}
-							{% else %}
-								{% comment %}
-									Render a standard theme placeholder when no featured image is selected.
-								{% endcomment %}
-								{{ 'product-apparel-1' | placeholder_svg_tag: 'shoppable-video-reels--featured-image placeholder_svg_tag' }}
-							{% endif %}
 							<div class="slideshow__slide-video-bg"{% if video_hosted %} data-provider="hosted"{% endif %}>
 								{% if video_hosted %}
-									{{ video_hosted | video_tag: autoplay: autoplay, loop: true, controls: false, muted: true, image_size: '600x', class: 'shoppable-video-reels--video-element' }}
+									{{ video_hosted | video_tag: autoplay: autoplay, loop: true, controls: false, muted: true, image_size: '600x' }}
 								{% else %}
-									{{ 'product-apparel-' | append: index_c | placeholder_svg_tag: 'shoppable-video-reels--video-element placeholder_svg_tag' }}
+									{{ 'product-apparel-' | append: index_c | placeholder_svg_tag: 'placeholder_svg_tag' }}
 								{% endif %}
 								
 								{% if controls_play_pause or controls_sound %}
@@ -67,12 +55,12 @@
 									</video-controls>
 								{% endif %}
 							</div>
+							{% if product_handle != blank %}
+							<div class="shoppable-video-reels--product" style="--color-body: {{ color_text }}; --color-body-rgb: {{ color_text.rgb | replace: ' ' , ',' }}; --color-price: {{ color_text }}; --color-accent: {{ color_text }}; --color-accent-rgb: {{ color_text.rgb | replace: ' ' , ',' }}; background: {{ overlay_gradient }}">
+								{%- render 'product-card-small', product_small: product_handle, quick_add: show_quick_add_button -%}
+							</div>
+							{% endif %}
 						</div>
-						{% if product_handle != blank %}
-						<div class="shoppable-video-reels--product" style="--color-body: {{ color_text }}; --color-body-rgb: {{ color_text.rgb | replace: ' ' , ',' }}; --color-price: {{ color_text }}; --color-accent: {{ color_text }}; --color-accent-rgb: {{ color_text.rgb | replace: ' ' , ',' }}; background: {{ overlay_gradient }}">
-							{%- render 'product-card-small', product_small: product_handle, quick_add: show_quick_add_button -%}
-						</div>
-						{% endif %}
 					</div>
 				{%- endfor -%}
 				{%- if section.blocks.size > 1 and show_dots -%}
@@ -202,12 +190,7 @@
             "type": "product",
             "id": "product_handle",
             "label": "Product"
-          },
-					{
-						"type": "image_picker",
-						"id": "featured_image",
-						"label": "Featured image"
-					}
+          }
         ]
       }
     ],
