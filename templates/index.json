@@ -42,11 +42,11 @@
         "slide_KPwN3G": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/hq720.jpg",
+            "image": "shopify://shop_images/Render.png",
             "slide_link": "",
             "video_background": true,
             "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-            "video_hosted": "shopify://files/videos/ba306bbe6dc1428c8109995f0531e5fc.HD-720p-4.5Mbps-10315842.mp4",
+            "video_hosted": "shopify://files/videos/video-5-2.mp4",
             "subheading": "INTRODUCING",
             "heading": "Your everyday uniform",
             "heading_size": "h2",
@@ -354,8 +354,8 @@
         "button_2_link": "",
         "button_2_outline": true,
         "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "video_hosted": "shopify://files/videos/ba306bbe6dc1428c8109995f0531e5fc.HD-720p-4.5Mbps-10315842.mp4",
-        "fallback_image": "shopify://shop_images/Rose-whip-poster_jpg.webp",
+        "video_hosted": "shopify://files/videos/video-3.mp4",
+        "fallback_image": "shopify://shop_images/T_Shirt-2.png",
         "overlay_opacity": 25,
         "disable_top_spacing": false,
         "disable_bottom_spacing": false
