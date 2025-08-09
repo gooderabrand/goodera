@@ -114,7 +114,7 @@
         "logo": "shopify://shop_images/good_era_svg_logo_icon_desktop_black.svg",
         "logo_height_range": 30,
         "logo_height_range_mobile": 30,
-        "style": "style3",
+        "style": "style2",
         "header_shadow": "header--shadow-none",
         "menu": "main-menu",
         "cart_icon": "frame_bag",
