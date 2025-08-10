@@ -439,11 +439,5 @@
       "send_on": "JJJJ-MM-DD",
       "send_on_label": "Verzenden op (optioneel)"
     }
-  },
-  "discounts": {
-    "discount_code": "Kortingscode toepassen",
-    "discount_code_error": "De kortingscode kan niet op je winkelwagen worden toegepast",
-    "discounts": "Kortingen",
-    "apply": "Toepassen"
   }
 }

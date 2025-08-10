@@ -11,7 +11,8 @@
   "sections": {
     "main-activate-account": {
       "type": "main-activate-account",
-      "settings": {}
+      "settings": {
+      }
     }
   },
   "order": [

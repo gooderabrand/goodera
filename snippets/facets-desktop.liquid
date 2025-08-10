@@ -22,31 +22,8 @@
 		    {% endif %}
 				<div class="facets__wrapper">
 					{%- for filter in results.filters -%}
-						{%- liquid
-						assign box_filter = false
-						assign box_filter_list_array = box_filter_list | newline_to_br | split: '<br />'
-						assign box_filter_key_array = ''
-						assign box_filter_val_array = ''
-
-						for box_filter in box_filter_list_array
-							assign key = box_filter | split: ':' | first | rstrip
-							assign value = box_filter | split: ':' | last | lstrip
-							assign box_filter_key_array = box_filter_key_array | append: ',' | append: key
-							assign box_filter_val_array = box_filter_val_array | append: ',' | append: value
-						endfor
-
-						assign box_filter_key_array = box_filter_key_array | remove_first: ',' | strip_newlines | split: ','
-						assign box_filter_val_array = box_filter_val_array | remove_first: ',' | split: ','
-
-						for box_filter_key in box_filter_key_array
-							if box_filter_key == filter.label
-								assign box_filter = true
-								assign box_filter_column = box_filter_val_array[forloop.index0]
-							endif
-						endfor
-						-%}
-						{%- case filter.type -%}
-			        {%- when 'boolean' or 'list' -%}
+						{% case filter.type %}
+			        {% when 'boolean' or 'list' %}
 							{%- assign label = filter.label | downcase | replace: ' ', '-' | escape -%}
 							<collapsible-row data-index="{{ forloop.index }}">
 								<details class="thb-filter js-filter" open>
@@ -89,7 +66,7 @@
 														assign slug = 'color'
 													endif
 												-%}
-												<ul class="{{ filter.type | escape }}-{{ slug }}{% if box_filter %} list--boxed{% endif %}"{% if box_filter %} style="--max-boxes: {{ box_filter_column }}"{% endif %}">
+												<ul class="{{ filter.type | escape }}-{{ slug }}">
 													{%- liquid
 													assign custom_colors = settings.color_swatches | newline_to_br | split: '<br />'
 													assign key_array = ''
@@ -173,14 +150,77 @@
 									</div>
 								</details>
 							</collapsible-row>
-							{%- when 'price_range' -%}
+							{% when 'price_range' %}
 							<collapsible-row data-index="{{ forloop.index }}">
 								<details class="thb-filter js-filter" data-index="{{ forloop.index }}" open>
 									<summary class="thb-filter-title"><span></span>{{ filter.label | escape }}</summary>
 									<div class="thb-filter-content collapsible__content">
 										<div class="{{ filter.type | escape }} {{ filter.type | escape }}-{{ filter.label | downcase | escape }}">
-											{% render 'facets-price-range', filter: filter %}
-										</div>
+												{% liquid
+					                assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,TRY,UYU,VES,VND' | split: ','
+					                assign uses_comma_decimals = false
+					                if currencies_using_comma_decimals contains cart.currency.iso_code
+					                  assign uses_comma_decimals = true
+					                endif
+
+													assign max_value = nil
+													assign min_value = nil
+													if uses_comma_decimals
+														if filter.max_value.value
+															assign max_value = filter.max_value.value | money_without_currency | replace: '.', ''
+														endif
+														if filter.min_value.value
+															assign min_value = filter.min_value.value | money_without_currency | replace: '.', ''
+														endif
+														assign range_max = filter.range_max | money_without_currency | replace: '.', ''
+													else
+														if filter.max_value.value
+															assign max_value = filter.max_value.value | money_without_currency | replace: ',', ''
+														endif
+														if filter.min_value.value
+															assign min_value = filter.min_value.value | money_without_currency | replace: ',', ''
+														endif
+														assign range_max = filter.range_max | money_without_currency | strip_html | replace: ',', '' | divided_by: 1.00
+													endif
+					              %}
+												{%- assign max_price_amount = filter.range_max | money | strip_html | escape -%}
+			                  <span class="price-highest">{{ "products.facets.max_price" | t: price: max_price_amount }}</span>
+												<price-slider class="price_slider_wrapper">
+													<div
+														class="price_slider"
+														data-min-value="{{ min_value }}"
+					                  data-min-name="filter.v.price.gte"
+					                  data-min="0"
+					                  data-max-value="{{ max_value }}"
+					                  data-max-name="filter.v.price.lte"
+					                  data-max="{{ range_max }}">
+													</div>
+													<div class="price_slider_amount">
+														<div>
+															<span class="field-currency">{{ cart.currency.symbol }}</span>
+															<input class="field__input field__input_min"
+						                    name="{{ filter.min_value.param_name }}"
+						                    id="Filter-{{ filter.label | escape }}-GTE"
+						                    value="{{ min_value }}"
+						                    type="text"
+																placeholder="0"
+						                  >
+						                  </input>
+														</div>
+														<div>
+															<span class="field-currency">{{ cart.currency.symbol }}</span>
+															<input class="field__input field__input_max"
+						                    name="{{ filter.max_value.param_name }}"
+						                    id="Filter-{{ filter.label | escape }}-LTE"
+						                    value="{{ max_value }}"
+						                    type="text"
+																placeholder="{{ filter.range_max | money_without_currency }}"
+						                  >
+						                  </input>
+														</div>
+													</div>
+												</price-slider>
+											</div>
 									</div>
 								</details>
 							</collapsible-row>

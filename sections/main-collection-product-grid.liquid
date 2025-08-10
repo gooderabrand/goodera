@@ -11,14 +11,13 @@
 	assign products_per_page = section.settings.products_per_page
 	assign columns_desktop = section.settings.columns_desktop
 	assign facets_desktop = section.settings.facets_desktop
-	assign box_filter_list = section.settings.box_filter_list
 
 	unless enable_filtering
 		assign facets_desktop = 'drawer'
 	endunless
 -%}
 {%- for filter in collection.filters limit: 1 -%}{%- endfor -%}{%- comment -%} This is just to get rid of the "this theme does not support filters" message in the shopify admin {%- endcomment -%}
-{%- render 'facets-mobile', results: collection, enable_filtering: enable_filtering, enable_sorting: enable_sorting, show_counts: show_counts, filter_color_swatches: filter_color_swatches, box_filter_list: box_filter_list -%}
+{%- render 'facets-mobile', results: collection, enable_filtering: enable_filtering, enable_sorting: enable_sorting, show_counts: show_counts, filter_color_swatches: filter_color_swatches -%}
 <div class="row {% if full_width %}full-width-row{% endif %}">
 	<div class="small-12 columns">
 		{%- paginate collection.products by products_per_page -%}
@@ -26,7 +25,7 @@
 				<div id="ProductGridContainer">
 					<div class="sidebar-container facets--{{ facets_desktop }} facets--sidebar-{{ sidebar_size }} results--{{ collection.products.size }}">
 						{%- if facets_desktop == 'sidebar' -%}
-							{%- render 'facets-desktop', results: collection, enable_filtering: enable_filtering, enable_sorting: enable_sorting, show_counts: show_counts, filter_color_swatches: filter_color_swatches, box_filter_list: box_filter_list -%}
+							{%- render 'facets-desktop', results: collection, enable_filtering: enable_filtering, enable_sorting: enable_sorting, show_counts: show_counts, filter_color_swatches: filter_color_swatches -%}
 						{%- endif -%}
 						<div>
 							{%- render 'facets-bar', results: collection, enable_filtering: enable_filtering, enable_sorting: enable_sorting, facets_desktop: facets_desktop, filter_color_swatches: filter_color_swatches -%}
@@ -41,7 +40,7 @@
 									</p>
 								</div>
 							{%- else -%}
-								<ul id="product-grid" data-id="{{ section.id }}" class="products collection row small-up-2 medium-up-{{ columns_desktop }} pagination--{{ pagination_type }}">
+								<ul id="product-grid" data-id="{{ section.id }}-{{ product_grid_id }}" class="products collection row small-up-{{ settings.products_per_row_mobile }} medium-up-{{ settings.products_per_row }} large-up-{{ settings.products_per_row_desktop }} pagination--{{ settings.pagination_type }}">
 									{%- for product in collection.products -%}
 										{%- assign product_loop = forloop -%}
 										{%- for block in section.blocks -%}
@@ -66,9 +65,39 @@
 												</li>
 											{%- endif -%}
 										{%- endfor -%}
-										<li class="column">
-											{%- render 'product-card', product_card_product: product -%}
-										</li>
+										
+										{% for option in product.options %}
+											{% if product.options_by_name['Color'].values != blank %}
+												{% if option == 'Color' %}
+													{% assign index = forloop.index0 %}
+													{% assign colorlist = '' %}
+													{% assign color = '' %}
+													{% for variant in product.variants %}
+														{% capture color %}
+															{{ variant.options[index] }}
+														{% endcapture %}
+														{% unless colorlist contains color %}
+															<li class="column">
+																{% render 'product-card-variant',
+																	card_product: variant,
+																	title: product.title,
+																	color: color,
+																	parent_product: product
+																%}
+															</li>
+															{% capture tempList %}
+																{{colorlist | append: color | append: " " }}
+															{% endcapture %}
+															{% assign colorlist = tempList %}
+														{% endunless %}
+													{% endfor %}
+												{% endif %}
+											{% else %}
+												<li class="column">
+													{%- render 'product-card', product_card_product: product -%}
+												</li>
+											{% endif %}
+										{% endfor %}
 									{%- endfor -%}
 								</ul>
 								{% render 'pagination', paginate: paginate, pagination_type: pagination_type, id: section.id %}
@@ -202,19 +231,7 @@
 	      "default": "medium",
 	      "label": "Sidebar size",
 	      "info": "Changes the width of the sidebar"
-	    },
-	    {
-	      "type": "header",
-	      "content": "Filter boxes",
-				"info": "Show some filter options as boxes instead of checkboxes. Recommended only for very short filter labels."
-	    },
-			{
-				"type": "textarea",
-				"id": "box_filter_list",
-        "placeholder": "Size: 4",
-				"label": "Product options to box",
-				"info": "Follow the format: <Filter name>: <Columns>. Example: Size: 2. Each filter name should be in a new line. Enter the name of the option as it appears in the admin area."
-			}
+	    }
     ],
 		"blocks": [
       {

@@ -445,11 +445,5 @@
       "send_on": "AAAA-MM-DD",
       "send_on_label": "Enviar el (opcional)"
     }
-  },
-  "discounts": {
-    "discount_code": "Aplicar código de descuento",
-    "discount_code_error": "El código de descuento no se puede aplicar a su carrito",
-    "discounts": "Descuentos",
-    "apply": "Aplicar"
   }
 }

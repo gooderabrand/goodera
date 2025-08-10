@@ -16,6 +16,8 @@
         "mobile_height": "mobile-height-400",
         "full_width": true,
         "subheading": "",
+        "heading": "",
+        "text": "",
         "lightbox_button": false,
         "video": "",
         "overlay_opacity": 0,
@@ -68,21 +70,30 @@
           "type": "column",
           "settings": {
             "image_full_width": true,
-            "retina": true
+            "image_link": "",
+            "retina": true,
+            "link_label": "",
+            "link": ""
           }
         },
         "157633c4-d14e-4a3d-b730-68d4cf98ccd5": {
           "type": "column",
           "settings": {
             "image_full_width": true,
-            "retina": true
+            "image_link": "",
+            "retina": true,
+            "link_label": "",
+            "link": ""
           }
         },
         "60bdc4fd-7c09-49d5-85f2-ce67069c6b25": {
           "type": "column",
           "settings": {
             "image_full_width": true,
-            "retina": true
+            "image_link": "",
+            "retina": true,
+            "link_label": "",
+            "link": ""
           }
         }
       },
@@ -92,6 +103,7 @@
         "60bdc4fd-7c09-49d5-85f2-ce67069c6b25"
       ],
       "settings": {
+        "heading": "",
         "heading_left": false,
         "description": "",
         "full_width": false,
@@ -112,18 +124,21 @@
         "72b61cd1-efaf-4962-9479-655398f8a640": {
           "type": "text",
           "settings": {
+            "link": "",
             "outline_text": false
           }
         },
         "d5501781-6c2e-4bf3-8b0f-d6aa4e6b1358": {
           "type": "text",
           "settings": {
+            "link": "",
             "outline_text": false
           }
         },
         "3a3c53b4-4fef-455c-bf2a-25711a34cd3c": {
           "type": "text",
           "settings": {
+            "link": "",
             "outline_text": false
           }
         }
@@ -156,18 +171,21 @@
         "1127da65-0942-4256-9fed-894c6da8b01f": {
           "type": "text",
           "settings": {
+            "link": "",
             "outline_text": false
           }
         },
         "48f58d2d-bc1a-4170-ac07-ab7742a1ac8e": {
           "type": "text",
           "settings": {
+            "link": "",
             "outline_text": false
           }
         },
         "4ac6a50f-a332-4349-b2d7-7ef30304d854": {
           "type": "text",
           "settings": {
+            "link": "",
             "outline_text": false
           }
         }
@@ -265,7 +283,11 @@
           "settings": {
             "subheading": "",
             "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
             "use_text_button": false,
+            "block_link": "",
             "product_list": []
           }
         },
@@ -274,7 +296,11 @@
           "settings": {
             "subheading": "",
             "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
             "use_text_button": false,
+            "block_link": "",
             "product_list": []
           }
         },
@@ -283,7 +309,11 @@
           "settings": {
             "subheading": "",
             "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
             "use_text_button": false,
+            "block_link": "",
             "product_list": []
           }
         },
@@ -292,7 +322,11 @@
           "settings": {
             "subheading": "",
             "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
             "use_text_button": false,
+            "block_link": "",
             "product_list": []
           }
         }
@@ -326,7 +360,11 @@
           "settings": {
             "subheading": "",
             "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
             "use_text_button": false,
+            "block_link": "",
             "product_list": []
           }
         },
@@ -335,7 +373,11 @@
           "settings": {
             "subheading": "",
             "title": "",
+            "text": "",
+            "link_label": "",
+            "link": "",
             "use_text_button": false,
+            "block_link": "",
             "product_list": []
           }
         }
@@ -367,7 +409,7 @@
         "collection": "all",
         "display_type": "carousel",
         "product_limit": 5,
-        "columns_desktop": 5,
+        "columns_desktop": 4,
         "show_view_all": false,
         "mobile_swipe": true,
         "show_progress_bar": false,

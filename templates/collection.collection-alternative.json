@@ -80,6 +80,9 @@
           "settings": {
             "subheading": "",
             "title": "Dresses",
+            "text": "",
+            "link_label": "",
+            "link": "",
             "use_text_button": false,
             "product_list": []
           }
@@ -89,6 +92,9 @@
           "settings": {
             "subheading": "",
             "title": "Bottoms",
+            "text": "",
+            "link_label": "",
+            "link": "",
             "use_text_button": false,
             "product_list": []
           }
@@ -98,6 +104,9 @@
           "settings": {
             "subheading": "",
             "title": "Sweaters",
+            "text": "",
+            "link_label": "",
+            "link": "",
             "use_text_button": false,
             "product_list": []
           }
@@ -107,6 +116,9 @@
           "settings": {
             "subheading": "",
             "title": "Denim",
+            "text": "",
+            "link_label": "",
+            "link": "",
             "use_text_button": false,
             "product_list": []
           }

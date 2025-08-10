@@ -21,7 +21,7 @@
       assign size = option.values.size | at_most: size_options_limit
       
     -%}
-    <div class="product-card-sizes--container no-js-hidden">
+    <div class="product-card-sizes--container theme-white no-js-hidden">
       <div class="product-card-sizes" data-options="{{ option_values | escape }}" data-index="{{ index }}">
         {%- for value in option.values limit: size_options_limit -%}
           <div class="product-card-sizes--size">
@@ -31,9 +31,9 @@
       </div>
       {%- if remaining > 0 -%}
         <div class="product-card-sizes--remaining">
-          {{ remaining | prepend: '+' }}
+          View {{ remaining }} additional sizes
         </div>
-      {%- endif- %}
+      {%- endif -%}
       <script type="application/json">
         {{ product_card_product.variants | json }}
       </script>

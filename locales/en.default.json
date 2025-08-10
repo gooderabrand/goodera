@@ -442,11 +442,5 @@
       "send_on": "YYYY-MM-DD",
       "send_on_label": "Send on (optional)"
     }
-  },
-  "discounts": {
-    "discount_code": "Discount code",
-    "discount_code_error": "Discount code cannot be applied to your cart",
-    "discounts": "Discounts",
-    "apply": "Apply"
   }
 }

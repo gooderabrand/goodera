@@ -1,0 +1,17 @@
+{%- comment -%}
+  This snippet renders a list of recommended products.
+  It is intended to be rendered via AJAX.
+{%- endcomment -%}
+
+{%- if recommendations.performed and recommendations.products_count > 0 -%}
+  {%- for recommendation in recommendations.products -%}
+    <li class="columns">
+      {% render 'product-card', product_card_product: recommendation %}
+    </li>
+  {%- endfor -%}
+{%- else -%}
+  {% comment %}
+    Optional: Display a message if no recommendations are found
+    <p>No recommended products found.</p>
+  {% endcomment %}
+{%- endif -%} 

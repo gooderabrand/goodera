@@ -442,11 +442,5 @@
       "send_on": "JJJJ-MM-TT",
       "send_on_label": "Senden am (optional)"
     }
-  },
-  "discounts": {
-    "discount_code": "Rabattcode anwenden",
-    "discount_code_error": "Der Rabattcode kann nicht auf Ihren Warenkorb angewendet werden",
-    "discounts": "Rabatte",
-    "apply": "Anwenden"
   }
 }

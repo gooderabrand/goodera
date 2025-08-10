@@ -41,6 +41,7 @@
           "type": "button",
           "settings": {
             "button_text": "Shop Now",
+            "button_link": "",
             "button_outline": false
           }
         }
@@ -79,7 +80,8 @@
         "9700969b-41f2-416a-b2bf-4105147b9ff9": {
           "type": "text-button",
           "settings": {
-            "link_label": "REINVENT YOUR SKIN TODAY"
+            "link_label": "REINVENT YOUR SKIN TODAY",
+            "link": ""
           }
         }
       },
@@ -102,6 +104,7 @@
     "a6e345fa-3032-4566-90a7-28aefe18ee18": {
       "type": "collection-list",
       "settings": {
+        "heading": "",
         "heading_left": false,
         "description": "",
         "full_width": false,
@@ -158,7 +161,7 @@
       "settings": {
         "heading": "New Arrivals",
         "heading_left": true,
-        "description": "<p>Describe your featured collection here</p>",
+        "description": "<p>Describe your featured collection here<\/p>",
         "full_width": false,
         "collection": "frontpage",
         "display_type": "grid",
@@ -214,7 +217,8 @@
         "1aacb913-044c-48dc-90f3-cf1c64d67d1e": {
           "type": "button",
           "settings": {
-            "button_text": "Shop Now"
+            "button_text": "Shop Now",
+            "button_link": ""
           }
         }
       },
@@ -256,6 +260,7 @@
           "settings": {
             "image": "",
             "text": "For a smooth and glowing skin",
+            "link": "",
             "outline_text": false
           }
         },
@@ -264,6 +269,7 @@
           "settings": {
             "image": "",
             "text": "One step to flawless beauty",
+            "link": "",
             "outline_text": false
           }
         },
@@ -272,6 +278,7 @@
           "settings": {
             "image": "",
             "text": "Let your skin breath",
+            "link": "",
             "outline_text": false
           }
         }
@@ -308,7 +315,9 @@
             "title": "Elegance In Every Way",
             "text": "This modern approach creates the optimal environment to strengthen cell function.",
             "link_label": "SHOP BALMS",
-            "use_text_button": false
+            "link": "",
+            "use_text_button": false,
+            "block_link": ""
           }
         },
         "template--17027746070843__165aed4e-90ed-434d-97ca-616ea4f48f79-1670224069d68b9afc-1": {
@@ -319,7 +328,9 @@
             "title": "Get Glam.. Be Glamorous",
             "text": "This modern approach creates the optimal environment to strengthen cell function.",
             "link_label": "SHOP SKINCARE",
-            "use_text_button": false
+            "link": "",
+            "use_text_button": false,
+            "block_link": ""
           }
         }
       },
@@ -361,7 +372,9 @@
             "image_full_width": false,
             "retina": true,
             "title": "",
-            "text": "<p>The important thing is to take your time and not get stressed. It's useless to send models out on the runway to cry.</p>"
+            "text": "<p>The important thing is to take your time and not get stressed. It's useless to send models out on the runway to cry.<\/p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "template--17027746070843__d71ad642-b939-4099-982e-5ba29c9abd38-167022714991e3fbd3-1": {
@@ -371,7 +384,9 @@
             "image_full_width": false,
             "retina": true,
             "title": "",
-            "text": "<p>What you wear is how you present yourself to the world, especially today when human contacts go so fast.</p>"
+            "text": "<p>What you wear is how you present yourself to the world, especially today when human contacts go so fast.<\/p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "template--17027746070843__d71ad642-b939-4099-982e-5ba29c9abd38-167022714991e3fbd3-2": {
@@ -381,7 +396,9 @@
             "image_full_width": false,
             "retina": true,
             "title": "",
-            "text": "<p>We look our best in subdued colors, sophisticated cuts, and a general air of sleek understatement.</p>"
+            "text": "<p>We look our best in subdued colors, sophisticated cuts, and a general air of sleek understatement.<\/p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "template--17027746070843__d71ad642-b939-4099-982e-5ba29c9abd38-167022714991e3fbd3-3": {
@@ -391,7 +408,9 @@
             "image_full_width": false,
             "retina": true,
             "title": "",
-            "text": "<p>We have got to change our ethics and our financial system and our whole way of understanding the world.</p>"
+            "text": "<p>We have got to change our ethics and our financial system and our whole way of understanding the world.<\/p>",
+            "link_label": "",
+            "link": ""
           }
         }
       },
@@ -402,6 +421,7 @@
         "template--17027746070843__d71ad642-b939-4099-982e-5ba29c9abd38-167022714991e3fbd3-3"
       ],
       "settings": {
+        "heading": "",
         "heading_left": false,
         "description": "",
         "full_width": false,
@@ -458,6 +478,7 @@
         "template--17027746070843__1551d615-db81-45f5-8df8-5e86b2e60089-1670222752bb070754-1"
       ],
       "settings": {
+        "heading": "",
         "heading_left": false,
         "description": "",
         "desktop_height": "desktop-height-550",
@@ -487,7 +508,8 @@
         },
         "c594d4ae-abbb-4e41-9b0c-15ec696f6b61": {
           "type": "description",
-          "settings": {}
+          "settings": {
+          }
         },
         "template--17027746070843__6c18904d-1867-4720-9268-e4d9022a47b3-1670230011a33445a1-1": {
           "type": "variant_picker",
@@ -509,7 +531,8 @@
         },
         "e7b012e3-9e17-45ab-9c27-05f93fa62e76": {
           "type": "product_link",
-          "settings": {}
+          "settings": {
+          }
         }
       },
       "block_order": [
@@ -521,6 +544,7 @@
         "e7b012e3-9e17-45ab-9c27-05f93fa62e76"
       ],
       "settings": {
+        "heading": "",
         "heading_left": false,
         "description": "",
         "full_width": false,
@@ -548,7 +572,7 @@
       "settings": {
         "heading": "Latest News",
         "heading_left": true,
-        "description": "<p>Add a short description for your brand news</p>",
+        "description": "<p>Add a short description for your brand news<\/p>",
         "full_width": false,
         "blog": "news",
         "post_limit": 3,
@@ -586,7 +610,7 @@
           "settings": {
             "heading": "How do I choose the right products for my skin?",
             "open": true,
-            "content": "<p>Your skin deserves a routine as unique as you are. That’s why we’re always chatting with skin care experts and looking into the latest products, treatments and tips to help you create your perfect skin care routine. Whether your skin is sensitive, dry or acne-prone, you’ll find tips for all your concerns.</p>",
+            "content": "<p>Your skin deserves a routine as unique as you are. That’s why we’re always chatting with skin care experts and looking into the latest products, treatments and tips to help you create your perfect skin care routine. Whether your skin is sensitive, dry or acne-prone, you’ll find tips for all your concerns.<\/p>",
             "page": ""
           }
         },
@@ -595,7 +619,7 @@
           "settings": {
             "heading": "Are the products tested on animals?",
             "open": false,
-            "content": "<p>Our formulas are vegan, contain no ingredients of animal origin and comply with European regulations which prohibit animal testing.</p>",
+            "content": "<p>Our formulas are vegan, contain no ingredients of animal origin and comply with European regulations which prohibit animal testing.<\/p>",
             "page": ""
           }
         },
@@ -604,7 +628,7 @@
           "settings": {
             "heading": "Can I receive samples?",
             "open": false,
-            "content": "<p>We do not send samples alone, without placing a prior order. We also offer our products in travel size, ideal for testing their formula over several weeks before buying a larger size!</p>",
+            "content": "<p>We do not send samples alone, without placing a prior order. We also offer our products in travel size, ideal for testing their formula over several weeks before buying a larger size!<\/p>",
             "page": ""
           }
         },
@@ -625,7 +649,7 @@
       "settings": {
         "image": "",
         "use_video": false,
-        "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "video": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
         "video_autoplay": true,
         "height": "large",
         "desktop_image_width": "medium",

@@ -6,7 +6,18 @@
   "company_location": [],
   "location": [],
   "market": [],
-  "order": [],
+  "order": [
+    {
+      "key": "return_information",
+      "namespace": "narvar",
+      "name": "Return Information",
+      "description": "A list of Return Order information to ensure all info is captured",
+      "type": {
+        "name": "json",
+        "category": "JSON"
+      }
+    }
+  ],
   "page": [
     {
       "key": "product_details",
@@ -238,16 +249,6 @@
       "type": {
         "name": "single_line_text_field",
         "category": "TEXT"
-      }
-    },
-    {
-      "key": "related_colors",
-      "namespace": "custom",
-      "name": "related colors",
-      "description": "Related Color Variants",
-      "type": {
-        "name": "list.product_reference",
-        "category": "REFERENCE"
       }
     },
     {

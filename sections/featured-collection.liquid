@@ -22,8 +22,6 @@
 			assign columns_class = 'small-6 medium-4'
 		when 4
 			assign columns_class = 'small-6 medium-6 large-3'
-		when 5
-			assign columns_class = 'small-6 medium-4 large-1/5'
 	endcase
 
 	if featured_collection.all_products_count > product_limit
@@ -44,7 +42,7 @@
 	<div class="row{% if full_width %} full-width-row{% endif %}">
 		<div class="small-12 columns">
 			{% render 'section-header', section_heading: section_heading, section_description: section_description, section_heading_left: section_heading_left, section_heading_button: section_heading_button %}
-			<div class="featured-collection__inner display-type--{{ display_type }}">
+			<div class="featured-collection__inner display-type--{{ display_type }}" style="--columns-desktop: {{ columns_desktop }};">
 				<{{ element }} id="product-grid-{{ section.id }}" class="products row {{ display_type }}">
 					{%- if featured_collection != blank -%}
 						{%- for product in featured_collection.products limit: product_limit -%}
@@ -142,7 +140,7 @@
 			"type": "range",
 			"id": "columns_desktop",
 			"min": 2,
-			"max": 5,
+			"max": 8,
 			"step": 1,
 			"default": 4,
 			"label": "Number of columns on desktop"

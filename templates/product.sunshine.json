@@ -110,7 +110,7 @@
         "f3a800b2-f98e-464c-af94-0b4dcded80ca": {
           "type": "text",
           "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>"
           }
         }
       },
@@ -137,6 +137,7 @@
           "type": "text",
           "settings": {
             "text": "Add campaign text here.",
+            "link": "",
             "outline_text": false
           }
         },
@@ -144,6 +145,7 @@
           "type": "text",
           "settings": {
             "text": "Add campaign text here.",
+            "link": "",
             "outline_text": false
           }
         },
@@ -151,6 +153,7 @@
           "type": "text",
           "settings": {
             "text": "Add campaign text here.",
+            "link": "",
             "outline_text": false
           }
         },
@@ -158,6 +161,7 @@
           "type": "text",
           "settings": {
             "text": "Add campaign text here.",
+            "link": "",
             "outline_text": false
           }
         },
@@ -165,6 +169,7 @@
           "type": "text",
           "settings": {
             "text": "Add campaign text here.",
+            "link": "",
             "outline_text": false
           }
         }
@@ -203,7 +208,7 @@
         "6abf090a-baed-4bcc-bc49-e60bab4f3e47": {
           "type": "text",
           "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>"
           }
         }
       },
@@ -231,7 +236,10 @@
           "settings": {
             "image_full_width": false,
             "retina": true,
-            "title": "Column"
+            "title": "Column",
+            "text": "",
+            "link_label": "",
+            "link": ""
           }
         },
         "3fe3e1fd-db99-414a-9dba-4c49100d31cc": {
@@ -240,7 +248,9 @@
             "image_full_width": false,
             "retina": true,
             "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "a9d1ff65-c5dd-4ecc-af66-db77e9fa6f55": {
@@ -249,7 +259,9 @@
             "image_full_width": false,
             "retina": true,
             "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "c640fb03-f7b1-42d0-be51-d54170b3763b": {
@@ -257,7 +269,10 @@
           "settings": {
             "image_full_width": false,
             "retina": true,
-            "title": ""
+            "title": "",
+            "text": "",
+            "link_label": "",
+            "link": ""
           }
         },
         "a039ea41-08e8-42c2-9d3b-12e1a59acc1a": {
@@ -266,7 +281,9 @@
             "image_full_width": false,
             "retina": true,
             "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "2d8255ad-b7ae-4861-a110-ae25c7c33577": {
@@ -275,7 +292,9 @@
             "image_full_width": false,
             "retina": true,
             "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "link_label": "",
+            "link": ""
           }
         }
       },
@@ -288,6 +307,7 @@
         "2d8255ad-b7ae-4861-a110-ae25c7c33577"
       ],
       "settings": {
+        "heading": "",
         "heading_left": false,
         "description": "",
         "full_width": false,
@@ -331,6 +351,7 @@
           "type": "button",
           "settings": {
             "button_text": "Shop Now",
+            "button_link": "",
             "button_outline": false
           }
         }
@@ -357,7 +378,7 @@
       "settings": {
         "heading": "Product recommendations",
         "heading_left": false,
-        "description": "<p>Product recommendations description</p>",
+        "description": "<p>Product recommendations description<\/p>",
         "full_width": true,
         "mobile_swipe": true,
         "disable_top_spacing": false,

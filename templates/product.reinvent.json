@@ -16,19 +16,29 @@
     "main-product": {
       "type": "main-product",
       "blocks": {
-        "e431a79e-9c7b-4a53-a79a-0cb918617ecf": {
-          "type": "text",
-          "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "style_vendor"
-          }
-        },
         "title": {
           "type": "title",
           "settings": {
-            "uppercase": true,
+            "uppercase": false,
             "show_products_rating": true,
             "show_custom_badges": true
+          }
+        },
+        "0b3e272b-c86a-4dba-946c-c6912251371c": {
+          "type": "description",
+          "settings": {
+            "seo_text_max_height": 1000,
+            "seo_text_read_more": "Read more",
+            "seo_text_read_less": "Read less"
+          }
+        },
+        "siblings_Czmpgn": {
+          "type": "siblings",
+          "settings": {
+            "siblings_collection": "{{ product.metafields.theme.siblings.value }}",
+            "sibling_color": "{{ product.metafields.theme.sibling_color.value }}",
+            "color_picker_size": "regular",
+            "margin_bottom": 20
           }
         },
         "546f2cee-3532-473a-836f-21f14fde7cfe": {
@@ -43,73 +53,123 @@
             "inventory_notice_base": 84
           }
         },
-        "0b3e272b-c86a-4dba-946c-c6912251371c": {
-          "type": "description",
-          "settings": {
-            "seo_text_max_height": 1000,
-            "seo_text_read_more": "Read more",
-            "seo_text_read_less": "Read less"
-          }
-        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
             "picker_type": "button",
             "color_picker": false,
-            "color_picker_size": "regular",
+            "color_picker_size": "xlarge",
             "color_picker_use_variants": false,
             "variant_is_disabled": true,
             "sizing_guide_variant": "Size",
-            "sizing_guide_text": "Sizing guide",
+            "sizing_guide_text": "",
             "sizing_guide_icon": "none",
-            "sizing_guide_page": "",
-            "custom_liquid": ""
-          }
-        },
-        "siblings_tm4PP7": {
-          "type": "siblings",
-          "settings": {
-            "siblings_collection": "{{ product.metafields.theme.siblings.value }}",
-            "sibling_color": "{{ product.metafields.theme.sibling_color.value }}",
-            "color_picker_size": "regular",
-            "margin_bottom": 20
+            "sizing_guide_page": ""
           }
         },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_quantity_selector": true,
+            "show_quantity_selector": false,
             "outline_button": true,
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": false
           }
+        },
+        "complementary_cCC3WK": {
+          "type": "complementary",
+          "settings": {
+            "block_heading": "Pairs well with",
+            "product_list_limit": 3
+          }
+        },
+        "1c29dd76-669f-4b4a-9883-a577855921eb": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "How to Use",
+            "open": false,
+            "content": "<p>Apply evenly to face as the last part of your morning routine to help protect your skin. It is important to apply 15 minutes prior to UV exposure. Also, see Drug Facts panel(s) on the package. Can be used with Vitamin C Lotion 15% or 30% for added antioxidant benefits.</p>",
+            "page": "",
+            "custom_liquid": ""
+          }
+        },
+        "0041f1e3-030f-4c9d-ae87-ddb7c2fa4b2b": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "Ingredients",
+            "open": false,
+            "content": "<p><strong>Active:</strong> Titanium Dioxide 4.4% (Sunscreen), Zinc Oxide 14.4% (Sunscreen).</p><p><strong>Inactive:</strong> Water (Aqua), Caprylic/Capric Triglyceride, Thermus Thermophillus Ferment, Polyglyceryl-2 Dipolyhydroxystearate, C12-15 Alkyl Benzoate, Dicaprylyl Carbonate, Cyclopentasiloxane, Dimethicone, Polyglyceryl-3 Diisostearate, Hydrogenated Starch Hydrolysate, Glycerin, Butylene Glycol, Aloe Barbadensis Leaf Juice, Betula Alba (White Birch) Bark Extract, Camellia Sinensis (Green Tea) Leaf Extract, Plankton Extract, Beeswax (Cera Alba), Acrylates/Dimethicone Copolymer</p>",
+            "page": "",
+            "custom_liquid": ""
+          }
+        },
+        "e49f0a1b-c60d-4e4a-b3c1-100c37771e4a": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "Other Details",
+            "open": false,
+            "content": "<p>Free delivery is available on all orders over $40. Please see our shipping information page for all available delivery options.</p>",
+            "page": "",
+            "custom_liquid": ""
+          }
+        },
+        "95b7e00a-0453-4eb0-9cf0-1dae84d8b822": {
+          "type": "side_panel",
+          "settings": {
+            "side_panel_1_label": "Materials",
+            "side_panel_1_icon": "leather",
+            "side_panel_1_content": "",
+            "side_panel_1_page": "",
+            "side_panel_2_label": "Shipping & Returns",
+            "side_panel_2_icon": "box",
+            "side_panel_2_content": "",
+            "side_panel_2_page": "",
+            "side_panel_3_label": "Care Guide",
+            "side_panel_3_icon": "washing",
+            "side_panel_3_content": "",
+            "side_panel_3_page": ""
+          }
+        },
+        "4fd23485-293f-46a0-8a4c-34d0e25ea41b": {
+          "type": "share",
+          "disabled": true,
+          "settings": {}
         }
       },
       "block_order": [
-        "e431a79e-9c7b-4a53-a79a-0cb918617ecf",
         "title",
-        "546f2cee-3532-473a-836f-21f14fde7cfe",
         "0b3e272b-c86a-4dba-946c-c6912251371c",
+        "siblings_Czmpgn",
+        "546f2cee-3532-473a-836f-21f14fde7cfe",
         "variant_picker",
-        "siblings_tm4PP7",
-        "buy_buttons"
+        "buy_buttons",
+        "complementary_cCC3WK",
+        "1c29dd76-669f-4b4a-9883-a577855921eb",
+        "0041f1e3-030f-4c9d-ae87-ddb7c2fa4b2b",
+        "e49f0a1b-c60d-4e4a-b3c1-100c37771e4a",
+        "95b7e00a-0453-4eb0-9cf0-1dae84d8b822",
+        "4fd23485-293f-46a0-8a4c-34d0e25ea41b"
       ],
       "settings": {
         "full_width": false,
-        "enable_sticky_info": true,
+        "enable_sticky_info": false,
         "enable_sticky_add_to_cart": true,
-        "show_taxes_included": true,
-        "media_layout": "collage",
+        "show_taxes_included": false,
+        "media_layout": "thumbnails",
         "display_slider_pagination": true,
-        "media_aspect_ratio": "adapt",
-        "display_captions": true,
-        "hide_variants": false,
-        "lightbox": true,
+        "media_aspect_ratio": "square",
+        "display_captions": false,
+        "hide_variants": true,
+        "lightbox": false,
         "enable_video_looping": false
       }
     },
     "16623877721f33fb14": {
       "type": "spacer",
+      "disabled": true,
       "settings": {
         "spacer_mobile": 35,
         "spacer_desktop": 90,
@@ -119,6 +179,7 @@
     },
     "b0489ba4-fdb2-4043-8efe-5d9739ec5323": {
       "type": "background-video",
+      "disabled": true,
       "settings": {
         "desktop_height": "desktop-height-550",
         "mobile_height": "mobile-height-500",
@@ -135,6 +196,7 @@
     },
     "f2006113-5255-4733-ba5e-2a112734dc3e": {
       "type": "spacer",
+      "disabled": true,
       "settings": {
         "spacer_mobile": 40,
         "spacer_desktop": 80,
@@ -213,6 +275,7 @@
         "template--17027745677627__c6d7b417-11dd-4a95-8367-4f6f0eb615a8-16698862611096ccc0-3",
         "fa31a1e8-25be-4ea1-a217-5593378d6336"
       ],
+      "disabled": true,
       "settings": {
         "heading": "Product information",
         "heading_left": true,
@@ -231,6 +294,7 @@
     },
     "2b3aa16d-fce3-49ff-8751-8618f0a7421d": {
       "type": "spacer",
+      "disabled": true,
       "settings": {
         "spacer_mobile": 50,
         "spacer_desktop": 40,
@@ -286,6 +350,7 @@
         "6bdc1221-3d9f-4be8-b482-80341e02abcf",
         "94831cdf-9641-4e12-9506-e140c83f2870"
       ],
+      "disabled": true,
       "settings": {
         "columns_desktop": 3,
         "section_width": "grid",
@@ -334,6 +399,7 @@
         "template--17027745677627__1d9ac32d-5b10-41c7-89b8-56067807f786-16698862613e3a24a1-1",
         "template--17027745677627__1d9ac32d-5b10-41c7-89b8-56067807f786-16698862613e3a24a1-2"
       ],
+      "disabled": true,
       "settings": {
         "height": "height-auto",
         "full_width": false,
@@ -353,6 +419,7 @@
     },
     "796d9b19-7417-4ca3-b804-7c7c9811c44a": {
       "type": "spacer",
+      "disabled": true,
       "settings": {
         "spacer_mobile": 10,
         "spacer_desktop": 20,
@@ -396,6 +463,7 @@
         "15d956da-4a4b-4c3a-990b-e8ce5fa853e0",
         "2167d66c-c63d-41c3-aa7c-4cb5455519e1"
       ],
+      "disabled": true,
       "settings": {
         "mobile_height": "mobile-height-350",
         "desktop_height": "desktop-height-550",
@@ -415,6 +483,7 @@
     },
     "16625458859c68803a": {
       "type": "apps",
+      "disabled": true,
       "settings": {
         "section_width": "full-width-row",
         "disable_top_spacing": false,
@@ -423,6 +492,7 @@
     },
     "1662552569cce2536d": {
       "type": "spacer",
+      "disabled": true,
       "settings": {
         "spacer_mobile": 0,
         "spacer_desktop": 5,
@@ -432,11 +502,24 @@
     },
     "product-recommendations": {
       "type": "product-recommendations",
+      "disabled": true,
       "settings": {
-        "heading": "Product recommendations",
+        "heading": "Recommended For You",
         "heading_left": true,
-        "description": "<p>Product recommendations description</p>",
+        "description": "",
         "full_width": false,
+        "mobile_swipe": true,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "recently_viewed_products_pdPAhT": {
+      "type": "recently-viewed-products",
+      "settings": {
+        "heading": "Recently Viewed",
+        "heading_left": true,
+        "description": "",
+        "full_width": true,
         "mobile_swipe": true,
         "disable_top_spacing": false,
         "disable_bottom_spacing": false
@@ -457,6 +540,7 @@
     "129f7137-f081-4054-9ac3-3719aa9c94bb",
     "16625458859c68803a",
     "1662552569cce2536d",
-    "product-recommendations"
+    "product-recommendations",
+    "recently_viewed_products_pdPAhT"
   ]
 }

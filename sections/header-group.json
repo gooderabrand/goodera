@@ -14,32 +14,32 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
-        "text-1": {
+        "5b1ab378-833d-4a94-a02e-8325ec1551d0": {
           "type": "text",
           "settings": {
             "icon": "none",
-            "text": "Add campaign text here.",
+            "text": "FREE SHIPPING ON DOMESTIC ORDERS $75+",
             "link": ""
           }
         },
-        "text-2": {
+        "text_aVmGdJ": {
           "type": "text",
           "settings": {
             "icon": "none",
-            "text": "Add campaign text here.",
+            "text": "Sign Up for Email & Sms",
             "link": ""
           }
         }
       },
       "block_order": [
-        "text-1",
-        "text-2"
+        "5b1ab378-833d-4a94-a02e-8325ec1551d0",
+        "text_aVmGdJ"
       ],
       "disabled": true,
       "settings": {
         "announcement_bar": true,
         "announcement_bar_homepage_only": false,
-        "announcement_bar_layout": "marquee",
+        "announcement_bar_layout": "carousel",
         "direction": "left",
         "speed": "20s",
         "autoplay": true,
@@ -49,7 +49,7 @@
     "header": {
       "type": "header",
       "blocks": {
-        "megamenu_sidebar_UXCgVy": {
+        "megamenu_sidebar_wELHxG": {
           "type": "megamenu_sidebar",
           "settings": {
             "position": "1",
@@ -57,7 +57,7 @@
             "content_product_image": true
           }
         },
-        "megamenu_sidebar_6hYjCP": {
+        "megamenu_sidebar_eDnXiV": {
           "type": "megamenu_sidebar",
           "settings": {
             "position": "2",
@@ -67,8 +67,8 @@
         }
       },
       "block_order": [
-        "megamenu_sidebar_UXCgVy",
-        "megamenu_sidebar_6hYjCP"
+        "megamenu_sidebar_wELHxG",
+        "megamenu_sidebar_eDnXiV"
       ],
       "settings": {
         "sticky_header": true,
@@ -76,9 +76,9 @@
         "logo_height_range": 30,
         "logo_height_range_mobile": 30,
         "style": "style3",
-        "header_shadow": "header--shadow-small",
+        "header_shadow": "header--shadow-none",
         "menu": "main-menu",
-        "cart_icon": "bag",
+        "cart_icon": "frame_bag",
         "use_icon_account": true,
         "transparent_header": true,
         "logo_light": "shopify://shop_images/good_era_svg_logo_icon_desktop_white.svg",

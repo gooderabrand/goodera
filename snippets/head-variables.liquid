@@ -80,6 +80,18 @@
 	  {{ body_font_bold_italic | font_face: font_display: 'swap' }}
 	{%- endif -%}
 
+	{% comment %} Adding Typekit link for neue-haas-unica {% endcomment %}
+	<link rel="stylesheet" href="https://use.typekit.net/bin0qyn.css">
+
+	{% comment %} Adding font-face for EverydaySans-Medium {% endcomment %}
+	@font-face {
+		font-family: 'EverydaySans-Medium';
+		src: url('https://cdn.shopify.com/s/files/1/0730/8509/2156/files/EverydaySans-Medium.woff?v=1748611821') format('woff');
+		font-weight: 500; /* Assuming medium corresponds to 500 */
+		font-style: normal;
+		font-display: swap;
+	}
+
 	{% if body_font != heading_font %}
 		{{ heading_font | font_face: font_display: 'swap' }}
 		{%- assign heading_font_400 = heading_font | font_modify: 'weight', '400' -%}
@@ -96,17 +108,46 @@
 	.h1-xlarge,
 	.h1-large,
 	.customer-addresses .my-address .address-index {
-		font-style: {{ heading_font.style }};
-		font-weight: {{ heading_font.weight }};
-		font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+		/* Using EverydaySans-Medium for headings with theme heading font as backup */
+		font-family: 'EverydaySans-Medium', {{ heading_font.family }}, {{ heading_font.fallback_families }};
+		font-weight: 500; /* Set primary weight for EverydaySans-Medium */
+		font-style: normal; /* Set primary style for EverydaySans-Medium */
 	}
+
 	body,
 	.body-font,
 	.thb-product-detail .product-title {
-		font-style: {{ body_font.style }};
-		font-weight: {{ body_font.weight }};
-		font-family: {{ body_font.family }}, {{ body_font.fallback_families }};
+		/* Using neue-haas-unica for body with theme body font as backup */
+		font-family: "neue-haas-unica", {{ body_font.family }}, {{ body_font.fallback_families }};
+		font-weight: 500; /* Set primary weight for neue-haas-unica */
+		font-style: normal; /* Set primary style for neue-haas-unica */
+		letter-spacing: 0.48px; /* Added letter spacing */
+		font-size: 14px; /* Added font size */
 	}
+
+	.product__title h1,
+	h1.aktiv,
+	.thb-product-detail .product-title,
+	.product-title {
+		font-family: var(--font-heading-family);
+		font-weight: var(--font-heading-weight);
+		font-style: var(--font-heading-style);
+		line-height: var(--font-heading-line-height);
+		font-size: 1.5rem calc(var(--font-heading-scale) * 1.5rem); /* Updated font size */
+		letter-spacing: var(--font-heading-letter-spacing);
+		word-spacing: var(--font-heading-word-spacing);
+	}
+
+	/* Product title container styles for product detail page */
+	.product-title-container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 20px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid var(--color-border);
+	}
+
 	:root {
 		--mobile-swipe-width: calc(90vw - 30px);
 		--font-body-scale: {{ settings.body_font_scale | divided_by: 100.0 }};

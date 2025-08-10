@@ -145,21 +145,30 @@
           "type": "column",
           "settings": {
             "image_full_width": false,
-            "retina": true
+            "image_link": "",
+            "retina": true,
+            "link_label": "",
+            "link": ""
           }
         },
         "column_WMBLYz": {
           "type": "column",
           "settings": {
             "image_full_width": false,
-            "retina": true
+            "image_link": "",
+            "retina": true,
+            "link_label": "",
+            "link": ""
           }
         },
         "column_UAd4pf": {
           "type": "column",
           "settings": {
             "image_full_width": false,
-            "retina": true
+            "image_link": "",
+            "retina": true,
+            "link_label": "",
+            "link": ""
           }
         }
       },
@@ -169,6 +178,7 @@
         "column_UAd4pf"
       ],
       "settings": {
+        "heading": "",
         "heading_left": false,
         "description": "",
         "full_width": false,
@@ -261,24 +271,28 @@
         "text_yXgiih": {
           "type": "text",
           "settings": {
+            "link": "",
             "outline_text": false
           }
         },
         "text_bh4jqB": {
           "type": "text",
           "settings": {
+            "link": "",
             "outline_text": false
           }
         },
         "text_Tb6a3N": {
           "type": "text",
           "settings": {
+            "link": "",
             "outline_text": false
           }
         },
         "text_bhGHM8": {
           "type": "text",
           "settings": {
+            "link": "",
             "outline_text": false
           }
         }
@@ -312,6 +326,7 @@
         "desktop_height": "desktop-height-650",
         "mobile_height": "mobile-height-500",
         "full_width": true,
+        "text": "",
         "lightbox_button": true,
         "overlay_opacity": 0,
         "disable_top_spacing": true,

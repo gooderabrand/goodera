@@ -11,7 +11,8 @@
   "sections": {
     "main-addresses": {
       "type": "main-addresses",
-      "settings": {}
+      "settings": {
+      }
     }
   },
   "order": [

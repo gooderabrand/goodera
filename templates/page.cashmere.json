@@ -72,6 +72,8 @@
         "mobile_height": "mobile-height-500",
         "full_width": true,
         "subheading": "",
+        "heading": "",
+        "text": "",
         "lightbox_button": false,
         "overlay_opacity": 0,
         "disable_top_spacing": true,
@@ -92,35 +94,49 @@
       "blocks": {
         "image_AaLtgr": {
           "type": "image",
-          "settings": {}
+          "settings": {
+            "link": "",
+            "heading": "",
+            "text": ""
+          }
         },
         "image_LrEDdb": {
           "type": "image",
           "settings": {
+            "link": "",
+            "heading": "",
             "text": "<p>Despite being lightweight, cashmere is up to eight times warmer than sheep’s wool, making it ideal for cold-weather clothing.</p>"
           }
         },
         "image_p8Gxxj": {
           "type": "image",
           "settings": {
+            "link": "",
+            "heading": "",
             "text": "<p>Add description text here.</p>"
           }
         },
         "image_HqwgYz": {
           "type": "image",
           "settings": {
+            "link": "",
+            "heading": "",
             "text": "<p>Add description text here.</p>"
           }
         },
         "image_BkiWMt": {
           "type": "image",
           "settings": {
+            "link": "",
+            "heading": "",
             "text": "<p>Add description text here.</p>"
           }
         },
         "image_DnAyJU": {
           "type": "image",
           "settings": {
+            "link": "",
+            "heading": "",
             "text": "<p>Add description text here.</p>"
           }
         }
@@ -219,6 +235,7 @@
             "button_text": "Shop sweaters",
             "content_position": "middle-center",
             "text_alignment": "center",
+            "badge_text": "",
             "color_badge_text": "#ffffff",
             "color_badge_bg": "#e32626",
             "color_text": "#ffffff",
@@ -241,6 +258,7 @@
             "button_text": "Shop scarves",
             "content_position": "middle-center",
             "text_alignment": "center",
+            "badge_text": "",
             "color_badge_text": "#ffffff",
             "color_badge_bg": "#e32626",
             "color_text": "#ffffff",
@@ -263,6 +281,7 @@
             "button_text": "Shop coats",
             "content_position": "middle-center",
             "text_alignment": "center",
+            "badge_text": "",
             "color_badge_text": "#ffffff",
             "color_badge_bg": "#e32626",
             "color_text": "#ffffff",
@@ -285,6 +304,7 @@
             "button_text": "Shop cardigans",
             "content_position": "middle-center",
             "text_alignment": "center",
+            "badge_text": "",
             "color_badge_text": "#ffffff",
             "color_badge_bg": "#e32626",
             "color_text": "#ffffff",
@@ -396,6 +416,7 @@
           "type": "text",
           "settings": {
             "text": "Sunset Glow",
+            "link": "",
             "outline_text": false
           }
         },
@@ -403,6 +424,7 @@
           "type": "text",
           "settings": {
             "text": "Timeless Allure",
+            "link": "",
             "outline_text": true
           }
         },
@@ -410,6 +432,7 @@
           "type": "text",
           "settings": {
             "text": "Sunset glow",
+            "link": "",
             "outline_text": false
           }
         },
@@ -417,6 +440,7 @@
           "type": "text",
           "settings": {
             "text": "Timeless Allure",
+            "link": "",
             "outline_text": true
           }
         }
