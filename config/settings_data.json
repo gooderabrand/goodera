@@ -336,7 +336,7 @@
           "remove_button_style": "icon",
           "product_options": "dropdowns",
           "cta_button": "add_to_cart",
-          "cta_button_style": "solid_accent_1",
+          "cta_button_style": "outline_accent_1",
           "alignment": "center",
           "image_aspect_ratio": "163/203",
           "image_object_fit": "cover",
