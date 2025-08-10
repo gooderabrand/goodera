@@ -223,31 +223,19 @@
       "blocks": {
         "column_8rtaaq": {
           "type": "column",
-          "settings": {
-            "link_label": "",
-            "link": ""
-          }
+          "settings": {}
         },
         "column_94c9x4": {
           "type": "column",
-          "settings": {
-            "link_label": "",
-            "link": ""
-          }
+          "settings": {}
         },
         "column_qJzNMc": {
           "type": "column",
-          "settings": {
-            "link_label": "",
-            "link": ""
-          }
+          "settings": {}
         },
         "column_Bj34Ly": {
           "type": "column",
-          "settings": {
-            "link_label": "",
-            "link": ""
-          }
+          "settings": {}
         }
       },
       "block_order": [

@@ -15,6 +15,7 @@ if (!customElements.get('collection-tabs')) {
         if (!sectionHeader) return; // Ensure the existence of the section header
         const links = sectionHeader.querySelectorAll('.linked-to-tab');
         this.target = this.dataset.target;
+        this.slider = document.getElementById(this.target);
 
         buttons.forEach((button, i) => {
           button.addEventListener('click', (event) => {
@@ -26,7 +27,11 @@ if (!customElements.get('collection-tabs')) {
             event.preventDefault();
           });
         });
-
+        window.addEventListener('resize', () => {
+          if (!this.slider) return; // Ensure the existence of the slider
+          let flkty = Flickity.data(this.slider);
+          flkty.resize();
+        });
         if (Shopify.designMode) {
           this.addEventListener('shopify:block:select', (event) => {
             const index = buttons.indexOf(event.target);

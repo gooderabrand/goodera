@@ -54,7 +54,7 @@
           "settings": {
             "heading": "Details",
             "open": true,
-            "content": "<p>Plastic, bold and colourful jewellery has captured the hearts of It Girls everywhere, integrating their holiday accessories into their everyday looks. Yala’s red beaded necklace pays homage to the cultural jewellery of the Maasai Mara ladies from the BMB Workshop and fits into this latest trend.<\/p>",
+            "content": "<p>Plastic, bold and colourful jewellery has captured the hearts of It Girls everywhere, integrating their holiday accessories into their everyday looks. Yala’s red beaded necklace pays homage to the cultural jewellery of the Maasai Mara ladies from the BMB Workshop and fits into this latest trend.</p>",
             "page": ""
           }
         },
@@ -63,7 +63,7 @@
           "settings": {
             "heading": "Shipping",
             "open": false,
-            "content": "<p>These techniques can include hand engraving, hand forging, and hand casting, among others. By using these traditional techniques, artisans are able to create pieces that have a unique and authentic look and feel.<\/p>",
+            "content": "<p>These techniques can include hand engraving, hand forging, and hand casting, among others. By using these traditional techniques, artisans are able to create pieces that have a unique and authentic look and feel.</p>",
             "page": ""
           }
         },
@@ -72,7 +72,7 @@
           "settings": {
             "heading": "Warranty",
             "open": false,
-            "content": "<p>Certified carbon-free products and companies offer several benefits. For one, they help to reduce the overall carbon footprint of society, which is crucial for mitigating the impacts of climate change.<\/p>",
+            "content": "<p>Certified carbon-free products and companies offer several benefits. For one, they help to reduce the overall carbon footprint of society, which is crucial for mitigating the impacts of climate change.</p>",
             "page": ""
           }
         },
@@ -148,7 +148,7 @@
         "template--18432547127579__dde9ae02-7832-4b5d-82cb-dce4d766f427-1681377090c56acdec-2": {
           "type": "text",
           "settings": {
-            "text": "<p>Rings are often used to symbolize love and commitment, with engagement rings and wedding bands being the most well-known examples. Religious and Spiritual Significance: Many cultures use jewelry in religious and spiritual rituals.<\/p>",
+            "text": "<p>Rings are often used to symbolize love and commitment, with engagement rings and wedding bands being the most well-known examples. Religious and Spiritual Significance: Many cultures use jewelry in religious and spiritual rituals.</p>",
             "size": "text-size-large"
           }
         }
@@ -205,9 +205,7 @@
             "image_full_width": false,
             "retina": true,
             "title": "Recycled Gold",
-            "text": "<p>Recycled gold refers to gold that has been previously used and is now being reclaimed and reused in various industries. This process of recycling gold has become increasingly popular in recent years due to the rising demand for ethical products.<\/p>",
-            "link_label": "",
-            "link": ""
+            "text": "<p>Recycled gold refers to gold that has been previously used and is now being reclaimed and reused in various industries. This process of recycling gold has become increasingly popular in recent years due to the rising demand for ethical products.</p>"
           }
         },
         "template--18432547127579__5927d23d-da00-4a9a-93f8-5644e7d23230-1681380108b151c721-1": {
@@ -216,9 +214,7 @@
             "image_full_width": false,
             "retina": true,
             "title": "Handmade In NYC",
-            "text": "<p>These techniques can include hand engraving, hand forging, and hand casting, among others. By using these traditional techniques, artisans are able to create pieces that have a unique and authentic look and feel.<\/p>",
-            "link_label": "",
-            "link": ""
+            "text": "<p>These techniques can include hand engraving, hand forging, and hand casting, among others. By using these traditional techniques, artisans are able to create pieces that have a unique and authentic look and feel.</p>"
           }
         },
         "template--18432547127579__5927d23d-da00-4a9a-93f8-5644e7d23230-1681380108b151c721-2": {
@@ -227,9 +223,7 @@
             "image_full_width": false,
             "retina": true,
             "title": "18K Solid Gold",
-            "text": "<p>18k gold is also a popular choice for jewelry making because of its color. Yellow gold is the most traditional and classic choice, but white and rose gold have become increasingly popular in recent years.<\/p>",
-            "link_label": "",
-            "link": ""
+            "text": "<p>18k gold is also a popular choice for jewelry making because of its color. Yellow gold is the most traditional and classic choice, but white and rose gold have become increasingly popular in recent years.</p>"
           }
         },
         "template--18432547127579__5927d23d-da00-4a9a-93f8-5644e7d23230-1681380108b151c721-3": {
@@ -238,9 +232,7 @@
             "image_full_width": false,
             "retina": true,
             "title": "Certifed Carbon Free",
-            "text": "<p>Certified carbon-free products and companies offer several benefits. For one, they help to reduce the overall carbon footprint of society, which is crucial for mitigating the impacts of climate change.<\/p>",
-            "link_label": "",
-            "link": ""
+            "text": "<p>Certified carbon-free products and companies offer several benefits. For one, they help to reduce the overall carbon footprint of society, which is crucial for mitigating the impacts of climate change.</p>"
           }
         }
       },
@@ -251,7 +243,6 @@
         "template--18432547127579__5927d23d-da00-4a9a-93f8-5644e7d23230-1681380108b151c721-3"
       ],
       "settings": {
-        "heading": "",
         "heading_left": false,
         "description": "",
         "full_width": true,
@@ -279,7 +270,7 @@
         "template--18432547127579__bcb48e2d-c55f-4787-abf4-17b850e5bb8a-16813710817e2ce3bd-2": {
           "type": "text",
           "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
             "description_size": "medium"
           }
         }
@@ -331,8 +322,7 @@
         "32e10985-5358-4031-8606-f99271cd4f8d": {
           "type": "text-button",
           "settings": {
-            "link_label": "LEARN MORE",
-            "link": ""
+            "link_label": "LEARN MORE"
           }
         }
       },
@@ -373,9 +363,7 @@
             "title": "Feel The Glamour",
             "text": "Dipped in 14K gold and featuring three star-studded, this bracelet is an everyday piece that still stands out.",
             "link_label": "LEARN MORE",
-            "link": "",
-            "use_text_button": true,
-            "block_link": ""
+            "use_text_button": true
           }
         },
         "template--18432547127579__b0d87fdd-e30c-4c3f-b29f-c71a7bf242f5-1681373018c042b41e-1": {
@@ -386,9 +374,7 @@
             "title": "Unmatched Selection",
             "text": "They can be simple studs or elaborate chandelier earrings, and can be made from a range of materials.",
             "link_label": "LEARN MORE",
-            "link": "",
-            "use_text_button": true,
-            "block_link": ""
+            "use_text_button": true
           }
         }
       },
@@ -429,7 +415,7 @@
       "settings": {
         "heading": "YOU MAY ALSO LIKE",
         "heading_left": true,
-        "description": "<p>Combine your style with these products<\/p>",
+        "description": "<p>Combine your style with these products</p>",
         "full_width": true,
         "mobile_swipe": true,
         "disable_top_spacing": false,

@@ -125,7 +125,7 @@ if (!customElements.get('product-card')) {
     constructor() {
       super();
       this.swatches = this.querySelector('.product-card-swatches');
-      this.image = this.querySelector('.product-featured-image-link .product-primary-image');
+      this.image = this.querySelector('.product-card--featured-image-link .product-primary-image');
       this.additional_images = this.querySelectorAll('.product-secondary-image');
       this.additional_images_nav = this.querySelectorAll('.product-secondary-images-nav li');
       this.quick_add = this.querySelector('.product-card--add-to-cart-button-simple');
@@ -149,7 +149,7 @@ if (!customElements.get('product-card')) {
       let image_length = this.additional_images.length;
       let images = this.additional_images;
       let nav = this.additional_images_nav;
-      let image_container = this.querySelector('.product-featured-image-link');
+      let image_container = this.querySelector('.product-card--featured-image-link');
       const mousemove = function (e) {
         let l = e.offsetX;
         let w = this.getBoundingClientRect().width;
@@ -250,7 +250,7 @@ if (!customElements.get('product-card')) {
     }
     enableSizeOptions() {
       let size_list = this.size_options.querySelectorAll('.product-card-sizes--size'),
-        featured_image = this.querySelector('.product-featured-image'),
+        featured_image = this.querySelector('.product-card--featured-image'),
         has_hover = featured_image.classList.contains('thb-hover'),
         size_parent = this.size_options.parentElement;
 
@@ -650,9 +650,7 @@ if (!customElements.get('cart-drawer')) {
     }
 
     connectedCallback() {
-
       let button = document.getElementById('cart-drawer-toggle');
-
 
       // Add functionality to buttons
       button.addEventListener('click', (e) => {
@@ -714,7 +712,7 @@ if (!customElements.get('cart-drawer')) {
         .querySelector(selector).innerHTML;
     }
     notesToggle() {
-      let notes_toggle = document.getElementById('order-note-toggle');
+      const notes_toggle = document.getElementById('order-note-toggle');
 
       if (!notes_toggle) {
         return;

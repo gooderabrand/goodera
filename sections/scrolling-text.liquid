@@ -28,42 +28,42 @@
 <div class="row{% if full_width %} full-width-row-full{% endif %}">
 	<div class="small-12 columns">
 		<div class="scrolling-text scrolling-text-uppercase--{{ text_uppercase }} section-spacing{% if disable_top_spacing %} section-spacing--disable-top{% endif %}{% if disable_bottom_spacing %} section-spacing--disable-bottom{% endif %} {{ height }} {{ font_family }}-font" id="scrolling-text-{{ section.id }}" style="--color-bg:{{ color_bg }};--color-text:{{ color_text }};--overlay-color-rgb: {{ overlay_color.rgb | replace: ' ' , ',' }}; --overlay-opacity: {{ overlay_opacity | divided_by: 100.0 }};">
-		<div class="scrolling-text--inner direction-{{ direction }}" style="--marquee-speed: {{ speed }}">
-			{% capture scrolling_text %}
-			<div>
-				{%- for i in (1..size) -%}
-					{% assign index = i | minus: 1 %}
-					<div class="scrolling-text--item outline-text--{{ section.blocks[index].settings.outline_text }}" {{ section.blocks[index].shopify_attributes }}>
-						{%- if section.blocks[index].settings.link -%}
-							<a href="{{ section.blocks[index].settings.link }}" target="_blank" class="scrolling-text--link">
-						{%- endif -%}
-						{%- if section.blocks[index].settings.image -%}
-						{%- liquid
-							assign class = 'scrolling-text--image scrolling-text--image--' | append: image_size
-							render 'responsive-image', image: section.blocks[index].settings.image, sizes: image_width, class: class -%}
-						{%- endif -%}
-						<span>{{ section.blocks[index].settings.text }}</span>
-						{%- if section.blocks[index].settings.link -%}
-							</a>
-						{%- endif -%}
-					</div>
-				{%- endfor -%}
+			<div class="scrolling-text--inner direction-{{ direction }}" style="--marquee-speed: {{ speed }}">
+				{% capture scrolling_text %}
+				<div>
+					{%- for i in (1..size) -%}
+						{% assign index = i | minus: 1 %}
+						<div class="scrolling-text--item outline-text--{{ section.blocks[index].settings.outline_text }}" {{ section.blocks[index].shopify_attributes }}>
+							{%- if section.blocks[index].settings.link -%}
+								<a href="{{ section.blocks[index].settings.link }}" target="_blank" class="scrolling-text--link">
+							{%- endif -%}
+							{%- if section.blocks[index].settings.image -%}
+							{%- liquid
+								assign class = 'scrolling-text--image scrolling-text--image--' | append: image_size
+								render 'responsive-image', image: section.blocks[index].settings.image, sizes: image_width, class: class -%}
+							{%- endif -%}
+							<span>{{ section.blocks[index].settings.text }}</span>
+							{%- if section.blocks[index].settings.link -%}
+								</a>
+							{%- endif -%}
+						</div>
+					{%- endfor -%}
+				</div>
+				{% endcapture %}
+				{{- scrolling_text }}{{ scrolling_text }}{{ scrolling_text -}}
 			</div>
-			{% endcapture %}
-			{{- scrolling_text }}{{ scrolling_text }}{{ scrolling_text -}}
-		</div>
-		{% style %}
-			{%- if bg_image -%}
-			#scrolling-text-{{ section.id }} {
-				background-image: url({{ bg_image | image_url: width: bg_image.src.width }});
-			}
-			{%- endif -%}
-			#scrolling-text-{{ section.id }}  .scrolling-text--inner {
-				font-size: {{ text_size | append: 'px' }};
-			}
+			{% style %}
+				{%- if bg_image -%}
+				#scrolling-text-{{ section.id }} {
+					background-image: url({{ bg_image | image_url: width: bg_image.src.width }});
+				}
+				{%- endif -%}
+				#scrolling-text-{{ section.id }}  .scrolling-text--inner {
+					font-size: {{ text_size | append: 'px' }};
+				}
 
-		{% endstyle %}
-	</div>
+			{% endstyle %}
+		</div>
 	</div>
 </div>
 {% schema %}

@@ -55,9 +55,8 @@
     "166366972953e881f5": {
       "type": "collection-list",
       "settings": {
-        "heading": "",
         "heading_left": false,
-        "description": "<p><\/p>",
+        "description": "<p></p>",
         "full_width": true,
         "collection_list": [
           "clothing",
@@ -102,7 +101,7 @@
         "16636723131a14a571-2": {
           "type": "text",
           "settings": {
-            "text": "<p>Doing collections, doing fashion is like a non-stop dialogue. War taught me that not everything is glamorous. Luxury will be always around, no matter what happens in the world. I don't care about money. I really don't care. I just want to do what I do. I love to design things that people can actually buy. I'm staggered by what a boot costs today.<\/p>",
+            "text": "<p>Doing collections, doing fashion is like a non-stop dialogue. War taught me that not everything is glamorous. Luxury will be always around, no matter what happens in the world. I don't care about money. I really don't care. I just want to do what I do. I love to design things that people can actually buy. I'm staggered by what a boot costs today.</p>",
             "size": "text-size-small"
           }
         }

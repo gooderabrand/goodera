@@ -16,7 +16,6 @@
           "type": "slide",
           "settings": {
             "image": "",
-            "slide_link": "",
             "video_background": false,
             "subheading": "",
             "heading": "Exclusive Designs",
@@ -30,10 +29,7 @@
             "overlay_opacity": 10,
             "overlay_gradient": "",
             "button_1_text": "Shop Now",
-            "button_1_link": "",
             "button_1_outline": true,
-            "button_2_text": "",
-            "button_2_link": "",
             "button_2_outline": false
           }
         },
@@ -41,7 +37,6 @@
           "type": "slide",
           "settings": {
             "image": "",
-            "slide_link": "",
             "video_background": false,
             "subheading": "EXCEPTIONAL VALUE",
             "heading": "A locket is more than just a precious keepsake; it’s the key to the memories that make your heart go pitter-patter",
@@ -55,10 +50,7 @@
             "overlay_opacity": 0,
             "overlay_gradient": "",
             "button_1_text": "SHOP BRACELETS",
-            "button_1_link": "",
             "button_1_outline": true,
-            "button_2_text": "",
-            "button_2_link": "",
             "button_2_outline": false
           }
         }
@@ -81,7 +73,6 @@
           "settings": {
             "image": "",
             "text": "Earrings",
-            "link": "",
             "outline_text": false
           }
         },
@@ -90,7 +81,6 @@
           "settings": {
             "image": "",
             "text": "Rings",
-            "link": "",
             "outline_text": false
           }
         },
@@ -99,7 +89,6 @@
           "settings": {
             "image": "",
             "text": "Necklaces",
-            "link": "",
             "outline_text": false
           }
         },
@@ -108,7 +97,6 @@
           "settings": {
             "image": "",
             "text": "Bracelets",
-            "link": "",
             "outline_text": false
           }
         },
@@ -182,7 +170,7 @@
         "template--18432547684635__97a561df-77ff-415e-98d2-a5e00211d784-1681195070f0596331-2": {
           "type": "text",
           "settings": {
-            "text": "<p>The brand is named after the town her grandma lived. Now based in Bristol, UK, Audrey splits her time between the two countries working directly with over 150 artisans in Kenya, ensuring they receive fair wages, work in safe and healthy environments, and real recognition for their talent all while using eco-friendly materials.<\/p>",
+            "text": "<p>The brand is named after the town her grandma lived. Now based in Bristol, UK, Audrey splits her time between the two countries working directly with over 150 artisans in Kenya, ensuring they receive fair wages, work in safe and healthy environments, and real recognition for their talent all while using eco-friendly materials.</p>",
             "size": "text-size-regular"
           }
         }
@@ -216,7 +204,6 @@
     "fabb047a-7356-4434-a057-9d94f0319e8f": {
       "type": "featured-collection",
       "settings": {
-        "heading": "",
         "heading_left": false,
         "description": "",
         "full_width": true,
@@ -249,11 +236,8 @@
             "image": "",
             "subheading": "THE BEST JEWELRY IN TOWN",
             "title": "Create timeless pieces with our fine selection of gold and silver jewelry",
-            "text": "",
             "link_label": "Shop Deals",
-            "link": "",
-            "use_text_button": false,
-            "block_link": ""
+            "use_text_button": false
           }
         },
         "template--18432547684635__11475166-7359-400d-a2c6-4185daa8d4ae-1681024933b71c923e-1": {
@@ -262,11 +246,8 @@
             "image": "",
             "subheading": "MADE WITH LOVE",
             "title": "There’s nothing like a beautiful piece of jewelry to give you that extra lift",
-            "text": "",
             "link_label": "Our Story",
-            "link": "",
-            "use_text_button": false,
-            "block_link": ""
+            "use_text_button": false
           }
         }
       },
@@ -302,7 +283,6 @@
         "content": "",
         "content_size": "medium",
         "button_text": "Shop Now",
-        "button_link": "",
         "timer_year": 2023,
         "timer_month": "06",
         "timer_day": "01",
@@ -348,7 +328,7 @@
       "settings": {
         "heading": "Best Sellers",
         "heading_left": false,
-        "description": "<p> Each collection is exclusively made in small batches to create as little  as possible.<\/p>",
+        "description": "<p> Each collection is exclusively made in small batches to create as little  as possible.</p>",
         "full_width": true,
         "product_limit": 6,
         "columns_desktop": 4,
@@ -389,8 +369,7 @@
         "4055131c-8dff-4fe0-8b20-1a9aa0387b7b": {
           "type": "button",
           "settings": {
-            "button_text": "LEARN MORE",
-            "button_link": ""
+            "button_text": "LEARN MORE"
           }
         }
       },
@@ -404,7 +383,7 @@
       "settings": {
         "image": "",
         "use_video": false,
-        "video": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+        "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "video_autoplay": true,
         "video_controls": true,
         "height": "small",
@@ -428,9 +407,8 @@
             "image": "",
             "subheading": "QUALITY",
             "heading": "Bring sparkle to everyday life",
-            "text": "<p>Jewelry has been an important part of human culture for thousands of years, used for both adornment and communication. From ancient Egypt to modern times, jewelry has been a symbol of wealth, power, and status, as well as a way to express personal style and creativity.<\/p>",
-            "link_label": "LEARN MORE",
-            "link": ""
+            "text": "<p>Jewelry has been an important part of human culture for thousands of years, used for both adornment and communication. From ancient Egypt to modern times, jewelry has been a symbol of wealth, power, and status, as well as a way to express personal style and creativity.</p>",
+            "link_label": "LEARN MORE"
           }
         },
         "template--18432547684635__69ea4fe8-c3b9-4b3d-b9b0-1d1dbb7ef1e3-1681288581eefc704f-1": {
@@ -439,9 +417,8 @@
             "image": "",
             "subheading": "APPROACH",
             "heading": "Accessories with soul and style",
-            "text": "<p>As technology advanced, jewelry became more intricate and was often made from precious metals such as gold and silver, as well as precious gems such as diamonds, rubies, and emeralds.<\/p>",
-            "link_label": "LEARN MORE",
-            "link": ""
+            "text": "<p>As technology advanced, jewelry became more intricate and was often made from precious metals such as gold and silver, as well as precious gems such as diamonds, rubies, and emeralds.</p>",
+            "link_label": "LEARN MORE"
           }
         },
         "template--18432547684635__69ea4fe8-c3b9-4b3d-b9b0-1d1dbb7ef1e3-1681288581eefc704f-2": {
@@ -450,9 +427,8 @@
             "image": "",
             "subheading": "VISION",
             "heading": "More than just a piece of jewelry",
-            "text": "<p>Jewelry has a rich history and a variety of meanings and significance. From ancient times to modern-day, jewelry has been used for adornment, communication, and self-expression.<\/p>",
-            "link_label": "LEARN MORE",
-            "link": ""
+            "text": "<p>Jewelry has a rich history and a variety of meanings and significance. From ancient times to modern-day, jewelry has been used for adornment, communication, and self-expression.</p>",
+            "link_label": "LEARN MORE"
           }
         }
       },
@@ -462,7 +438,6 @@
         "template--18432547684635__69ea4fe8-c3b9-4b3d-b9b0-1d1dbb7ef1e3-1681288581eefc704f-2"
       ],
       "settings": {
-        "heading": "",
         "heading_left": false,
         "description": "",
         "full_width": true,
@@ -490,7 +465,7 @@
       "settings": {
         "heading": "Latest News",
         "heading_left": false,
-        "description": "<p>Add a short description for your brand news<\/p>",
+        "description": "<p>Add a short description for your brand news</p>",
         "full_width": true,
         "blog": "news",
         "post_limit": 4,

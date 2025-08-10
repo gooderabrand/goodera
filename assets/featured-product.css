@@ -42,7 +42,7 @@
     align-items: center;
     justify-content: center;
     height: 48px;
-    font-size: 0.875rem;
+    font-size: calc(var(--button-font-scale) * 0.875rem);
     font-weight: var(--font-body-bold-weight, 600);
     letter-spacing: 0.02em;
     color: var(--solid-button-label, #fff);
@@ -74,7 +74,7 @@
     align-items: center;
     justify-content: center;
     min-height: 48px !important;
-    font-size: 0.875rem !important;
+    font-size: calc(var(--button-font-scale) * 0.875rem) !important;
     font-weight: var(--font-body-bold-weight, 600);
     letter-spacing: 0.02em;
     color: var(--solid-button-label, #fff);
@@ -410,15 +410,11 @@
     margin-top: 40px; } }
 
 .thb-product-detail .product-title-container {
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px; }
+  margin-bottom: 20px; }
 
 .thb-product-detail .product-title {
-  font-size: calc(var(--font-heading-scale) * 1.2rem);
-  line-height: calc(var(--font-heading-line-height-scale) * 1.5rem);
+  font-size: calc(var(--font-heading-scale) * 1.75rem);
+  line-height: calc(var(--font-heading-line-height-scale) * 2.125rem);
   font-weight: var(--font-body-medium-weight, 500);
   margin-bottom: 3px;
   color: var(--color-body); }
@@ -426,10 +422,6 @@
     text-transform: uppercase; }
   .thb-product-detail .product-title a {
     color: var(--color-body); }
-
-.thb-product-detail .product-title-container .jdgm-preview-badge {
-  font-size: 0.8rem; /* Adjust this value as needed */
-}
 
 @media only screen and (min-width: 1068px) {
   .thb-product-detail .product-information--inner.production-information--sticky {
@@ -455,7 +447,7 @@
   border-bottom: 1px solid var(--color-border); }
 
 .thb-product-detail .product-price-container .price {
-  font-size: 1rem;
+  font-size: 1.25rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -480,7 +472,7 @@
 
 .thb-product-detail .star-rating-container {
   display: block;
-  font-size: 0.7rem;
+  font-size: 0.8125rem;
   margin-top: 0.3125rem;
   line-height: 0; }
   .thb-product-detail .star-rating-container .star-rating {

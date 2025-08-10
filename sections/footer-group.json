@@ -14,35 +14,35 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "00a364e5-af4e-4073-871b-4d533bd4da06": {
+        "menu-1": {
           "type": "menu",
           "settings": {
-            "column_size": "small",
-            "title": "Information",
+            "column_size": "medium",
+            "title": "COMPANY",
             "menu": "account"
           }
         },
-        "a09a8a35-bedc-4119-aa04-3ce886faba9d": {
+        "menu-3": {
           "type": "menu",
           "settings": {
-            "column_size": "small",
-            "title": "Customer Care",
+            "column_size": "medium",
+            "title": "SUPPORT",
             "menu": "information"
           }
         },
-        "56d4ccfa-a515-4c26-9e64-c26ec5eea8d2": {
+        "signup": {
           "type": "signup",
           "settings": {
-            "column_size": "medium",
-            "title": "JOIN THE CLUB",
-            "text": ""
+            "column_size": "large",
+            "title": "NEWSLETTER",
+            "text": "<p>Sign up for our newsletter and receive 10% off your first order!</p>"
           }
         }
       },
       "block_order": [
-        "00a364e5-af4e-4073-871b-4d533bd4da06",
-        "a09a8a35-bedc-4119-aa04-3ce886faba9d",
-        "56d4ccfa-a515-4c26-9e64-c26ec5eea8d2"
+        "menu-1",
+        "menu-3",
+        "signup"
       ],
       "settings": {
         "full_width": true,
@@ -50,7 +50,7 @@
         "show_language_switcher": false,
         "show_currency_switcher": false,
         "show_payment_icons": false,
-        "enable_follow_on_shop": false
+        "enable_follow_on_shop": true
       }
     }
   },

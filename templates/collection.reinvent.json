@@ -16,7 +16,6 @@
           "type": "text",
           "settings": {
             "text": "{{ collection.title }}",
-            "link": "",
             "outline_text": false
           }
         },
@@ -24,7 +23,6 @@
           "type": "text",
           "settings": {
             "text": "{{ collection.title }}",
-            "link": "",
             "outline_text": false
           }
         },
@@ -32,7 +30,6 @@
           "type": "text",
           "settings": {
             "text": "{{ collection.title }}",
-            "link": "",
             "outline_text": false
           }
         }

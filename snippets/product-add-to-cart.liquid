@@ -72,9 +72,7 @@
 						-%}
 						{{- button_content -}}
 					</span>
-					<span class="loading-overlay">
-						{% render 'svg-icons' with 'thb-loading' %}
-					</span>
+					<span class="loading-overlay">{%- render 'svg-icons' with 'thb-loading' -%}</span>
 				</button>
 				{%- if show_dynamic_checkout -%}
 		      {{ form | payment_button }}

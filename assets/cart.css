@@ -62,10 +62,10 @@
   display: flex; }
 
 .cart-items tfoot .accordion {
-  margin-bottom: 15px;
+  margin-bottom: 0;
   border-top: 0; }
   .cart-items tfoot .accordion + .accordion {
-    margin-top: -15px; }
+    margin-top: 0; }
   .cart-items tfoot .accordion summary {
     font-weight: 400;
     font-size: 0.875rem; }
@@ -96,24 +96,17 @@
   .cart-items tfoot .thb-cart-form--cart-collaterals .cart-notes {
     width: 100%;
     font-size: 0.875rem; }
-    .cart-items tfoot .thb-cart-form--cart-collaterals .cart-notes + .proceed-to-checkout {
-      margin-top: 15px; }
     .cart-items tfoot .thb-cart-form--cart-collaterals .cart-notes textarea {
       min-height: 120px;
       margin-bottom: 0; }
-  .cart-items tfoot .thb-cart-form--cart-collaterals table.no-borders {
-    border-top: 1px solid var(--color-border);
-    margin-bottom: 0; }
-    .cart-items tfoot .thb-cart-form--cart-collaterals table.no-borders th {
-      font-weight: 400; }
-    .cart-items tfoot .thb-cart-form--cart-collaterals table.no-borders tbody td {
-      border: 0; }
+  .cart-items tfoot .thb-cart-form--cart-collaterals .proceed-to-checkout {
+    margin-top: 15px; }
   .cart-items tfoot .thb-cart-form--cart-collaterals .additional-checkout-buttons {
     margin-top: 10px; }
 
 .cart-items .cart-drawer--terms {
   display: block;
-  margin-bottom: 15px;
+  margin: 15px 0;
   text-align: left; }
   .cart-items .cart-drawer--terms a {
     color: var(--color-accent);
