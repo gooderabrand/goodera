@@ -23,6 +23,8 @@
     "swatch_style": "always",
     "show_size_options": true,
     "size_options_limit": 5,
+    "color_swatches_variant_option": "Color",
+    "color_swatches": "Light Grey: #E4E4E4",
     "sibling_style": "swatch",
     "sections": {
       "announcement-bar": {
