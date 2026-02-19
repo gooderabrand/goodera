@@ -11,14 +11,13 @@
 	assign products_per_page = section.settings.products_per_page
 	assign columns_desktop = section.settings.columns_desktop
 	assign facets_desktop = section.settings.facets_desktop
-	assign box_filter_list = section.settings.box_filter_list
 
 	assign show_date = section.settings.show_date
 	assign show_excerpt = section.settings.show_excerpt
 	assign image_ratio = section.settings.image_ratio
 -%}
 {%- if search.performed -%}
-	{%- render 'facets-mobile', results: search, enable_filtering: enable_filtering, enable_sorting: enable_sorting, filter_color_swatches: filter_color_swatches, box_filter_list: box_filter_list -%}
+	{%- render 'facets-mobile', results: search, enable_filtering: enable_filtering, enable_sorting: enable_sorting, filter_color_swatches: filter_color_swatches  -%}
 	<div class="row {% if full_width %}full-width-row{% endif %}">
 		<div class="small-12 columns">
 			<div class="collection-container section-spacing-bottom">
@@ -36,7 +35,7 @@
 								<div id="ProductGridContainer">
 									<div class="sidebar-container facets--{{ facets_desktop }} results--{{ collection.products.size }}">
 										{%- if facets_desktop == 'sidebar' -%}
-											{%- render 'facets-desktop', results: search, enable_filtering: enable_filtering, enable_sorting: enable_sorting, filter_color_swatches: filter_color_swatches, box_filter_list: box_filter_list  -%}
+											{%- render 'facets-desktop', results: search, enable_filtering: enable_filtering, enable_sorting: enable_sorting, filter_color_swatches: filter_color_swatches  -%}
 										{%- endif -%}
 										<div>
 											{%- render 'facets-bar', results: search, enable_filtering: enable_filtering, enable_sorting: enable_sorting, filter_color_swatches: filter_color_swatches -%}
@@ -186,18 +185,6 @@
 	      ],
 	      "default": "medium",
 	      "label": "Sidebar size",
-			},
-	    {
-	      "type": "header",
-	      "content": "Filter boxes",
-				"info": "Show some filter options as boxes instead of checkboxes. Recommended only for very short filter labels."
-	    },
-			{
-				"type": "textarea",
-				"id": "box_filter_list",
-        "placeholder": "Size: 4",
-				"label": "Product options to box",
-				"info": "Follow the format: <Filter name>: <Columns>. Example: Size: 2. Each filter name should be in a new line. Enter the name of the option as it appears in the admin area."
 			},
 			{
 	      "type": "header",

@@ -1,0 +1,110 @@
+{%- liquid
+  assign show_siblings = false
+  if sibs_collection.size > 0
+    assign show_siblings = true
+  endif
+
+  assign color_picker_size = 'regular'
+  
+  assign custom_colors = settings.color_swatches | newline_to_br | split: '<br />'
+  assign key_array = ''
+  assign val_array = ''
+
+  for color in custom_colors
+    assign key = color | split: ':' | first | rstrip
+    assign value = color | split: ':' | last | lstrip
+    assign key_array = key_array | append: ',' | append: key
+    assign val_array = val_array | append: ',' | append: value
+  endfor
+
+  assign key_array = key_array | remove_first: ',' | strip_newlines | downcase | split: ','
+  assign val_array = val_array | remove_first: ',' | split: ','
+
+  assign variant_image_size = '40'
+  case color_picker_size
+    when 'large'
+      assign variant_image_size = '72'
+    when 'xlarge'
+      assign variant_image_size = '104'
+  endcase
+-%}
+
+<fieldset class="product-form__input product-form__input--siblings product-form__input--siblings--{{ color_picker_size }}" style="--siblings-margin:20px">
+  <div class="form__label">{{ option.name }}: <span class="form__label__value">{{ option.selected_value }}</span></div>
+
+  {%- if show_siblings -%}
+    {%- for sib_product in sibs_collection limit: 50 -%}
+      {%- liquid
+        assign color_value = sib_product.metafields.theme.sibling_color.value | default: sib_product.metafields.theme.sibling_colour.value | default: sib_product.metafields.theme.siblings_color.value | default: sib_product.metafields.theme.siblings_colour.value | default: sib_product.metafields.theme.siblings_colors.value | default: sib_product.metafields.theme.siblings_colours.value
+        assign color_value = color_value | downcase
+
+        for custom_color in key_array
+          if custom_color == color_value
+            assign color_value = val_array[forloop.index0]
+          endif
+        endfor
+
+        assign bg_value = empty
+        if color_value contains '.'
+          assign bg_value = color_value | file_url
+          assign color_value = 'var(--bg-body)'
+        endif
+
+        if settings.sibling_style == 'image'
+          assign bg_value = sib_product.featured_media.preview_image | image_url: width: variant_image_size
+        endif
+      -%}
+      <label class="{%- if sib_product.handle == product.handle -%}active{%- endif %}{%- if sib_product.available == false %} sold-out{%- endif %}" style="--option-color: {{ color_value | downcase | escape }}; {%- if bg_value != empty -%} --option-color-image: url('{{ bg_value | escape }}');{%- endif -%}">
+        <a href="{{ sib_product.url }}" title="{{ sib_product.title | escape }}"></a>
+      </label>
+    {%- endfor -%}
+  {%- else -%}
+    {%- comment -%} Fallback to regular color options in circle format when no siblings {%- endcomment -%}
+    {%- for value in option.values -%}
+      {%- liquid
+        assign color_value = value | downcase | escape
+
+        for custom_color in key_array
+          if custom_color == color_value
+            assign color_value = val_array[forloop.index0]
+          endif
+        endfor
+
+        assign bg_value = empty
+        if color_value contains '.'
+          assign bg_value = color_value | file_url
+          assign color_value = 'var(--bg-body)'
+        endif
+
+        if color_picker_use_variants
+          assign variant_image = blank
+
+          for variant in product.variants
+            if variant.title contains value
+              if variant.image
+                assign bg_value = variant.image | image_url: width: variant_image_size
+                break
+              endif
+            endif
+          endfor
+        endif
+
+        if value.swatch.image
+          assign bg_value = value.swatch.image | image_url: width: variant_image_size
+          assign swatch_focal_point = value.swatch.image.presentation.focal_point
+        elsif value.swatch.color
+          assign color_value = 'rgb(' | append: value.swatch.color.rgb | append: ')'
+        endif
+      -%}
+      <label class="{%- if option.selected_value == value -%}active{%- endif %}" style="--option-color: {{ color_value | downcase | escape }}; {%- if bg_value -%}--option-color-image: url('{{ bg_value | escape }}');{%- endif -%}">
+        <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}--sticky"
+                name="{{ option.name | append: '--sticky' }}"
+                value="{{ value | escape }}"
+                form="{{ product_form_id }}"
+                {% if option.selected_value == value %}checked{% endif %}
+        >
+        {{ value }}
+      </label>
+    {%- endfor -%}
+  {%- endif -%}
+</fieldset>

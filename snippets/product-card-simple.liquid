@@ -28,8 +28,10 @@
 	endif
 	assign product_content_alignment = settings.product_content_alignment
 
-	# Product card options
-	assign show_size_options = settings.show_size_options
+	# Product card options - use parameter if provided, otherwise use theme setting
+	unless show_size_options
+		assign show_size_options = settings.show_size_options
+	endunless
 
 	# Product card image options
 	assign product_image_fit = settings.product_image_fit
@@ -58,10 +60,10 @@
 			<span>{%- unless show_size_options -%}{{ 'products.product.quick_view' | t }}{%- else -%}{% render 'svg-icons' with 'thb-quick-view' %}{%- endunless -%}</span>
 		</quick-view>
 		{%- endif -%}
+  </figure>
 		{%- if show_size_options -%}
 			{%- render 'product-card-size-options', product_card_product: product_card_product -%}
 		{%- endif -%}
-  </figure>
 	{%- endif -%}
 	<div class="product-card-info">
   	<a href="{{ product_card_product.url | within: collection }}" title="{{ product_card_product.title | escape }}" class="product-card-title">{{ product_card_product.title }}</a>

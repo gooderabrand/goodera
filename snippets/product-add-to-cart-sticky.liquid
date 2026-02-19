@@ -7,7 +7,15 @@
 			{%- endif -%}
 		</div>
 		<div class="product-add-to-cart-sticky--info">
-			<div class="product-add-to-cart-sticky--title">{{ product.title }}</div>
+			{%- liquid
+				assign display_title = product.title
+				# Remove color from title if it follows the pattern "Product Name - Color"
+				assign title_parts = product.title | split: ' - '
+				if title_parts.size > 1
+					assign display_title = title_parts.first | strip
+				endif
+			-%}
+			<div class="product-add-to-cart-sticky--title">{{ display_title }}</div>
 			<div id="price-{{ section.id }}--sticky">
 				{% render 'product-price', product: product, use_variant: true, show_badges: false %}
 			</div>
@@ -15,8 +23,27 @@
 		<span class="plus"></span>
 	</button>
 	<div class="product-add-to-cart-sticky--content">
+		
+		{%- comment -%} Always show sibling swatches for color in sticky add to cart {%- endcomment -%}
+		<div class="variations variations--siblings">
+			{%- if sibling_block -%}
+				{%- render 'product-siblings', product: product, product_form_id: product_form_id, block: sibling_block -%}
+			{%- else -%}
+				{%- comment -%} Try to find siblings via metafields {%- endcomment -%}
+				{%- liquid
+					assign sibs_collection = product.metafields.theme.sibling_products.value | default: collections[product.metafields.theme.siblings.value].products
+					if sibs_collection.size > 0
+						assign temp_block = '{"type":"siblings","settings":{"color_picker_size":"regular","margin_bottom":20}}' | parse_json
+					endif
+				-%}
+				{%- if sibs_collection.size > 0 -%}
+					{%- render 'product-siblings', product: product, product_form_id: product_form_id, block: temp_block, metafields: true -%}
+				{%- endif -%}
+			{%- endif -%}
+		</div>
+		
 		{%- unless product.has_only_default_variant -%}
-		<variant-selects id="variant-selects-{{ section.id }}--sticky" class="no-js-hidden variant-selects--sticky" data-section="{{ section.id }}" data-url="{{ product.url }}" data-sticky="1" data-is-disabled="{{ is_disabled }}">
+		<variant-selects id="variant-selects-{{ section.id }}--sticky" class="no-js-hidden variant-selects--sticky" data-section="{{ section.id }}" data-url="{{ product.url }}" data-sticky="1" data-is-disabled="true">
 			<div class="variations">
 				{%- for option in product.options_with_values -%}
 					{%- liquid
@@ -34,7 +61,9 @@
 							endif
 						endif
 					-%}
-					{% render 'product-option', option_type: option_type, product: product, option: option, forloop: forloop, product_form_id: product_form_id, sticky: true %}
+					{%- unless option_name contains 'color' or option_name contains 'colour' or option_name contains 'couleur' or option_name contains 'farbe' -%}
+						{% render 'product-option', option_type: option_type, product: product, option: option, forloop: forloop, product_form_id: product_form_id, sticky: true, sibling_block: sibling_block, sibs_collection: sibs_collection %}
+					{%- endunless -%}
 				{%- endfor -%}
 			</div>
 			<script type="application/json">

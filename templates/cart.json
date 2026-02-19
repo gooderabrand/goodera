@@ -12,7 +12,8 @@
     "main-cart": {
       "type": "main-cart",
       "settings": {
-        "cart_notes_enable": true
+        "cart_notes_enable": true,
+        "cart_add_discounts": false
       }
     },
     "product-recommendations": {
@@ -20,7 +21,7 @@
       "settings": {
         "heading": "You may also like",
         "heading_left": false,
-        "description": "<p>Describe your featured collection here<\/p>",
+        "description": "",
         "full_width": true,
         "mobile_swipe": true,
         "disable_top_spacing": true,
@@ -30,9 +31,9 @@
     "recently-viewed-products": {
       "type": "recently-viewed-products",
       "settings": {
-        "heading": "Recently viewed products",
+        "heading": "Recently viewed",
         "heading_left": false,
-        "description": "<p>Describe your recently viewed products here<\/p>",
+        "description": "",
         "full_width": true,
         "mobile_swipe": true,
         "disable_top_spacing": false,

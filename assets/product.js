@@ -970,10 +970,23 @@ if (!customElements.get('product-add-to-cart-sticky')) {
             }
             if (entry.target === form) {
               let boundingRect = form.getBoundingClientRect();
+              let isMobile = window.innerWidth < 768;
 
-              if (entry.intersectionRatio === 0 && window.scrollY > (boundingRect.top + boundingRect.height)) {
-                _this.formPassed = true;
-                _this.classList.add('sticky--visible');
+              if (entry.intersectionRatio === 0) {
+                if (isMobile) {
+                  // On mobile, show sticky when form is just out of view (more precise)
+                  // Check if the form's bottom edge has passed the top of the viewport
+                  if (boundingRect.bottom <= 0) {
+                    _this.formPassed = true;
+                    _this.classList.add('sticky--visible');
+                  }
+                } else {
+                  // On desktop, use original logic
+                  if (window.scrollY > (boundingRect.top + boundingRect.height)) {
+                    _this.formPassed = true;
+                    _this.classList.add('sticky--visible');
+                  }
+                }
               } else if (entry.intersectionRatio === 1) {
                 _this.formPassed = false;
                 _this.classList.remove('sticky--visible');

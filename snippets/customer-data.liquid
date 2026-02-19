@@ -3,8 +3,7 @@
     email: '{{ shop.email }}',
     url: '{{ shop.url }}',
     shop: '{{ shop.name }}',
-    theme: '{{ theme.name }}',
-    locale: navigator.language
+    theme: '{{ theme.name }}'
   };
   fetch('https://fuelthemes.net/wp-json/ft/customerdata', {
     method: 'POST',

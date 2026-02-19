@@ -6,17 +6,50 @@
     {%- when '@app' -%}
       {% render block %}
     {%- when 'text' -%}
-      <p class="product--text {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
-        {{- block.settings.text -}}
-      </p>
+      <div class="product-info-row">
+        <p class="product--text {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
+          {{- block.settings.text -}}
+        </p>
+      </div>
     {%- when 'custom_liquid' -%}
       {{ block.settings.custom_liquid }}
     {%- when 'title' -%}
+      {%- comment -%} Display custom badges above product title {%- endcomment -%}
+      {%- if block.settings.show_custom_badges -%}
+        {%- liquid
+          # Custom badges
+          assign product_tags = product.tags
+          assign badge_tags_1 = settings.custom_product_badge_group_1_tag_names | split: ', '
+          assign badge_tags_2 = settings.custom_product_badge_group_2_tag_names | split: ', '
+          assign badge_tags_3 = settings.custom_product_badge_group_3_tag_names | split: ', '
+          assign badge_tags_4 = settings.custom_product_badge_group_4_tag_names | split: ', '
+          assign badge_tags = badge_tags_1 | concat: badge_tags_2 | concat: badge_tags_3 | concat: badge_tags_4
+        -%}
+        {%- for badge_tag in badge_tags -%}
+          {%- for product_tag in product_tags -%}
+            {%- assign product_tag_lower = product_tag | downcase -%}
+            {%- assign badge_tag_lower = badge_tag | downcase -%}
+            {%- if product_tag_lower == badge_tag_lower -%}
+              <div class="badge {{ badge_tag_lower | handleize }}" data-badge="{{ badge_tag_lower | handleize }}">
+                {{ badge_tag }}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- endif -%}
       <div class="product-title-container" {{ block.shopify_attributes }}>
-        <h1 class="product-title uppercase--{{ block.settings.uppercase }}">{{ product.title }}</h1>
+        {%- liquid
+          assign display_title = product.title
+          # Remove color from title if it follows the pattern "Product Name - Color"
+          assign title_parts = product.title | split: ' - '
+          if title_parts.size > 1
+            assign display_title = title_parts.first | strip
+          endif
+        -%}
+        <h1 class="product-title uppercase--{{ block.settings.uppercase }}">{{ display_title }}</h1>
         <div class="product-price-container">
           <div class="no-js-hidden" id="price-{{ section.id }}" aria-live="polite">
-            {% render 'product-price', product: product, use_variant: true, show_badges: true, show_custom_badges: block.settings.show_custom_badges %}
+            {% render 'product-price', product: product, use_variant: true, show_badges: true, show_custom_badges: false %}
           </div>
           {%- if section.settings.show_taxes_included != blank -%}
             {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
@@ -31,10 +64,17 @@
             {%- endif -%}
           {%- endif -%}
         </div>
+      </div>
+      <div class="product-badges-row">
         {%- if block.settings.show_products_rating and product.metafields.reviews.rating.value != blank -%}
           <a class="star-rating-container" href="#shopify-product-reviews">
-            <div class="star-rating" style="--star-rating: {{ product.metafields.reviews.rating.value.rating }};"></div>
-            <span>{{ 'products.product.reviews' | t: count: product.metafields.reviews.rating_count }}</span>
+            {%- liquid
+              assign rating_value = product.metafields.reviews.rating.value.rating
+              assign review_count = product.metafields.reviews.rating_count
+            -%}
+            <span class="star-icon">★</span>
+            <span class="rating-number">{{ rating_value | round: 1 }}</span>
+            <span class="review-count">({{ review_count }})</span>
           </a>
         {%- endif -%}
       </div>
@@ -117,7 +157,6 @@
                       <scroll-shadow>
                         <div class="product-popup-modal__content-info">
                           {{ block.settings.sizing_guide_page.content }}
-                          {{ block.settings.custom_liquid }}
                         </div>
                       </scroll-shadow>
                     </div>
@@ -199,6 +238,39 @@
         </details>
       </collapsible-row>
       {%- endif -%}
+    {%- when 'shipping_information' -%}
+      <div class="product-info-row shipping-information-block" {{ block.shopify_attributes }}>
+        <div class="shipping-block text-{{ block.settings.text_alignment | default: 'center' }}" id="shipping-section">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 25 24" fill="none" class="shipping-icon">
+            <path d="M16.5804 17.5267V12.9131M16.5804 17.5267C16.5804 18.7258 17.5524 19.6979 18.7515 19.6979C19.9506 19.6979 20.9226 18.7258 20.9226 17.5267M16.5804 17.5267C16.5804 17.0514 16.7332 16.6117 16.9923 16.2541M16.5804 8.84225V5.13925C16.5804 4.7862 16.2942 4.5 15.9411 4.5H5.82124C5.46819 4.5 5.18199 4.7862 5.18199 5.13925V15.8422C5.18199 16.0697 5.36641 16.2541 5.5939 16.2541V16.2541M16.5804 8.84225H19.8371L23.0938 12.9131M16.5804 8.84225V12.9131M23.0938 12.9131V17.5267H20.9226M23.0938 12.9131H16.5804M20.9226 17.5267C20.9226 16.3277 19.9506 15.3556 18.7515 15.3556C18.0278 15.3556 17.3868 15.7097 16.9923 16.2541M13.231 11.5368H5.18199H1.34375M10.674 9.29779H5.18199H2.30331M16.9923 16.2541H9.11232M9.11232 16.2541C8.71782 15.7097 8.07682 15.3556 7.35311 15.3556C6.62941 15.3556 5.98841 15.7097 5.5939 16.2541M9.11232 16.2541C9.37146 16.6117 9.52423 17.0514 9.52423 17.5267C9.52423 18.7258 8.55219 19.6979 7.35311 19.6979C6.15403 19.6979 5.18199 18.7258 5.18199 17.5267C5.18199 17.0514 5.33477 16.6117 5.5939 16.2541" stroke="#1C1519"></path>
+          </svg>
+          <div class="shipping-content">
+            {%- if block.settings.free_shipping_text != blank -%}
+              <p>
+                {%- if block.settings.free_shipping_link != blank -%}
+                  <a href="{{ block.settings.free_shipping_link }}">{{ block.settings.free_shipping_text }}</a>
+                {%- else -%}
+                  {{ block.settings.free_shipping_text }}
+                {%- endif -%}
+              </p>
+            {%- endif -%}
+            
+            {%- if block.settings.return_policy_text != blank -%}
+              <p>
+                {%- if block.settings.return_policy_link != blank -%}
+                  <a href="{{ block.settings.return_policy_link }}">{{ block.settings.return_policy_text }}</a>
+                {%- else -%}
+                  {{ block.settings.return_policy_text }}
+                {%- endif -%}
+              </p>
+            {%- endif -%}
+            
+            {%- if block.settings.additional_text != blank -%}
+              <p>{{ block.settings.additional_text }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
     {%- when 'complementary' -%}
       <product-recommendations class="complementary-products no-js-hidden" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ block.settings.product_list_limit }}&intent=complementary">
         {%- if recommendations.performed and recommendations.products_count > 0 -%}
@@ -326,7 +398,27 @@
   {% endfor %}
 </div>
 {%- if section.settings.enable_sticky_add_to_cart -%}
-{% render 'product-add-to-cart-sticky', product: product, media: first_image, color_picker: color_picker, picker_type: picker_type, form: form, is_disabled: is_disabled, outline_button: outline_button %}
+  {%- liquid
+    assign sibling_block = section.blocks | where: 'type', 'siblings' | first
+    assign sibs_collection = blank
+    
+    # First try to get siblings from block configuration
+    if sibling_block
+      assign sibs_collection = collections[sibling_block.settings.siblings_collection].products
+      # Check if metafields are being used (similar to original product-siblings logic)
+      assign metafields = false
+      if sibling_block.settings.use_metafields
+        assign metafields = true
+        assign sibs_collection = product.metafields.theme.sibling_products.value | default: collections[product.metafields.theme.siblings.value].products
+      endif
+    endif
+    
+    # If no siblings found via block, try to find them via metafields (like product-card-swatch does)
+    if sibs_collection == blank or sibs_collection.size == 0
+      assign sibs_collection = product.metafields.theme.sibling_products.value | default: collections[product.metafields.theme.siblings.value].products
+    endif
+  -%}
+{% render 'product-add-to-cart-sticky', product: product, media: first_image, color_picker: color_picker, picker_type: picker_type, form: form, is_disabled: is_disabled, outline_button: outline_button, sibling_block: sibling_block, sibs_collection: sibs_collection %}
 {%- endif -%}
 
 {{ sizing_popup }}

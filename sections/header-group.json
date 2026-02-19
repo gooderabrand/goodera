@@ -18,22 +18,23 @@
           "type": "text",
           "settings": {
             "icon": "none",
-            "text": "FREE SHIPPING ON ALL U.S. ORDERS",
+            "text": "Free Shipping on U.S Orders",
             "link": ""
           }
         },
-        "2f7893ee-7b84-4f15-911a-801b94ffa38e": {
+        "text_UyXbL8": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "icon": "none",
-            "text": "SIGN UP FOR EMAILS AND TEXTS",
-            "link": ""
+            "text": "Get 10% off with code  \"VDAY\"",
+            "link": "shopify://collections/self-care-club"
           }
         }
       },
       "block_order": [
         "5b1ab378-833d-4a94-a02e-8325ec1551d0",
-        "2f7893ee-7b84-4f15-911a-801b94ffa38e"
+        "text_UyXbL8"
       ],
       "settings": {
         "announcement_bar": true,
@@ -42,22 +43,55 @@
         "direction": "left",
         "speed": "20s",
         "autoplay": true,
-        "autoplay_length": 10
+        "autoplay_length": 5
       }
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "megamenu_WKKPTz": {
+          "type": "megamenu",
+          "settings": {
+            "position": "1",
+            "promo_1_image": "shopify://shop_images/GoodEraBranding-13_ba5cf48d-7505-4297-bf2b-b793b91b22e1.jpg",
+            "promo_1_heading": "Self Care Club",
+            "promo_1_link_label": "Shop",
+            "promo_1_link": "shopify://collections/self-care-club",
+            "promo_2_heading": "Promotion heading",
+            "promo_2_link_label": "Shop",
+            "promo_2_link": "",
+            "promo_3_heading": "Promotion heading",
+            "promo_3_link_label": "Shop",
+            "promo_3_link": "",
+            "promo_4_heading": "Promotion heading",
+            "promo_4_link_label": "Shop",
+            "promo_4_link": ""
+          }
+        },
+        "megamenu_sidebar_wELHxG": {
+          "type": "megamenu_sidebar",
+          "settings": {
+            "position": "1",
+            "content_collection_image": true,
+            "content_product_image": true
+          }
+        }
+      },
+      "block_order": [
+        "megamenu_WKKPTz",
+        "megamenu_sidebar_wELHxG"
+      ],
       "settings": {
         "sticky_header": true,
         "logo": "shopify://shop_images/good_era_svg_logo_icon_desktop_black.svg",
         "logo_height_range": 30,
         "logo_height_range_mobile": 30,
         "style": "style3",
-        "header_shadow": "header--shadow-small",
+        "header_shadow": "header--shadow-none",
         "menu": "main-menu",
         "cart_icon": "frame_bag",
         "use_icon_account": true,
-        "transparent_header": true,
+        "transparent_header": false,
         "logo_light": "shopify://shop_images/good_era_svg_logo_icon_desktop_white.svg",
         "transparent_header_border": false,
         "transparent_header_background": false,

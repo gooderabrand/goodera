@@ -1,27 +1,29 @@
 ---
 description: 
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 1. Respect Existing Architecture
 
-Leverage the theme’s existing Liquid handles, CSS classes, components, and UI elements.
+Assume the original implementation in the old theme has a more sophisticated approach to handling and theme customizations. If asked to copy a feature or customization use the existing logic from the working sample and code over trying to customize unecessary new code on your own. You will not achieve the exact result if the code is different.
+
+Leverage the themes existing Liquid handles, CSS classes, components, and UI elements.
 Reuse before rebuilding. Avoid custom code that duplicates existing functionality.
 Preserve the original architecture and design system.
 2. Leverage Theme Customizer
 
 If the change can be controlled via theme settings (settings_schema.json), do it.
-Add toggles, selectors, ranges, or text inputs to allow control from Shopify’s customizer.
+Add toggles, selectors, ranges, or text inputs to allow control from Shopifys customizer.
 Prioritize admin usability and non-technical maintainability.
 3. Maintain Theme Integrity
 
 Do not break or bypass global logic, responsive rules, or layout structures.
-Match the theme’s HTML structure, spacing units, font stacks, and component logic.
+Match the themes HTML structure, spacing units, font stacks, and component logic.
 Avoid shortcuts or overrides that conflict with other sections/pages.
 4. Code Review + Debug First
 
 Before editing, read and audit all relevant files (sections, snippets, assets).
-Don’t blindly patch. If something’s not working, diagnose root cause first.
+Dont blindly patch. If somethings not working, diagnose root cause first.
 Always test changes across multiple pages and screen sizes.
 5. Version Control Discipline
 

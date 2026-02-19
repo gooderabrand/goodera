@@ -1,0 +1,103 @@
+/* Shipping Information Section Styling - Clean background with shipping icon and text */
+
+.shipping-information-section {
+  margin-bottom: 24px;
+}
+
+.shipping-block {
+  background-color: #F7F7F7;
+  border: 1px solid #d1d1d1;
+  border-radius: 4px;
+  margin-bottom: 24px;
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 60px;
+  width: 100%;
+}
+
+.shipping-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.shipping-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.shipping-content p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #1a1a1a;
+}
+
+.shipping-content a {
+  color: #000;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.shipping-content a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+/* Text alignment classes */
+.shipping-block.text-left {
+  justify-content: flex-start;
+}
+
+.shipping-block.text-center {
+  justify-content: center;
+}
+
+.shipping-block.text-right {
+  justify-content: flex-end;
+}
+
+.shipping-block.text-left .shipping-content {
+  text-align: left;
+}
+
+.shipping-block.text-center .shipping-content {
+  text-align: center;
+}
+
+.shipping-block.text-right .shipping-content {
+  text-align: right;
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 767px) {
+  .shipping-block {
+    padding: 12px 8px;
+    gap: 8px;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .shipping-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .shipping-content p {
+    font-size: 13px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .shipping-block {
+    padding: 10px;
+    gap: 10px;
+  }
+}
+

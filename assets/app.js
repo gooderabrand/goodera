@@ -124,25 +124,32 @@ if (!customElements.get('product-card')) {
   class ProductCard extends HTMLElement {
     constructor() {
       super();
-      this.swatches = this.querySelector('.product-card-swatches');
+      this.swatches = this.querySelector('.product-card-swatches--container');
       this.image = this.querySelector('.product-card--featured-image-link .product-primary-image');
       this.additional_images = this.querySelectorAll('.product-secondary-image');
       this.additional_images_nav = this.querySelectorAll('.product-secondary-images-nav li');
       this.quick_add = this.querySelector('.product-card--add-to-cart-button-simple');
       this.size_options = this.querySelector('.product-card-sizes');
+      this.originalProductData = null; // Store original product data for size options
+      this.originalSizeStates = new Map(); // Store original size option states
+      this.originalImageStates = new Map(); // Store original image states
     }
     connectedCallback() {
       if (this.swatches) {
         this.enableSwatches(this.swatches, this.image);
       }
-      if (this.additional_images) {
+      if (this.additional_images && this.additional_images.length > 0) {
         this.enableAdditionalImages();
       }
       if (this.quick_add) {
         this.enableQuickAdd();
       }
       if (this.size_options) {
+        this.storeOriginalSizeStates();
         this.enableSizeOptions();
+      }
+      if (this.image) {
+        this.storeOriginalImageStates();
       }
     }
     enableAdditionalImages() {
@@ -211,47 +218,463 @@ if (!customElements.get('product-card')) {
 
     }
     enableSwatches(swatches, image) {
-      let swatch_list = swatches.querySelectorAll('.product-card-swatch'),
-        org_srcset = image ? image.dataset.srcset : '';
+      // Handle regular color variant swatches (with radio inputs)
+      let swatch_inputs = swatches.querySelectorAll('.product-card-swatch-input');
+      let org_srcset = image ? image.dataset.srcset : '';
       this.color_index = this.swatches.dataset.index;
 
-      swatch_list.forEach((swatch, index) => {
+      swatch_inputs.forEach((input, index) => {
+        let label = input.nextElementSibling;
+        
         window.addEventListener('load', (event) => {
           let image = new Image();
-          image.srcset = swatch.dataset.srcset;
+          image.srcset = input.dataset.srcset;
           lazySizes.loader.unveil(image);
         });
 
-        swatch.addEventListener('mouseover', () => {
-          [].forEach.call(swatch_list, function (el) {
-            el.classList.remove('active');
+        label.addEventListener('mouseover', () => {
+          // Remove active class from all labels
+          swatch_inputs.forEach(input => {
+            input.nextElementSibling.classList.remove('active');
+            input.checked = false;
           });
-          if (image) {
-            if (swatch.dataset.srcset) {
-              image.setAttribute('srcset', swatch.dataset.srcset);
-            } else {
-              image.setAttribute('srcset', org_srcset);
-            }
+          
+          // Add active class to hovered label and check the input
+          label.classList.add('active');
+          input.checked = true;
+          
+          // Update image if srcset is available
+          if (image && input.dataset.srcset) {
+            image.setAttribute('srcset', input.dataset.srcset);
+          } else if (image) {
+            image.setAttribute('srcset', org_srcset);
           }
+          
+          // Update size options for regular color variants
           if (this.size_options) {
-            this.current_options[this.color_index] = swatch.querySelector('span').innerText;
+            this.current_options[this.color_index] = label.querySelector('span').innerText;
             this.updateMasterId();
           }
-          swatch.classList.add('active');
         });
-        swatch.addEventListener('click', function (evt) {
-          window.location.href = this.dataset.href;
-          evt.preventDefault();
+
+        input.addEventListener('change', (evt) => {
+          // Update all labels
+          swatch_inputs.forEach(input => {
+            input.nextElementSibling.classList.remove('active');
+          });
+          
+          // Add active to checked label
+          if (input.checked) {
+            input.nextElementSibling.classList.add('active');
+          }
+          
+          // Update image
+          if (image && input.dataset.srcset) {
+            image.setAttribute('srcset', input.dataset.srcset);
+          } else if (image) {
+            image.setAttribute('srcset', org_srcset);
+          }
+          
+          // Update size options
+          if (this.size_options) {
+            this.current_options[this.color_index] = input.nextElementSibling.querySelector('span').innerText;
+            this.updateMasterId();
+          }
+        });
+      });
+
+      // Handle sibling swatches (with dynamic size option updates and enhanced hover images)
+      let sibling_labels = swatches.querySelectorAll('.product-form__input--siblings label');
+      let currentSiblingProduct = null;
+      let currentSiblingImages = null;
+      
+      sibling_labels.forEach((label) => {
+        label.addEventListener('mouseover', async () => {
+          // Remove active class from all sibling labels
+          sibling_labels.forEach(l => l.classList.remove('active'));
+          
+          // Add active class to hovered label
+          label.classList.add('active');
+          
+          // Update color text for sibling product
+          this.updateColorTextForSibling(label);
+          
+          // Update images if the label has a data-srcset attribute
+          const link = label.querySelector('a');
+          if (link && link.dataset.srcset && image) {
+            
+            // Update the primary image to show sibling color
+            this.updateImageSrcset(image, link.dataset.srcset);
+            
+          }
+          
+          // Fetch sibling images for hover functionality (always, not just when size options exist)
+          if (link) {
+            const siblingUrl = link.getAttribute('href');
+            // Better URL parsing to handle various URL formats
+            let siblingHandle = siblingUrl;
+            
+            // Remove query parameters and hash
+            siblingHandle = siblingHandle.split('?')[0].split('#')[0];
+            
+            // Extract handle from URL path
+            const urlParts = siblingHandle.split('/');
+            siblingHandle = urlParts[urlParts.length - 1];
+            
+            // Remove any trailing slashes
+            siblingHandle = siblingHandle.replace(/\/$/, '');
+            
+            if (siblingHandle && siblingHandle !== '') {
+              try {
+                // Fetch sibling product data
+                const response = await fetch(`/products/${siblingHandle}.js`);
+                if (response.ok) {
+                  const siblingProduct = await response.json();
+                  
+                  
+                  // Store current sibling product
+                  currentSiblingProduct = siblingProduct;
+                  
+                  // Store sibling images for hover functionality
+                  currentSiblingImages = this.prepareSiblingImages(siblingProduct);
+                  
+                  // Update additional images to show sibling images during hover
+                  this.updateAdditionalImagesForSibling(currentSiblingImages);
+                  
+                } else {
+                  console.warn('Failed to fetch sibling product:', siblingHandle, response.status);
+                }
+              } catch (error) {
+                console.error('Error fetching sibling product:', error);
+              }
+            } else {
+              console.warn('Invalid sibling handle extracted from URL:', siblingUrl);
+            }
+          }
+          
+          // Update size options for sibling product (only if size options exist)
+          if (this.size_options && link && currentSiblingProduct) {
+            this.updateSizeOptionsForSibling(currentSiblingProduct);
+          }
+        });
+        
+        // Handle mouseout to restore original size options and images
+        label.addEventListener('mouseout', () => {
+          // Only restore if this is not the currently active sibling
+          if (!label.classList.contains('active')) {
+            this.restoreOriginalSizeOptions();
+            this.restoreOriginalImages();
+            this.restoreOriginalAdditionalImages();
+            this.restoreOriginalColorText();
+          }
+        });
+        
+        // Handle click to make sibling selection permanent
+        label.addEventListener('click', (e) => {
+          e.preventDefault();
+          // Update color text permanently for clicked sibling
+          this.updateColorTextForSibling(label);
+          // Navigate to the sibling product
+          const link = label.querySelector('a');
+          if (link) {
+            window.location.href = link.getAttribute('href');
+          }
         });
       });
     }
+    
+    storeOriginalImageStates() {
+      // Store original primary image state
+      if (this.image) {
+        this.originalImageStates.set('primary', {
+          dataSrcset: this.image.getAttribute('data-srcset'),
+          srcset: this.image.getAttribute('srcset'),
+          src: this.image.getAttribute('src')
+        });
+      }
+      
+      // Store original additional images states for hover functionality
+      this.additional_images.forEach((img, index) => {
+        this.originalImageStates.set(`additional_${index}`, {
+          dataSrcset: img.getAttribute('data-srcset'),
+          srcset: img.getAttribute('srcset'),
+          src: img.getAttribute('src')
+        });
+      });
+    }
+    
+    restoreOriginalImages() {
+      // Restore primary image
+      if (this.image) {
+        const originalState = this.originalImageStates.get('primary');
+        if (originalState) {
+          this.image.setAttribute('data-srcset', originalState.dataSrcset);
+          if (originalState.srcset) {
+            this.image.setAttribute('srcset', originalState.srcset);
+          }
+          if (originalState.src) {
+            this.image.setAttribute('src', originalState.src);
+          }
+          
+          // Force lazy loading to reload
+          if (window.lazySizes) {
+            window.lazySizes.loader.unveil(this.image);
+          }
+        }
+      }
+    }
+    
+    restoreOriginalAdditionalImages() {
+      // Restore additional images to their original state
+      this.additional_images.forEach((img, index) => {
+        const originalState = this.originalImageStates.get(`additional_${index}`);
+        if (originalState) {
+          img.setAttribute('data-srcset', originalState.dataSrcset);
+          if (originalState.srcset) {
+            img.setAttribute('srcset', originalState.srcset);
+          }
+          if (originalState.src) {
+            img.setAttribute('src', originalState.src);
+          }
+          
+          // Force lazy loading to reload
+          if (window.lazySizes) {
+            window.lazySizes.loader.unveil(img);
+          }
+        }
+      });
+    }
+    
+    updateColorTextForSibling(label) {
+      // Update color text when hovering over sibling swatch
+      const colorTextElement = this.querySelector('.product-card-color-text');
+      if (!colorTextElement) return;
+      
+      // Store original color text if not already stored
+      if (!this.originalColorText) {
+        this.originalColorText = colorTextElement.textContent.trim();
+      }
+      
+      // Extract color from the label's title attribute or style
+      const link = label.querySelector('a');
+      if (link) {
+        const title = link.getAttribute('title');
+        if (title) {
+          // Extract color from title (e.g., "Self Care Club Hoodie - Black" -> "Black")
+          const colorMatch = title.match(/- ([^-]+)$/);
+          if (colorMatch) {
+            const colorName = colorMatch[1].trim();
+            colorTextElement.textContent = colorName;
+            colorTextElement.setAttribute('data-color-text', colorName);
+          }
+        }
+      }
+    }
+    
+    restoreOriginalColorText() {
+      // Restore original color text
+      const colorTextElement = this.querySelector('.product-card-color-text');
+      if (colorTextElement && this.originalColorText) {
+        colorTextElement.textContent = this.originalColorText;
+        colorTextElement.setAttribute('data-color-text', this.originalColorText);
+      }
+    }
+    
+    prepareSiblingImages(siblingProduct) {
+      // Prepare sibling images for hover functionality
+      const siblingImages = [];
+      
+      
+      if (siblingProduct && siblingProduct.images && siblingProduct.images.length > 0) {
+        // Get the number of additional images to show (from theme settings)
+        const maxImages = window.theme?.settings?.products_hover_images_count || 4;
+        
+        
+        // Start from index 1 (skip the first image as it's the primary)
+        for (let i = 1; i <= maxImages && i < siblingProduct.images.length; i++) {
+          const image = siblingProduct.images[i];
+          if (image) {
+            // Handle different image formats from Shopify API
+            let imageSrc = image.src || image.url || image;
+            let imageAlt = image.alt || siblingProduct.title;
+            
+            // If imageSrc is still undefined, try to construct it from the image object
+            if (!imageSrc && image.id) {
+              // Construct Shopify image URL from ID
+              imageSrc = `https://cdn.shopify.com/s/files/1/${image.id}`;
+            }
+            
+            if (imageSrc) {
+              // Ensure protocol is included (fix protocol-relative URLs)
+              if (imageSrc.startsWith('//')) {
+                imageSrc = 'https:' + imageSrc;
+              }
+              
+              // Create proper srcset URLs with correct query parameter handling
+              const separator = imageSrc.includes('?') ? '&' : '?';
+              const srcset = `${imageSrc}${separator}width=375 375w, ${imageSrc}${separator}width=770 770w`;
+              
+              siblingImages.push({
+                src: imageSrc,
+                srcset: srcset,
+                alt: imageAlt
+              });
+              
+            }
+          }
+        }
+      }
+      
+      return siblingImages;
+    }
+    
+    updateAdditionalImagesForSibling(siblingImages) {
+      // Update additional images to show sibling images during hover
+      
+      if (!siblingImages || siblingImages.length === 0) {
+        return;
+      }
+      
+      this.additional_images.forEach((img, index) => {
+        if (siblingImages[index]) {
+          const siblingImage = siblingImages[index];
+          
+          
+          // Update image attributes
+          img.setAttribute('data-srcset', siblingImage.srcset);
+          img.setAttribute('srcset', siblingImage.srcset);
+          img.setAttribute('src', siblingImage.src);
+          img.setAttribute('alt', siblingImage.alt);
+          
+          // Force lazy loading to reload
+          if (window.lazySizes) {
+            window.lazySizes.loader.unveil(img);
+          }
+        }
+      });
+    }
+    
+    updateImageSrcset(imageElement, newSrcset) {
+      const currentDataSrcset = imageElement.getAttribute('data-srcset');
+      const currentSrcset = imageElement.getAttribute('srcset');
+      
+      
+      if (currentDataSrcset !== newSrcset) {
+        // Extract the first image URL from the srcset for direct src update
+        const firstImageUrl = newSrcset.split(',')[0].trim().split(' ')[0];
+        
+        
+        // More aggressive approach to force image reload
+        // 1. Clear all image attributes first
+        imageElement.removeAttribute('data-srcset');
+        imageElement.removeAttribute('srcset');
+        imageElement.removeAttribute('src');
+        
+        // 2. Force a reflow
+        imageElement.offsetHeight;
+        
+        // 3. Set new attributes
+        imageElement.setAttribute('data-srcset', newSrcset);
+        imageElement.setAttribute('srcset', newSrcset);
+        imageElement.setAttribute('src', firstImageUrl);
+        
+        // 4. Force lazy loading to reload the image
+        if (window.lazySizes) {
+          window.lazySizes.loader.unveil(imageElement);
+        }
+        
+        // 5. Add a cache-busting parameter to force reload
+        const cacheBustUrl = firstImageUrl + (firstImageUrl.includes('?') ? '&' : '?') + 'cb=' + Date.now();
+        imageElement.setAttribute('src', cacheBustUrl);
+        
+      }
+    }
+    
+    updateSizeOptionsForSibling(siblingProduct) {
+      if (!this.size_options || !siblingProduct.variants) return;
+      
+      // Get the size option index from the original product
+      const sizeIndex = parseInt(this.size_options.dataset.index);
+      const sizeOptionsVariantName = this.size_options.dataset.sizeOptionName || 'Size';
+      
+      // Find the size option in the sibling product
+      let siblingSizeIndex = -1;
+      siblingProduct.options.forEach((option, index) => {
+        if (option.name.toLowerCase() === sizeOptionsVariantName.toLowerCase()) {
+          siblingSizeIndex = index;
+        }
+      });
+      
+      if (siblingSizeIndex === -1) return;
+      
+      // Update each size option based on sibling product availability
+      const sizeElements = this.size_options.querySelectorAll('.product-card-sizes--size');
+      sizeElements.forEach((sizeElement) => {
+        const sizeValue = sizeElement.querySelector('span').textContent.trim();
+        
+        // Check if this size is available in the sibling product
+        const isAvailable = siblingProduct.variants.some(variant => 
+          variant.options[siblingSizeIndex] === sizeValue && variant.available
+        );
+        
+        // Update the size element
+        if (isAvailable) {
+          sizeElement.classList.remove('is-disabled');
+          sizeElement.style.opacity = '1';
+          sizeElement.style.pointerEvents = 'auto';
+        } else {
+          sizeElement.classList.add('is-disabled');
+          sizeElement.style.opacity = '0.3';
+          sizeElement.style.pointerEvents = 'none';
+        }
+      });
+    }
+    
+    storeOriginalSizeStates() {
+      if (!this.size_options) return;
+      
+      const sizeElements = this.size_options.querySelectorAll('.product-card-sizes--size');
+      sizeElements.forEach((sizeElement) => {
+        const sizeValue = sizeElement.querySelector('span').textContent.trim();
+        this.originalSizeStates.set(sizeValue, {
+          hasDisabledClass: sizeElement.classList.contains('is-disabled'),
+          opacity: sizeElement.style.opacity,
+          pointerEvents: sizeElement.style.pointerEvents
+        });
+      });
+    }
+    
+    restoreOriginalSizeOptions() {
+      if (!this.size_options) return;
+      
+      // Restore original size options from stored states
+      const sizeElements = this.size_options.querySelectorAll('.product-card-sizes--size');
+      sizeElements.forEach((sizeElement) => {
+        const sizeValue = sizeElement.querySelector('span').textContent.trim();
+        const originalState = this.originalSizeStates.get(sizeValue);
+        
+        if (originalState) {
+          // Restore original disabled state
+          if (originalState.hasDisabledClass) {
+            sizeElement.classList.add('is-disabled');
+          } else {
+            sizeElement.classList.remove('is-disabled');
+          }
+          
+          // Restore original styles
+          sizeElement.style.opacity = originalState.opacity;
+          sizeElement.style.pointerEvents = originalState.pointerEvents;
+        }
+      });
+    }
+    
     enableQuickAdd() {
       this.quick_add.addEventListener('click', this.quickAdd.bind(this));
     }
     enableSizeOptions() {
       let size_list = this.size_options.querySelectorAll('.product-card-sizes--size'),
         featured_image = this.querySelector('.product-card--featured-image'),
-        has_hover = featured_image.classList.contains('thb-hover'),
+        has_hover = featured_image ? featured_image.classList.contains('thb-hover') : false,
         size_parent = this.size_options.parentElement;
 
       this.size_index = this.size_options.dataset.index;
@@ -261,14 +684,14 @@ if (!customElements.get('product-card')) {
       this.updateMasterId();
 
       size_parent.addEventListener('mouseenter', () => {
-        if (has_hover) {
+        if (has_hover && featured_image) {
           featured_image.classList.remove('thb-hover');
         }
       }, {
         passive: true
       });
       size_parent.addEventListener('mouseleave', () => {
-        if (has_hover) {
+        if (has_hover && featured_image) {
           featured_image.classList.add('thb-hover');
         }
       }, {
@@ -650,7 +1073,9 @@ if (!customElements.get('cart-drawer')) {
     }
 
     connectedCallback() {
+
       let button = document.getElementById('cart-drawer-toggle');
+
 
       // Add functionality to buttons
       button.addEventListener('click', (e) => {

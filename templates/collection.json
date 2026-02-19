@@ -14,79 +14,27 @@
       "settings": {
         "show_collection_image": true,
         "show_collection_description": true,
-        "show_subcollections": true,
+        "show_subcollections": false,
         "make_heading_uppercase": true,
+        "text_alignment": "center",
+        "image": "shopify://shop_images/GoodEraBranding-35.jpg",
         "overlay_color": "#000000",
         "overlay_opacity": 40
       }
     },
     "product-grid": {
       "type": "main-collection-product-grid",
-      "blocks": {
-        "2eb8e6da-98ad-442c-b31e-fcc9bc0532b9": {
-          "type": "promotion",
-          "settings": {
-            "promotion_collection": "",
-            "promotion_position": 7,
-            "promotion_width": "1",
-            "title": "PROMOTION BANNER",
-            "text": "Add your description text for promotion banner here.",
-            "link_label": "Explore",
-            "use_text_button": true,
-            "overlay_color": "#000000",
-            "overlay_opacity": 15
-          }
-        }
-      },
-      "block_order": [
-        "2eb8e6da-98ad-442c-b31e-fcc9bc0532b9"
-      ],
       "settings": {
-        "full_width": true,
-        "products_per_page": 11,
-        "columns_desktop": 4,
+        "full_width": false,
+        "products_per_page": 10,
+        "columns_desktop": 2,
         "pagination_type": "infinite",
-        "enable_filtering": true,
-        "enable_sorting": true,
-        "show_counts": true,
-        "facets_desktop": "drawer"
-      }
-    },
-    "166366972953e881f5": {
-      "type": "collection-list",
-      "settings": {
-        "heading": "",
-        "heading_left": false,
-        "description": "<p><\/p>",
-        "full_width": true,
-        "collection_list": [
-          "clothing",
-          "denim",
-          "dresses",
-          "knitwear",
-          "long",
-          "pants"
-        ],
-        "image_ratio": "square",
-        "layout": "grid",
-        "style": "style1",
-        "columns_desktop": 6,
-        "columns_mobile": "1",
-        "show_progress_bar": true,
-        "mobile_swipe": true,
-        "overlay_color": "#000000",
-        "overlay_opacity": 0,
-        "disable_top_spacing": true,
-        "disable_bottom_spacing": true
-      }
-    },
-    "16636704759cbf64c5": {
-      "type": "spacer",
-      "settings": {
-        "spacer_mobile": 50,
-        "spacer_desktop": 125,
-        "border_separator": true,
-        "border_separator_full": true
+        "enable_filtering": false,
+        "enable_sorting": false,
+        "show_counts": false,
+        "filter_color_swatches": false,
+        "facets_desktop": "drawer",
+        "sidebar_size": "small"
       }
     },
     "166367231494317262": {
@@ -95,14 +43,15 @@
         "1fc06b12-e359-41a2-b694-099a6a7d4133": {
           "type": "heading",
           "settings": {
-            "text": "USE IT TO ADD SEO TEXT",
+            "text": "Good Era® Every Day, Self Care, Apparel & Wellness Essentials",
             "size": "h4"
           }
         },
         "16636723131a14a571-2": {
           "type": "text",
           "settings": {
-            "text": "<p>Doing collections, doing fashion is like a non-stop dialogue. War taught me that not everything is glamorous. Luxury will be always around, no matter what happens in the world. I don't care about money. I really don't care. I just want to do what I do. I love to design things that people can actually buy. I'm staggered by what a boot costs today.<\/p>",
+            "text": "<p>Explore the complete Good Era® collection, from Self Care Club essentials to signature lifestyle pieces. Designed for comfort, quality, and everyday self-care, our products help you make better choices today for a stronger tomorrow. Own the moment with Good Era®.</p>",
+            "custom_liquid": "",
             "size": "text-size-small"
           }
         }
@@ -116,7 +65,7 @@
         "text_width": "xlarge",
         "text_position": "center",
         "text_alignment": "center",
-        "color_bg": "transparent",
+        "color_bg": "rgba(0,0,0,0)",
         "color_text": "#151515",
         "color_links": "#151515",
         "disable_top_spacing": true,
@@ -136,8 +85,6 @@
   "order": [
     "main-collection-banner",
     "product-grid",
-    "166366972953e881f5",
-    "16636704759cbf64c5",
     "166367231494317262",
     "166367228131c52c01"
   ]

@@ -32,7 +32,7 @@
                   <a href="{{ sub_link.url }}" class="thb-full-menu--link">{{- sub_link.title -}}</a>
                   {%- endif -%}
                 {%- elsif sub_link.type == 'product_link' -%}
-                  {%- render 'product-card-simple', product_card_product: sub_link.object, show_product_image: mega_menu_block.settings.content_product_image -%}
+                  {%- render 'product-card-simple', product_card_product: sub_link.object, show_product_image: mega_menu_block.settings.content_product_image, show_size_options: false -%}
                 {%- else -%}
                   <a href="{{ sub_link.url }}" class="thb-full-menu--link">{{- sub_link.title -}}</a>
                 {%- endif -%}

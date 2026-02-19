@@ -51,6 +51,21 @@ if (!customElements.get('recently-viewed-products')) {
 
           if (recommendations && recommendations.innerHTML.trim().length) {
             this.container.innerHTML = recommendations.innerHTML;
+            
+            // Initialize ProductCard custom elements for sibling functionality
+            this.container.querySelectorAll('product-card').forEach(card => {
+              if (!customElements.get('product-card')) {
+                // ProductCard custom element not defined yet, wait for it
+                setTimeout(() => {
+                  if (customElements.get('product-card')) {
+                    customElements.upgrade(card);
+                  }
+                }, 100);
+              } else {
+                customElements.upgrade(card);
+              }
+            });
+            
             this.classList.add('product-recommendations--loaded');
           }
 

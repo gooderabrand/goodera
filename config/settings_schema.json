@@ -3,7 +3,7 @@
     "name": "theme_info",
     "theme_name": "Reformation",
     "theme_author": "Fuel Themes",
-    "theme_version": "8.4.0",
+    "theme_version": "8.3.0",
     "theme_documentation_url": "https:\/\/documentation.fuelthemes.net\/article-categories\/reformation\/",
     "theme_support_url": "https:\/\/fuelthemes.net\/contact\/"
   },
@@ -179,16 +179,6 @@
         "id": "button_uppercase",
         "label": "Make buttons uppercase",
         "default": false
-      },
-      {
-        "type": "range",
-        "id": "button_font_scale",
-        "min": 100,
-        "max": 150,
-        "step": 5,
-        "unit": "%",
-        "label": "Font size scale",
-        "default": 100
       }
     ]
   },

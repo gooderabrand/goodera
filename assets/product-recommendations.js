@@ -20,6 +20,20 @@ class ProductRecommendations extends HTMLElement {
 				if (recommendations && recommendations.innerHTML.trim().length) {
 					this.innerHTML = recommendations.innerHTML;
 
+					// Initialize ProductCard custom elements for sibling functionality
+					this.querySelectorAll('product-card').forEach(card => {
+						if (!customElements.get('product-card')) {
+							// ProductCard custom element not defined yet, wait for it
+							setTimeout(() => {
+								if (customElements.get('product-card')) {
+									customElements.upgrade(card);
+								}
+							}, 100);
+						} else {
+							customElements.upgrade(card);
+						}
+					});
+
 					if ( this.parent ) {
 						this.parent.classList.add('product-recommendations--full');
 

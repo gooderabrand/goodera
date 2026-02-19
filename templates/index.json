@@ -9,82 +9,151 @@
  */
 {
   "sections": {
-    "16479477632637c9a7": {
+    "slideshow_iX6Xi7": {
       "type": "slideshow",
       "blocks": {
-        "164794776393e76b8e-2": {
+        "slide_P4TAWF": {
           "type": "slide",
           "settings": {
-            "slide_link": "",
-            "video_background": true,
-            "video": "",
-            "subheading": "ADD A SUBHEADER",
-            "heading": "SLIDE HEADING",
-            "heading_size": "h1",
-            "content": "It’s hard to be nice if you don’t feel comfortable.",
+            "image": "shopify://shop_images/Good_Era_Brand_Clothing_Self_Care_Club_Sweats_0ad5cc37-7b90-42dc-a894-4195619f6ae9.webp",
+            "slide_link": "shopify://collections/sweatpants",
+            "video_background": false,
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "subheading": "The Self-Care Set is here",
+            "heading": "Made to Match",
+            "heading_size": "h2",
+            "content": "",
             "description_size": "medium",
-            "content_position": "middle-center",
-            "text_alignment": "center",
+            "content_position": "bottom-left",
+            "text_alignment": "left",
             "content_size": "medium",
-            "overlay_color": "#000000",
-            "overlay_opacity": 70,
-            "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4) 100%)",
-            "button_1_text": "SHOP COLLECTION",
-            "button_1_link": "",
-            "button_1_outline": true,
+            "overlay_color": "rgba(0,0,0,0)",
+            "overlay_opacity": 0,
+            "overlay_gradient": "linear-gradient(180deg, rgba(NaN, NaN, NaN, 1), rgba(0, 0, 0, 0.4) 100%)",
+            "button_1_text": "Shop Sweats",
+            "button_1_link": "shopify://collections/self-care-club",
+            "button_1_outline": false,
             "button_2_text": "",
             "button_2_link": "",
             "button_2_outline": false
           }
         },
-        "164794776393e76b8e-1": {
+        "slide_gafMXJ": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/GoodEraBranding-36HORIZONTAL_33386b8a-fad6-4e37-8ffa-9cce4b576286.jpg",
             "slide_link": "",
             "video_background": false,
-            "video": "",
-            "subheading": "ADD A SUBHEADER",
-            "heading": "SLIDE HEADING",
-            "heading_size": "h1-xlarge",
-            "content": "All the Spring 2022 Ready-to-Wear fashion show coverage in one place.",
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "subheading": "SELF CARE CLUB",
+            "heading": "Your Best Era Yet",
+            "heading_size": "h2",
+            "content": "",
             "description_size": "medium",
-            "content_position": "middle-center",
-            "text_alignment": "center",
+            "content_position": "bottom-left",
+            "text_alignment": "left",
             "content_size": "medium",
             "overlay_color": "#000000",
-            "overlay_opacity": 20,
-            "overlay_gradient": "",
-            "button_1_text": "Shop Tops",
-            "button_1_link": "",
+            "overlay_opacity": 70,
+            "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4) 100%)",
+            "button_1_text": "Shop Now",
+            "button_1_link": "shopify://collections/self-care-club",
+            "button_1_outline": false,
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_outline": false
+          }
+        },
+        "slide_KPwN3G": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Render.png",
+            "slide_link": "",
+            "video_background": true,
+            "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "video_hosted": "shopify://files/videos/video-5-2.mp4",
+            "subheading": "INTRODUCING",
+            "heading": "Your everyday uniform",
+            "heading_size": "h2",
+            "content": "",
+            "description_size": "small",
+            "content_position": "bottom-left",
+            "text_alignment": "left",
+            "content_size": "large",
+            "overlay_color": "#000000",
+            "overlay_opacity": 70,
+            "overlay_gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4) 100%)",
+            "button_1_text": "Shop Now",
+            "button_1_link": "shopify://collections/self-care-club",
             "button_1_outline": true,
-            "button_2_text": "Shop Denim",
+            "button_2_text": "",
             "button_2_link": "",
             "button_2_outline": false
           }
         }
       },
       "block_order": [
-        "164794776393e76b8e-2",
-        "164794776393e76b8e-1"
+        "slide_P4TAWF",
+        "slide_gafMXJ",
+        "slide_KPwN3G"
       ],
       "settings": {
-        "desktop_height": "desktop-height-full",
-        "mobile_height": "mobile-height-500",
+        "desktop_height": "desktop-height-750",
+        "mobile_height": "mobile-height-450",
         "full_width": true,
         "autoplay": true,
         "autoplay_length": 10,
-        "transition": "swipe",
+        "transition": "fade",
         "disable_top_spacing": true,
         "disable_bottom_spacing": true
       }
     },
-    "1662389920b1295ea2": {
-      "type": "spacer",
+    "hero_banner_FrVzRx": {
+      "type": "hero-banner",
+      "disabled": true,
       "settings": {
-        "spacer_mobile": 25,
-        "spacer_desktop": 80,
-        "border_separator": false,
-        "border_separator_full": false
+        "desktop_height": "desktop-height-full",
+        "mobile_height": "mobile-height-500",
+        "full_width": true,
+        "full_width_padding": 0,
+        "corner_radius": 0,
+        "content_position": "bottom-left",
+        "text_alignment": "left",
+        "content_width": "medium",
+        "subheading": "INTRODUCING",
+        "heading": "Your Everyday Uniform",
+        "text": "",
+        "text_size": "text-size-extra-large",
+        "button_1_text": "Shop now",
+        "button_1_link": "",
+        "button_1_outline": false,
+        "button_2_text": "",
+        "button_2_link": "",
+        "button_2_outline": true,
+        "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "video_hosted": "shopify://files/videos/Hero Banner Demo.mp4",
+        "fallback_image": "shopify://shop_images/hq720.jpg",
+        "overlay_opacity": 25,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "166366563622039b3e": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Self Care Club",
+        "heading_left": false,
+        "description": "",
+        "full_width": true,
+        "collection": "self-care-club",
+        "display_type": "carousel",
+        "product_limit": 8,
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "mobile_swipe": false,
+        "show_progress_bar": false,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
       }
     },
     "16614195534fb74bc3": {
@@ -129,146 +198,151 @@
         "9dc5629d-3c1a-4dcc-b25a-0aa3972a2cb7",
         "8695b758-8543-4e57-bb17-1249221a1269"
       ],
+      "disabled": true,
       "settings": {
-        "heading": "BESTSELLERS",
+        "heading": "What's New",
         "heading_left": true,
         "description": "",
         "full_width": true,
-        "product_limit": 8,
-        "columns_desktop": 4,
+        "product_limit": 6,
+        "columns_desktop": 3,
         "show_view_all": true,
-        "show_progress_bar": true,
-        "disable_top_spacing": true,
-        "disable_bottom_spacing": false
+        "show_progress_bar": false,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
       }
     },
-    "166143150135dd97e2": {
-      "type": "gallery",
+    "rich_text_FeCiJ9": {
+      "type": "rich-text",
       "blocks": {
-        "6a1c724d-715f-4918-acea-e9f4464d74de": {
-          "type": "image",
-          "disabled": true,
+        "heading_TBqfbU": {
+          "type": "heading",
           "settings": {
-            "subheading": "Add a tagline",
-            "title": "Column",
-            "text": "Pair text with an image to focus on your chosen image",
-            "link_label": "Explore",
-            "link": "",
-            "use_text_button": false,
-            "block_link": "",
-            "product_list": []
+            "text": "",
+            "size": "h3"
           }
         },
-        "bbdd3a28-ed72-4073-b920-e0710a00f80b": {
-          "type": "image",
-          "disabled": true,
+        "text_kUx7pq": {
+          "type": "text",
           "settings": {
-            "subheading": "Add a tagline",
-            "title": "Column",
-            "text": "Pair text with an image to focus on your chosen image",
-            "link_label": "Explore",
-            "link": "",
-            "use_text_button": false,
-            "block_link": "",
-            "product_list": []
+            "text": "<h4>We make good decision-making effortless with modern essentials that inspire  change  from the inside out.</h4>",
+            "custom_liquid": "",
+            "size": "text-size-small"
+          }
+        },
+        "button_fkqJLf": {
+          "type": "button",
+          "settings": {
+            "link_label": "Learn More",
+            "link": "shopify://pages/our-story",
+            "button_outline": true
           }
         }
       },
       "block_order": [
-        "6a1c724d-715f-4918-acea-e9f4464d74de",
-        "bbdd3a28-ed72-4073-b920-e0710a00f80b"
+        "heading_TBqfbU",
+        "text_kUx7pq",
+        "button_fkqJLf"
       ],
-      "disabled": true,
       "settings": {
-        "columns_desktop": 2,
         "section_width": "full-width-row",
-        "mobile_swipe": false,
-        "image_ratio": "adapt",
-        "content_position": "bottom-left",
+        "text_width": "xlarge",
+        "text_position": "left",
         "text_alignment": "left",
-        "column_spacing": "large",
-        "heading_size": "h2",
-        "overlay_color": "#000000",
-        "overlay_opacity": 20,
+        "color_bg": "rgba(0,0,0,0)",
+        "color_text": "#151515",
+        "color_links": "#151515",
         "disable_top_spacing": true,
         "disable_bottom_spacing": false
       }
     },
-    "1661512437fd38dfb2": {
-      "type": "featured-collection-list",
+    "1661426105a80f3333": {
+      "type": "scrolling-text",
       "blocks": {
-        "0da7006d-3f7c-445e-beea-4a390b373aad": {
-          "type": "collection",
+        "0b2612d0-8401-4857-a46a-9487c6340ed5": {
+          "type": "text",
           "settings": {
-            "collection": ""
+            "text": "Add campaign text here.",
+            "link": "",
+            "outline_text": false
           }
         },
-        "55dc7437-dab4-4e15-b317-316d02faadb7": {
-          "type": "collection",
+        "85234e70-c157-4919-931d-bf097e8aab79": {
+          "type": "text",
           "settings": {
-            "collection": ""
-          }
-        },
-        "71a1e8d7-01d1-40d2-9ef1-6f2631328763": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "6f36cf8f-9b45-49f6-9ceb-e098c331d610": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
+            "text": "Add campaign text here.",
+            "link": "",
+            "outline_text": false
           }
         }
       },
       "block_order": [
-        "0da7006d-3f7c-445e-beea-4a390b373aad",
-        "55dc7437-dab4-4e15-b317-316d02faadb7",
-        "71a1e8d7-01d1-40d2-9ef1-6f2631328763",
-        "6f36cf8f-9b45-49f6-9ceb-e098c331d610"
+        "0b2612d0-8401-4857-a46a-9487c6340ed5",
+        "85234e70-c157-4919-931d-bf097e8aab79"
       ],
       "disabled": true,
       "settings": {
-        "desktop_height": "desktop-height-550",
-        "mobile_height": "mobile-height-500",
+        "height": "height-auto",
         "full_width": true,
-        "content_position": "middle-center",
-        "heading_size": "h1-large",
-        "color_text": "#ffffff",
+        "direction": "left",
+        "speed": "30s",
+        "font_family": "body",
+        "text_size": 100,
+        "text_uppercase": false,
+        "image_size": "medium",
+        "color_bg": "#ffffff",
+        "color_text": "#151515",
         "overlay_color": "#000000",
-        "overlay_opacity": 15,
-        "disable_top_spacing": true,
-        "disable_bottom_spacing": false
-      }
-    },
-    "166366563622039b3e": {
-      "type": "featured-collection",
-      "disabled": true,
-      "settings": {
-        "heading": "FEATURED COLLECTION",
-        "heading_left": true,
-        "description": "<p>Best dresses for the upcoming fall season</p>",
-        "full_width": true,
-        "collection": "",
-        "display_type": "carousel",
-        "product_limit": 8,
-        "columns_desktop": 4,
-        "show_view_all": true,
-        "mobile_swipe": true,
-        "show_progress_bar": true,
+        "overlay_opacity": 0,
         "disable_top_spacing": true,
         "disable_bottom_spacing": true
       }
     },
-    "166366584621bc44f2": {
-      "type": "spacer",
-      "disabled": true,
+    "hero_banner_VYkrHK": {
+      "type": "hero-banner",
       "settings": {
-        "spacer_mobile": 20,
-        "spacer_desktop": 55,
-        "border_separator": false,
-        "border_separator_full": false
+        "desktop_height": "desktop-height-750",
+        "mobile_height": "mobile-height-500",
+        "full_width": false,
+        "full_width_padding": 0,
+        "corner_radius": 33,
+        "content_position": "bottom-left",
+        "text_alignment": "left",
+        "content_width": "medium",
+        "subheading": "INTRODUCING",
+        "heading": "Your Everyday Uniform",
+        "text": "",
+        "text_size": "text-size-extra-large",
+        "button_1_text": "Explore",
+        "button_1_link": "shopify://collections/self-care-club",
+        "button_1_outline": false,
+        "button_2_text": "",
+        "button_2_link": "",
+        "button_2_outline": true,
+        "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "video_hosted": "shopify://files/videos/video-3.mp4",
+        "fallback_image": "shopify://shop_images/T_Shirt-2.png",
+        "overlay_opacity": 25,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "featured_collection_jzUKaJ": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "",
+        "heading_left": false,
+        "description": "<h4>Join The Club</h4><p>Discover Your Everyday Self Care Club Essentials</p>",
+        "full_width": true,
+        "collection": "self-care-club",
+        "display_type": "grid",
+        "product_limit": 5,
+        "columns_desktop": 5,
+        "show_view_all": false,
+        "mobile_swipe": false,
+        "show_progress_bar": false,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
       }
     },
     "1661539188062a849e": {
@@ -276,7 +350,6 @@
       "blocks": {
         "fda9f8c9-12e5-4536-bc2c-f950960c43b7": {
           "type": "product",
-          "disabled": true,
           "settings": {
             "product_handle": "",
             "x_position": 20,
@@ -296,49 +369,21 @@
         "disable_bottom_spacing": false
       }
     },
-    "16624658277b7c3abc": {
-      "type": "countdown-banner",
-      "disabled": true,
-      "settings": {
-        "section_width": "full-width-row",
-        "section_layout": "horizontal",
-        "desktop_height": "desktop-height-auto",
-        "mobile_height": "mobile-height-auto",
-        "subheading": "",
-        "heading": "SELF CARE CLUB",
-        "heading_size": "h2",
-        "content": "",
-        "content_size": "medium",
-        "button_text": "Pre-Order",
-        "button_link": "",
-        "timer_year": 2023,
-        "timer_month": "06",
-        "timer_day": "20",
-        "timer_hour": "00",
-        "timer_minute": "00",
-        "color_bg": "#e2e2e2",
-        "color_text": "#ffffff",
-        "overlay_color": "#000000",
-        "overlay_opacity": 0,
-        "disable_top_spacing": true,
-        "disable_bottom_spacing": true
-      }
-    },
     "1647955648d6a0baee": {
       "type": "featured-blog",
       "disabled": true,
       "settings": {
         "heading": "Latest News",
         "heading_left": true,
-        "description": "<p>Latest news from Reformation!</p>",
-        "full_width": true,
+        "description": "<p>Keep up</p>",
+        "full_width": false,
         "blog": "news",
         "post_limit": 3,
         "columns_desktop": 3,
         "mobile_swipe": true,
         "image_ratio": "landscape",
         "show_date": true,
-        "show_excerpt": true,
+        "show_excerpt": false,
         "show_view_all": true,
         "disable_top_spacing": false,
         "disable_bottom_spacing": true
@@ -346,7 +391,6 @@
     },
     "16626364694d37e9d5": {
       "type": "spacer",
-      "disabled": true,
       "settings": {
         "spacer_mobile": 0,
         "spacer_desktop": 20,
@@ -369,7 +413,6 @@
       "blocks": {
         "4551cbda-76ff-4a07-a279-a29df7956af6": {
           "type": "subheading",
-          "disabled": true,
           "settings": {
             "text": "IN THE PRESS"
           }
@@ -399,6 +442,57 @@
         "spacer_desktop": 20,
         "border_separator": false,
         "border_separator_full": false
+      }
+    },
+    "166143150135dd97e2": {
+      "type": "gallery",
+      "blocks": {
+        "bbdd3a28-ed72-4073-b920-e0710a00f80b": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/GoodEraBranding-35.jpg",
+            "subheading": "A new chapter begins",
+            "title": "Self Care Club",
+            "text": "",
+            "link_label": "Explore",
+            "link": "shopify://collections/self-care-club",
+            "use_text_button": false,
+            "block_link": "",
+            "product_list": []
+          }
+        },
+        "6a1c724d-715f-4918-acea-e9f4464d74de": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/GoodEraBranding-33.jpg",
+            "subheading": "Transforming Tomorrow",
+            "title": "Meet The Founder",
+            "text": "",
+            "link_label": "About Us",
+            "link": "shopify://pages/our-story",
+            "use_text_button": false,
+            "block_link": "",
+            "product_list": []
+          }
+        }
+      },
+      "block_order": [
+        "bbdd3a28-ed72-4073-b920-e0710a00f80b",
+        "6a1c724d-715f-4918-acea-e9f4464d74de"
+      ],
+      "settings": {
+        "columns_desktop": 2,
+        "section_width": "full-width-row",
+        "mobile_swipe": true,
+        "image_ratio": "square",
+        "content_position": "bottom-left",
+        "text_alignment": "left",
+        "column_spacing": "large",
+        "heading_size": "h2",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": false
       }
     },
     "16615358507b6ff1a8": {
@@ -472,7 +566,6 @@
       "blocks": {
         "1662098307788ca717-0": {
           "type": "icon",
-          "disabled": true,
           "settings": {
             "icon": "ruler",
             "heading": "Customer Support",
@@ -481,7 +574,6 @@
         },
         "1662098307788ca717-1": {
           "type": "icon",
-          "disabled": true,
           "settings": {
             "icon": "ruler",
             "heading": "Easy Returns",
@@ -490,7 +582,6 @@
         },
         "1662098307788ca717-2": {
           "type": "icon",
-          "disabled": true,
           "settings": {
             "icon": "ruler",
             "heading": "Gift Package",
@@ -499,7 +590,6 @@
         },
         "2c4a636c-cb89-4faf-82e6-13a0e7241006": {
           "type": "icon",
-          "disabled": true,
           "settings": {
             "icon": "ruler",
             "heading": "One-year Warranty",
@@ -517,8 +607,8 @@
       "settings": {
         "text_alignment": "left",
         "icon_position": "left",
-        "icon_size": "large",
-        "heading_size": "medium",
+        "icon_size": "medium",
+        "heading_size": "small",
         "mobile_swipe": true,
         "color_bg": "#ffffff",
         "color_heading": "#151515",
@@ -529,20 +619,21 @@
     }
   },
   "order": [
-    "16479477632637c9a7",
-    "1662389920b1295ea2",
-    "16614195534fb74bc3",
-    "166143150135dd97e2",
-    "1661512437fd38dfb2",
+    "slideshow_iX6Xi7",
+    "hero_banner_FrVzRx",
     "166366563622039b3e",
-    "166366584621bc44f2",
+    "16614195534fb74bc3",
+    "rich_text_FeCiJ9",
+    "1661426105a80f3333",
+    "hero_banner_VYkrHK",
+    "featured_collection_jzUKaJ",
     "1661539188062a849e",
-    "16624658277b7c3abc",
     "1647955648d6a0baee",
     "16626364694d37e9d5",
     "1662459246bd099bb7",
     "1662459178b0886a69",
     "16624594877292080f",
+    "166143150135dd97e2",
     "16615358507b6ff1a8",
     "1662636493225665a2",
     "1662368401fce27368",

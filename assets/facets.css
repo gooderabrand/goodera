@@ -1,6 +1,6 @@
 
 
-.facets .thb-filter .thb-filter-title span:before, .facets .thb-filter .thb-filter-title span:after, .active-facets__button span, .active-facets__button--color:before, .thb-filter ul.list-color label, .thb-filter ul.list-color label:after, .thb-filter ul.list--boxed label {
+.facets .thb-filter .thb-filter-title span:before, .facets .thb-filter .thb-filter-title span:after, .active-facets__button span, .active-facets__button--color:before, .thb-filter ul.list-color label, .thb-filter ul.list-color label:after {
   transition: all 0.25s cubic-bezier(0.104, 0.204, 0.492, 1); }
 
 
@@ -252,16 +252,16 @@
 .price_range .price_slider_amount {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 15px; }
+  grid-gap: 20px; }
   .price_range .price_slider_amount > div {
     display: flex;
     align-items: center; }
     .price_range .price_slider_amount > div .field-currency {
-      font-size: 0.875rem;
-      margin-right: 7px; }
+      font-size: 0.8125rem;
+      margin-right: 10px; }
       [dir="rtl"] .price_range .price_slider_amount > div .field-currency {
         margin-right: 0;
-        margin-left: 7px; }
+        margin-left: 10px; }
   .price_range .price_slider_amount input {
     box-sizing: border-box;
     margin-bottom: 0;
@@ -503,40 +503,3 @@
     .thb-filter ul.list-color label:not(.facet-checkbox--disabled):hover {
       z-index: 1;
       box-shadow: 0 0 0 1px var(--color-body) inset; }
-
-.thb-filter ul.list--boxed {
-  display: grid;
-  grid-template-columns: repeat(var(--max-boxes, 2), 1fr);
-  max-height: none;
-  padding: 1px 0 0 1px; }
-  .thb-filter ul.list--boxed li {
-    margin: -1px 0 0 -1px; }
-  .thb-filter ul.list--boxed label {
-    width: 100%;
-    height: 100%;
-    box-shadow: 0 0 0 1px var(--color-border) inset;
-    border-radius: 0;
-    display: inline-flex;
-    align-items: center;
-    padding: 7px;
-    justify-content: center;
-    font-size: 0.8125rem;
-    position: relative;
-    z-index: 0;
-    cursor: pointer; }
-    .thb-filter ul.list--boxed label:hover {
-      z-index: 1;
-      box-shadow: 0 0 0 1px var(--color-body) inset; }
-  .thb-filter ul.list--boxed input {
-    clip: rect(0, 0, 0, 0);
-    overflow: hidden;
-    position: absolute;
-    height: 1px;
-    width: 1px; }
-    .thb-filter ul.list--boxed input:checked + label {
-      z-index: 1;
-      box-shadow: 0 0 0 1px var(--color-body) inset;
-      background-color: var(--color-body);
-      color: var(--bg-body, #fff); }
-  .thb-filter ul.list--boxed .count {
-    font-size: 0.625rem; }

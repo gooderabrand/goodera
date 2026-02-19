@@ -1,0 +1,225 @@
+{%- liquid
+	assign section_heading = section.settings.heading
+	assign recommended_tab_title = section.settings.recommended_tab_title
+	assign recently_viewed_tab_title = section.settings.recently_viewed_tab_title
+	assign full_width = section.settings.full_width
+	assign mobile_swipe = section.settings.mobile_swipe
+	assign disable_top_spacing = section.settings.disable_top_spacing
+	assign disable_bottom_spacing = section.settings.disable_bottom_spacing
+
+	assign product_id = product.id
+	if template == 'cart' and cart != empty
+		assign product_id = cart.items.first.product_id
+	endif
+-%}
+
+<div class="row{% if full_width %} full-width-row{% endif %}">
+	<div class="small-12 columns section-spacing-padding{% if disable_top_spacing %} section-spacing--disable-top{% endif %}{% if disable_bottom_spacing %} section-spacing--disable-bottom{% endif %}">
+		{% render 'section-header', section_heading: section_heading %}
+
+		<div class="product-suggestions-tabs" data-product-id="{{ product_id }}" data-section-id="{{ section.id }}">
+			<ul class="tabs">
+				<li class="tab-link current" data-tab="tab-recommended">{{ recommended_tab_title }}</li>
+				<li class="tab-link" data-tab="tab-recently-viewed">{{ recently_viewed_tab_title }}</li>
+			</ul>
+
+			<div id="tab-recommended" class="tab-content current">
+				{# Recommended Products will be loaded here #}
+				<div class="product-recommendations">
+					{% comment %}
+					  Content loaded by JavaScript from product recommendations API
+					{% endcomment %}
+					<ul class="products collection row small-up-1 medium-up-4 no-padding">
+						{# Recommended product cards will be inserted here by JS #}
+					</ul>
+				</div>
+			</div>
+
+			<div id="tab-recently-viewed" class="tab-content">
+				{# Recently Viewed Products will be loaded here #}
+				<div class="recently-viewed-products">
+					{% comment %}
+					  Content loaded by JavaScript from recently viewed products logic
+					{% endcomment %}
+					<ul class="products collection row small-up-1 medium-up-4 no-padding">
+						{# Recently viewed product cards will be inserted here by JS #}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{ 'product-suggestions-tabs.js' | asset_url | script_tag }}
+
+{% schema %}
+	{
+		"name": "Product Suggestions Tabs",
+		"class": "section-product-suggestions-tabs",
+		"settings": [
+			{
+				"type": "text",
+				"id": "heading",
+				"label": "Section Heading",
+				"default": "You Might Also Like"
+			},
+			{
+				"type": "text",
+				"id": "recommended_tab_title",
+				"label": "Recommended Tab Title",
+				"default": "Recommended"
+			},
+			{
+				"type": "text",
+				"id": "recently_viewed_tab_title",
+				"label": "Recently Viewed Tab Title",				
+                "default": "Recently Viewed"
+			},
+			{
+				"type": "checkbox",
+				"id": "full_width",
+				"label": "Make section full width",
+				"default": true
+			},
+			{
+				"type": "checkbox",
+				"id": "mobile_swipe",
+				"default": true,
+				"label": "Enable swipe on mobile"
+			},
+	 		{
+	       "type": "header",
+	       "content": "Spacing"
+	     },
+	 		{
+	 			"type": "checkbox",
+	 			"id": "disable_top_spacing",
+	 			"default": false,
+	 			"label": "Remove top spacing"
+	 		},
+	 		{
+	 			"type": "checkbox",
+	 			"id": "disable_bottom_spacing",
+	 			"default": false,
+	 			"label": "Remove bottom spacing"
+	 		}
+		],
+    "presets": [
+      {
+        "name": "Product Suggestions Tabs"
+      }
+    ]
+	}
+{% endschema %}
+
+<style>
+  /* Basic styling for tabs - will need to be adapted to your theme's styles */
+  .product-suggestions-tabs .tabs {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 20px 0;
+    display: inline-flex;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    white-space: nowrap;
+    width: fit-content;
+    justify-content: center;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 30px;
+    padding: 3px;
+    background-color: #fff;
+  }
+
+  .product-suggestions-tabs .tabs li {
+    display: inline-block;
+    margin: 0;
+    padding: 8px 24px;
+    cursor: pointer;
+    border: none;
+    border-radius: 25px;
+    background-color: transparent;
+    color: #000;
+    font-weight: var(--font-body-medium-weight, 500);
+    opacity: 0.7;
+    position: relative;
+    transition: all 0.25s cubic-bezier(0.104, 0.204, 0.492, 1);
+    z-index: 1;
+  }
+
+  .product-suggestions-tabs .tabs li:hover {
+    opacity: 1;
+  }
+
+  .product-suggestions-tabs .tabs li.current {
+    background-color: #F5F5F5;
+    border-color: #ccc;
+    border-bottom: none;
+    opacity: 1;
+    color: #000;
+  }
+
+  .product-suggestions-tabs .tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+  }
+
+  .product-suggestions-tabs .tab-content.current {
+    display: block;
+  }
+
+  /* Add any necessary styling for product grid here, likely using existing theme styles */
+</style>
+
+<script>
+  // Basic JavaScript for tab functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.product-suggestions-tabs .tab-link').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var tabId = this.getAttribute('data-tab');
+
+        document.querySelectorAll('.product-suggestions-tabs .tab-link').forEach(function(link) {
+          link.classList.remove('current');
+        });
+        this.classList.add('current');
+
+        document.querySelectorAll('.product-suggestions-tabs .tab-content').forEach(function(content) {
+          content.classList.remove('current');
+        });
+        document.getElementById(tabId).classList.add('current');
+
+        // Trigger loading of products if needed
+        if (tabId === 'tab-recommended') {
+          loadRecommendedProducts(); // You'll need to implement this function
+        } else if (tabId === 'tab-recently-viewed') {
+           loadRecentlyViewedProducts(); // You'll need to implement this function
+        }
+      });
+    });
+
+    // Initial load of the first tab
+    // loadRecommendedProducts(); // Decide which tab should be active by default
+  });
+
+  // Function to load recommended products - needs implementation
+  function loadRecommendedProducts() {
+    // Use Shopify's built-in product recommendations API or similar logic
+    // Refer to product-recommendations.liquid for how your theme does this
+    console.log('Load recommended products'); // Placeholder
+  }
+
+  // Function to load recently viewed products - needs implementation
+  function loadRecentlyViewedProducts() {
+     // Use client-side logic (e.g., reading cookies/localStorage) to get recently viewed product handles
+     // Then fetch product data, possibly using Shopify's Storefront API or AJAX
+     // Refer to recently-viewed-products.js for how your theme does this
+     console.log('Load recently viewed products'); // Placeholder
+  }
+
+  // Decide which tab is active on load and call the corresponding load function
+  // Example: Activate the first tab by default
+  document.querySelector('.product-suggestions-tabs .tab-link.current').click();
+
+</script> 
