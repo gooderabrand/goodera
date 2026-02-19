@@ -141,9 +141,9 @@
     "166366563622039b3e": {
       "type": "featured-collection",
       "settings": {
-        "heading": "Self Care Club",
+        "heading": "",
         "heading_left": false,
-        "description": "",
+        "description": "<h4>Self Care Club</h4>",
         "full_width": true,
         "collection": "self-care-club",
         "display_type": "carousel",

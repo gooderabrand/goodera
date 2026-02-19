@@ -110,8 +110,9 @@
 	.customer-addresses .my-address .address-index {
 		/* Using EverydaySans-Medium for headings with theme heading font as backup */
 		font-family: 'EverydaySans-Medium', {{ heading_font.family }}, {{ heading_font.fallback_families }};
-		font-weight: 500; /* Set primary weight for EverydaySans-Medium */
-		font-style: normal; /* Set primary style for EverydaySans-Medium */
+		font-style: normal;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 	}
 
 	body,

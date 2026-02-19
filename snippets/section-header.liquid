@@ -5,7 +5,8 @@
         {{ section_description }}
       </div>
       {%- if section_heading -%}
-        <h2 class="h3">{{ section_heading }}</h2>
+        {%- assign heading_class = section_heading_size | default: 'h3' -%}
+        <h2 class="{{ heading_class }}">{{ section_heading }}</h2>
       {%- endif -%}
       {%- if section_description != blank -%}
         <!-- Section description (if any) -->
