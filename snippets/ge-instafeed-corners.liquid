@@ -1,0 +1,75 @@
+<script>
+  (function () {
+    var feedScript = /nfcube\.com\/instafeed-[^"'?\s]+\.js/i;
+
+    function rewriteFeedCode(code) {
+      return code
+        .replace(/corners\s*:\s*-?\d+(?:\.\d+)?/g, 'corners: 0')
+        .replace(/format\s*:\s*-?\d+(?:\.\d+)?/g, 'format: 0')
+        .replace(/if\(document\.currentScript&&!document\.currentScript\.src\.includes\([^)]+\)&&!document\.currentScript\.src\.includes\([^)]+\)\)return!1;/, '');
+    }
+
+    function inFeed(el) {
+      if (!el || el.nodeType !== 1) return false;
+      if (el.id === 'insta-feed' || (el.classList && el.classList.contains('instafeed-shopify'))) return true;
+      return !!(el.closest && el.closest('#insta-feed, .instafeed-shopify'));
+    }
+
+    function swapScript(node) {
+      if (!node || node.tagName !== 'SCRIPT' || node.dataset.geFeedSwap === '1') return;
+      var src = node.src || node.getAttribute('src') || '';
+      if (!feedScript.test(src)) return;
+      node.dataset.geFeedSwap = '1';
+      node.type = 'text/plain';
+      node.removeAttribute('src');
+      fetch(src, { credentials: 'omit' })
+        .then(function (res) { return res.text(); })
+        .then(function (code) {
+          var el = document.createElement('script');
+          el.text = rewriteFeedCode(code);
+          document.head.appendChild(el);
+        })
+        .catch(function () {
+          var el = document.createElement('script');
+          el.src = src;
+          el.defer = true;
+          document.head.appendChild(el);
+        });
+    }
+
+    new MutationObserver(function (records) {
+      records.forEach(function (record) {
+        record.addedNodes.forEach(swapScript);
+      });
+    }).observe(document.documentElement, { childList: true, subtree: true });
+
+    var htmlDesc = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML');
+    if (htmlDesc && htmlDesc.set) {
+      Object.defineProperty(Element.prototype, 'innerHTML', {
+        configurable: true,
+        enumerable: htmlDesc.enumerable,
+        get: htmlDesc.get,
+        set: function (value) {
+          if (typeof value === 'string' && /border-radius\s*:/i.test(value) && inFeed(this)) {
+            value = value.replace(/border-radius\s*:\s*[^;"']+/gi, 'border-radius:0');
+          }
+          htmlDesc.set.call(this, value);
+        }
+      });
+    }
+
+    function squareTiles() {
+      document.querySelectorAll('.instafeed-new-layout-item').forEach(function (item) {
+        var width = parseFloat(item.style.width);
+        var height = parseFloat(item.style.height);
+        if (!(width > 0) || !(height > width + 1)) return;
+        var previous = item.style.height;
+        item.style.height = item.style.width;
+        var box = item.closest('.instafeed-new-layout-container');
+        if (box && box.style.height === previous) box.style.height = item.style.width;
+      });
+    }
+
+    document.addEventListener('instafeedAppLoaded', squareTiles);
+  })();
+</script>

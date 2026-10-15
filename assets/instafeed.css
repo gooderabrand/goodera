@@ -1,96 +1,17 @@
 /*
-  Mintt Instafeed on the shop homepage.
-  Tiles crop square with sharp corners. The row stays full width,
-  same side edges as the product rails.
+  The feed row uses the same side edges as the product rails.
+  Photo corners and crop come from the feed script itself.
 */
 
-#insta-feed,
-.instafeed-shopify,
-.instafeed-new-layout-container,
-.instafeed-new-layout-wrapper,
-.page-width:has(#insta-feed),
-.page-width:has(.instafeed-shopify),
-.shopify-section:has(#insta-feed),
-.shopify-section:has(.instafeed-shopify) {
-  width: 100% !important;
-  max-width: none !important;
-  margin-inline: 0 !important;
+.shopify-section:has(#insta-feed) .page-width,
+.shopify-section:has(.instafeed-shopify) .page-width {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 0;
 }
 
-#insta-feed h1,
-#insta-feed h2,
-#insta-feed h3,
-#insta-feed [class*="title"],
-.instafeed-shopify h1,
-.instafeed-shopify h2,
-.instafeed-shopify [class*="title"] {
-  text-align: start !important;
-  padding-inline: 0 !important;
-  margin-inline: 0 !important;
-}
-
-.instafeed-new-layout-item,
-#insta-feed .instafeed-new-layout-item,
-.instafeed-shopify .instafeed-new-layout-item {
-  position: relative !important;
-  aspect-ratio: 1 / 1 !important;
-  height: auto !important;
-  max-height: none !important;
-  overflow: hidden !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-}
-
-.instafeed-new-layout-item a,
-.instafeed-new-layout-item > div,
-#insta-feed .instafeed-new-layout-item a,
-#insta-feed .instafeed-new-layout-item > div {
-  display: block;
-  width: 100% !important;
-  height: 100% !important;
-  aspect-ratio: 1 / 1 !important;
-  overflow: hidden !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-}
-
-.instafeed-new-layout-item img,
-.instafeed-new-layout-item video,
-#insta-feed .instafeed-new-layout-item img,
-#insta-feed .instafeed-new-layout-item video,
-.instafeed-shopify .instafeed-new-layout-item img,
-.instafeed-shopify .instafeed-new-layout-item video {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  max-width: none !important;
-  object-fit: cover !important;
-  object-position: center center !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-}
-
-#insta-feed [style*="border-radius"],
-.instafeed-shopify [style*="border-radius"],
-.instafeed-new-layout-item[style],
-.instafeed-new-layout-item [style] {
-  border-radius: 0 !important;
-}
-
-#insta-feed [class*="fade"],
-#insta-feed [class*="gradient"],
-#insta-feed [style*="linear-gradient"],
-.instafeed-shopify [class*="fade"],
-.instafeed-shopify [class*="gradient"],
-.instafeed-shopify [style*="linear-gradient"],
-.instafeed-new-layout-container::before,
-.instafeed-new-layout-container::after,
-.instafeed-new-layout-wrapper::before,
-.instafeed-new-layout-wrapper::after {
-  background: none !important;
-  background-image: none !important;
-  -webkit-mask-image: none !important;
-  mask-image: none !important;
+body #insta-feed,
+body .instafeed-shopify {
+  text-align: start;
 }
