@@ -1,75 +1,94 @@
 <script>
   (function () {
-    var feedScript = /nfcube\.com\/instafeed-[^"'?\s]+\.js/i;
+    var watching = typeof WeakSet === 'function' ? new WeakSet() : null;
 
-    function rewriteFeedCode(code) {
-      return code
-        .replace(/corners\s*:\s*-?\d+(?:\.\d+)?/g, 'corners: 0')
-        .replace(/format\s*:\s*-?\d+(?:\.\d+)?/g, 'format: 0')
-        .replace(/if\(document\.currentScript&&!document\.currentScript\.src\.includes\([^)]+\)&&!document\.currentScript\.src\.includes\([^)]+\)\)return!1;/, '');
+    function px(value) {
+      var number = parseFloat(value);
+      return number > 0 ? number : 0;
     }
 
-    function inFeed(el) {
-      if (!el || el.nodeType !== 1) return false;
-      if (el.id === 'insta-feed' || (el.classList && el.classList.contains('instafeed-shopify'))) return true;
-      return !!(el.closest && el.closest('#insta-feed, .instafeed-shopify'));
+    function clearRadius(el) {
+      if (!el || !el.style) return;
+      if (el.style.clipPath) el.style.clipPath = 'none';
+      if (el.style.borderRadius) el.style.borderRadius = '0';
     }
 
-    function swapScript(node) {
-      if (!node || node.tagName !== 'SCRIPT' || node.dataset.geFeedSwap === '1') return;
-      var src = node.src || node.getAttribute('src') || '';
-      if (!feedScript.test(src)) return;
-      node.dataset.geFeedSwap = '1';
-      node.type = 'text/plain';
-      node.removeAttribute('src');
-      fetch(src, { credentials: 'omit' })
-        .then(function (res) { return res.text(); })
-        .then(function (code) {
-          var el = document.createElement('script');
-          el.text = rewriteFeedCode(code);
-          document.head.appendChild(el);
-        })
-        .catch(function () {
-          var el = document.createElement('script');
-          el.src = src;
-          el.defer = true;
-          document.head.appendChild(el);
-        });
+    function fixItem(item) {
+      if (!item || item.nodeType !== 1) return;
+      clearRadius(item);
+      item.style.overflow = 'hidden';
+
+      var media = item.querySelectorAll('img, video, .instafeed-hover-layer, .instafeed-new-layout-item-container');
+      for (var i = 0; i < media.length; i++) clearRadius(media[i]);
+
+      var width = px(item.style.width);
+      var height = px(item.style.height);
+      if (!width || Math.abs(height - width) < 1) return;
+
+      item.style.height = width + 'px';
+      var box = item.closest('.instafeed-new-layout-container');
+      if (box && Math.abs(px(box.style.height) - height) < 2) box.style.height = width + 'px';
+    }
+
+    function scan(root) {
+      if (!root || root.nodeType !== 1) return;
+      if (root.classList && root.classList.contains('instafeed-new-layout-item')) fixItem(root);
+      if (!root.querySelectorAll) return;
+      var items = root.querySelectorAll('.instafeed-new-layout-item');
+      for (var i = 0; i < items.length; i++) fixItem(items[i]);
+    }
+
+    var feedObserver = new MutationObserver(function (records) {
+      for (var r = 0; r < records.length; r++) {
+        var record = records[r];
+        if (record.type === 'attributes') {
+          var target = record.target;
+          if (target.classList && target.classList.contains('instafeed-new-layout-item')) fixItem(target);
+          continue;
+        }
+        for (var n = 0; n < record.addedNodes.length; n++) scan(record.addedNodes[n]);
+      }
+    });
+
+    function watch(feed) {
+      if (!feed || feed.nodeType !== 1) return;
+      if (watching) {
+        if (watching.has(feed)) return;
+        watching.add(feed);
+      } else if (feed.dataset.geFeedWatch === '1') {
+        return;
+      } else {
+        feed.dataset.geFeedWatch = '1';
+      }
+      feedObserver.observe(feed, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['style']
+      });
+      scan(feed);
+    }
+
+    function collect(node, found) {
+      if (!node || node.nodeType !== 1) return;
+      if (node.id === 'insta-feed' || (node.classList && node.classList.contains('instafeed-shopify'))) found.push(node);
+      if (!node.querySelectorAll) return;
+      var nested = node.querySelectorAll('#insta-feed, .instafeed-shopify');
+      for (var i = 0; i < nested.length; i++) found.push(nested[i]);
     }
 
     new MutationObserver(function (records) {
-      records.forEach(function (record) {
-        record.addedNodes.forEach(swapScript);
-      });
+      for (var r = 0; r < records.length; r++) {
+        var nodes = records[r].addedNodes;
+        for (var n = 0; n < nodes.length; n++) {
+          var found = [];
+          collect(nodes[n], found);
+          for (var i = 0; i < found.length; i++) watch(found[i]);
+        }
+      }
     }).observe(document.documentElement, { childList: true, subtree: true });
 
-    var htmlDesc = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML');
-    if (htmlDesc && htmlDesc.set) {
-      Object.defineProperty(Element.prototype, 'innerHTML', {
-        configurable: true,
-        enumerable: htmlDesc.enumerable,
-        get: htmlDesc.get,
-        set: function (value) {
-          if (typeof value === 'string' && /border-radius\s*:/i.test(value) && inFeed(this)) {
-            value = value.replace(/border-radius\s*:\s*[^;"']+/gi, 'border-radius:0');
-          }
-          htmlDesc.set.call(this, value);
-        }
-      });
-    }
-
-    function squareTiles() {
-      document.querySelectorAll('.instafeed-new-layout-item').forEach(function (item) {
-        var width = parseFloat(item.style.width);
-        var height = parseFloat(item.style.height);
-        if (!(width > 0) || !(height > width + 1)) return;
-        var previous = item.style.height;
-        item.style.height = item.style.width;
-        var box = item.closest('.instafeed-new-layout-container');
-        if (box && box.style.height === previous) box.style.height = item.style.width;
-      });
-    }
-
-    document.addEventListener('instafeedAppLoaded', squareTiles);
+    var existing = document.querySelectorAll('#insta-feed, .instafeed-shopify');
+    for (var i = 0; i < existing.length; i++) watch(existing[i]);
   })();
 </script>

@@ -1,6 +1,6 @@
 /*
   The feed row uses the same side edges as the product rails.
-  Photo corners and crop come from the feed script itself.
+  Tile corners and the square crop are applied when the feed draws each photo.
 */
 
 .shopify-section:has(#insta-feed) .page-width,
