@@ -1,0 +1,17 @@
+/*
+  The feed row uses the same side edges as the product rails.
+  Tile corners and the square crop are applied when the feed draws each photo.
+*/
+
+.shopify-section:has(#insta-feed) .page-width,
+.shopify-section:has(.instafeed-shopify) .page-width {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 0;
+}
+
+body #insta-feed,
+body .instafeed-shopify {
+  text-align: start;
+}

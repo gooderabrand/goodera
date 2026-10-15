@@ -36,6 +36,7 @@
 	{% render 'social-meta-tags' %}
 
 	{{ 'app.css' | asset_url | stylesheet_tag }}
+	{{ 'instafeed.css' | asset_url | stylesheet_tag }}
 
 	{% render 'head-variables' %}
 
@@ -72,6 +73,7 @@
 			}
 		};
 	</script>
+	{% render 'ge-instafeed-corners' %}
 	{{ content_for_header }} <!-- Header hook for plugins -->
 
 	<script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
