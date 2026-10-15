@@ -256,3 +256,427 @@
     height: auto; }
   .social-links span {
     margin-left: 15px; }
+
+/**
+ * Good Era multi-column footer (sections/footer.liquid)
+ */
+.site-footer {
+  --ge-footer-field-bg: var(--ge-bg, #fff);
+  --ge-footer-field-ink: var(--ge-text, #17160f);
+  --ge-footer-chrome: var(--ge-text, #17160f);
+  --ge-footer-group-gap: 2rem;
+  margin-block-start: var(--ge-space-sm, 1rem);
+  padding-block-end: 0.75rem;
+}
+
+.shopify-section-group-footer-group:has(.destination-switcher) .site-footer {
+  padding-block-end: var(--ge-space-sm, 1rem);
+}
+
+.site-footer__inner {
+  gap: 0;
+  padding-block: 0.5rem 0;
+}
+
+/*
+  Match the shared page measure (header body, Sunday Reset sections, FAQ).
+  The footer shell is already guttered; this caps the row so it does not
+  run wider than the content above it.
+*/
+@media (min-width: 990px) {
+  .shopify-section-group-footer-group .site-footer .site-footer__inner,
+  .site-footer__inner {
+    width: min(100%, var(--ge-site-content, 80rem));
+    max-width: var(--ge-site-content, 80rem);
+    margin-inline: auto;
+  }
+}
+
+.site-footer__main {
+  width: 100%;
+}
+
+.site-footer__nav {
+  width: 100%;
+  min-width: 0;
+}
+
+.site-footer__cols {
+  width: 100%;
+}
+
+.site-footer__col {
+  margin: 0;
+  border-block-end: 1px solid var(--ge-hair, rgba(23, 22, 15, 0.08));
+}
+
+.site-footer__col:first-child {
+  border-block-start: 1px solid var(--ge-hair, rgba(23, 22, 15, 0.08));
+}
+
+.site-footer__heading {
+  margin: 0;
+}
+
+.site-footer__heading--static {
+  padding-block: 1.05rem 0.75rem;
+}
+
+.site-footer__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding-block: 1.05rem;
+  padding-inline: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--ge-text, var(--color-body));
+  text-align: start;
+  font-family: var(--ge-font);
+  font-size: var(--ge-role-meta);
+  font-weight: var(--ge-weight-medium, 500);
+}
+
+html body .site-footer__heading,
+html body .site-footer__heading-text {
+  font-family: var(--ge-font);
+  font-size: var(--ge-role-meta);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: var(--ge-lh-snug, 1.25);
+  color: #1a1a1a;
+}
+
+.site-footer__toggle {
+  position: relative;
+  width: 0.55rem;
+  height: 0.55rem;
+  flex-shrink: 0;
+  color: inherit;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 180ms ease;
+}
+
+.site-footer__col.is-open .site-footer__toggle {
+  transform: rotate(225deg);
+}
+
+.site-footer__links {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 1rem;
+  display: none;
+  gap: 0.55rem;
+}
+
+.site-footer__col.is-open .site-footer__links {
+  display: grid;
+}
+
+.site-footer__links a {
+  color: #8a8a8a;
+  text-decoration: none;
+  font-family: var(--ge-font-body, var(--ge-font));
+  font-size: var(--ge-role-meta);
+  font-weight: var(--ge-weight-regular, 400);
+}
+
+.site-footer__links a:hover,
+.site-footer__links a:focus-visible {
+  color: #1a1a1a;
+}
+
+.site-footer__signup {
+  display: grid;
+  gap: 0.65rem;
+  width: 100%;
+  padding-block-start: 1.15rem;
+  margin-block-start: 0.35rem;
+  border-block-start: 1px solid var(--ge-hair, rgba(23, 22, 15, 0.08));
+}
+
+.site-footer__signup-inner {
+  min-width: 0;
+}
+
+.site-footer__signup-note {
+  margin: 0.35rem 0 0;
+  color: inherit;
+  font-family: var(--ge-font-body, var(--ge-font));
+  font-size: var(--ge-role-meta);
+}
+
+.site-footer__omnisend,
+.site-footer__signup .ge-email-signup__omnisend {
+  width: 100%;
+  min-height: 3rem;
+}
+
+.site-footer__signup .ge-email-signup__label {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0 0 0.85rem;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  color: #8a8a8a;
+  font-family: var(--ge-font-body, var(--ge-font));
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.site-footer__signup .ge-email-signup__row {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.85rem;
+  width: 100%;
+}
+
+.site-footer__signup .ge-email-signup__row input[type="email"],
+.site-footer__signup .ge-email-signup__row button {
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  border-radius: 0;
+  font-family: var(--ge-font-body, var(--ge-font));
+  font-size: 0.9375rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.3;
+  appearance: none;
+  -webkit-appearance: none;
+  box-shadow: none;
+}
+
+.site-footer__signup .ge-email-signup__row input[type="email"] {
+  height: auto;
+  min-height: 0;
+  margin-bottom: 0;
+  padding: 0.45rem 0 0.55rem;
+  border: 0;
+  border-bottom: 1px solid #d5d5d5;
+  border-radius: 0;
+  background: transparent;
+  color: #2a2a2a;
+  caret-color: #2a2a2a;
+}
+
+.site-footer__signup .ge-email-signup__row input[type="email"]::placeholder {
+  color: #b0b0b0;
+  opacity: 1;
+}
+
+.site-footer__signup .ge-email-signup__row input[type="email"]:focus,
+.site-footer__signup .ge-email-signup__row input[type="email"]:focus-visible {
+  outline: none;
+  border-color: transparent;
+  border-bottom: 1px solid #1a1a1a;
+  background: transparent;
+  color: #1a1a1a;
+}
+
+.site-footer__signup .ge-email-signup__row button {
+  min-height: 2.75rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid #e3e3e3;
+  background: #fff;
+  color: #b5b5b5;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.site-footer__signup .ge-email-signup__row button:hover,
+.site-footer__signup .ge-email-signup__row button:focus-visible {
+  background: #fff;
+  border-color: #1a1a1a;
+  color: #1a1a1a;
+  outline: none;
+}
+
+.site-footer__signup .ge-email-signup__notice {
+  margin: 0;
+  font-size: var(--ge-role-meta);
+}
+
+.site-footer__bottom {
+  width: 100%;
+  margin-block-start: 1rem;
+  padding-block-start: 0.75rem;
+  border-block-start: 1px solid var(--ge-hair, rgba(23, 22, 15, 0.08));
+  text-align: center;
+}
+
+.site-footer__legal {
+  margin: 0;
+  padding: 0;
+  color: var(--ge-muted);
+  font-size: var(--ge-text-sm, 0.75rem);
+}
+
+.site-footer__legal-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  width: 100%;
+  text-align: center;
+}
+
+.site-footer__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 1.15rem;
+  margin: 0;
+  font-size: var(--ge-text-sm, 0.75rem);
+}
+
+.site-footer__meta a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-footer__col--signup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
+  border: 0;
+}
+
+.site-footer__col--signup .site-footer__signup {
+  width: 100%;
+}
+
+@media (min-width: 990px) {
+  .site-footer__main--with-signup {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: stretch;
+    gap: var(--ge-footer-group-gap, 2rem);
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .site-footer__nav {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .site-footer__cols {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: clamp(1.5rem, 3vw, 3.5rem);
+    width: 100%;
+    max-width: none;
+  }
+
+  .site-footer__col {
+    flex: 0 1 auto;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+  }
+
+  .site-footer__col.site-footer__col--signup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+    flex: 1 1 16rem;
+    width: auto;
+    max-width: 22rem;
+  }
+
+  .site-footer__col--signup .site-footer__signup {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: none;
+  }
+
+  .site-footer__col--signup .site-footer__signup .ge-email-signup__form,
+  .site-footer__col--signup .site-footer__signup .ge-email-signup__omnisend,
+  .site-footer__col--signup .site-footer__signup .ge-email-signup__row,
+  .site-footer__col--signup .site-footer__signup .ge-email-signup__row input,
+  .site-footer__col--signup .site-footer__signup .ge-email-signup__row button {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+
+  .site-footer__col--signup .site-footer__signup .ge-email-signup__row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .site-footer__legal-row {
+    flex-direction: row;
+    gap: 0.65rem 1.5rem;
+  }
+
+  .site-footer__col,
+  .site-footer__col:first-child {
+    border: 0;
+  }
+
+  .site-footer__trigger {
+    padding-block: 0 0.5rem;
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .site-footer__heading--static {
+    padding-block: 0 0.5rem;
+  }
+
+  .site-footer__toggle {
+    display: none;
+  }
+
+  .site-footer__links,
+  .site-footer__col.is-open .site-footer__links {
+    display: grid;
+    padding: 0;
+  }
+
+  .site-footer__signup {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .site-footer__signup .ge-email-signup__form,
+  .site-footer__signup .ge-email-signup__omnisend,
+  .site-footer__signup .ge-email-signup__row,
+  .site-footer__signup .ge-email-signup__row input,
+  .site-footer__signup .ge-email-signup__row button {
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+    min-width: 0;
+    max-width: none;
+  }
+}
