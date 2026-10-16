@@ -1,0 +1,227 @@
+/**
+ * Collection pages: flat title, mini category row, rail-sized cards,
+ * filters and sort as a right-side drawer.
+ */
+
+.template-collection .collection-banner,
+.template-collection .collection-banner.collection-banner--has-bg {
+  min-height: 0;
+  margin: 0;
+  border-radius: 0;
+  overflow: visible;
+  color: #17160f;
+  background: transparent;
+}
+
+.template-collection .collection-banner--image,
+.template-collection .collection-banner--has-bg .collection-banner--image,
+.template-collection .collection-banner--has-bg .collection-banner--image:after {
+  display: none !important;
+}
+
+.template-collection .collection-banner .row,
+.template-collection .collection-banner .row.full-width-row,
+.template-collection .collection-banner .columns,
+.template-collection .collection-banner .small-12.columns {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding-inline: 0 !important;
+}
+
+.template-collection .collection-banner--breadcrumbs {
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+  z-index: 1;
+  padding-block: 0.85rem 0;
+}
+
+.template-collection .collection-banner--breadcrumbs,
+.template-collection .collection-banner--content,
+.template-collection .collection-banner:not(.collection-banner--has-bg) .collection-banner--breadcrumbs,
+.template-collection .collection-banner:not(.collection-banner--has-bg) .collection-banner--content,
+.template-collection .collection-banner.collection-banner--has-bg .collection-banner--content {
+  padding-inline: calc(var(--ge-content-inset, 0px) + var(--ge-shell-gutter, 20px))
+    var(--ge-shell-gutter, 20px) !important;
+  text-align: left !important;
+}
+
+.template-collection .collection-banner--content {
+  padding-block: 0.35rem 0.25rem !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+.template-collection .collection-banner--title,
+.template-collection .collection-banner--content h1,
+.template-collection .collection-banner--description,
+.template-collection .collection-banner--description p,
+.template-collection .collection-banner .breadcrumbs,
+.template-collection .collection-banner .breadcrumbs a,
+.template-collection .collection-banner .breadcrumbs i {
+  color: #17160f !important;
+  opacity: 1;
+}
+
+.template-collection .collection-banner .breadcrumbs {
+  padding: 0;
+}
+
+/* Mini collections sit under the title, on the same left inset as the old banner edge. */
+.template-collection .section-collection-list {
+  overflow: visible;
+}
+
+.template-collection .section-collection-list .row {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: calc(var(--ge-content-inset, 0px) + var(--ge-shell-gutter, 20px))
+    var(--ge-shell-gutter, 20px);
+  box-sizing: border-box;
+}
+
+.template-collection .section-collection-list .columns {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 0;
+  box-sizing: border-box;
+}
+
+.template-collection .section-collection-list .list-collections {
+  margin-block: 0.35rem 0.85rem;
+}
+
+.template-collection .section-collection-list .collection-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--ge-rail-gap, 12px);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.template-collection .section-collection-list .collection-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.template-collection .section-collection-list .collection-grid > div {
+  flex: 0 0 148px;
+  width: 148px;
+  max-width: 148px;
+  padding: 0;
+  scroll-snap-align: start;
+}
+
+@media (min-width: 990px) {
+  .template-collection .section-collection-list .collection-grid > div {
+    flex-basis: 168px;
+    width: 168px;
+    max-width: 168px;
+  }
+}
+
+.template-collection .section-collection-list .collection-card__image {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--ge-surface, #f5f5f7);
+}
+
+.template-collection .section-collection-list .collection-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.template-collection .section-collection-list .collection-card__content,
+.template-collection .section-collection-list .collection-card__content a {
+  color: #17160f;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+/* Product cards match the rail width used on the rest of the shop. */
+@media (min-width: 990px) {
+  .template-collection .ge-collection__grid,
+  .template-collection #product-grid.ge-collection__grid {
+    grid-template-columns: repeat(auto-fill, clamp(260px, 18vw, 300px));
+    justify-content: start;
+  }
+}
+
+/* Filters and sort open from the right, same edge as the cart. */
+.template-collection .side-panel.facet-drawer {
+  right: 0 !important;
+  left: auto !important;
+  transform: translateX(100%) !important;
+}
+
+.template-collection .side-panel.facet-drawer.active {
+  transform: translateX(0%) !important;
+}
+
+.template-collection .ge-facet-popover,
+.template-collection .ge-facet-sheet {
+  display: none !important;
+}
+
+.template-collection .ge-facets-bar__end {
+  margin-inline-start: auto;
+  gap: 1.15rem;
+}
+
+.template-collection .ge-facets-bar__sort {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  pointer-events: none;
+}
+
+.template-collection .ge-facets-bar__sort-trigger {
+  display: inline-flex;
+}
+
+@media (max-width: 989px) {
+  .template-collection .ge-facets-bar__sort-trigger {
+    display: inline-flex;
+  }
+}
+
+.ge-sort-drawer__list {
+  list-style: none;
+  margin: 0;
+  padding: 0.35rem 0 1rem;
+}
+
+.ge-sort-drawer__option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 0.9rem 1.25rem;
+  border: 0;
+  background: transparent;
+  color: #17160f;
+  font-family: var(--ge-font, inherit);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ge-sort-drawer__option.is-active {
+  font-weight: 600;
+}
+
+.ge-sort-drawer__option:hover,
+.ge-sort-drawer__option:focus-visible {
+  background: rgba(23, 22, 15, 0.04);
+}
