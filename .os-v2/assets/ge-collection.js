@@ -47,9 +47,26 @@
     summary.innerHTML = '<span></span>Sort By';
     details.appendChild(summary);
 
+    var sortLabels = {
+      manual: 'Featured',
+      'best-selling': 'Best Selling',
+      'created-descending': 'New Arrivals',
+      'price-descending': 'Price: High to Low',
+      'price-ascending': 'Price: Low to High'
+    };
+    var sortOrder = ['manual', 'created-descending', 'best-selling', 'price-descending', 'price-ascending'];
+    var options = Array.prototype.filter.call(select.options, function (option) {
+      return sortLabels[option.value] || option.selected;
+    });
+    options.sort(function (a, b) {
+      var ai = sortOrder.indexOf(a.value);
+      var bi = sortOrder.indexOf(b.value);
+      return (ai < 0 ? 99 : ai) - (bi < 0 ? 99 : bi);
+    });
+
     var list = document.createElement('div');
     list.className = 'thb-filter-content ge-sort-facet__list';
-    Array.prototype.forEach.call(select.options, function (option) {
+    options.forEach(function (option) {
       var row = document.createElement('label');
       row.className = 'ge-sort-facet__option';
       var input = document.createElement('input');
@@ -64,7 +81,7 @@
         select.dispatchEvent(new Event('input', { bubbles: true }));
       });
       row.appendChild(input);
-      row.appendChild(document.createTextNode(option.text));
+      row.appendChild(document.createTextNode(sortLabels[option.value] || option.text));
       list.appendChild(row);
     });
     details.appendChild(list);

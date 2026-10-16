@@ -276,9 +276,9 @@
 }
 
 .template-collection .ge-facet-sheet__title {
-  font-size: 1.75rem;
+  font-size: 2rem;
   font-weight: 500;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   text-transform: none;
 }
 
@@ -306,6 +306,13 @@
   display: none !important;
 }
 
+.template-collection .ge-facet-sheet collapsible-row:has(.price_range),
+.template-collection .ge-facet-sheet collapsible-row:has(.thb-filter-availability),
+.template-collection .ge-facet-sheet details.thb-filter:has(.price_range),
+.template-collection .ge-facet-sheet details.thb-filter:has(.thb-filter-availability) {
+  display: none !important;
+}
+
 .template-collection .ge-facet-sheet .facets .thb-filter {
   margin: 0;
   border-bottom: 1px solid rgba(23, 22, 15, 0.12);
@@ -313,66 +320,218 @@
 
 .template-collection .ge-facet-sheet .facets .thb-filter .thb-filter-title {
   justify-content: space-between;
-  padding: 1.05rem 0;
-  font-size: 1.02rem;
-  font-weight: 650;
-  letter-spacing: 0;
+  padding: 1.35rem 0;
+  font-size: 1.7rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
   text-transform: none;
 }
 
 .template-collection .ge-facet-sheet .facets .thb-filter .thb-filter-title span {
+  position: relative;
   order: 2;
-  flex: 0 0 12px;
-  width: 12px;
-  height: 12px;
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
   margin: 0;
 }
 
-.template-collection .ge-facet-sheet .facets .thb-filter .thb-filter-title span:before,
-.template-collection .ge-facet-sheet .facets .thb-filter .thb-filter-title span:after {
-  background: transparent;
-  border-right: 1.5px solid #17160f;
-  border-bottom: 1.5px solid #17160f;
-  width: 8px;
-  height: 8px;
-  left: 2px;
-  top: 1px;
-  transform: rotate(45deg);
+.template-collection .ge-facet-sheet .facets .thb-filter .thb-filter-title span:before {
+  display: none !important;
+  content: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: none !important;
+  transform: none !important;
 }
 
 .template-collection .ge-facet-sheet .facets .thb-filter .thb-filter-title span:after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  width: 9px !important;
+  height: 9px !important;
+  top: 2px !important;
+  left: 3px !important;
+  background: none !important;
+  border: 0 !important;
+  border-right: 1.5px solid #17160f !important;
+  border-bottom: 1.5px solid #17160f !important;
+  transform: rotate(45deg) !important;
+}
+
+.template-collection .ge-facet-sheet .facets .thb-filter[open] .thb-filter-title span:after {
+  top: 6px !important;
+  transform: rotate(-135deg) !important;
+}
+
+.template-collection .ge-facet-sheet .thb-filter-content {
+  padding-top: 0.15rem;
+  padding-bottom: 0.85rem;
+}
+
+.template-collection .ge-facet-sheet .thb-filter-content .count,
+.template-collection .ge-facet-sheet .thb-filter-content sup.count {
   display: none;
 }
 
-.template-collection .ge-facet-sheet .facets .thb-filter[open] .thb-filter-title span:before {
-  top: 4px;
-  transform: rotate(-135deg);
+.template-collection .ge-facet-sheet .thb-filter-content ul {
+  max-height: none;
+  overflow: visible;
+}
+
+.template-collection .ge-facet-sheet .thb-filter-content li {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0.72rem 0;
+}
+
+.template-collection .ge-facet-sheet .thb-filter-content input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  margin: 0 0.95rem 0 0;
+  border: 1.5px solid #c8c8c4;
+  border-radius: 5px;
+  background: #fff center / 12px 12px no-repeat;
+  cursor: pointer;
+}
+
+.template-collection .ge-facet-sheet .thb-filter-content input[type="checkbox"]:checked {
+  border-color: #17160f;
+  background-color: #17160f;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path d='M2 6.2 4.6 8.8 10 3.2' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+}
+
+.template-collection .ge-facet-sheet .thb-filter-content label {
+  font-size: 1.0625rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: #17160f;
+}
+
+.template-collection .ge-facet-sheet .thb-filter ul.list-color {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0;
+  margin: 0;
+  padding: 0 0 0.35rem;
+}
+
+.template-collection .ge-facet-sheet .thb-filter ul.list-color li {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 0.62rem 0;
+}
+
+.template-collection .ge-facet-sheet .thb-filter ul.list-color input {
+  position: static;
+  clip: auto;
+  overflow: visible;
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  margin: 0 0.95rem 0 0;
+}
+
+.template-collection .ge-facet-sheet .thb-filter ul.list-color label,
+.template-collection .ge-facet-sheet .thb-filter ul.list-color input:checked + label,
+.template-collection .ge-facet-sheet .thb-filter ul.list-color label:hover {
+  display: flex;
+  align-items: center;
+  width: auto;
+  height: auto;
+  flex: 1 1 auto;
+  margin: 0;
+  text-indent: 0;
+  color: #17160f;
+  font-size: 1.0625rem;
+  box-shadow: none;
+  background: none;
+  transform: none;
+}
+
+.template-collection .ge-facet-sheet .thb-filter ul.list-color label:before {
+  display: none !important;
+  content: none !important;
+}
+
+.template-collection .ge-facet-sheet .thb-filter ul.list-color label:after {
+  content: "";
+  position: static;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  width: 28px;
+  height: 28px;
+  margin-left: auto;
+  flex: 0 0 28px;
+  border-radius: 50%;
+  transform: none;
+  background-color: var(--bg-color, #d4d4d8);
+  background-image: var(--option-color-image);
+  background-size: cover;
+  background-position: center;
+  box-shadow: inset 0 0 0 1px rgba(23, 22, 15, 0.14);
 }
 
 .template-collection .ge-facet-sheet .ge-sort-facet__list {
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
-  padding: 0 0 1rem;
+  padding: 0.15rem 0 1.15rem;
 }
 
 .template-collection .ge-facet-sheet .ge-sort-facet__option {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
   margin: 0;
-  padding: 0.45rem 0;
+  padding: 0.62rem 0;
   color: #17160f;
-  font-size: 0.98rem;
+  font-size: 1.125rem;
   font-weight: 400;
   cursor: pointer;
 }
 
 .template-collection .ge-facet-sheet .ge-sort-facet__option input {
-  width: 18px;
-  height: 18px;
+  appearance: none;
+  -webkit-appearance: none;
+  display: grid;
+  place-content: center;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
   margin: 0;
-  accent-color: #17160f;
+  border: 1.5px solid #c8c8c4;
+  border-radius: 50%;
+  background: #fff;
+  accent-color: transparent;
+}
+
+.template-collection .ge-facet-sheet .ge-sort-facet__option input::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #17160f;
+  transform: scale(0);
+}
+
+.template-collection .ge-facet-sheet .ge-sort-facet__option input:checked {
+  border-color: #17160f;
+}
+
+.template-collection .ge-facet-sheet .ge-sort-facet__option input:checked::before {
+  transform: scale(1);
 }
 
 .template-collection .ge-facet-sheet__footer {
@@ -401,8 +560,9 @@
 }
 
 .template-collection .ge-facet-sheet__reset {
-  background: #f3f3f1;
+  background: #fff;
   color: #17160f;
+  border: 1px solid #17160f;
 }
 
 .template-collection .ge-facet-sheet__apply {
