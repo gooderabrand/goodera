@@ -229,6 +229,50 @@ html body .product-card .product-card-color-text {
   .site-header .ge-inset-x {
     padding-inline: 16px;
   }
+
+  /* Standalone announcement is a desktop header slot. */
+  .announcement-bar-section {
+    display: none !important;
+  }
+
+  /*
+    Homepage product rails meet the screen edge, the way the product
+    gallery does. Titles keep a small pad so they don't sit on the bezel.
+  */
+  .template-index .ge-commerce-section {
+    padding-inline: 0 !important;
+  }
+
+  .template-index .ge-commerce-section .section-header,
+  .template-index .section-featured-collection .section-header,
+  .template-index .section-recently-viewed-products .section-header {
+    padding-inline: 16px;
+  }
+
+  .template-index .ge-rail__scroller {
+    padding-inline: 0 !important;
+    scroll-padding-inline: 0 !important;
+  }
+
+  .template-index .ge-commerce-section .product-card .product-card--featured-image,
+  .template-index .ge-commerce-section .product-card figure.product-card--featured-image,
+  .template-index .ge-commerce-section .product-card .product-card--featured-image-link,
+  .template-index .ge-commerce-section .product-card a.product-card--featured-image-link,
+  .template-index .ge-commerce-section .product-card .product-featured-image-link,
+  .template-index .ge-commerce-section .product-card .product-card--featured-image-link img,
+  .template-index .ge-commerce-section .product-card .product-featured-image-link img,
+  .template-index .ge-commerce-section .product-card .product-primary-image,
+  .template-index .ge-commerce-section .product-card .product-secondary-image {
+    border-radius: 0 !important;
+  }
+
+  .template-index .ge-commerce-section .product-card-info {
+    padding-inline: 8px;
+  }
+
+  html body .site-footer {
+    padding-inline: 8px !important;
+  }
 }
 
 /*
@@ -274,4 +318,42 @@ body.ge-nav-horizontal:not(.template-index):not(.ge-page-sunday-reset) .site-hea
 
 body.ge-nav-horizontal:not(.template-index):not(.ge-page-sunday-reset) .site-header__logo-white {
   display: none !important;
+}
+
+/*
+  Shop menu rows use the filter-drawer type: large, medium, tight.
+  Parent "Shop" stays the accordion title. Everything under it
+  (Explore, group labels, collection links) matches that scale.
+*/
+html body .site-header .ge-mobile-menu__explore,
+html body .site-header .ge-mobile-menu__section-label,
+html body .site-header .ge-mobile-menu__link,
+html body .site-header .ge-mobile-menu__link--emphasis,
+html body.ge-nav-horizontal .ge-mega--horizontal .ge-mega__label,
+html body.ge-nav-horizontal .ge-mega--horizontal .ge-mega__heading,
+html body.ge-nav-horizontal .ge-mega--horizontal .ge-mega__link,
+html body.ge-nav-horizontal .ge-mega--horizontal .ge-mega__column:first-child .ge-mega__link,
+html body.ge-nav-horizontal .ge-mega--horizontal .ge-mega__column:first-child .ge-mega__heading {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-size: 1.7rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  text-transform: none;
+  color: #17160f;
+}
+
+html body .site-header .ge-mobile-menu__explore,
+html body .site-header .ge-mobile-menu__link,
+html body .site-header .ge-mobile-menu__link--emphasis {
+  padding-block: 0.65rem;
+}
+
+html body .site-header .ge-mobile-menu__section-label {
+  margin: 0.85rem 0 0.15rem;
+  padding-block: 0.65rem 0.2rem;
+}
+
+html body.ge-nav-horizontal .ge-mega--horizontal .ge-mega__link {
+  padding-block: 0.4rem;
 }

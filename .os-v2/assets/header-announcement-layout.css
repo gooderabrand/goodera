@@ -1,5 +1,12 @@
 .site-header__announcement { display: none; }
 
+/* The bar is a desktop header slot. On mobile it stays in its own section. */
+@media (max-width: 989px) {
+  .announcement-bar-section {
+    display: none !important;
+  }
+}
+
 @media (min-width: 990px) {
   body.ge-nav-horizontal .site-header[data-desktop-layout="centered_announcement"] .site-header__inner {
     grid-template-columns: minmax(320px, 1fr) minmax(0, 1fr) minmax(320px, 1fr);
