@@ -1,0 +1,21 @@
+{% doc %}
+  Renders the model-fit line from the product's custom.model_fit metaobject.
+
+  @param product {Product} the product
+  @param block {Block} optional theme-editor block
+{% enddoc %}
+{%- liquid
+  assign fit = product.metafields.custom.model_fit.value
+  assign height = fit.height
+  assign fit_size = fit.size
+-%}
+{%- if height != blank and fit_size != blank -%}
+  <p class="product-model-fit"{% if block %} {{ block.shopify_attributes }}{% endif %}>
+    {%- assign model_fit_text = 'products.product.model_fit_html' | t: height: height, size: fit_size -%}
+    {%- if model_fit_text contains 'products.product.model_fit_html' -%}
+      Model is {{ height }} and wears size {{ fit_size }}
+    {%- else -%}
+      {{ model_fit_text }}
+    {%- endif -%}
+  </p>
+{%- endif -%}

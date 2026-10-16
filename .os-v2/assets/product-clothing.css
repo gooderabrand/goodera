@@ -1,0 +1,330 @@
+/**
+ * Clothing PDP — Lululemon-style layout on template-product-clothing.
+ * Loaded after product-ge.css. Default / skincare PDP is unchanged.
+ */
+
+.template-product-clothing .thb-product-detail {
+  --ge-clothing-size: 3.5rem;
+  --ge-clothing-info: 34rem;
+}
+
+/* Less inset: media can sit closer to the shell edge */
+@media (min-width: 990px) {
+  .template-product-clothing .thb-product-detail > .row {
+    padding-inline: var(--ge-shell-gutter, 20px);
+  }
+}
+
+/* Wider sticky info column; gallery takes the leftover */
+@media (min-width: 1068px) {
+  .template-product-clothing .thb-product-detail .product-grid-container {
+    grid-template-columns: minmax(0, 1fr) minmax(28rem, var(--ge-clothing-info));
+    justify-content: stretch;
+    grid-gap: clamp(1.25rem, 2.5vw, 2rem);
+  }
+
+  .template-product-clothing .thb-product-detail .product-information--inner,
+  .template-product-clothing .thb-product-detail .production-information--sticky {
+    position: sticky;
+    top: var(--ge-detail-sticky-top, 24px);
+    max-width: none;
+  }
+
+  .template-product-clothing .thb-product-detail [id^='MediaGallery-'] {
+    position: sticky;
+    top: var(--ge-detail-sticky-top, 24px);
+    align-self: start;
+    max-height: calc(100dvh - var(--ge-detail-sticky-top, 24px) - 0.5rem);
+  }
+}
+
+/* ——— Color name: Maison Neue, not Garamond italic ——— */
+.template-product-clothing .thb-product-detail .product-form__input--color .form__label__value,
+.template-product-clothing .thb-product-detail .product-form__input--siblings .form__label__value,
+.template-product-clothing .thb-product-detail .form__label__value,
+.template-product-clothing .template-product .thb-product-detail .product-form__input--color .form__label__value {
+  font-family: var(--ge-font, inherit) !important;
+  font-style: normal !important;
+  font-weight: var(--ge-weight-regular, 400) !important;
+  font-size: var(--ge-role-body) !important;
+  letter-spacing: var(--ge-tracking-body, 0.005em);
+  line-height: var(--ge-lh-snug, 1.25);
+  text-transform: none;
+  font-synthesis: none;
+}
+
+/* ——— Square size tiles ——— */
+.template-product-clothing .thb-product-detail .variations .product-form__input--block {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.template-product-clothing .thb-product-detail .variations .product-form__input--block input[type='radio'] + label {
+  box-sizing: border-box;
+  width: var(--ge-clothing-size) !important;
+  min-width: var(--ge-clothing-size) !important;
+  height: var(--ge-clothing-size) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 4px !important;
+  border: 1px solid var(--ge-text, #17160f) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ge-font, inherit) !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--ge-text, var(--color-body)) !important;
+}
+
+.template-product-clothing
+  .thb-product-detail
+  .variations
+  .product-form__input--block
+  input[type='radio']:checked
+  + label {
+  background: var(--ge-text, #17160f) !important;
+  border-color: var(--ge-text, #17160f) !important;
+  color: var(--ge-bg, #fff) !important;
+}
+
+.template-product-clothing
+  .thb-product-detail
+  .variations
+  .product-form__input--block
+  input[type='radio'].is-disabled
+  + label {
+  opacity: 0.35;
+  text-decoration: line-through;
+}
+
+.template-product-clothing
+  .thb-product-detail
+  .variations
+  .product-form__input--block
+  input[type='radio']:focus-visible
+  + label {
+  outline: 2px solid var(--ge-accent, #6e7b5e);
+  outline-offset: 2px;
+}
+
+/* ——— ATC + Apple Pay on one row ——— */
+.template-product-clothing .add_to_cart_holder {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.template-product-clothing .product-form__checkout-row {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.template-product-clothing .product-form__checkout-row .single-add-to-cart-button,
+.template-product-clothing .product-form__checkout-row .shopify-payment-button {
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0 !important;
+}
+
+.template-product-clothing .product-form__checkout-row .single-add-to-cart-button {
+  min-height: 3rem;
+  height: 3rem;
+}
+
+.template-product-clothing .product-form__checkout-row .shopify-payment-button,
+.template-product-clothing .product-form__checkout-row .shopify-payment-button__button,
+.template-product-clothing .product-form__checkout-row shopify-accelerated-checkout,
+.template-product-clothing .product-form__checkout-row shopify-accelerated-checkout-cart {
+  width: 100%;
+  min-height: 3rem;
+  height: 3rem;
+}
+
+.template-product-clothing {
+  --shopify-accelerated-checkout-button-block-size: 48px;
+  --shopify-accelerated-checkout-button-inline-size: 100%;
+}
+
+@media (max-width: 479px) {
+  .template-product-clothing .product-form__checkout-row {
+    flex-direction: column;
+  }
+}
+
+/* ——— Chevrons instead of plus ——— */
+.template-product-clothing .thb-product-detail .accordion summary span:before,
+.template-product-clothing .thb-product-detail .accordion summary span:after {
+  background: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.template-product-clothing .thb-product-detail .accordion summary span {
+  width: 12px;
+  height: 12px;
+  right: 0;
+}
+
+.template-product-clothing .thb-product-detail .accordion summary span:after {
+  content: '' !important;
+  display: block !important;
+  box-sizing: border-box;
+  width: 8px !important;
+  height: 8px !important;
+  top: 1px !important;
+  left: 2px !important;
+  border-right: 1.5px solid var(--ge-text, #17160f);
+  border-bottom: 1.5px solid var(--ge-text, #17160f);
+  transform: rotate(45deg);
+  transform-origin: center;
+  background: none !important;
+  transition: transform 0.2s ease;
+}
+
+.template-product-clothing .thb-product-detail .accordion details[open] summary span:before {
+  transform: none !important;
+}
+
+.template-product-clothing .thb-product-detail .accordion details[open] summary span:after {
+  top: 5px !important;
+  transform: rotate(-135deg);
+}
+
+/* ——— Model fit ——— */
+.template-product-clothing .product-model-fit {
+  margin: 0 0 0.85rem;
+  font-family: var(--ge-font, inherit);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  color: var(--ge-muted, #6e6e73);
+}
+
+/* Hide the live thumbnail rail on clothing — two-up slider replaces it */
+.template-product-clothing .ge-product-thumbs-rail,
+.template-product-clothing .product-images-buttons {
+  display: none !important;
+}
+
+/* ——— Paired two-up gallery + overlay arrows ——— */
+.template-product-clothing .product-image-container,
+.template-product-clothing .product-image-container--paired {
+  position: relative;
+  margin-inline: 0;
+  width: 100%;
+  padding: 0 !important;
+}
+
+.template-product-clothing .product-images--paired {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: none !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  background: transparent;
+  border-radius: 0;
+  gap: 0.35rem;
+}
+
+.template-product-clothing .product-images--paired::-webkit-scrollbar {
+  display: none;
+}
+
+.template-product-clothing .product-images--paired .product-images__slide {
+  flex: 0 0 calc(50% - 0.175rem);
+  width: calc(50% - 0.175rem);
+  max-width: calc(50% - 0.175rem);
+  scroll-snap-align: start;
+  position: relative;
+}
+
+.template-product-clothing .product-images--paired .product-images__slide-item--variant:not(.is-active) {
+  display: none;
+}
+
+.template-product-clothing .product-images--paired .product-single__media-image,
+.template-product-clothing .product-images--paired .product-images__slide {
+  height: auto;
+}
+
+.template-product-clothing .product-images--paired img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.template-product-clothing .ge-paired-nav {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.template-product-clothing .ge-paired-nav__btn {
+  pointer-events: auto;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ge-bg, #fff) 88%, transparent);
+  color: var(--ge-text, #17160f);
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(23, 22, 15, 0.12);
+}
+
+.template-product-clothing .ge-paired-nav__btn--prev {
+  left: 0.75rem;
+}
+
+.template-product-clothing .ge-paired-nav__btn--next {
+  right: 0.75rem;
+}
+
+.template-product-clothing .ge-paired-nav__btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.template-product-clothing .ge-paired-nav__btn:focus-visible {
+  outline: 2px solid var(--ge-text, #17160f);
+  outline-offset: 2px;
+}
+
+.template-product-clothing .ge-paired-nav__btn svg {
+  width: 8px;
+  height: 12px;
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .template-product-clothing .product-images--paired .product-images__slide {
+    flex-basis: 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+}
