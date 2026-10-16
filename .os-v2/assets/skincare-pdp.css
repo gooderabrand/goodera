@@ -856,10 +856,6 @@ body.template-product-skincare .sr-beta__step.is-current .sr-beta__step-node {
   body.template-product-skincare .thb-product-detail .product-title {
     font-size: 2rem;
   }
-
-  body.template-product-skincare .thb-product-detail .product-title br {
-    display: none;
-  }
 }
 
 @media (min-width: 1068px) {
@@ -1004,6 +1000,16 @@ body.template-product-skincare .ge-skin-faq__media svg {
 
 body.template-product-skincare .ge-skin-faq__copy {
   min-width: 0;
+}
+
+body.template-product-skincare .ge-skin-faq__label {
+  margin: 0 0 0.55rem;
+  color: var(--ge-muted, #6e6e73);
+  font-size: var(--ge-role-meta, 0.75rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
 }
 
 body.template-product-skincare .ge-skin-faq__title {

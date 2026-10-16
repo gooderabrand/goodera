@@ -246,7 +246,8 @@
       "benefit_glowing": "Glowing",
       "benefit_moisturizing": "Moisturizing",
       "closer_look": "A closer look at {{ product }}",
-      "closer_sub": "Texture, skin type, and how it fits the rest of your routine."
+      "closer_sub": "Texture, skin type, and how it fits the rest of your routine.",
+      "faq_label": "Frequently asked questions"
     },
     "facets": {
       "apply": "Apply",
