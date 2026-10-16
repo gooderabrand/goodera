@@ -59,9 +59,6 @@
           {%- liquid
             assign ge_collection = ge_link.object
             assign ge_image = ge_collection.featured_image
-            if ge_image == blank
-              assign ge_image = ge_collection.products.first.featured_image
-            endif
             assign ge_text = ge_collection.description | strip_html | strip
           -%}
           <a class="ge-collection-rail__card{% if ge_collection.handle == collection.handle %} is-current{% endif %}" href="{{ ge_collection.url }}"{% if ge_collection.handle == collection.handle %} aria-current="page"{% endif %}>

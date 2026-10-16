@@ -81,30 +81,9 @@
     });
   }
 
-  function watchSheet(root) {
-    if (root.dataset.geWatch === 'true') return;
-    root.dataset.geWatch = 'true';
-    var keep = null;
-    root.addEventListener('toggle', function (event) {
-      if (event.target && event.target.matches && event.target.matches('details')) keep = event.target;
-    }, true);
-    var locking = false;
-    new MutationObserver(function () {
-      if (locking) return;
-      locking = true;
-      enhanceSort(root);
-      labelApply();
-      root.querySelectorAll('details.thb-filter:not(.ge-sort-facet)').forEach(function (row) {
-        if (row !== keep) row.removeAttribute('open');
-      });
-      locking = false;
-    }).observe(root, { childList: true, subtree: true, attributes: true, attributeFilter: ['open'] });
-  }
-
   function openFilters() {
     var root = sheet();
     if (!root) return;
-    watchSheet(root);
     enhanceSort(root);
     labelApply();
     root.hidden = false;
@@ -134,7 +113,9 @@
   }
 
   document.addEventListener('click', function (event) {
-    var toggle = event.target.closest('#Facets-Toggle, #Sort-Toggle');
+    var target = event.target;
+    if (!target || !target.closest) return;
+    var toggle = target.closest('#Facets-Toggle, #Sort-Toggle');
     if (toggle) {
       event.preventDefault();
       event.stopPropagation();
@@ -143,13 +124,13 @@
       return;
     }
 
-    if (event.target.closest('[data-ge-facet-close], .click-capture')) {
+    if (target.closest('[data-ge-facet-close], .click-capture')) {
       if (filtersOpen()) closeFilters();
       return;
     }
 
-    var prev = event.target.closest('[data-ge-rail-prev]');
-    var next = event.target.closest('[data-ge-rail-next]');
+    var prev = target.closest('[data-ge-rail-prev]');
+    var next = target.closest('[data-ge-rail-next]');
     if (!prev && !next) return;
     var scroller = document.querySelector('.ge-collection-rail__scroller');
     if (!scroller) return;
@@ -163,22 +144,4 @@
     if (event.key === 'Escape' && filtersOpen()) closeFilters();
   });
 
-  function watchCount() {
-    var count = document.getElementById('ProductCount');
-    if (!count || count.dataset.geWatch === 'true') return;
-    count.dataset.geWatch = 'true';
-    new MutationObserver(labelApply).observe(count, { childList: true, subtree: true, characterData: true });
-  }
-
-  function boot() {
-    var root = sheet();
-    watchCount();
-    if (!root) return;
-    watchSheet(root);
-    enhanceSort(root);
-    labelApply();
-  }
-
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
 })();
