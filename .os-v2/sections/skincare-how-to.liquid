@@ -1,3 +1,4 @@
+{{ 'sunday-reset-beta.css' | asset_url | stylesheet_tag }}
 {{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'video-controls.js' | asset_url }}" defer></script>
 
@@ -9,16 +10,19 @@
   assign instructions = ''
   if product.metafields.custom.how_to != blank
     assign instructions = product.metafields.custom.how_to | metafield_text | strip
-  endif
-  if instructions == blank
+  elsif product.handle == 'sunday-reset-overnight-glow-mask'
+    assign instructions = 'products.skincare.mask_how_to' | t
+  elsif product.handle == 'sunday-reset-ritual-kit'
+    assign instructions = 'products.skincare.kit_how_to' | t
+  else
     assign instructions = section.settings.instructions
   endif
 -%}
 
 <section class="ge-skin-howto" aria-labelledby="SkinHowTo-{{ section.id }}">
-  <div class="ge-skin-howto__inner">
-    <p class="ge-skin-howto__kicker">{{ 'products.skincare.how_to' | t }}</p>
-    <h2 class="ge-skin-howto__title" id="SkinHowTo-{{ section.id }}">{{ howto_title | escape }}</h2>
+  <div class="sr-beta__inner ge-skin-howto__inner">
+    <p class="sr-beta__eyebrow">{{ 'products.skincare.how_to' | t }}</p>
+    <h2 class="sr-beta__title" id="SkinHowTo-{{ section.id }}">{{ howto_title | escape }}</h2>
     <div class="ge-skin-howto__frame">
       {%- if section.settings.video != blank -%}
         {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '800x' }}

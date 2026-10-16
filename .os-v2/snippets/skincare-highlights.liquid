@@ -35,10 +35,22 @@
   </ul>
 {%- else -%}
   <ul class="ge-skin-highlights">
-    <li>{{ 'products.skincare.highlight_1' | t }}</li>
-    <li>{{ 'products.skincare.highlight_2' | t }}</li>
-    <li>{{ 'products.skincare.highlight_3' | t }}</li>
-    <li>{{ 'products.skincare.highlight_4' | t }}</li>
-    <li>{{ 'products.skincare.highlight_5' | t }}</li>
+    {%- if product.handle == 'sunday-reset-overnight-glow-mask' -%}
+      <li>{{ 'products.skincare.mask_highlight_1' | t }}</li>
+      <li>{{ 'products.skincare.mask_highlight_2' | t }}</li>
+      <li>{{ 'products.skincare.mask_highlight_3' | t }}</li>
+      <li>{{ 'products.skincare.mask_highlight_4' | t }}</li>
+    {%- elsif product.handle == 'sunday-reset-ritual-kit' -%}
+      <li>{{ 'products.skincare.kit_highlight_1' | t }}</li>
+      <li>{{ 'products.skincare.kit_highlight_2' | t }}</li>
+      <li>{{ 'products.skincare.kit_highlight_3' | t }}</li>
+      <li>{{ 'products.skincare.kit_highlight_4' | t }}</li>
+    {%- else -%}
+      <li>{{ 'products.skincare.highlight_1' | t }}</li>
+      <li>{{ 'products.skincare.highlight_2' | t }}</li>
+      <li>{{ 'products.skincare.highlight_3' | t }}</li>
+      <li>{{ 'products.skincare.highlight_4' | t }}</li>
+      <li>{{ 'products.skincare.highlight_5' | t }}</li>
+    {%- endif -%}
   </ul>
 {%- endif -%}

@@ -1,6 +1,6 @@
 /*
  * ------------------------------------------------------------
- * Skincare PDP — clothing gallery and buy box, with highlights,
+ * Skincare PDP — the clothing product page, plus highlights,
  * specifications, results, routine, how-to video, and FAQ.
  * Assigned via product template suffix "skincare".
  * ------------------------------------------------------------
@@ -22,18 +22,61 @@
             "show_custom_badges": true
           }
         },
+        "0b3e272b-c86a-4dba-946c-c6912251371c": {
+          "type": "description",
+          "disabled": true,
+          "settings": {
+            "seo_text_max_height": 1000,
+            "seo_text_read_more": "Read more",
+            "seo_text_read_less": "Read less"
+          }
+        },
+        "siblings_Czmpgn": {
+          "type": "siblings",
+          "disabled": true,
+          "settings": {
+            "siblings_collection": "",
+            "sibling_color": "",
+            "color_picker_size": "regular",
+            "margin_bottom": 20
+          }
+        },
+        "color_swatches": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'product-color-siblings', product: product %}"
+          }
+        },
+        "546f2cee-3532-473a-836f-21f14fde7cfe": {
+          "type": "inventory_level",
+          "disabled": true,
+          "settings": {
+            "show_inventory_notice": "always",
+            "show_inventory_count": "always",
+            "inventory_notice_pulse": true,
+            "inventory_notice_bar": true,
+            "inventory_notice_threshold": 10,
+            "inventory_notice_base": 84
+          }
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
             "picker_type": "button",
             "color_picker": false,
-            "color_picker_size": "regular",
+            "color_picker_size": "xlarge",
             "color_picker_use_variants": false,
             "variant_is_disabled": true,
             "sizing_guide_variant": "Size",
             "sizing_guide_text": "",
             "sizing_guide_icon": "none",
             "sizing_guide_page": ""
+          }
+        },
+        "model_fit": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'product-model-fit', product: product %}"
           }
         },
         "buy_buttons": {
@@ -45,6 +88,67 @@
             "show_gift_card_recipient": false
           }
         },
+        "complementary_cCC3WK": {
+          "type": "complementary",
+          "settings": {
+            "block_heading": "Pairs well with",
+            "product_list_limit": 3
+          }
+        },
+        "0041f1e3-030f-4c9d-ae87-ddb7c2fa4b2b": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Description",
+            "open": true,
+            "content": "",
+            "page": "",
+            "custom_liquid": "{% render 'skincare-description', product: product %}"
+          }
+        },
+        "1c29dd76-669f-4b4a-9883-a577855921eb": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Fit and Fabric",
+            "open": false,
+            "content": "",
+            "page": "",
+            "custom_liquid": "{% if product.metafields.custom.fabric_fit != blank %}{{ product.metafields.custom.fabric_fit | metafield_tag }}{% else %}<p>Fit and fabric details coming soon.</p>{% endif %}"
+          },
+          "disabled": true
+        },
+        "e49f0a1b-c60d-4e4a-b3c1-100c37771e4a": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Shipping & Returns",
+            "open": false,
+            "content": "<p><strong>US SHIPPING</strong></p><p>Shipping domestically from the United States.</p><ul><li>Standard Shipping (4-6 Business Days) - Free</li></ul><p><strong>US RETURNS </strong>If something is not quite right please email care@gooderabrand.com</p>",
+            "page": "",
+            "custom_liquid": ""
+          }
+        },
+        "95b7e00a-0453-4eb0-9cf0-1dae84d8b822": {
+          "type": "side_panel",
+          "disabled": true,
+          "settings": {
+            "side_panel_1_label": "Materials",
+            "side_panel_1_icon": "leather",
+            "side_panel_1_content": "",
+            "side_panel_1_page": "",
+            "side_panel_2_label": "Shipping & Returns",
+            "side_panel_2_icon": "box",
+            "side_panel_2_content": "",
+            "side_panel_2_page": "",
+            "side_panel_3_label": "Care Guide",
+            "side_panel_3_icon": "washing",
+            "side_panel_3_content": "",
+            "side_panel_3_page": ""
+          }
+        },
+        "4fd23485-293f-46a0-8a4c-34d0e25ea41b": {
+          "type": "share",
+          "disabled": true,
+          "settings": {}
+        },
         "highlights": {
           "type": "collapsible_tab",
           "settings": {
@@ -53,16 +157,6 @@
             "content": "",
             "page": "",
             "custom_liquid": "{% render 'skincare-highlights', product: product %}"
-          }
-        },
-        "description": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Description",
-            "open": true,
-            "content": "",
-            "page": "",
-            "custom_liquid": "{% render 'skincare-description', product: product %}"
           }
         },
         "specifications": {
@@ -78,11 +172,21 @@
       },
       "block_order": [
         "title",
+        "0b3e272b-c86a-4dba-946c-c6912251371c",
+        "siblings_Czmpgn",
+        "color_swatches",
+        "546f2cee-3532-473a-836f-21f14fde7cfe",
         "variant_picker",
+        "model_fit",
         "buy_buttons",
+        "complementary_cCC3WK",
         "highlights",
-        "description",
-        "specifications"
+        "0041f1e3-030f-4c9d-ae87-ddb7c2fa4b2b",
+        "specifications",
+        "1c29dd76-669f-4b4a-9883-a577855921eb",
+        "e49f0a1b-c60d-4e4a-b3c1-100c37771e4a",
+        "95b7e00a-0453-4eb0-9cf0-1dae84d8b822",
+        "4fd23485-293f-46a0-8a4c-34d0e25ea41b"
       ],
       "settings": {
         "full_width": true,
@@ -97,6 +201,22 @@
         "lightbox": false,
         "enable_video_looping": false
       }
+    },
+    "recently_viewed_products_pdPAhT": {
+      "type": "recently-viewed-products",
+      "settings": {
+        "heading": "Recently Viewed",
+        "heading_left": true,
+        "description": "",
+        "full_width": true,
+        "mobile_swipe": true,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "skincare_bridge": {
+      "type": "skincare-pdp-bridge",
+      "settings": {}
     },
     "skincare_results": {
       "type": "skincare-results",
@@ -130,7 +250,12 @@
           }
         }
       },
-      "block_order": ["result_1", "result_2", "result_3", "result_4"],
+      "block_order": [
+        "result_1",
+        "result_2",
+        "result_3",
+        "result_4"
+      ],
       "settings": {
         "image_alt": "",
         "footnote": "*Within an independent consumer perception study of 30 people (ages 18-55), measuring performance immediately."
@@ -142,37 +267,46 @@
         "step_1": {
           "type": "step",
           "settings": {
-            "label": "Step 1: Cleanse",
-            "name": "Pink Dew Gel Cleanser",
+            "label": "Step 1",
+            "name": "Cleanse",
+            "text": "Start with clean skin.",
             "current": false
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
-            "label": "Step 2: Treat",
-            "name": "CC Me Serum",
+            "label": "Step 2",
+            "name": "Treat",
+            "text": "Apply any treatment while skin is still fresh.",
             "current": false
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
-            "label": "Step 3: Moisturize",
-            "name": "Cloud Dew Gel Cream Moisturizer",
+            "label": "Step 3",
+            "name": "Moisturize",
+            "text": "Seal the routine before the last step.",
             "current": false
           }
         },
         "step_4": {
           "type": "step",
           "settings": {
-            "label": "Step 4: Protect",
-            "name": "ShadeDrops Mineral Milk Sunscreen",
+            "label": "Step 4",
+            "name": "",
+            "text": "This is the last step.",
             "current": true
           }
         }
       },
-      "block_order": ["step_1", "step_2", "step_3", "step_4"],
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
       "settings": {
         "heading": "",
         "explore_prefix": "Explore"
@@ -213,39 +347,34 @@
           "type": "faq",
           "settings": {
             "question": "Where does it go in my routine?",
-            "answer": "Cleanse, treat, then moisturize. Apply this as the protect step."
+            "answer": "Cleanse, treat, then moisturize. Apply this as the last step."
           }
         },
         "faq_5": {
           "type": "faq",
           "settings": {
             "question": "How do I apply it?",
-            "answer": "Apply evenly over skin as the final step. Reapply every two hours when you are in the sun."
+            "answer": "Apply evenly over skin as the final step. Leave an overnight mask on overnight. Reapply a daytime product every two hours when you are in the sun."
           }
         }
       },
-      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5"],
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ],
       "settings": {
         "eyebrow": "Good to know",
         "heading_line_1": "Your questions,",
         "heading_line_2": "answered.",
         "lede": "Texture, skin type, and how it fits the rest of your routine."
       }
-    },
-    "recently_viewed_products_pdPAhT": {
-      "type": "recently-viewed-products",
-      "settings": {
-        "heading": "Recently Viewed",
-        "heading_left": true,
-        "description": "",
-        "full_width": true,
-        "mobile_swipe": true,
-        "disable_top_spacing": false,
-        "disable_bottom_spacing": false
-      }
     }
   },
   "order": [
+    "skincare_bridge",
     "breadcrumbs",
     "main-product",
     "skincare_results",

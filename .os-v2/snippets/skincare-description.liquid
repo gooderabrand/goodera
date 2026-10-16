@@ -10,6 +10,10 @@
 
 {%- if product.description != blank -%}
   {{ product.description }}
+{%- elsif product.handle == 'sunday-reset-overnight-glow-mask' -%}
+  <p>{{ 'products.skincare.mask_how_to' | t }}</p>
+{%- elsif product.handle == 'sunday-reset-ritual-kit' -%}
+  <p>{{ 'products.skincare.kit_highlight_1' | t }} {{ 'products.skincare.kit_highlight_2' | t }}</p>
 {%- else -%}
   <p>{{ 'products.skincare.description_sample' | t }}</p>
 {%- endif -%}
@@ -18,7 +22,7 @@
   assign study_note = ''
   if product.metafields.custom.study_note != blank
     assign study_note = product.metafields.custom.study_note | metafield_text | strip
-  elsif product.description == blank
+  elsif product.description == blank and product.handle != 'sunday-reset-overnight-glow-mask' and product.handle != 'sunday-reset-ritual-kit'
     assign study_note = 'products.skincare.study_note_sample' | t
   endif
 -%}

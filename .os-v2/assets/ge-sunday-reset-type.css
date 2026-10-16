@@ -3,25 +3,29 @@
   collection filter drawer (Sort By, Variant, Product type).
 */
 
-.template-page-sunday-reset-3d .sr-beta__step-heading {
+.template-page-sunday-reset-3d .sr-beta__step-heading,
+.template-product-skincare .sr-beta__step-heading {
   font-size: 1.7rem;
   font-weight: 500;
   letter-spacing: -0.03em;
   line-height: 1.15;
 }
 
-.template-page-sunday-reset-3d .sr-beta__step-num {
+.template-page-sunday-reset-3d .sr-beta__step-num,
+.template-product-skincare .sr-beta__step-num {
   font-size: 0.95rem;
   letter-spacing: 0.06em;
 }
 
-.template-page-sunday-reset-3d .sr-beta__step-text {
+.template-page-sunday-reset-3d .sr-beta__step-text,
+.template-product-skincare .sr-beta__step-text {
   margin-top: 0.8rem;
   font-size: 1.125rem;
   line-height: 1.5;
 }
 
-.template-page-sunday-reset-3d .sr-beta__step-node {
+.template-page-sunday-reset-3d .sr-beta__step-node,
+.template-product-skincare .sr-beta__step-node {
   top: 0.55rem;
 }
 

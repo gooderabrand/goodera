@@ -1,0 +1,20 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    display: none !important;
+  }
+{% endstyle %}
+<script>
+  document.body.classList.add('template-product-clothing');
+</script>
+{{ 'product-clothing.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-paired.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Skincare PDP bridge",
+  "settings": [],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}

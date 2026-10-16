@@ -48,11 +48,22 @@
   endif
 
   if ingredient == blank and product_form == blank and volume == blank and dispenser == blank and skin_type == blank
-    assign ingredient = 'products.skincare.spec_ingredient_sample' | t
-    assign product_form = 'products.skincare.spec_form_sample' | t
-    assign volume = 'products.skincare.spec_volume_sample' | t
-    assign dispenser = 'products.skincare.spec_dispenser_sample' | t
-    assign skin_type = 'products.skincare.spec_skin_sample' | t
+    if product.handle == 'sunday-reset-overnight-glow-mask'
+      assign product_form = 'products.skincare.mask_form' | t
+      assign volume = 'products.skincare.mask_volume' | t
+      assign skin_type = 'products.skincare.mask_skin' | t
+    elsif product.handle == 'sunday-reset-ritual-kit'
+      assign product_form = 'products.skincare.kit_form' | t
+      assign volume = 'products.skincare.kit_volume' | t
+      assign dispenser = 'products.skincare.kit_dispenser' | t
+      assign skin_type = 'products.skincare.kit_skin' | t
+    else
+      assign ingredient = 'products.skincare.spec_ingredient_sample' | t
+      assign product_form = 'products.skincare.spec_form_sample' | t
+      assign volume = 'products.skincare.spec_volume_sample' | t
+      assign dispenser = 'products.skincare.spec_dispenser_sample' | t
+      assign skin_type = 'products.skincare.spec_skin_sample' | t
+    endif
   endif
 -%}
 

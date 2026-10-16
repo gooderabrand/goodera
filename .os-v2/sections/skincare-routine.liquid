@@ -1,4 +1,5 @@
-{{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
+{{ 'sunday-reset-beta.css' | asset_url | stylesheet_tag }}
+{{ 'ge-sunday-reset-type.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
   assign routine_heading = section.settings.heading
@@ -8,43 +9,52 @@
   assign explore_prefix = section.settings.explore_prefix
 -%}
 
-<section class="ge-skin-routine" aria-labelledby="SkinRoutine-{{ section.id }}">
-  <div class="ge-skin-routine__inner">
-    <h2 class="ge-skin-routine__title" id="SkinRoutine-{{ section.id }}">{{ routine_heading | escape }}</h2>
-    <ol class="ge-skin-routine__steps">
-      {%- for block in section.blocks -%}
-        {%- liquid
-          assign step_name = block.settings.name
-          assign step_url = block.settings.link
-          if block.settings.product != blank
-            assign step_name = block.settings.product.title
-            assign step_url = block.settings.product.url
-          endif
-          if step_name == blank
-            assign step_name = product.title
-          endif
-        -%}
-        <li class="ge-skin-routine__step{% if block.settings.current %} ge-skin-routine__step--current{% endif %}" {{ block.shopify_attributes }}>
-          <span class="ge-skin-routine__node" aria-hidden="true"></span>
-          <p class="ge-skin-routine__label">{{ block.settings.label | escape }}</p>
-          <p class="ge-skin-routine__name">
-            {%- if step_url != blank -%}
-              <a href="{{ step_url }}">
-                {%- unless block.settings.current -%}
-                  {%- if explore_prefix != blank -%}{{ explore_prefix | escape }} {% endif -%}
-                {%- endunless -%}
-                {{ step_name | escape }}
-              </a>
-            {%- else -%}
-              {%- unless block.settings.current -%}
-                {%- if explore_prefix != blank -%}{{ explore_prefix | escape }} {% endif -%}
-              {%- endunless -%}
-              {{ step_name | escape }}
-            {%- endif -%}
-          </p>
-        </li>
-      {%- endfor -%}
-    </ol>
+<section class="sr-beta__experience ge-skin-routine" aria-labelledby="SkinRoutine-{{ section.id }}">
+  <div class="sr-beta__inner">
+    <h2 class="sr-beta__title" id="SkinRoutine-{{ section.id }}">{{ routine_heading | escape }}</h2>
+    <div class="sr-beta__timeline-scroll sr-beta__timeline-scroll--static">
+      <ol class="sr-beta__steps">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign step_name = block.settings.name
+            assign step_url = block.settings.link
+            if block.settings.product != blank
+              assign step_name = block.settings.product.title
+              assign step_url = block.settings.product.url
+            endif
+            if step_name == blank
+              assign step_name = product.title
+            endif
+          -%}
+          <li class="sr-beta__step" {{ block.shopify_attributes }}>
+            <div class="sr-beta__step-card">
+              <div class="sr-beta__step-node" aria-hidden="true"></div>
+              <h3 class="sr-beta__step-heading">
+                <span class="sr-beta__step-num">{{ block.settings.label | escape }}</span>
+                <span class="sr-beta__step-name">
+                  {%- if step_url != blank -%}
+                    <a href="{{ step_url }}">
+                      {%- unless block.settings.current -%}
+                        {%- if explore_prefix != blank -%}{{ explore_prefix | escape }} {% endif -%}
+                      {%- endunless -%}
+                      {{ step_name | escape }}
+                    </a>
+                  {%- else -%}
+                    {%- unless block.settings.current -%}
+                      {%- if explore_prefix != blank -%}{{ explore_prefix | escape }} {% endif -%}
+                    {%- endunless -%}
+                    {{ step_name | escape }}
+                  {%- endif -%}
+                </span>
+              </h3>
+              {%- if block.settings.text != blank -%}
+                <p class="sr-beta__step-text">{{ block.settings.text | escape }}</p>
+              {%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
   </div>
 </section>
 
@@ -97,6 +107,11 @@
           "id": "link",
           "label": "Link",
           "info": "Used when no product is selected."
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description"
         },
         {
           "type": "checkbox",
