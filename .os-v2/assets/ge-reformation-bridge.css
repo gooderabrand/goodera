@@ -215,3 +215,63 @@ html body .product-card .product-card-color-text {
   line-height: 1.25;
   color: var(--ge-text, #17160f);
 }
+
+/*
+  Mobile has no sidebar, so the 60px shell gutter reads as a frame.
+  Pull the header and page copy toward the screen edge.
+*/
+@media (max-width: 989px) {
+  :root {
+    --ge-shell-gutter: 16px;
+  }
+
+  .site-header__inner,
+  .site-header .ge-inset-x {
+    padding-inline: 16px;
+  }
+}
+
+/*
+  Homepage and Sunday Reset keep a transparent bar over their hero, then
+  turn solid once that hero has scrolled away. Every other page is a
+  white bar from the start so black type never sits on the content.
+*/
+body.ge-nav-horizontal .site-header.is-past-hero,
+body.ge-nav-horizontal .header-section:has(.site-header.is-past-hero) {
+  background: #fff !important;
+  color: #17160f !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+body.ge-nav-horizontal:not(.template-index):not(.ge-page-sunday-reset) .header-section {
+  position: sticky !important;
+  top: 0;
+  z-index: 50;
+  height: auto !important;
+  margin-bottom: 0 !important;
+  background: #fff !important;
+}
+
+body.ge-nav-horizontal:not(.template-index):not(.ge-page-sunday-reset) .site-header,
+body.ge-nav-horizontal:not(.template-index):not(.ge-page-sunday-reset) .header-section .site-header {
+  --site-header-icon: #17160f;
+  --ge-chrome-ink: #17160f;
+  position: relative !important;
+  inset: auto !important;
+  width: 100%;
+  margin: 0 !important;
+  background: #fff !important;
+  color: #17160f !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  transform: none !important;
+}
+
+body.ge-nav-horizontal:not(.template-index):not(.ge-page-sunday-reset) .site-header__logo-ink {
+  display: block !important;
+}
+
+body.ge-nav-horizontal:not(.template-index):not(.ge-page-sunday-reset) .site-header__logo-white {
+  display: none !important;
+}
