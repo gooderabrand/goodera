@@ -265,27 +265,32 @@ body.template-product-skincare.template-product-clothing .product-image-containe
 
 @media (min-width: 1068px) {
   body.template-product-skincare.template-product-clothing .product-image-container.product-image-container--thumbnails {
-    display: flex !important;
-    flex-flow: row nowrap;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 174px;
+    column-gap: 12px;
     align-items: stretch;
-    gap: 12px;
     box-sizing: border-box !important;
-    width: 100% !important;
-    max-width: none !important;
+    width: min(100%, calc(100svh - var(--header-height, 56px) + 186px)) !important;
+    max-width: 100% !important;
     height: auto !important;
     min-height: 500px;
     padding: 0 !important;
+    overflow: visible !important;
   }
 
   body.template-product-skincare.template-product-clothing .ge-product-thumbs-rail {
     display: flex !important;
-    flex: 0 0 174px;
+    grid-column: 2;
+    grid-row: 1;
     flex-direction: column;
     width: 174px !important;
     max-width: 174px;
+    min-width: 174px;
     min-height: 0;
     position: relative !important;
+    z-index: 4 !important;
     align-self: stretch;
+    overflow: visible !important;
   }
 
   body.template-product-skincare.template-product-clothing .product-image-container--thumbnails scroll-shadow {
@@ -368,9 +373,13 @@ body.template-product-skincare.template-product-clothing .thb-product-detail .pr
 
 @media (min-width: 1068px) {
   body.template-product-skincare.template-product-clothing .thb-product-detail .product-images.product-images--thumbnails {
-    flex: 0 0 auto;
-    width: min(calc(100% - 186px), calc(100svh - var(--header-height, 56px))) !important;
-    max-width: min(calc(100% - 186px), calc(100svh - var(--header-height, 56px))) !important;
+    grid-column: 1;
+    grid-row: 1;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    z-index: 1;
+    justify-self: stretch;
   }
 }
 
