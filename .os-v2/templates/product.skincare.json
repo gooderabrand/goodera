@@ -22,6 +22,12 @@
             "show_custom_badges": true
           }
         },
+        "benefits": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'skincare-benefits', product: product %}"
+          }
+        },
         "0b3e272b-c86a-4dba-946c-c6912251371c": {
           "type": "description",
           "disabled": true,
@@ -99,7 +105,7 @@
           "type": "collapsible_tab",
           "settings": {
             "heading": "Description",
-            "open": true,
+            "open": false,
             "content": "",
             "page": "",
             "custom_liquid": "{% render 'skincare-description', product: product %}"
@@ -163,7 +169,7 @@
           "type": "collapsible_tab",
           "settings": {
             "heading": "Specifications",
-            "open": true,
+            "open": false,
             "content": "",
             "page": "",
             "custom_liquid": "{% render 'skincare-specs', product: product %}"
@@ -172,6 +178,7 @@
       },
       "block_order": [
         "title",
+        "benefits",
         "0b3e272b-c86a-4dba-946c-c6912251371c",
         "siblings_Czmpgn",
         "color_swatches",

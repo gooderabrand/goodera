@@ -240,7 +240,11 @@
       "kit_dispenser": "Sachet",
       "kit_skin": "All skin types, including dry and sensitive",
       "mask_how_to": "Use it as the last step in your evening routine. Leave it on overnight.",
-      "kit_how_to": "Use one sachet about once a week for four weeks, as the last step in your evening routine. Follow the instructions in the kit."
+      "kit_how_to": "Use one sachet about once a week for four weeks, as the last step in your evening routine. Follow the instructions in the kit.",
+      "benefit_texture": "Improved texture",
+      "benefit_smoothing": "Smoothing",
+      "benefit_glowing": "Glowing",
+      "benefit_moisturizing": "Moisturizing"
     },
     "facets": {
       "apply": "Apply",

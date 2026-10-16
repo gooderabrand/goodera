@@ -65,12 +65,54 @@
     return true;
   }
 
+  function geAppleSoldOut(btn) {
+    if (!btn || !document.body.classList.contains('template-product-skincare')) return false;
+    var row = btn.closest('.product-form__checkout-row');
+    var atc = row && row.querySelector('.single-add-to-cart-button');
+    if (!atc) return false;
+    return atc.disabled || atc.classList.contains('sold-out');
+  }
+
+  function geLockSoldOutApple() {
+    if (!document.body.classList.contains('template-product-skincare')) return;
+    document.querySelectorAll('.ge-apple-pay').forEach(function (btn) {
+      var soldOut = geAppleSoldOut(btn);
+      var marked = btn.classList.contains('is-sold-out');
+      if (btn.disabled === soldOut && marked === soldOut) return;
+      btn.disabled = soldOut;
+      btn.classList.toggle('is-sold-out', soldOut);
+      btn.setAttribute('aria-disabled', soldOut ? 'true' : 'false');
+      if (soldOut) btn.setAttribute('tabindex', '-1');
+      else btn.removeAttribute('tabindex');
+    });
+  }
+
   document.addEventListener('click', function (event) {
     var btn = event.target.closest && event.target.closest('.ge-apple-pay');
     if (!btn) return;
+    if (geAppleSoldOut(btn) || btn.disabled || btn.classList.contains('is-sold-out')) {
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      return;
+    }
+    if (!document.body.classList.contains('template-product-skincare')) return;
     btn.classList.add('is-pressed');
     window.setTimeout(function () { btn.classList.remove('is-pressed'); }, 160);
   }, true);
+
+  geLockSoldOutApple();
+  var geAppleLocks = 0;
+  var geAppleTimer = window.setInterval(function () {
+    geLockSoldOutApple();
+    geAppleLocks += 1;
+    if (geAppleLocks > 30) window.clearInterval(geAppleTimer);
+  }, 200);
+  var geAppleRoot = document.querySelector('.product-form') || document.body;
+  if (window.MutationObserver && geAppleRoot) {
+    var geAppleWatch = new MutationObserver(geLockSoldOutApple);
+    geAppleWatch.observe(geAppleRoot, { childList: true, subtree: true, attributes: true, attributeFilter: ['disabled', 'class'] });
+  }
 
   function geWatchSkinGallery() {
     var tries = 0;

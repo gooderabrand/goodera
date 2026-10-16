@@ -99,6 +99,19 @@ body.template-product-skincare {
   background: var(--ge-bg, #fff);
 }
 
+.template-product-skincare .ge-skin-results__label {
+  display: block;
+  width: 100%;
+  margin: 0 0 2.5rem;
+  color: var(--ge-ink, #17160f);
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-size: var(--ge-role-section-title);
+  font-weight: var(--ge-weight-heading, 500);
+  letter-spacing: var(--ge-tracking-tight, -0.01em);
+  line-height: var(--ge-lh-snug, 1.25);
+  text-transform: none;
+}
+
 .ge-skin-results__list {
   display: grid;
   gap: 1.65rem;
@@ -566,6 +579,69 @@ body.template-product-skincare.template-product-clothing .product-form__checkout
   transform: scale(0.98);
 }
 
+body.template-product-skincare.template-product-clothing .product-form__checkout-row:has(.single-add-to-cart-button:disabled) .ge-apple-pay,
+body.template-product-skincare.template-product-clothing .product-form__checkout-row:has(.single-add-to-cart-button.sold-out) .ge-apple-pay,
+body.template-product-skincare.template-product-clothing .product-form__checkout-row .ge-apple-pay.is-sold-out,
+body.template-product-skincare.template-product-clothing .product-form__checkout-row .ge-apple-pay:disabled,
+body.template-product-skincare.template-product-clothing .product-form__checkout-row:has(.single-add-to-cart-button:disabled) .ge-apple-pay:hover,
+body.template-product-skincare.template-product-clothing .product-form__checkout-row:has(.single-add-to-cart-button.sold-out) .ge-apple-pay:hover,
+body.template-product-skincare.template-product-clothing .product-form__checkout-row:has(.single-add-to-cart-button:disabled) .ge-apple-pay:active,
+body.template-product-skincare.template-product-clothing .product-form__checkout-row:has(.single-add-to-cart-button.sold-out) .ge-apple-pay:active,
+body.template-product-skincare.template-product-clothing .product-form__checkout-row .ge-apple-pay.is-sold-out:hover,
+body.template-product-skincare.template-product-clothing .product-form__checkout-row .ge-apple-pay.is-sold-out.is-pressed {
+  pointer-events: none !important;
+  cursor: default !important;
+  opacity: 0.38;
+  filter: grayscale(1);
+  transform: none !important;
+  background-color: #f5f5f7 !important;
+  border-color: #d2d2d7 !important;
+}
+
+.ge-skin-buy-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
+  margin: 0.9rem 0 0.15rem;
+}
+
+.ge-skin-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  color: var(--ge-muted, #6e6e73);
+  font-size: var(--ge-role-meta, 0.75rem);
+  line-height: 1;
+}
+
+.ge-skin-stars .star-rating {
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.ge-skin-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ge-skin-benefits li {
+  margin: 0;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--ge-border, #e5e5ea);
+  border-radius: 999px;
+  color: var(--ge-ink, #17160f);
+  font-size: var(--ge-role-meta, 0.75rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
 body.template-product-skincare .section-skincare-results,
 body.template-product-skincare .section-skincare-routine,
 body.template-product-skincare .section-skincare-how-to,
@@ -824,5 +900,51 @@ body.template-product-skincare .sr-beta__step.is-current .sr-beta__step-node {
 
   body.template-product-skincare .site-header__local {
     display: none !important;
+  }
+}
+
+body.template-product-skincare .section-skincare-faq .sr-beta__faq-toggle {
+  padding: 0.95rem 0;
+  font-size: var(--ge-role-section-title);
+  font-weight: var(--ge-weight-heading, 500);
+  letter-spacing: var(--ge-tracking-tight, -0.01em);
+  line-height: var(--ge-lh-snug, 1.25);
+}
+
+body.template-product-skincare .section-skincare-faq .sr-beta__faq-panel {
+  margin-bottom: 0.95rem;
+  font-size: var(--ge-role-body, 1.0625rem);
+  line-height: var(--ge-lh-normal, 1.5);
+}
+
+@media (max-width: 989px) {
+  html body.template-product-skincare .site-footer .site-footer__col:not(.site-footer__col--signup) .site-footer__heading,
+  html body.template-product-skincare .site-footer .site-footer__col:not(.site-footer__col--signup) .site-footer__heading-text,
+  html body.template-product-skincare .site-footer .site-footer__col:not(.site-footer__col--signup) .site-footer__trigger {
+    color: var(--ge-ink, #17160f);
+    font-size: 1.375rem;
+    line-height: 1.3;
+  }
+
+  body.template-product-skincare .site-footer__legal-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  body.template-product-skincare .site-footer__legal-row .site-footer__brand {
+    display: flex;
+    order: -1;
+    justify-content: center;
+    margin: 0 0 0.35rem;
+  }
+
+  body.template-product-skincare .site-footer__legal,
+  body.template-product-skincare .site-footer__legal-row .site-footer__meta {
+    justify-content: center;
+    text-align: center;
   }
 }
