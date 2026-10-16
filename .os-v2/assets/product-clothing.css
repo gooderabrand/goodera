@@ -4,27 +4,56 @@
  */
 
 .template-product-clothing .thb-product-detail {
-  --ge-clothing-info: 22.5rem;
+  /* Lululemon aside[data-pdp-buy-box]: width 440px, padding 0 24px */
+  --ge-clothing-info: 440px;
+  --ge-clothing-info-pad: 24px;
 }
 
-/* Gallery takes the leftover width so two photos can sit side by side */
+/* Desktop: gallery fills the left; buy box is a 440px column hugging the right */
 @media (min-width: 1068px) {
-  .template-product-clothing .thb-product-detail > .row {
-    padding-inline: var(--ge-shell-gutter, 20px);
+  .template-product-clothing .thb-product-detail > .row,
+  .template-product-clothing .section-main-product .row,
+  .template-product-clothing .product-section-container .row {
+    padding-inline: 0 !important;
+    max-width: none;
+    width: 100%;
   }
 
   .template-product-clothing .thb-product-detail .product-grid-container,
   .template-product-clothing.template-product .thb-product-detail .product-grid-container {
-    grid-template-columns: minmax(0, 1fr) minmax(18.5rem, var(--ge-clothing-info));
+    display: grid;
+    width: 100%;
+    max-width: none;
+    grid-template-columns: minmax(0, 1fr) var(--ge-clothing-info);
     justify-content: stretch;
-    grid-gap: clamp(1.25rem, 2vw, 2rem);
+    justify-items: stretch;
+    align-items: start;
+    grid-gap: 0;
+  }
+
+  .template-product-clothing .thb-product-detail .product-information {
+    grid-column: 2;
+    grid-row: 1;
+    width: var(--ge-clothing-info);
+    max-width: var(--ge-clothing-info);
+    min-width: 0;
+    justify-self: end;
+    box-sizing: border-box;
+    padding: 0 var(--ge-clothing-info-pad) !important;
+    margin-inline: 0;
+    position: relative;
+    z-index: 2;
   }
 
   .template-product-clothing .thb-product-detail .product-information--inner,
   .template-product-clothing .thb-product-detail .production-information--sticky {
     position: sticky;
     top: var(--ge-detail-sticky-top, 24px);
+    width: 100%;
     max-width: none;
+    margin-inline: 0;
+    padding-inline-end: 0 !important;
+    box-sizing: border-box;
   }
 }
 
@@ -59,9 +88,16 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
   background: transparent;
-  border-radius: 0;
+  border-radius: 0 !important;
   gap: 3px;
   padding: 0 !important;
+}
+
+.template-product-clothing .thb-product-detail .product-images .product-images__slide,
+.template-product-clothing .thb-product-detail .product-images .product-single__media,
+.template-product-clothing .thb-product-detail .product-images .product-single__media-image,
+.template-product-clothing .thb-product-detail .product-images img {
+  border-radius: 0 !important;
 }
 
 .template-product-clothing .thb-product-detail .product-images::-webkit-scrollbar {
@@ -88,6 +124,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+  border-radius: 0 !important;
 }
 
 .template-product-clothing .ge-paired-nav {
@@ -222,12 +259,13 @@
   margin: 0 !important;
 }
 
-/* ——— Rectangular size chips: outline when selected, never filled black ——— */
+/* ——— Rectangular size chips: 4-up grid like Lululemon, outline when selected ——— */
 .template-product-clothing .thb-product-detail .variations .product-form__input--block {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.5rem;
   padding: 0 !important;
+  width: 100%;
 }
 
 .template-product-clothing .thb-product-detail .variations .product-form__input--block input[type='radio'] + label,
@@ -245,10 +283,10 @@
 
 .template-product-clothing .thb-product-detail .variations .product-form__input--block input[type='radio'] + label {
   box-sizing: border-box;
-  width: auto !important;
-  min-width: 4.75rem !important;
+  width: 100% !important;
+  min-width: 0 !important;
   height: 2.75rem !important;
-  padding: 0 1.35rem !important;
+  padding: 0 0.5rem !important;
   margin: 0 !important;
   border-radius: 8px !important;
   border: 1px solid #d2d2d7 !important;
@@ -297,41 +335,66 @@
   transform: none;
 }
 
-/* ——— ATC + Apple Pay on one row ——— */
+/* ——— ATC + Apple Pay on one row; more-options / terms sit full-width below ——— */
 .template-product-clothing .add_to_cart_holder {
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
   gap: 0.75rem;
   width: 100%;
 }
 
 .template-product-clothing .product-form__checkout-row {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: stretch;
   gap: 0.5rem;
   width: 100%;
 }
 
-.template-product-clothing .product-form__checkout-row .single-add-to-cart-button,
+/* Flatten the wallet wrapper so the button sits beside ATC and the
+   “More payment options” link drops to its own full-width row. */
 .template-product-clothing .product-form__checkout-row .shopify-payment-button {
-  flex: 1 1 0;
-  min-width: 0;
+  display: contents;
   margin: 0 !important;
+  width: auto;
 }
 
 .template-product-clothing .product-form__checkout-row .single-add-to-cart-button {
+  order: 2;
+  min-width: 0;
+  margin: 0 !important;
   min-height: 3rem;
   height: 3rem;
 }
 
-.template-product-clothing .product-form__checkout-row .shopify-payment-button,
 .template-product-clothing .product-form__checkout-row .shopify-payment-button__button,
 .template-product-clothing .product-form__checkout-row shopify-accelerated-checkout,
 .template-product-clothing .product-form__checkout-row shopify-accelerated-checkout-cart {
+  order: 1;
   width: 100%;
+  min-width: 0;
   min-height: 3rem;
   height: 3rem;
+  margin: 0 !important;
+}
+
+.template-product-clothing .product-form__checkout-row .shopify-payment-button__more-options {
+  order: 3;
+  grid-column: 1 / -1;
+  display: block;
+  width: 100%;
+  margin: 0.35rem 0 0;
+  text-align: left;
+}
+
+.template-product-clothing .installment,
+.template-product-clothing .thb-product-detail shopify-payment-terms {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin-top: 0.35rem;
+  padding-bottom: 0;
 }
 
 .template-product-clothing {
@@ -350,7 +413,11 @@
 
 @media (max-width: 479px) {
   .template-product-clothing .product-form__checkout-row {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+  }
+
+  .template-product-clothing .thb-product-detail .variations .product-form__input--block {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
