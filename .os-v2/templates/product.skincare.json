@@ -376,10 +376,7 @@
         "faq_5"
       ],
       "settings": {
-        "eyebrow": "Good to know",
-        "heading_line_1": "Your questions,",
-        "heading_line_2": "answered.",
-        "lede": "Texture, skin type, and how it fits the rest of your routine."
+        "subheading": "Texture, skin type, and how it fits the rest of your routine."
       }
     }
   },
