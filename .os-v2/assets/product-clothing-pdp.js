@@ -24,9 +24,10 @@
     catch (e) { return false; }
   }
 
-  function rootUrl() {
-    var r = (window.theme && theme.routes && theme.routes.root_url) || '/';
-    return r.length > 1 && r.slice(-1) === '/' ? r.slice(0, -1) : r;
+  function checkoutUrl() {
+    var root = (window.theme && theme.routes && theme.routes.root_url) || '';
+    if (!root || root === '/') return '/checkout';
+    return root.replace(/\/+$/, '') + '/checkout';
   }
 
   function pageUrl(url) {
@@ -48,7 +49,7 @@
       credentials: 'same-origin'
     }).then(function (res) {
       if (!res.ok) throw new Error('add');
-      window.location.href = rootUrl() + '/checkout';
+      window.location.href = checkoutUrl();
     }).catch(function () { form.submit(); });
   }
 
