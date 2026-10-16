@@ -1,0 +1,157 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "desktop_height": "desktop-height-full",
+        "mobile_height": "mobile-height-500",
+        "full_width": true,
+        "full_width_padding": 0,
+        "corner_radius": 0,
+        "content_position": "bottom-left",
+        "text_alignment": "left",
+        "content_width": "wide",
+        "subheading": "For wherever the day takes you.",
+        "subheading_is_emotional": true,
+        "heading": "The All Day Uniform",
+        "text": "",
+        "text_size": "text-size-extra-large",
+        "button_1_text": "Shop now",
+        "button_1_link": "shopify://collections/self-care-club",
+        "button_1_outline": false,
+        "button_2_text": "",
+        "button_2_link": "",
+        "button_2_outline": true,
+        "video": "",
+        "video_hosted": "shopify://files/videos/846998e07fca4e6db29394a0213d5911.HD-1080p-7.2Mbps-92676105.mp4",
+        "fallback_image": "shopify://shop_images/hq720.jpg",
+        "overlay_opacity": 25,
+        "sticky_product": "",
+        "sticky_title": "",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "featured_club": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Self Care Club",
+        "heading_is_era": false,
+        "editorial_line": "",
+        "description": "<p>Everything you need to begin the week restored.</p>",
+        "collection": "self-care-club",
+        "display_type": "carousel",
+        "product_limit": 8,
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "mobile_swipe": true,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
+    "hero_secondary": {
+      "type": "hero-banner",
+      "settings": {
+        "desktop_height": "desktop-height-750",
+        "mobile_height": "mobile-height-500",
+        "full_width": false,
+        "full_width_padding": 0,
+        "corner_radius": 28,
+        "content_position": "bottom-left",
+        "text_alignment": "left",
+        "content_width": "medium",
+        "subheading": "Take your time.",
+        "subheading_is_emotional": true,
+        "heading": "Essentials for slower Sundays.",
+        "text": "",
+        "text_size": "text-size-extra-large",
+        "button_1_text": "Explore",
+        "button_1_link": "shopify://collections/self-care-club",
+        "button_1_outline": true,
+        "button_2_text": "",
+        "button_2_link": "",
+        "button_2_outline": true,
+        "video": "",
+        "video_hosted": "shopify://files/videos/video-3.mp4",
+        "fallback_image": "shopify://shop_images/T_Shirt-2.png",
+        "overlay_opacity": 25,
+        "sticky_product": "",
+        "sticky_title": "",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "featured_new": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "New",
+        "heading_is_era": false,
+        "editorial_line": "",
+        "description": "",
+        "collection": "new-arrivals",
+        "display_type": "carousel",
+        "product_limit": 12,
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "mobile_swipe": true,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
+    "recent": {
+      "type": "recently-viewed-products",
+      "settings": {
+        "heading": "Recently viewed",
+        "heading_is_era": false,
+        "editorial_line": "",
+        "description": "",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "instafeed": {
+      "type": "apps",
+      "blocks": {
+        "instafeed_app_block_GMAFJr": {
+          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
+          "settings": {
+            "title": "Follow along @gooderawellness",
+            "title_color": "",
+            "title_size_v2": 22,
+            "alignment": "left",
+            "instafeed_margin_top": 0,
+            "instafeed_margin_bottom": 0,
+            "instafeed_margin_sides": 0,
+            "show_instagram_link": false,
+            "link_alignment": "left",
+            "link_color": "#000000",
+            "background_color": "",
+            "feed_id": "",
+            "html_area": ""
+          }
+        }
+      },
+      "block_order": [
+        "instafeed_app_block_GMAFJr"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "featured_club",
+    "hero_secondary",
+    "featured_new",
+    "recent",
+    "instafeed"
+  ]
+}
