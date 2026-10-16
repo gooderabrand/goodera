@@ -1,7 +1,7 @@
 /**
  * Clothing PDP: compact Apple Pay, hover/click color swap.
- * Sibling clicks use the JSON-template section id (Reformation product.js)
- * and swap gallery + buy-box inner HTML so the grid wrapper stays put.
+ * Sibling clicks fetch the full product page (assigned template + blocks)
+ * and swap gallery + buy-box inner HTML only when the title and form exist.
  */
 (function () {
   var cache = {};
@@ -16,27 +16,8 @@
     return r.length > 1 && r.slice(-1) === '/' ? r.slice(0, -1) : r;
   }
 
-  function sectionId() {
-    var root = document.querySelector('[data-ge-color-siblings][data-section-id]');
-    if (root && root.getAttribute('data-section-id')) return root.getAttribute('data-section-id');
-    var vs = document.querySelector('.template-product-clothing variant-selects[data-section]');
-    if (vs && vs.getAttribute('data-section')) return vs.getAttribute('data-section');
-    var form = document.querySelector('.template-product-clothing product-form[data-section]');
-    if (form && form.getAttribute('data-section')) return form.getAttribute('data-section');
-    var info = document.querySelector('.template-product-clothing [id^="ProductInfo-"]');
-    if (info) return info.id.replace('ProductInfo-', '');
-    var wrap = document.querySelector('.template-product-clothing .thb-product-detail');
-    wrap = wrap && wrap.closest('[id^="shopify-section-"]');
-    if (wrap) return wrap.id.replace('shopify-section-', '');
-    return '';
-  }
-
-  function sectionUrl(url) {
-    var clean = url.split('#')[0];
-    var id = sectionId();
-    var sep = clean.indexOf('?') > -1 ? '&' : '?';
-    if (id) return clean + sep + 'section_id=' + encodeURIComponent(id);
-    return clean;
+  function pageUrl(url) {
+    return String(url || '').split('#')[0];
   }
 
   function buyApple(form) {
@@ -88,26 +69,31 @@
     });
   }
 
+  function productDoc(html) {
+    if (!html) return null;
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    var detail = doc.querySelector('.thb-product-detail');
+    if (!detail) return null;
+    if (!detail.querySelector('.product-information .product-title')) return null;
+    if (!detail.querySelector('.product-form, form [name="id"]')) return null;
+    return doc;
+  }
+
   function prefetch(url) {
-    if (cache[url]) return cache[url];
-    cache[url] = fetch(sectionUrl(url), { credentials: 'same-origin' })
+    var clean = pageUrl(url);
+    if (!clean) return Promise.resolve(null);
+    if (cache[clean]) return cache[clean];
+    cache[clean] = fetch(clean, { credentials: 'same-origin' })
       .then(function (r) {
-        if (!r.ok) throw new Error('section');
+        if (!r.ok) throw new Error('page');
         return r.text();
       })
       .then(function (html) {
-        var doc = new DOMParser().parseFromString(html, 'text/html');
-        if (doc.querySelector('.thb-product-detail .product-information, .product-information--inner')) return html;
-        throw new Error('empty');
+        if (!productDoc(html)) throw new Error('incomplete');
+        return html;
       })
-      .catch(function () {
-        return fetch(url.split('#')[0], { credentials: 'same-origin' }).then(function (r) {
-          if (!r.ok) throw new Error('page');
-          return r.text();
-        });
-      })
-      .catch(function () { delete cache[url]; return null; });
-    return cache[url];
+      .catch(function () { delete cache[clean]; return null; });
+    return cache[clean];
   }
 
   function parseAttr(el, name) {
@@ -155,18 +141,22 @@
   }
 
   function applyHtml(html, url, push) {
-    if (!html) { window.location.href = url; return; }
-    var doc = new DOMParser().parseFromString(html, 'text/html');
-    var incoming = doc.querySelector('.thb-product-detail');
+    var doc = productDoc(html);
+    var incoming = doc && doc.querySelector('.thb-product-detail');
     var current = document.querySelector('.template-product-clothing .thb-product-detail')
       || document.querySelector('.thb-product-detail');
-    if (!incoming || !current) { window.location.href = url; return; }
+    if (!incoming || !current) {
+      window.location.href = url;
+      return;
+    }
 
     var galleryOk = swapInner(current, incoming, '.product-image-container');
     var infoOk = swapInner(current, incoming, '.product-information');
-    if (!galleryOk && !infoOk) {
-      current.replaceWith(incoming);
-    } else if (incoming.getAttribute('data-handle')) {
+    if (!galleryOk || !infoOk) {
+      window.location.href = url;
+      return;
+    }
+    if (incoming.getAttribute('data-handle')) {
       current.setAttribute('data-handle', incoming.getAttribute('data-handle'));
     }
 
