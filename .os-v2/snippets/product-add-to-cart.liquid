@@ -104,6 +104,31 @@
 			<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
 			{{ form | payment_terms }}
 		{%- endform -%}
+		{%- if template.suffix == 'clothing' -%}
+			<div class="ge-pay-icons">
+				{%- liquid
+					assign ge_pay_seen = ''
+					for type in shop.enabled_payment_types
+						assign ge_type = type | downcase
+						if ge_type == 'klarna' or ge_type == 'affirm'
+							assign ge_pay_seen = ge_pay_seen | append: ge_type | append: '|'
+						endif
+					endfor
+				-%}
+				{%- for type in shop.enabled_payment_types -%}
+					{%- assign ge_type = type | downcase -%}
+					{%- if ge_type == 'klarna' or ge_type == 'affirm' -%}
+						<span class="ge-pay-icons__mark">{{ type | payment_type_svg_tag: class: 'ge-pay-icons__svg' }}</span>
+					{%- endif -%}
+				{%- endfor -%}
+				{%- unless ge_pay_seen contains 'klarna' -%}
+					<span class="ge-pay-icons__word">Klarna</span>
+				{%- endunless -%}
+				{%- unless ge_pay_seen contains 'affirm' -%}
+					<span class="ge-pay-icons__word">Affirm</span>
+				{%- endunless -%}
+			</div>
+		{%- endif -%}
 	{%- endif -%}
 </div>
 {%- if pickup -%}

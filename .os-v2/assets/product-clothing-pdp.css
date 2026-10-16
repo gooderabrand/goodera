@@ -232,23 +232,30 @@
   z-index: 8;
   display: flex;
   align-items: center;
-  width: 72px;
-  height: 40px;
-  border-radius: 50%;
-  background: #fff;
+  box-sizing: border-box;
+  width: 96px !important;
+  height: 40px !important;
+  padding: 0 4px;
+  border-radius: 999px !important;
+  background: #f4f4f4 !important;
   color: rgb(20, 15, 15);
   pointer-events: auto;
-  box-shadow: 0 1px 4px rgba(20, 15, 15, 0.1);
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(20, 15, 15, 0.14);
 }
 
 .template-product-clothing .ge-paired-nav__btn {
   position: static;
   transform: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex: 1 1 50%;
-  width: 36px;
-  height: 40px;
+  width: auto;
+  height: 100%;
   padding: 0;
   border: 0;
+  border-radius: 0;
   background: transparent;
   box-shadow: none;
   color: rgb(20, 15, 15);
@@ -387,6 +394,38 @@ body.template-product-clothing .site-header__logo-white { display: none !importa
   .template-product-clothing .product-image-container > .ge-paired-nav {
     z-index: 8 !important;
   }
+}
+
+.template-product-clothing .installment shopify-payment-terms.ge-shop-ink {
+  filter: brightness(0);
+}
+
+.template-product-clothing .ge-pay-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.45rem;
+}
+
+.template-product-clothing .ge-pay-icons__mark {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.template-product-clothing .ge-pay-icons__svg {
+  display: block;
+  height: 14px;
+  width: auto;
+  filter: brightness(0);
+}
+
+.template-product-clothing .ge-pay-icons__word {
+  color: #17160f;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
 }
 
 .template-product-clothing .product-information .breadcrumbs {

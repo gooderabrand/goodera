@@ -160,16 +160,71 @@
     });
   }
 
+  function paintShopLogo(host) {
+    var root = host.shadowRoot;
+    if (!root) return false;
+    if (host.dataset.geShopWatch !== 'true') {
+      host.dataset.geShopWatch = 'true';
+      var obs = new MutationObserver(function () { paintShopLogo(host); });
+      obs.observe(root, { childList: true, subtree: true });
+    }
+    if (!root.querySelector('style[data-ge-shop-ink]')) {
+      var style = document.createElement('style');
+      style.setAttribute('data-ge-shop-ink', '');
+      style.textContent = '.shop-pay-logo,svg,img{filter:brightness(0)!important}';
+      root.appendChild(style);
+    }
+    var logos = root.querySelectorAll('.shop-pay-logo, svg, img');
+    if (!logos.length) return false;
+    logos.forEach(function (logo) {
+      logo.style.filter = 'brightness(0)';
+    });
+    host.classList.remove('ge-shop-ink');
+    return true;
+  }
+
+  function inkShopMarks() {
+    if (!document.body.classList.contains('template-product-clothing')) return true;
+    var hosts = document.querySelectorAll('shopify-payment-terms');
+    if (!hosts.length) return false;
+    var done = true;
+    hosts.forEach(function (host) {
+      if (!paintShopLogo(host)) done = false;
+    });
+    return done;
+  }
+
+  function startShopInk() {
+    if (!document.body.classList.contains('template-product-clothing')) return;
+    if (startShopInk.timer) clearInterval(startShopInk.timer);
+    var tries = 0;
+    startShopInk.timer = setInterval(function () {
+      tries += 1;
+      if (inkShopMarks() || tries >= 40) {
+        clearInterval(startShopInk.timer);
+        startShopInk.timer = null;
+        document.querySelectorAll('shopify-payment-terms').forEach(function (host) {
+          if (!host.shadowRoot) host.classList.add('ge-shop-ink');
+        });
+      }
+    }, 200);
+  }
+
   window.geInitClothingGallery = initGallery;
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
       labelBag();
       initGallery();
+      startShopInk();
     });
   } else {
     labelBag();
     initGallery();
+    startShopInk();
   }
-  document.addEventListener('shopify:section:load', initGallery);
+  document.addEventListener('shopify:section:load', function () {
+    initGallery();
+    startShopInk();
+  });
 })();
