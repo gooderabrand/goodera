@@ -208,27 +208,88 @@ body.template-product-skincare {
   box-sizing: border-box;
 }
 
+.template-product-skincare .ge-skin-howto {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  align-items: stretch;
+}
+
+.template-product-skincare .ge-skin-howto__still {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.template-product-skincare .ge-skin-howto__still-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.template-product-skincare .ge-skin-howto__video {
+  min-width: 0;
+}
+
+.template-product-skincare .ge-skin-howto__copy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: clamp(1.5rem, 3vw, 3rem);
+  background: var(--ge-band, #f5f5f7);
+  text-align: center;
+}
+
+.template-product-skincare .ge-skin-howto__copy-inner {
+  width: 100%;
+  max-width: 28rem;
+}
+
+.template-product-skincare .ge-skin-howto__copy .sr-beta__eyebrow,
+.template-product-skincare .ge-skin-howto__copy .sr-beta__title,
+.template-product-skincare .ge-skin-howto__copy .sr-beta__lede {
+  text-align: center;
+}
+
+.template-product-skincare .ge-skin-howto__copy .sr-beta__lede {
+  margin-inline: auto;
+}
+
+.template-product-skincare .ge-skin-howto .shoppable-video-reels,
 .template-product-skincare .ge-skin-howto .shoppable-video-reels--slide {
   width: 100%;
   padding: 0;
 }
 
-.template-product-skincare .ge-skin-howto .image-with-text__image,
-.template-product-skincare .ge-skin-howto .image-with-text__content {
-  padding: 0;
-}
-
-.template-product-skincare .ge-skin-howto .image-with-text__content {
-  padding-left: var(--ge-page-inset, 64px);
-}
-
 .template-product-skincare .ge-skin-howto .shoppable-video-reels--video {
   height: auto;
-  margin-left: 0;
-  margin-right: auto;
-  max-width: 22rem;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  aspect-ratio: 9 / 16;
   border-radius: 0 !important;
   clip-path: none !important;
+}
+
+@media (max-width: 989px) {
+  .template-product-skincare .ge-skin-howto {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .template-product-skincare .ge-skin-howto__still {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .template-product-skincare .ge-skin-howto {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .template-product-skincare .ge-skin-howto .shoppable-video-reels--video video {
