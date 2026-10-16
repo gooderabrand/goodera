@@ -169,6 +169,8 @@
       current.setAttribute('data-handle', incoming.getAttribute('data-handle'));
     }
 
+    var freshCrumbs = doc.querySelector('.breadcrumbs');
+    if (freshCrumbs) window.__geCrumbsTemplate = freshCrumbs.cloneNode(true);
     neutralizeHero();
     if (push) history.pushState({ geClothingUrl: url }, '', url);
     if (window.geInitClothingGallery) window.geInitClothingGallery();

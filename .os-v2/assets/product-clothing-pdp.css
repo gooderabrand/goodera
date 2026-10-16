@@ -46,7 +46,7 @@
   pointer-events: none;
 }
 
-/* Shop Pay host is closed shadow DOM — hide the light-DOM element */
+/* Shop Pay host is closed shadow DOM - hide the light-DOM element */
 .template-product-clothing .product-form shopify-accelerated-checkout,
 .template-product-clothing .product-form shopify-accelerated-checkout-cart {
   display: none !important;
@@ -61,7 +61,8 @@
   grid-template-columns: 1fr;
 }
 
-/* Lululemon compact chip: logo only, white outline, 100x44 */
+/* 100x44 pill stays. The system Apple Pay control sizes its glyph to the
+   button height, so paint the mark ourselves at a short fixed size. */
 .template-product-clothing .product-form__checkout-row .ge-apple-pay {
   order: 1;
   box-sizing: border-box;
@@ -71,18 +72,20 @@
   height: 44px;
   min-height: 44px;
   margin: 0;
-  padding: 0 7px;
+  padding: 0;
   border: 1px solid rgb(117, 117, 117);
   border-radius: 1000px;
-  background-color: #fff;
-  background-image: -webkit-named-image(apple-pay-logo-black);
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  background-size: 26px auto !important;
+  background-color: #fff !important;
+  background-image: -webkit-named-image(apple-pay-logo-black) !important;
+  background-repeat: no-repeat !important;
+  background-position: 50% 50% !important;
+  background-size: auto 14px !important;
   color: transparent;
+  font-size: 0;
+  line-height: 0;
   cursor: pointer;
-  appearance: auto;
-  -webkit-appearance: -apple-pay-button;
+  appearance: none !important;
+  -webkit-appearance: none !important;
   -apple-pay-button-type: plain;
   -apple-pay-button-style: white-outline;
 }
@@ -201,12 +204,18 @@
   }
 }
 
+.template-product-clothing .product-image-container {
+  position: relative;
+}
+
 .template-product-clothing .ge-paired-nav {
-  position: absolute;
-  right: 24px;
-  bottom: 24px;
-  inset: auto;
-  z-index: 3;
+  position: absolute !important;
+  top: auto !important;
+  left: auto !important;
+  right: 24px !important;
+  bottom: 24px !important;
+  margin: 0;
+  z-index: 4;
   display: flex;
   align-items: center;
   width: 72px;
@@ -281,3 +290,56 @@ body.template-product-clothing .site-header.is-nav-hidden {
 
 body.template-product-clothing .site-header__logo-ink { display: block !important; }
 body.template-product-clothing .site-header__logo-white { display: none !important; }
+
+/* Gallery stays; the buy box scrolls. Breadcrumbs live in the buy box. */
+@media (min-width: 1068px) {
+  .template-product-clothing .thb-product-detail .product-grid-container,
+  .template-product-clothing.template-product .thb-product-detail .product-grid-container {
+    align-items: stretch !important;
+  }
+
+  .template-product-clothing .product-grid-container > [id^='MediaGallery-'] {
+    align-self: stretch !important;
+    height: auto !important;
+  }
+
+  .template-product-clothing .product-image-container,
+  .template-product-clothing .product-image-container--grid,
+  .template-product-clothing .product-image-container--paired {
+    position: sticky !important;
+    top: var(--header-height, 56px);
+    align-self: start;
+    z-index: 1;
+    height: fit-content;
+  }
+
+  .template-product-clothing .thb-product-detail .product-information--inner,
+  .template-product-clothing .thb-product-detail .product-information--inner.production-information--sticky,
+  .template-product-clothing .thb-product-detail .production-information--sticky {
+    position: relative !important;
+    top: auto !important;
+  }
+
+  .template-product-clothing .thb-product-detail .product-images .product-single__media-image {
+    height: calc(100svh - var(--header-height, 56px)) !important;
+    padding-bottom: 0 !important;
+  }
+
+  .template-product-clothing .thb-product-detail .product-images .product-single__media-image img {
+    object-fit: cover;
+    object-position: center top;
+  }
+}
+
+.template-product-clothing .product-information .breadcrumbs {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 4px;
+  padding: 2px 0 14px;
+  overflow-x: auto;
+  text-align: left;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  white-space: nowrap;
+}

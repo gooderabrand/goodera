@@ -123,8 +123,31 @@
     update();
   }
 
+  function placeBreadcrumbs() {
+    if (!document.body.classList.contains('template-product-clothing')) return;
+    var info = document.querySelector('.product-information--inner');
+    if (!info) return;
+    if (!window.__geCrumbsTemplate) {
+      var live = document.querySelector('.breadcrumbs');
+      if (live) window.__geCrumbsTemplate = live.cloneNode(true);
+    }
+    if (!window.__geCrumbsTemplate) return;
+    var node = window.__geCrumbsTemplate.cloneNode(true);
+    var current = info.querySelector('.breadcrumbs');
+    if (current) current.replaceWith(node);
+    else {
+      var title = info.querySelector('.product-title-container');
+      if (title) info.insertBefore(node, title);
+      else info.insertBefore(node, info.firstChild);
+    }
+    document.querySelectorAll('.section-breadcrumbs').forEach(function (section) {
+      section.setAttribute('hidden', '');
+    });
+  }
+
   function initGallery() {
     neutralizeHero();
+    placeBreadcrumbs();
     document.querySelectorAll('.template-product-clothing .product-image-container').forEach(bindGallery);
   }
 

@@ -45,15 +45,35 @@
     z-index: 2;
   }
 
+  .template-product-clothing .product-grid-container > [id^='MediaGallery-'] {
+    align-self: stretch;
+    height: auto;
+  }
+
+  .template-product-clothing .product-grid-container {
+    align-items: stretch;
+  }
+
   .template-product-clothing .thb-product-detail .product-information--inner,
+  .template-product-clothing .thb-product-detail .product-information--inner.production-information--sticky,
   .template-product-clothing .thb-product-detail .production-information--sticky {
-    position: sticky;
-    top: calc(var(--header-height, 56px) + 16px);
+    position: relative;
+    top: auto;
     width: 100%;
     max-width: none;
     margin-inline: 0;
     padding-inline-end: 0 !important;
     box-sizing: border-box;
+  }
+
+  .template-product-clothing .thb-product-detail .product-images .product-single__media-image {
+    height: calc(100svh - var(--header-height, 56px)) !important;
+    padding-bottom: 0 !important;
+  }
+
+  .template-product-clothing .thb-product-detail .product-images .product-single__media-image img {
+    object-fit: cover;
+    object-position: center top;
   }
 }
 
@@ -71,6 +91,17 @@
   width: 100% !important;
   max-width: none !important;
   padding: 0 !important;
+}
+
+@media (min-width: 1068px) {
+  .template-product-clothing .product-image-container,
+  .template-product-clothing .product-image-container--grid,
+  .template-product-clothing .product-image-container--paired {
+    position: sticky;
+    top: var(--header-height, 56px);
+    align-self: start;
+    z-index: 1;
+  }
 }
 
 .template-product-clothing .thb-product-detail .product-images,
@@ -130,9 +161,10 @@
 /* Lululemon-style 72x40 white pill, bottom-right of the gallery */
 .template-product-clothing .ge-paired-nav {
   position: absolute;
+  top: auto;
+  left: auto;
   right: 24px;
   bottom: 24px;
-  inset: auto;
   z-index: 3;
   display: flex;
   align-items: center;
@@ -565,11 +597,13 @@
   background-image: -webkit-named-image(apple-pay-logo-black);
   background-repeat: no-repeat;
   background-position: 50% 50%;
-  background-size: 26px auto !important;
+  background-size: auto 14px !important;
   color: transparent;
+  font-size: 0;
+  line-height: 0;
   cursor: pointer;
-  appearance: auto;
-  -webkit-appearance: -apple-pay-button;
+  appearance: none !important;
+  -webkit-appearance: none !important;
   -apple-pay-button-type: plain;
   -apple-pay-button-style: white-outline;
 }
