@@ -125,11 +125,11 @@
         "e49f0a1b-c60d-4e4a-b3c1-100c37771e4a": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Shipping & Returns",
+            "heading": "What's in it and what's not",
             "open": false,
-            "content": "<p><strong>US SHIPPING</strong></p><p>Shipping domestically from the United States.</p><ul><li>Standard Shipping (4-6 Business Days) - Free</li></ul><p><strong>US RETURNS </strong>If something is not quite right please email care@gooderabrand.com</p>",
+            "content": "",
             "page": "",
-            "custom_liquid": ""
+            "custom_liquid": "{% render 'skincare-formula', product: product %}"
           }
         },
         "95b7e00a-0453-4eb0-9cf0-1dae84d8b822": {
