@@ -459,13 +459,22 @@ body.template-product-skincare.template-product-clothing .product-form__checkout
 body.template-product-skincare .section-skincare-results,
 body.template-product-skincare .section-skincare-routine,
 body.template-product-skincare .section-skincare-how-to,
-body.template-product-skincare .section-skincare-faq,
-body.template-product-skincare .section-recently-viewed-products {
+body.template-product-skincare .section-skincare-faq {
   box-sizing: border-box;
   width: auto;
   max-width: none;
   margin-inline: 0;
   padding-inline: var(--ge-page-edge, 64px) !important;
+  background: transparent;
+  border: 0;
+}
+
+body.template-product-skincare .section-recently-viewed-products {
+  box-sizing: border-box;
+  width: auto;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 0 !important;
   background: transparent;
   border: 0;
 }
@@ -479,11 +488,9 @@ body.template-product-skincare .section-skincare-how-to {
 body.template-product-skincare .section-skincare-results > .row,
 body.template-product-skincare .section-skincare-routine > .row,
 body.template-product-skincare .section-skincare-how-to > .row,
-body.template-product-skincare .section-recently-viewed-products > .row,
 body.template-product-skincare .section-skincare-results > .row > .columns,
 body.template-product-skincare .section-skincare-routine > .row > .columns,
-body.template-product-skincare .section-skincare-how-to > .row > .columns,
-body.template-product-skincare .section-recently-viewed-products > .row > .columns {
+body.template-product-skincare .section-skincare-how-to > .row > .columns {
   width: 100%;
   max-width: none;
   margin: 0;
@@ -510,15 +517,25 @@ body.template-product-skincare .section-skincare-faq .sr-beta__faq {
   padding-block: var(--ge-section-space, 64px);
 }
 
-body.template-product-skincare .section-recently-viewed-products .products.row {
+body.template-product-skincare .section-recently-viewed-products .ge-commerce-section {
+  padding-inline: var(--ge-page-edge, 64px);
+  background: transparent;
+}
+
+body.template-product-skincare .section-recently-viewed-products .page-width,
+body.template-product-skincare .section-recently-viewed-products .discover-section__header,
+body.template-product-skincare .section-recently-viewed-products .ge-rail,
+body.template-product-skincare .section-recently-viewed-products .ge-rail__scroller {
   width: 100%;
   max-width: none;
   margin-inline: 0;
   padding-inline: 0;
+  scroll-padding-inline: 0;
 }
 
-body.template-product-skincare .section-recently-viewed-products .products.row > .columns:first-child {
+body.template-product-skincare .section-recently-viewed-products .ge-rail__scroller > :first-child {
   padding-left: 0;
+  margin-left: 0;
 }
 
 body.template-product-skincare .section-skincare-results .ge-skin-ring::before {
