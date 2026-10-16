@@ -1,0 +1,73 @@
+{{ 'sunday-reset-beta.css' | asset_url | stylesheet_tag }}
+{{ 'ge-sunday-reset-type.css' | asset_url | stylesheet_tag }}
+
+<section class="sr-beta__experience" id="process" data-sr-experience aria-labelledby="SrBetaExperienceTitle-{{ section.id }}">
+  <div class="sr-beta__inner">
+    <div class="sr-beta__experience-intro">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="sr-beta__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h2 class="sr-beta__title" id="SrBetaExperienceTitle-{{ section.id }}">
+        {{ section.settings.heading_line_1 | escape }}<br>
+        <em>{{ section.settings.heading_line_2 | escape }}</em>
+      </h2>
+      {%- if section.settings.lede != blank -%}
+        <p class="sr-beta__lede sr-beta__lede--muted">{{ section.settings.lede | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="sr-beta__timeline-scroll" data-sr-timeline>
+      <ol class="sr-beta__steps" aria-label="{{ section.settings.timeline_label | escape }}">
+        {%- for block in section.blocks -%}
+          <li class="sr-beta__step" data-sr-timeline-step {{ block.shopify_attributes }}>
+            <div class="sr-beta__step-card">
+              <div class="sr-beta__step-node" aria-hidden="true"></div>
+              <h3 class="sr-beta__step-heading">
+                <span class="sr-beta__step-num">{{ block.settings.step_label | escape }}</span>
+                <span class="sr-beta__step-name">{{ block.settings.title | escape }}</span>
+              </h3>
+              <p class="sr-beta__step-text">{{ block.settings.text | escape }}</p>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SR — Experience",
+  "tag": "section",
+  "class": "section-sunday-reset-experience",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "03 / THE EXPERIENCE" },
+    { "type": "text", "id": "heading_line_1", "label": "Heading line 1", "default": "Four moments." },
+    { "type": "text", "id": "heading_line_2", "label": "Heading line 2 (italic)", "default": "One honest perspective." },
+    { "type": "textarea", "id": "lede", "label": "Body", "default": "Here's how the Sunday Reset beta works, from application to the final check-in." },
+    { "type": "text", "id": "timeline_label", "label": "Timeline accessible name", "default": "Sunday Reset beta steps" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "step_label", "label": "Step label", "default": "STEP 1" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Apply" },
+        { "type": "textarea", "id": "text", "label": "Description", "default": "Tell us about your skin, your routine, and why you would like to test Sunday Reset." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SR — Experience",
+      "blocks": [
+        { "type": "step", "settings": { "step_label": "STEP 1", "title": "Apply", "text": "Tell us about your skin, your routine, and why you would like to test Sunday Reset." } },
+        { "type": "step", "settings": { "step_label": "STEP 2", "title": "Join", "text": "We will thoughtfully choose 50 testers. If selected, you will receive a complimentary Ritual Kit and next steps." } },
+        { "type": "step", "settings": { "step_label": "STEP 3", "title": "Make time", "text": "Enjoy one individually packed use each week over approximately four weeks, at a time that works for you." } },
+        { "type": "step", "settings": { "step_label": "STEP 4", "title": "Share your experience", "text": "Complete two brief feedback check-ins. Before-and-after selfies and social posts are always optional." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
