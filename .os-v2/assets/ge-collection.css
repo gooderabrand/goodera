@@ -5,6 +5,10 @@
 
 .template-collection .collection-banner,
 .template-collection .collection-banner.collection-banner--has-bg {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
   min-height: 0;
   margin: 0;
   border-radius: 0;
@@ -30,12 +34,14 @@
 }
 
 .template-collection .collection-banner--breadcrumbs {
-  position: relative;
+  position: relative !important;
   top: auto;
   left: auto;
   right: auto;
   z-index: 1;
-  padding-block: 0.85rem 0;
+  order: 0;
+  width: 100%;
+  padding-block: 0.7rem 0.2rem;
 }
 
 .template-collection .collection-banner--breadcrumbs,
@@ -48,8 +54,12 @@
   text-align: left !important;
 }
 
+.template-collection .collection-banner .row {
+  order: 1;
+}
+
 .template-collection .collection-banner--content {
-  padding-block: 0.35rem 0.25rem !important;
+  padding-block: 0.15rem 0.25rem !important;
   max-width: none !important;
   margin: 0 !important;
 }
@@ -66,21 +76,23 @@
 }
 
 .template-collection .collection-banner--content h1 {
-  display: block;
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.55rem;
   margin: 0;
   font-weight: 650;
   letter-spacing: -0.03em;
   line-height: 1.05;
 }
 
-.template-collection .ge-collection-count {
-  margin-inline-start: 0.35rem;
-  font-size: 0.38em;
+.template-collection .collection-banner--content h1 .ge-collection-count {
+  margin: 0 0 0.2rem;
+  font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0;
   line-height: 1;
-  vertical-align: 0.85em;
-  color: #17160f;
+  color: #a3a39c !important;
 }
 
 .template-collection .collection-banner--description {
