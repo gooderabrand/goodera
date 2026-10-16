@@ -65,6 +65,13 @@
     return true;
   }
 
+  document.addEventListener('click', function (event) {
+    var btn = event.target.closest && event.target.closest('.ge-apple-pay');
+    if (!btn) return;
+    btn.classList.add('is-pressed');
+    window.setTimeout(function () { btn.classList.remove('is-pressed'); }, 160);
+  }, true);
+
   function geWatchSkinGallery() {
     var tries = 0;
     function tick() {
