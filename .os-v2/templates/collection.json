@@ -14,42 +14,12 @@
       "settings": {
         "show_collection_image": false,
         "show_collection_description": true,
-        "show_subcollections": true,
         "make_heading_uppercase": false,
         "heading_is_era": false,
         "text_alignment": "left",
+        "show_subcollections": false,
         "overlay_color": "#000000",
         "overlay_opacity": 0
-      }
-    },
-    "shop-by-category": {
-      "type": "collection-list",
-      "settings": {
-        "heading": "",
-        "heading_left": true,
-        "description": "",
-        "full_width": true,
-        "collection_list": [
-          "self-care-club",
-          "new-arrivals",
-          "bestsellers",
-          "t-shirts-copy-1",
-          "t-shirts-copy",
-          "hoodies-copy",
-          "sweatpants",
-          "skincare"
-        ],
-        "image_ratio": "square",
-        "layout": "grid",
-        "style": "style1",
-        "columns_desktop": 6,
-        "columns_mobile": "2",
-        "show_progress_bar": false,
-        "mobile_swipe": true,
-        "overlay_color": "#000000",
-        "overlay_opacity": 0,
-        "disable_top_spacing": true,
-        "disable_bottom_spacing": true
       }
     },
     "product-grid": {
@@ -137,7 +107,6 @@
   },
   "order": [
     "main-collection-banner",
-    "shop-by-category",
     "product-grid",
     "16636704759cbf64c5",
     "166367231494317262",

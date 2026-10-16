@@ -1,0 +1,91 @@
+{% doc %}
+  Horizontal rail of the collections that share a menu group with the current collection.
+  A menu whose handle matches the collection is used when it contains collection links.
+  Otherwise the deepest matching group in the main menu or mega menu is used.
+  Renders nothing when that group has fewer than two collections.
+{% enddoc %}
+{%- if collection != blank -%}
+{%- liquid
+  assign ge_group = blank
+
+  if linklists[collection.handle] != empty
+    assign ge_child_count = 0
+    for ge_link in linklists[collection.handle].links
+      if ge_link.type == 'collection_link' and ge_link.object != blank
+        assign ge_child_count = ge_child_count | plus: 1
+      endif
+    endfor
+    if ge_child_count > 0
+      assign ge_group = linklists[collection.handle].links
+    endif
+  endif
+
+  unless ge_group
+    assign ge_depth = 0
+    assign ge_menu_handles = 'main-menu,mega-menu' | split: ','
+    for ge_menu_handle in ge_menu_handles
+      assign ge_menu = linklists[ge_menu_handle]
+      for ge_link in ge_menu.links
+        for ge_child in ge_link.links
+          if ge_child.type == 'collection_link' and ge_child.object.handle == collection.handle and ge_depth < 2
+            assign ge_group = ge_link.links
+            assign ge_depth = 2
+          endif
+          for ge_grand in ge_child.links
+            if ge_grand.type == 'collection_link' and ge_grand.object.handle == collection.handle
+              assign ge_group = ge_child.links
+              assign ge_depth = 3
+            endif
+          endfor
+        endfor
+      endfor
+    endfor
+  endunless
+
+  assign ge_count = 0
+  if ge_group
+    for ge_link in ge_group
+      if ge_link.type == 'collection_link' and ge_link.object != blank
+        assign ge_count = ge_count | plus: 1
+      endif
+    endfor
+  endif
+-%}
+{%- if ge_count > 1 -%}
+  <div class="ge-collection-rail">
+    <div class="ge-collection-rail__scroller">
+      {%- for ge_link in ge_group -%}
+        {%- if ge_link.type == 'collection_link' and ge_link.object != blank -%}
+          {%- liquid
+            assign ge_collection = ge_link.object
+            assign ge_image = ge_collection.featured_image
+            if ge_image == blank
+              assign ge_image = ge_collection.products.first.featured_image
+            endif
+            assign ge_text = ge_collection.description | strip_html | strip
+          -%}
+          <a class="ge-collection-rail__card{% if ge_collection.handle == collection.handle %} is-current{% endif %}" href="{{ ge_collection.url }}"{% if ge_collection.handle == collection.handle %} aria-current="page"{% endif %}>
+            <span class="ge-collection-rail__media">
+              {%- if ge_image -%}
+                {%- render 'responsive-image', image: ge_image, sizes: '280x350,560x700' -%}
+              {%- endif -%}
+            </span>
+            <span class="ge-collection-rail__name">{{ ge_collection.title }}</span>
+            {%- if ge_text != blank -%}
+              <span class="ge-collection-rail__text">{{ ge_text | truncate: 72 }}</span>
+            {%- endif -%}
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="ge-collection-rail__nav">
+      <button type="button" class="ge-collection-rail__btn" data-ge-rail-prev aria-label="Previous collections">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button type="button" class="ge-collection-rail__btn" data-ge-rail-next aria-label="Next collections">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+{%- endif -%}
+{%- endif -%}
