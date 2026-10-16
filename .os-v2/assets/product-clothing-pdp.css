@@ -119,15 +119,48 @@
 }
 
 .template-product-clothing .product-form__checkout-row .single-add-to-cart-button,
-.template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button {
+.template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button {
   background: #000 !important;
   background-image: none !important;
   color: #fff !important;
   border: 0 !important;
 }
 
-.template-product-clothing .product-form__checkout-row .single-add-to-cart-button .single-add-to-cart-button--text {
+.template-product-clothing .single-add-to-cart-button .single-add-to-cart-button--text {
   color: #fff !important;
+}
+
+@media (hover: hover) {
+  .template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button:hover,
+  .template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button:focus,
+  .template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button:hover,
+  .template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button:focus {
+    background: #2a2a2a !important;
+    color: #fff !important;
+  }
+
+  .template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button:hover:before,
+  .template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button:focus:before,
+  .template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button:hover:before,
+  .template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button:focus:before {
+    opacity: 0 !important;
+    transform: rotate3d(0, 0, 1, 6deg) translate3d(-1.2em, 110%, 0) !important;
+  }
+}
+
+.template-product-clothing .complementary-products--heading {
+  font-size: 0.9375rem;
+}
+
+.template-product-clothing .complementary-products .cart-product-link {
+  font-size: 1.0625rem;
+  line-height: 1.35;
+}
+
+.template-product-clothing .complementary-products .price {
+  font-size: 0.9375rem;
 }
 
 @media (max-width: 1067px) {

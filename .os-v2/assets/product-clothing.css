@@ -417,7 +417,8 @@
 }
 
 .template-product-clothing .product-form__checkout-row .single-add-to-cart-button,
-.template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button {
+.template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button {
   order: 2;
   min-width: 0;
   margin: 0 !important;
@@ -430,8 +431,27 @@
   box-shadow: none !important;
 }
 
-.template-product-clothing .product-form__checkout-row .single-add-to-cart-button .single-add-to-cart-button--text {
+.template-product-clothing .product-form__checkout-row .single-add-to-cart-button .single-add-to-cart-button--text,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button--text {
   color: #fff !important;
+}
+
+@media (hover: hover) {
+  .template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button:hover,
+  .template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button:focus,
+  .template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button:hover,
+  .template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button:focus {
+    background: #2a2a2a !important;
+    color: #fff !important;
+  }
+
+  .template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button:hover:before,
+  .template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button:focus:before,
+  .template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button:hover:before,
+  .template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button:focus:before {
+    opacity: 0 !important;
+    transform: rotate3d(0, 0, 1, 6deg) translate3d(-1.2em, 110%, 0) !important;
+  }
 }
 
 .template-product-clothing .product-form__checkout-row .shopify-payment-button__button,

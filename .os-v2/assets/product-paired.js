@@ -128,11 +128,24 @@
     document.querySelectorAll('.template-product-clothing .product-image-container').forEach(bindGallery);
   }
 
+  function labelBag() {
+    if (!document.body.classList.contains('template-product-clothing')) return;
+    if (window.theme && theme.variantStrings) theme.variantStrings.addToCart = 'Add to bag';
+    document.querySelectorAll('.single-add-to-cart-button--text').forEach(function (el) {
+      var text = (el.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+      if (text === 'add to cart') el.textContent = 'Add to bag';
+    });
+  }
+
   window.geInitClothingGallery = initGallery;
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initGallery);
+    document.addEventListener('DOMContentLoaded', function () {
+      labelBag();
+      initGallery();
+    });
   } else {
+    labelBag();
     initGallery();
   }
   document.addEventListener('shopify:section:load', initGallery);
