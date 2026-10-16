@@ -148,6 +148,7 @@
   function initGallery() {
     neutralizeHero();
     placeBreadcrumbs();
+    if (document.body.classList.contains('template-product-skincare')) return;
     document.querySelectorAll('.template-product-clothing .product-image-container').forEach(bindGallery);
   }
 

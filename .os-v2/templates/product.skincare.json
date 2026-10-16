@@ -193,9 +193,9 @@
         "enable_sticky_info": true,
         "enable_sticky_add_to_cart": true,
         "show_taxes_included": false,
-        "media_layout": "grid",
+        "media_layout": "thumbnails",
         "display_slider_pagination": true,
-        "media_aspect_ratio": "portrait",
+        "media_aspect_ratio": "square",
         "display_captions": false,
         "hide_variants": false,
         "lightbox": false,
@@ -318,6 +318,7 @@
       "type": "skincare-how-to",
       "settings": {
         "title": "",
+        "video": "shopify://files/videos/Sunday Reset Routine Social.mp4",
         "instructions": "Shake well before use. Apply evenly over skin as the final step in your skincare routine. Reapply every two hours when in the sun."
       }
     },

@@ -5,6 +5,25 @@
 {% endstyle %}
 <script>
   document.body.classList.add('template-product-clothing');
+  function geBreakSundayResetTitle() {
+    var title = document.querySelector('.product-title');
+    if (!title || title.querySelector('br')) return;
+    var text = (title.textContent || '').replace(/\s+/g, ' ').trim();
+    var lead = '';
+    if (text.indexOf('Sunday Reset®') === 0) lead = 'Sunday Reset®';
+    else if (text.indexOf('Sunday Reset') === 0) lead = 'Sunday Reset';
+    if (!lead) return;
+    var rest = text.slice(lead.length).replace(/^\s+/, '');
+    title.textContent = '';
+    title.appendChild(document.createTextNode(lead));
+    title.appendChild(document.createElement('br'));
+    if (rest) title.appendChild(document.createTextNode(rest));
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', geBreakSundayResetTitle);
+  } else {
+    geBreakSundayResetTitle();
+  }
 </script>
 {{ 'product-clothing.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product-paired.js' | asset_url }}" defer></script>
