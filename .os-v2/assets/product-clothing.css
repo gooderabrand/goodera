@@ -436,22 +436,52 @@
   color: #fff !important;
 }
 
-@media (hover: hover) {
-  .template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button:hover,
-  .template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button:focus,
-  .template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button:hover,
-  .template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button:focus {
-    background: #2a2a2a !important;
-    color: #fff !important;
-  }
+/* Reformation slides a white :before across .button on hover. Remove it so
+   Add to bag darkens instead of flashing white. */
+.template-product-clothing .single-add-to-cart-button.button:before,
+.template-product-clothing .single-add-to-cart-button.button::before,
+.template-product-clothing .single-add-to-cart-button.button:hover:before,
+.template-product-clothing .single-add-to-cart-button.button:hover::before,
+.template-product-clothing .single-add-to-cart-button.button:focus:before,
+.template-product-clothing .single-add-to-cart-button.button:focus::before,
+.template-product-clothing .single-add-to-cart-button.button:focus-visible:before,
+.template-product-clothing .single-add-to-cart-button.button:focus-visible::before,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button:before,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button::before,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button:hover:before,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button:hover::before {
+  content: none !important;
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  background: #2a2a2a !important;
+  background-color: #2a2a2a !important;
+  transform: none !important;
+  transition: none !important;
+}
 
-  .template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button:hover:before,
-  .template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button:focus:before,
-  .template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button:hover:before,
-  .template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button:focus:before {
-    opacity: 0 !important;
-    transform: rotate3d(0, 0, 1, 6deg) translate3d(-1.2em, 110%, 0) !important;
-  }
+.template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button:hover,
+.template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button:focus,
+.template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button:focus-visible,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button:hover,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button:focus,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button:focus-visible,
+.template-product-clothing #AddToCart:hover,
+.template-product-clothing #AddToCart:focus,
+.template-product-clothing #AddToCartSticky:hover,
+.template-product-clothing #AddToCartSticky:focus {
+  background: #2a2a2a !important;
+  background-color: #2a2a2a !important;
+  background-image: none !important;
+  color: #fff !important;
+  border-color: #2a2a2a !important;
+  opacity: 1 !important;
+}
+
+.template-product-clothing .single-add-to-cart-button:hover .single-add-to-cart-button--text,
+.template-product-clothing .single-add-to-cart-button:focus .single-add-to-cart-button--text {
+  color: #fff !important;
+  opacity: 1 !important;
 }
 
 .template-product-clothing .product-form__checkout-row .shopify-payment-button__button,
