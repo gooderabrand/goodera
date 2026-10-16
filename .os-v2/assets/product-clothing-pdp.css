@@ -312,6 +312,43 @@ body.template-product-clothing .site-header.is-nav-hidden {
 body.template-product-clothing .site-header__logo-ink { display: block !important; }
 body.template-product-clothing .site-header__logo-white { display: none !important; }
 
+/* Gallery and buy box start flush under the nav. The theme's 40px product
+   margin and the full-width breadcrumb band sit above both columns. */
+body.template-product-clothing #MainContent,
+body.template-product-clothing .main-content,
+body.template-product-clothing .product-section,
+body.template-product-clothing .shopify-section.product-section,
+body.template-product-clothing .thb-product-detail,
+body.template-product-clothing .thb-product-detail > .row,
+body.template-product-clothing .section-breadcrumbs + .product-section .thb-product-detail {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+body.template-product-clothing .section-breadcrumbs {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+body.template-product-clothing .product-image-container,
+body.template-product-clothing .product-image-container--grid,
+body.template-product-clothing .product-image-container--paired {
+  margin-top: 0 !important;
+}
+
+@media (min-width: 1068px) {
+  body.template-product-clothing .thb-product-detail .product-information,
+  body.template-product-clothing .thb-product-detail .product-information--inner,
+  body.template-product-clothing .product-title-container {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+}
+
 /* Gallery stays one screen tall; only the buy box moves with the page. */
 @media (min-width: 1068px) {
   .template-product-clothing .thb-product-detail .product-grid-container,
