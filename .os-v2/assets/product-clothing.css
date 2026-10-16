@@ -218,45 +218,63 @@
   gap: 0.55rem;
 }
 
+/* Same ring as the native color picker (28px, 2px outer ring, inner fill) */
 .template-product-clothing .product-color-siblings__swatch {
   box-sizing: border-box;
-  width: 1.75rem;
-  height: 1.75rem;
-  border-radius: 999px;
-  background: var(--option-color, #d4d4d8);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: transparent;
   border: 2px solid transparent;
-  box-shadow: inset 0 0 0 1px rgba(23, 22, 15, 0.12);
+  box-shadow: none;
   display: inline-block;
+  position: relative;
+  cursor: pointer;
+  text-indent: -9999px;
+  overflow: visible;
 }
 
-.template-product-clothing .product-color-siblings__swatch.is-active {
+.template-product-clothing .product-color-siblings__swatch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border-radius: 50%;
+  background-color: var(--option-color, #d4d4d8);
+  background-image: var(--option-color-image, none);
+  background-size: cover;
+  background-position: center;
+  box-shadow: inset 0 0 0 1px var(--ge-hair, rgba(23, 22, 15, 0.12));
+}
+
+.template-product-clothing .product-color-siblings__swatch.is-active,
+.template-product-clothing .product-color-siblings__swatch[aria-current='true'] {
   border-color: var(--ge-text, #17160f);
   box-shadow: none;
+}
+
+.template-product-clothing .product-color-siblings__swatch:hover::after {
+  transform: none;
+}
+
+.template-product-clothing .product-color-siblings__swatch:focus-visible {
+  outline: 2px solid var(--ge-accent, #6e7b5e);
+  outline-offset: 2px;
 }
 
 .template-product-clothing .product-color-siblings__swatch.is-sold-out {
   opacity: 0.4;
 }
 
-/* Theme siblings block, if present — same stacked layout */
+/* Native Color / siblings rows under Colour — hide; top swatches replace them */
+.template-product-clothing .thb-product-detail .variations .product-form__input--color,
+.template-product-clothing .thb-product-detail .variations .product-form__input[data-handle='color'],
+.template-product-clothing .thb-product-detail .variations .product-form__input[data-handle='colour'],
 .template-product-clothing .thb-product-detail .product-form__input--siblings,
 .template-product-clothing .thb-product-detail .variations--siblings .product-form__input--siblings {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.65rem;
-}
-
-.template-product-clothing .thb-product-detail .product-form__input--siblings .form__label {
-  width: 100%;
-}
-
-.template-product-clothing .thb-product-detail .product-form__input--siblings label {
-  width: 1.75rem !important;
-  height: 1.75rem !important;
-  min-width: 1.75rem !important;
-  border-radius: 999px !important;
-  margin: 0 !important;
+  display: none !important;
 }
 
 /* ——— Rectangular size chips: 4-up grid like Lululemon, outline when selected ——— */
@@ -266,6 +284,22 @@
   gap: 0.5rem;
   padding: 0 !important;
   width: 100%;
+  position: relative;
+}
+
+.template-product-clothing .thb-product-detail .variations .product-form__input--block > .form__label {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin: 0 0 0.45rem;
+}
+
+/* Radios are fieldset children and would steal a size-tile cell */
+.template-product-clothing .thb-product-detail .variations .product-form__input--block > input[type='radio'] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .template-product-clothing .thb-product-detail .variations .product-form__input--block input[type='radio'] + label,
@@ -384,8 +418,13 @@
   grid-column: 1 / -1;
   display: block;
   width: 100%;
-  margin: 0.35rem 0 0;
+  margin: 0.65rem 0 0;
   text-align: left;
+  font-size: 0.75rem;
+  letter-spacing: 0.01em;
+  color: var(--ge-muted, #6e6e73);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
 .template-product-clothing .installment,
@@ -393,8 +432,17 @@
   display: block;
   width: 100%;
   text-align: left;
-  margin-top: 0.35rem;
+  margin-top: 0.65rem;
   padding-bottom: 0;
+  border-bottom: 0;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  color: var(--ge-muted, #6e6e73);
+}
+
+.template-product-clothing .product-form__checkout-row.ge-wallet-hidden {
+  grid-template-columns: 1fr;
 }
 
 .template-product-clothing {
@@ -402,13 +450,43 @@
   --shopify-accelerated-checkout-button-inline-size: 100%;
 }
 
-/* Hide Shop Pay on the PDP only. Wallets stay on in Admin; Apple Pay can surface. */
+/*
+ * Shop Pay lives in a closed shadow DOM — inner CSS cannot hide just that
+ * wallet. Hide the light-DOM host on clothing PDPs and use the Apple Pay
+ * button we inject. Shop Pay stays enabled in Admin / checkout.
+ */
+.template-product-clothing .product-form shopify-accelerated-checkout,
+.template-product-clothing .product-form shopify-accelerated-checkout-cart,
 .template-product-clothing .product-form .shopify-payment-button__button--shop-pay,
 .template-product-clothing .product-form .shopify-payment-button__button--branded,
 .template-product-clothing .product-form [class*='shop-pay'],
+.template-product-clothing .product-form [class*='ShopPay'],
 .template-product-clothing .product-form [aria-label*='Shop Pay' i],
-.template-product-clothing .product-form [aria-label*='shopPay' i] {
+.template-product-clothing .product-form [aria-label*='shopPay' i],
+.template-product-clothing .product-form [aria-label*='Buy with Shop' i] {
   display: none !important;
+}
+
+.template-product-clothing .product-form__checkout-row .ge-apple-pay {
+  order: 1;
+  width: 100%;
+  min-width: 0;
+  min-height: 3rem;
+  height: 3rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  -webkit-appearance: -apple-pay-button;
+  -apple-pay-button-type: buy;
+  -apple-pay-button-style: black;
+}
+
+@supports not (-webkit-appearance: -apple-pay-button) {
+  .template-product-clothing .product-form__checkout-row .ge-apple-pay {
+    display: none;
+  }
 }
 
 @media (max-width: 479px) {
@@ -421,43 +499,52 @@
   }
 }
 
-/* ——— Chevrons instead of plus ——— */
-.template-product-clothing .thb-product-detail .accordion summary span:before,
-.template-product-clothing .thb-product-detail .accordion summary span:after {
-  background: none !important;
-  width: 0 !important;
-  height: 0 !important;
-}
-
-.template-product-clothing .thb-product-detail .accordion summary span {
+/* ——— Chevrons: right when closed, down when open (not down/up) ——— */
+.template-product-clothing .thb-product-detail .accordion summary span,
+.template-product-clothing .thb-product-detail .product__accordion summary span,
+.template-product-clothing .thb-product-detail .product--accordion summary span {
   width: 12px;
   height: 12px;
   right: 0;
 }
 
-.template-product-clothing .thb-product-detail .accordion summary span:after {
+.template-product-clothing .thb-product-detail .accordion summary span:before,
+.template-product-clothing .thb-product-detail .product__accordion summary span:before,
+.template-product-clothing .thb-product-detail .product--accordion summary span:before {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  transform: none !important;
+}
+
+.template-product-clothing .thb-product-detail .accordion summary span:after,
+.template-product-clothing .thb-product-detail .product__accordion summary span:after,
+.template-product-clothing .thb-product-detail .product--accordion summary span:after {
   content: '' !important;
   display: block !important;
   box-sizing: border-box;
   width: 8px !important;
   height: 8px !important;
-  top: 1px !important;
+  top: 2px !important;
   left: 2px !important;
-  border-right: 1.5px solid var(--ge-text, #17160f);
-  border-bottom: 1.5px solid var(--ge-text, #17160f);
-  transform: rotate(45deg);
-  transform-origin: center;
+  border: 0 !important;
+  border-right: 1.5px solid var(--ge-text, #17160f) !important;
+  border-bottom: 1.5px solid var(--ge-text, #17160f) !important;
   background: none !important;
+  /* Closed: points right */
+  transform: rotate(-45deg) !important;
+  transform-origin: center;
   transition: transform 0.2s ease;
 }
 
-.template-product-clothing .thb-product-detail .accordion details[open] summary span:before {
-  transform: none !important;
-}
-
-.template-product-clothing .thb-product-detail .accordion details[open] summary span:after {
-  top: 5px !important;
-  transform: rotate(-135deg);
+.template-product-clothing .thb-product-detail .accordion details[open] summary span:after,
+.template-product-clothing .thb-product-detail .product__accordion details[open] summary span:after,
+.template-product-clothing .thb-product-detail .product--accordion details[open] summary span:after {
+  top: 1px !important;
+  /* Open: points down */
+  transform: rotate(45deg) !important;
 }
 
 /* ——— Model fit ——— */

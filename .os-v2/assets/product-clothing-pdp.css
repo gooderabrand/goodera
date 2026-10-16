@@ -1,0 +1,100 @@
+/* Delta styles on top of product-clothing.css */
+
+/* Native ring swatch (28px, 2px outer ring) on the Colour row */
+.template-product-clothing .product-color-siblings__swatch {
+  width: 28px;
+  height: 28px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+}
+.template-product-clothing .product-color-siblings__swatch::after {
+  inset: auto;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+}
+.template-product-clothing .product-color-siblings__swatch.is-active,
+.template-product-clothing .product-color-siblings__swatch[aria-current='true'] {
+  border-color: var(--ge-text, #17160f);
+}
+.template-product-clothing .product-color-siblings__swatch:hover::after {
+  transform: none;
+}
+
+/* Hide duplicate Color / siblings rows */
+.template-product-clothing .thb-product-detail .variations .product-form__input--color,
+.template-product-clothing .thb-product-detail .variations .product-form__input[data-handle='color'],
+.template-product-clothing .thb-product-detail .variations .product-form__input[data-handle='colour'],
+.template-product-clothing .thb-product-detail .product-form__input--siblings {
+  display: none !important;
+}
+
+/* SIZE label on its own row; radios must not steal a tile cell */
+.template-product-clothing .thb-product-detail .variations .product-form__input--block {
+  position: relative;
+}
+.template-product-clothing .thb-product-detail .variations .product-form__input--block > .form__label {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+.template-product-clothing .thb-product-detail .variations .product-form__input--block > input[type='radio'] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Shop Pay host is closed shadow DOM — hide the light-DOM element */
+.template-product-clothing .product-form shopify-accelerated-checkout,
+.template-product-clothing .product-form shopify-accelerated-checkout-cart {
+  display: none !important;
+}
+
+.template-product-clothing .product-form__checkout-row .ge-apple-pay {
+  order: 1;
+  width: 100%;
+  min-width: 0;
+  min-height: 3rem;
+  height: 3rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  -webkit-appearance: -apple-pay-button;
+  -apple-pay-button-type: buy;
+  -apple-pay-button-style: black;
+}
+@supports not (-webkit-appearance: -apple-pay-button) {
+  .template-product-clothing .product-form__checkout-row .ge-apple-pay { display: none; }
+}
+
+/* Chevrons: right when closed, down when open */
+.template-product-clothing .thb-product-detail .accordion summary span:before,
+.template-product-clothing .thb-product-detail .product__accordion summary span:before {
+  display: none !important;
+  content: none !important;
+  transform: none !important;
+}
+.template-product-clothing .thb-product-detail .accordion summary span:after,
+.template-product-clothing .thb-product-detail .product__accordion summary span:after {
+  content: '' !important;
+  display: block !important;
+  width: 8px !important;
+  height: 8px !important;
+  top: 2px !important;
+  left: 2px !important;
+  background: none !important;
+  border: 0 !important;
+  border-right: 1.5px solid var(--ge-text, #17160f) !important;
+  border-bottom: 1.5px solid var(--ge-text, #17160f) !important;
+  transform: rotate(-45deg) !important;
+  transform-origin: center;
+}
+.template-product-clothing .thb-product-detail .accordion details[open] summary span:after,
+.template-product-clothing .thb-product-detail .product__accordion details[open] summary span:after {
+  top: 1px !important;
+  transform: rotate(45deg) !important;
+}

@@ -21,12 +21,14 @@
     endfor
   endif
 -%}
+{{ 'product-clothing-pdp.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-clothing-pdp.js' | asset_url }}" defer="defer"></script>
 {%- if match_count > 0 and color_name != blank -%}
-  <div class="product-color-siblings">
+  <div class="product-color-siblings" data-ge-color-siblings data-section-id="{{ section.id }}" data-current-url="{{ product.url }}">
     <div class="form__label">
-      Colour <span class="form__label__value">{{ color_name }}</span>
+      Colour <span class="form__label__value" data-ge-color-name>{{ color_name }}</span>
     </div>
-    <div class="product-color-siblings__swatches">
+    <div class="product-color-siblings__swatches" role="radiogroup" aria-label="Colour">
       {%- for sib in club.products -%}
         {%- liquid
           assign sib_prefix = sib.title | split: ' - ' | first | strip
@@ -46,6 +48,35 @@
             elsif swatch contains 'grey' or swatch contains 'gray'
               assign swatch_hex = '#d4d4d8'
             endif
+            assign first_opt = sib.options.first | downcase
+            assign sizes_json = '['
+            for v in sib.variants
+              if first_opt == 'color' or first_opt == 'colour'
+                assign size_name = v.option2
+              else
+                assign size_name = v.option1
+              endif
+              assign size_name_json = size_name | json
+              assign sizes_json = sizes_json | append: '{"name":' | append: size_name_json | append: ',"available":' | append: v.available | append: '}'
+              unless forloop.last
+                assign sizes_json = sizes_json | append: ','
+              endunless
+            endfor
+            assign sizes_json = sizes_json | append: ']'
+            assign images_json = '['
+            for media in sib.media
+              assign img_json = media.preview_image | image_url: width: 1600 | json
+              assign images_json = images_json | append: img_json
+              unless forloop.last
+                assign images_json = images_json | append: ','
+              endunless
+            endfor
+            assign images_json = images_json | append: ']'
+            assign sib_price = sib.price | money
+            assign sib_compare = ''
+            if sib.compare_at_price > sib.price
+              assign sib_compare = sib.compare_at_price | money
+            endif
           -%}
           <a
             href="{{ sib.url }}"
@@ -54,6 +85,13 @@
             title="{{ sib_color | escape }}"
             aria-label="{{ sib_color | escape }}"
             aria-current="{% if sib.handle == product.handle %}true{% else %}false{% endif %}"
+            data-url="{{ sib.url }}"
+            data-handle="{{ sib.handle }}"
+            data-color="{{ sib_color | escape }}"
+            data-price="{{ sib_price | escape }}"
+            data-compare="{{ sib_compare | escape }}"
+            data-images="{{ images_json | escape }}"
+            data-sizes="{{ sizes_json | escape }}"
           ></a>
         {%- endif -%}
       {%- endfor -%}

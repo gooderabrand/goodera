@@ -1,6 +1,5 @@
 /**
  * Clothing gallery — two images at a time, overlay arrows.
- * Works with the theme's native product-images--grid (not the thumbnail slider).
  */
 (function () {
   function visibleCount() {
@@ -35,14 +34,13 @@
     if (flkty) flkty.destroy();
   }
 
-  function bind(container) {
+  function bindGallery(container) {
     var slider = container.querySelector('.product-images');
     if (!slider || slider.dataset.pairedBound === 'true') return;
     slider.dataset.pairedBound = 'true';
     destroyFlickity(slider);
     slider.classList.add('product-images--paired');
     container.classList.add('product-image-container--paired');
-
     var nav = ensureNav(container);
     var prev = nav.querySelector('.ge-paired-nav__btn--prev');
     var next = nav.querySelector('.ge-paired-nav__btn--next');
@@ -65,42 +63,16 @@
     update();
   }
 
-  function init() {
-    document.querySelectorAll('.template-product-clothing .product-image-container').forEach(bind);
+  function initGallery() {
+    document.querySelectorAll('.template-product-clothing .product-image-container').forEach(bindGallery);
   }
+
+  window.geInitClothingGallery = initGallery;
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', initGallery);
   } else {
-    init();
+    initGallery();
   }
-
-  document.addEventListener('shopify:section:load', init);
-
-  function hideShopPayIn(root) {
-    if (!root || !root.querySelectorAll) return;
-    root.querySelectorAll(
-      '.shopify-payment-button__button--shop-pay, .shopify-payment-button__button--branded, [aria-label*="Shop Pay"], [aria-label*="shop pay"]'
-    ).forEach(function (el) {
-      el.style.setProperty('display', 'none', 'important');
-    });
-    root.querySelectorAll('shopify-accelerated-checkout').forEach(function (host) {
-      if (host.shadowRoot) hideShopPayIn(host.shadowRoot);
-    });
-  }
-
-  function hideShopPayOnPdp() {
-    document.querySelectorAll('.template-product-clothing .product-form, .template-product .product-form').forEach(function (form) {
-      hideShopPayIn(form);
-    });
-  }
-
-  hideShopPayOnPdp();
-  document.addEventListener('shopify:section:load', hideShopPayOnPdp);
-  var shopPayTries = 0;
-  var shopPayTimer = setInterval(function () {
-    hideShopPayOnPdp();
-    shopPayTries += 1;
-    if (shopPayTries > 20) clearInterval(shopPayTimer);
-  }, 300);
+  document.addEventListener('shopify:section:load', initGallery);
 })();

@@ -76,11 +76,15 @@
     {%- if template.name == 'product' and template.suffix == 'clothing' -%}
       {{ 'product-clothing.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
-    {%- if template.name == 'product' -%}
+    {%- if template.name == 'product' and template.suffix == 'clothing' -%}
       <style>
-        /* Hide Shop Pay on product pages only — checkout still offers Shop Pay. */
+        /* Clothing PDP: hide Shop Pay host (closed shadow DOM). Checkout still has Shop Pay. */
+        .product-form shopify-accelerated-checkout,
+        .product-form shopify-accelerated-checkout-cart,
         .product-form .shopify-payment-button__button--shop-pay,
-        .product-form .shopify-payment-button__button--branded {
+        .product-form .shopify-payment-button__button--branded,
+        .product-form [aria-label*='Shop Pay' i],
+        .product-form [aria-label*='Buy with Shop' i] {
           display: none !important;
         }
       </style>
