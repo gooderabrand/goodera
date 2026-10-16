@@ -1,13 +1,18 @@
 /**
- * Clothing paired gallery — inject overlay arrows and page by two on desktop.
+ * Clothing gallery — two images at a time, overlay arrows.
+ * Works with the theme's native product-images--grid (not the thumbnail slider).
  */
 (function () {
+  function visibleCount() {
+    return window.matchMedia('(min-width: 1068px)').matches ? 2 : 1;
+  }
+
   function pageSize(slider) {
-    var slide = slider.querySelector('.product-images__slide.is-active, .product-images__slide');
+    var slide = slider.querySelector('.product-images__slide');
     if (!slide) return slider.clientWidth;
-    var gap = parseFloat(getComputedStyle(slider).gap) || 0;
-    var visible = window.matchMedia('(min-width: 768px)').matches ? 2 : 1;
-    return (slide.getBoundingClientRect().width + gap) * visible;
+    var styles = getComputedStyle(slider);
+    var gap = parseFloat(styles.columnGap || styles.gap) || 0;
+    return (slide.getBoundingClientRect().width + gap) * visibleCount();
   }
 
   function ensureNav(container) {
@@ -24,10 +29,17 @@
     return nav;
   }
 
+  function destroyFlickity(slider) {
+    if (!window.Flickity) return;
+    var flkty = Flickity.data(slider);
+    if (flkty) flkty.destroy();
+  }
+
   function bind(container) {
     var slider = container.querySelector('.product-images');
     if (!slider || slider.dataset.pairedBound === 'true') return;
     slider.dataset.pairedBound = 'true';
+    destroyFlickity(slider);
     slider.classList.add('product-images--paired');
     container.classList.add('product-image-container--paired');
 
@@ -39,6 +51,7 @@
       var max = Math.max(0, slider.scrollWidth - slider.clientWidth - 2);
       if (prev) prev.disabled = slider.scrollLeft <= 2;
       if (next) next.disabled = slider.scrollLeft >= max;
+      if (nav) nav.hidden = max <= 0;
     }
 
     function go(direction) {
@@ -63,4 +76,31 @@
   }
 
   document.addEventListener('shopify:section:load', init);
+
+  function hideShopPayIn(root) {
+    if (!root || !root.querySelectorAll) return;
+    root.querySelectorAll(
+      '.shopify-payment-button__button--shop-pay, .shopify-payment-button__button--branded, [aria-label*="Shop Pay"], [aria-label*="shop pay"]'
+    ).forEach(function (el) {
+      el.style.setProperty('display', 'none', 'important');
+    });
+    root.querySelectorAll('shopify-accelerated-checkout').forEach(function (host) {
+      if (host.shadowRoot) hideShopPayIn(host.shadowRoot);
+    });
+  }
+
+  function hideShopPayOnPdp() {
+    document.querySelectorAll('.template-product-clothing .product-form, .template-product .product-form').forEach(function (form) {
+      hideShopPayIn(form);
+    });
+  }
+
+  hideShopPayOnPdp();
+  document.addEventListener('shopify:section:load', hideShopPayOnPdp);
+  var shopPayTries = 0;
+  var shopPayTimer = setInterval(function () {
+    hideShopPayOnPdp();
+    shopPayTries += 1;
+    if (shopPayTries > 20) clearInterval(shopPayTimer);
+  }, 300);
 })();

@@ -76,6 +76,15 @@
     {%- if template.name == 'product' and template.suffix == 'clothing' -%}
       {{ 'product-clothing.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
+    {%- if template.name == 'product' -%}
+      <style>
+        /* Hide Shop Pay on product pages only — checkout still offers Shop Pay. */
+        .product-form .shopify-payment-button__button--shop-pay,
+        .product-form .shopify-payment-button__button--branded {
+          display: none !important;
+        }
+      </style>
+    {%- endif -%}
     {%- if template.suffix == 'sunday-reset-3d' or template.suffix == 'sunday-reset-application' -%}
       {{ 'sunday-reset-theme.css' | asset_url | stylesheet_tag }}
     {%- endif -%}

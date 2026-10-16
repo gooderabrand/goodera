@@ -1,0 +1,62 @@
+{% doc %}
+  Clothing colorway swatches. Groups products in the Self Care Club
+  collection that share the same title prefix (text before " - ").
+
+  @param product {Product} the product
+{% enddoc %}
+{%- liquid
+  assign club = collections['self-care-club']
+  assign prefix = product.title | split: ' - ' | first | strip
+  assign color_name = product.title | split: ' - ' | last | strip
+  if product.title == color_name
+    assign color_name = product.metafields.theme.sibling_color.value
+  endif
+  assign match_count = 0
+  if club != blank
+    for sib in club.products
+      assign sib_prefix = sib.title | split: ' - ' | first | strip
+      if sib_prefix == prefix
+        assign match_count = match_count | plus: 1
+      endif
+    endfor
+  endif
+-%}
+{%- if match_count > 0 and color_name != blank -%}
+  <div class="product-color-siblings">
+    <div class="form__label">
+      Colour <span class="form__label__value">{{ color_name }}</span>
+    </div>
+    <div class="product-color-siblings__swatches">
+      {%- for sib in club.products -%}
+        {%- liquid
+          assign sib_prefix = sib.title | split: ' - ' | first | strip
+        -%}
+        {%- if sib_prefix == prefix -%}
+          {%- liquid
+            assign sib_color = sib.title | split: ' - ' | last | strip
+            if sib.title == sib_color
+              assign sib_color = sib.metafields.theme.sibling_color.value | default: sib.title
+            endif
+            assign swatch = sib_color | downcase
+            assign swatch_hex = '#c8c8cc'
+            if swatch contains 'black'
+              assign swatch_hex = '#17160f'
+            elsif swatch contains 'white'
+              assign swatch_hex = '#f5f5f7'
+            elsif swatch contains 'grey' or swatch contains 'gray'
+              assign swatch_hex = '#d4d4d8'
+            endif
+          -%}
+          <a
+            href="{{ sib.url }}"
+            class="product-color-siblings__swatch{% if sib.handle == product.handle %} is-active{% endif %}{% unless sib.available %} is-sold-out{% endunless %}"
+            style="--option-color: {{ swatch_hex }};"
+            title="{{ sib_color | escape }}"
+            aria-label="{{ sib_color | escape }}"
+            aria-current="{% if sib.handle == product.handle %}true{% else %}false{% endif %}"
+          ></a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}

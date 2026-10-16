@@ -32,11 +32,18 @@
         },
         "siblings_Czmpgn": {
           "type": "siblings",
+          "disabled": true,
           "settings": {
             "siblings_collection": "",
             "sibling_color": "",
             "color_picker_size": "regular",
             "margin_bottom": 20
+          }
+        },
+        "color_swatches": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'product-color-siblings', product: product %}"
           }
         },
         "546f2cee-3532-473a-836f-21f14fde7cfe": {
@@ -145,6 +152,7 @@
         "title",
         "0b3e272b-c86a-4dba-946c-c6912251371c",
         "siblings_Czmpgn",
+        "color_swatches",
         "546f2cee-3532-473a-836f-21f14fde7cfe",
         "variant_picker",
         "model_fit",
@@ -161,11 +169,11 @@
         "enable_sticky_info": true,
         "enable_sticky_add_to_cart": true,
         "show_taxes_included": false,
-        "media_layout": "thumbnails",
-        "display_slider_pagination": false,
+        "media_layout": "grid",
+        "display_slider_pagination": true,
         "media_aspect_ratio": "portrait",
         "display_captions": false,
-        "hide_variants": true,
+        "hide_variants": false,
         "lightbox": false,
         "enable_video_looping": false
       }
