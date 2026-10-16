@@ -215,12 +215,12 @@
   background: #f6f6f4;
 }
 
-/* Product cards match the rail width used on the rest of the shop. */
+/* Cards grow to fill the row, so a window between sizes does not leave a gap on the right. */
 @media (min-width: 990px) {
   .template-collection .ge-collection__grid,
   .template-collection #product-grid.ge-collection__grid {
-    grid-template-columns: repeat(auto-fill, clamp(260px, 18vw, 300px));
-    justify-content: start;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    justify-content: stretch;
   }
 }
 
@@ -289,17 +289,30 @@ body.template-collection .main-content {
   box-shadow: none !important;
 }
 
+.template-collection .ge-facets-bar.facets--bar .facets__form,
 .template-collection .ge-facets-bar__form {
-  align-items: flex-end;
+  display: flex !important;
+  flex-flow: row wrap !important;
+  align-items: flex-end !important;
+  justify-content: flex-start !important;
+  grid-template-columns: none !important;
   gap: 0.75rem 1.25rem;
+}
+
+@media (min-width: 750px) {
+  .template-collection .ge-facets-bar.facets--bar .facets__form,
+  .template-collection .ge-facets-bar__form {
+    flex-wrap: nowrap !important;
+  }
 }
 
 .template-collection .ge-facets-bar__title {
   display: flex;
   align-items: flex-end;
-  flex: 1 1 auto;
+  flex: 0 1 auto;
+  width: auto;
+  margin: 0 auto 0 0;
   gap: 0.15rem 0.55rem;
-  margin: 0;
   color: #17160f;
   font-size: clamp(1.75rem, 3.2vw, 2.75rem);
   font-weight: 650;
@@ -337,8 +350,53 @@ body.template-collection .main-content {
 }
 
 .template-collection .ge-facets-bar__end {
-  margin-inline-start: auto;
+  margin-inline-start: auto !important;
+  margin-inline-end: 0;
+  align-self: flex-end;
+  justify-content: flex-end;
   gap: 1.15rem;
+  padding-bottom: 0.35rem;
+}
+
+.template-collection .ge-collection__cell--promo .gallery__item,
+.template-collection .ge-collection__cell--promo .gallery__item figure {
+  height: 100%;
+  margin: 0;
+  aspect-ratio: var(--ge-product-aspect, 4 / 5);
+  background: linear-gradient(165deg, #f4f0e8 0%, #e3dcd0 46%, #cfc6b6 100%);
+  overflow: hidden;
+}
+
+.template-collection .ge-collection__cell--promo .gallery__item figure > svg,
+.template-collection .ge-collection__cell--promo .placeholder_svg_tag {
+  display: none !important;
+}
+
+.template-collection .ge-collection__cell--promo .gallery__item figure:after {
+  content: none !important;
+  opacity: 0 !important;
+}
+
+.template-collection .ge-collection__cell--promo .gallery__item-content {
+  color: #17160f;
+  text-align: center;
+}
+
+.template-collection .ge-collection__cell--promo .gallery__item-content h4 {
+  margin: 0 0 0.45rem;
+  color: #17160f;
+  font-size: clamp(1.15rem, 1.5vw, 1.45rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  text-transform: none;
+}
+
+.template-collection .ge-collection__cell--promo .gallery__item-content p {
+  margin: 0;
+  color: #3c3b36;
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
 
 .template-collection .ge-facets-bar__sort {

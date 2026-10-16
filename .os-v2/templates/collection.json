@@ -31,12 +31,14 @@
             "promotion_collection": "",
             "promotion_position": 7,
             "promotion_width": "1",
-            "title": "PROMOTION BANNER",
-            "text": "Add your description text for promotion banner here.",
-            "link_label": "Explore",
-            "use_text_button": true,
+            "title": "Free shipping is a click away",
+            "text": "Order now to get free shipping on all orders.",
+            "link_label": "",
+            "use_text_button": false,
+            "content_position": "middle-center",
+            "text_alignment": "center",
             "overlay_color": "#000000",
-            "overlay_opacity": 15
+            "overlay_opacity": 0
           }
         }
       },
