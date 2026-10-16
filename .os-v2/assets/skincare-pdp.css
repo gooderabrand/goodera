@@ -299,3 +299,101 @@
     height: 24rem;
   }
 }
+
+/*
+  One product photo should fill the clothing gallery. The paired layout
+  otherwise leaves a 50% empty slide, and the header stacks into that gap.
+*/
+@media (min-width: 1068px) {
+  body.template-product-skincare .thb-product-detail .product-images .product-images__slide:only-child {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (min-width: 990px) {
+  body.template-product-skincare .header-section {
+    position: sticky !important;
+    top: 0;
+    z-index: 62;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    overflow: visible;
+    background: #fff !important;
+    pointer-events: auto;
+  }
+
+  body.template-product-skincare .header-section .site-header {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    margin: 0 !important;
+    background: #fff !important;
+    color: #17160f !important;
+    transform: none !important;
+  }
+
+  body.template-product-skincare .site-header__inner {
+    display: grid !important;
+    grid-template-columns: minmax(320px, 1fr) minmax(0, 1fr) minmax(320px, 1fr) !important;
+    align-items: center;
+    min-height: var(--ge-header-bar-h, 48px);
+    width: calc(100% - (var(--ge-shell-gutter, 60px) * 2));
+    max-width: none;
+    margin-inline: auto;
+  }
+
+  body.template-product-skincare .site-header__left {
+    display: none !important;
+  }
+
+  body.template-product-skincare .site-header__logo {
+    grid-area: 1 / 1;
+    justify-self: start;
+    position: relative;
+    left: auto;
+    top: auto;
+    translate: none;
+  }
+
+  body.template-product-skincare .site-header__dest {
+    display: flex !important;
+    grid-area: 1 / 1;
+    justify-self: start;
+    margin-left: 128px;
+  }
+
+  body.template-product-skincare .ge-dest-nav {
+    display: flex !important;
+    align-items: center;
+    gap: 18px;
+    list-style: none !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  body.template-product-skincare .ge-dest-nav > li {
+    list-style: none !important;
+    margin: 0;
+  }
+
+  body.template-product-skincare .site-header__announcement {
+    display: block !important;
+    grid-area: 1 / 2;
+    min-width: 0;
+    text-align: center;
+  }
+
+  body.template-product-skincare .site-header__right {
+    display: inline-flex !important;
+    grid-area: 1 / 3;
+    justify-self: end;
+    align-items: center;
+  }
+
+  body.template-product-skincare .site-header__local {
+    display: none !important;
+  }
+}
