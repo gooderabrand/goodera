@@ -36,7 +36,7 @@
                   assign step_name = product.title
                 endif
               -%}
-              <li class="sr-beta__step" {{ block.shopify_attributes }}>
+              <li class="sr-beta__step{% if block.settings.current %} is-current{% endif %}" {{ block.shopify_attributes }}>
                 <div class="sr-beta__step-card">
                   <div class="sr-beta__step-node" aria-hidden="true"></div>
                   <h3 class="sr-beta__step-heading">
