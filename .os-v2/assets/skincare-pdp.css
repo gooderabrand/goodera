@@ -146,10 +146,10 @@ body.template-product-skincare {
 .ge-skin-stat p {
   margin: 0;
   color: var(--ge-ink, #17160f);
-  font-size: 1.7rem;
+  font-size: var(--ge-role-body, 1.0625rem);
   font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
+  letter-spacing: -0.01em;
+  line-height: var(--ge-lh-normal, 1.5);
 }
 
 .ge-skin-results__note {
@@ -222,9 +222,9 @@ body.template-product-skincare {
   position: relative;
   width: 100%;
   min-width: 0;
-  aspect-ratio: 545 / 880;
-  max-height: 880px;
-  min-height: 350px;
+  aspect-ratio: 4 / 5;
+  max-height: 520px;
+  min-height: 320px;
   overflow: hidden;
 }
 
@@ -249,9 +249,9 @@ body.template-product-skincare {
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
-  aspect-ratio: 545 / 880;
-  max-height: 880px;
-  min-height: 350px;
+  aspect-ratio: 4 / 5;
+  max-height: 520px;
+  min-height: 320px;
   overflow: hidden;
   padding: clamp(1.5rem, 3vw, 3rem);
   background: var(--ge-band, #f5f5f7);
@@ -284,9 +284,9 @@ body.template-product-skincare {
   width: 100%;
   max-width: none;
   margin: 0;
-  aspect-ratio: 545 / 880;
-  max-height: 880px;
-  min-height: 350px;
+  aspect-ratio: 4 / 5;
+  max-height: 520px;
+  min-height: 320px;
   overflow: hidden;
   border-radius: 0 !important;
   clip-path: none !important;
@@ -665,11 +665,6 @@ body.template-product-skincare .section-skincare-results .ge-skin-ring::before {
 
   body.template-product-skincare .section-skincare-results .ge-skin-ring span {
     font-size: 1rem;
-  }
-
-  body.template-product-skincare .section-skincare-results .ge-skin-stat p {
-    font-size: 1.15rem;
-    line-height: 1.25;
   }
 }
 
