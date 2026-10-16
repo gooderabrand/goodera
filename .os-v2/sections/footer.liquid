@@ -1,0 +1,349 @@
+{{ 'footer.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign footer_menu = section.settings.menu
+  if footer_menu == blank
+    assign footer_menu = linklists['footer']
+  endif
+
+  assign menu_block_count = 0
+  assign has_signup_block = false
+  assign has_app_block = false
+  for block in section.blocks
+    if block.type == 'menu'
+      assign preview_menu = block.settings.menu
+      if request.design_mode or preview_menu != blank and preview_menu.links.size > 0
+        assign menu_block_count = menu_block_count | plus: 1
+      endif
+    elsif block.type == 'signup'
+      assign has_signup_block = true
+    elsif block.type == '@app'
+      assign has_app_block = true
+    endif
+  endfor
+
+  assign show_signup_column = false
+  if has_signup_block or has_app_block
+    assign show_signup_column = true
+  endif
+
+  assign use_blocks = false
+  if menu_block_count > 0
+    assign use_blocks = true
+  endif
+
+  assign column_count = 0
+  if use_blocks
+    assign column_count = menu_block_count
+  elsif footer_menu != blank
+    for link in footer_menu.links
+      if link.links.size > 0
+        assign column_count = column_count | plus: 1
+      endif
+    endfor
+    assign orphan_count = 0
+    for link in footer_menu.links
+      if link.links.size == 0
+        assign orphan_count = orphan_count | plus: 1
+      endif
+    endfor
+    if orphan_count > 0
+      assign column_count = column_count | plus: 1
+    endif
+  endif
+-%}
+<footer class="site-footer" style="--site-footer-cols: {{ column_count | at_least: 1 }}">
+  <div class="site-footer__inner">
+    <div class="site-footer__main{% if show_signup_column %} site-footer__main--with-signup{% endif %}">
+      <div class="site-footer__brand">
+        {% render 'good-era-brand-lockup' %}
+      </div>
+      <div class="site-footer__cols">
+        {%- if use_blocks -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'menu' -%}
+              {%- liquid
+                assign col_menu = block.settings.menu
+                if col_menu == blank and block.settings.menu != blank
+                  assign col_menu = linklists[block.settings.menu]
+                endif
+                assign col_title = block.settings.title | strip
+                if col_title == blank and col_menu != blank
+                  assign col_title = col_menu.title
+                endif
+                if col_title == blank
+                  assign col_title = 'general.footer.explore' | t
+                endif
+                assign show_col = false
+                if request.design_mode
+                  assign show_col = true
+                endif
+                if col_menu != blank and col_menu.links.size > 0
+                  assign show_col = true
+                endif
+              -%}
+              {%- if show_col -%}
+                <div class="site-footer__col" {{ block.shopify_attributes }}>
+                  <h2 class="site-footer__heading">
+                    <button type="button" class="site-footer__trigger" aria-expanded="false" aria-controls="FooterMenu-{{ block.id }}">
+                      <span class="site-footer__heading-text">{{ col_title | escape }}</span>
+                      <span class="site-footer__toggle" aria-hidden="true"></span>
+                    </button>
+                  </h2>
+                  {%- if col_menu != blank and col_menu.links.size > 0 -%}
+                    <ul class="site-footer__links" id="FooterMenu-{{ block.id }}">
+                      {%- for link in col_menu.links -%}
+                        <li>
+                          <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            {%- elsif block.type == 'signup' -%}
+              <div class="site-footer__col site-footer__col--signup" {{ block.shopify_attributes }}>
+                <div class="site-footer__signup">
+                  {%- liquid
+                    assign signup_heading = block.settings.heading | strip
+                    if signup_heading == blank
+                      assign signup_heading = 'general.footer.stay_updated' | t
+                    endif
+                    assign signup_note = block.settings.note | strip
+                    assign signup_button = block.settings.button_label | strip
+                  -%}
+                  <div class="site-footer__signup-inner">
+                    <h2 class="site-footer__heading site-footer__heading--static">
+                      <span class="site-footer__heading-text">{{ signup_heading | escape }}</span>
+                    </h2>
+                    {%- if signup_note != blank -%}
+                      <p class="site-footer__signup-note">{{ signup_note | escape }}</p>
+                    {%- endif -%}
+                  </div>
+                  {%- unless has_app_block -%}
+                    {% render 'ge-email-signup',
+                      form_id: block.settings.omnisend_form_id,
+                      embed_code: block.settings.omnisend_embed_code,
+                      cta: signup_button,
+                      id: block.id,
+                      tags: 'newsletter,footer',
+                      layout: 'row'
+                    %}
+                    {% render 'footer-social-links' %}
+                  {%- endunless -%}
+                </div>
+              </div>
+            {%- elsif block.type == '@app' -%}
+              <div class="site-footer__col site-footer__col--signup" {{ block.shopify_attributes }}>
+                <div class="site-footer__signup">
+                  <div class="site-footer__omnisend">{% render block %}</div>
+                  {% render 'footer-social-links' %}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- if footer_menu != blank -%}
+            {%- for link in footer_menu.links -%}
+              {%- if link.links.size > 0 -%}
+                <div class="site-footer__col">
+                  <h2 class="site-footer__heading">
+                    <button type="button" class="site-footer__trigger" aria-expanded="false" aria-controls="FooterMenu-nested-{{ forloop.index }}">
+                      <span class="site-footer__heading-text">{{ link.title | escape }}</span>
+                      <span class="site-footer__toggle" aria-hidden="true"></span>
+                    </button>
+                  </h2>
+                  <ul class="site-footer__links" id="FooterMenu-nested-{{ forloop.index }}">
+                    {%- for child in link.links -%}
+                      <li>
+                        <a href="{{ child.url }}"{% if child.current %} aria-current="page"{% endif %}>{{ child.title | escape }}</a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+            {%- assign orphan_count = 0 -%}
+            {%- for link in footer_menu.links -%}
+              {%- if link.links.size == 0 -%}
+                {%- assign orphan_count = orphan_count | plus: 1 -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if orphan_count > 0 -%}
+              <div class="site-footer__col">
+                <h2 class="site-footer__heading">
+                  <button type="button" class="site-footer__trigger" aria-expanded="false" aria-controls="FooterMenu-fallback">
+                    <span class="site-footer__heading-text">
+                      {%- if footer_menu.title != blank -%}
+                        {{ footer_menu.title | escape }}
+                      {%- else -%}
+                        {{ 'general.footer.explore' | t }}
+                      {%- endif -%}
+                    </span>
+                    <span class="site-footer__toggle" aria-hidden="true"></span>
+                  </button>
+                </h2>
+                <ul class="site-footer__links" id="FooterMenu-fallback">
+                  {%- for link in footer_menu.links -%}
+                    {%- if link.links.size == 0 -%}
+                      <li>
+                        <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+                      </li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'signup' -%}
+              <div class="site-footer__col site-footer__col--signup" {{ block.shopify_attributes }}>
+                <div class="site-footer__signup">
+                  {%- liquid
+                    assign signup_heading = block.settings.heading | strip
+                    if signup_heading == blank
+                      assign signup_heading = 'general.footer.stay_updated' | t
+                    endif
+                    assign signup_note = block.settings.note | strip
+                    assign signup_button = block.settings.button_label | strip
+                  -%}
+                  <div class="site-footer__signup-inner">
+                    <h2 class="site-footer__heading site-footer__heading--static">
+                      <span class="site-footer__heading-text">{{ signup_heading | escape }}</span>
+                    </h2>
+                    {%- if signup_note != blank -%}
+                      <p class="site-footer__signup-note">{{ signup_note | escape }}</p>
+                    {%- endif -%}
+                  </div>
+                  {%- unless has_app_block -%}
+                    {% render 'ge-email-signup',
+                      form_id: block.settings.omnisend_form_id,
+                      embed_code: block.settings.omnisend_embed_code,
+                      cta: signup_button,
+                      id: block.id,
+                      tags: 'newsletter,footer',
+                      layout: 'row'
+                    %}
+                    {% render 'footer-social-links' %}
+                  {%- endunless -%}
+                </div>
+              </div>
+            {%- elsif block.type == '@app' -%}
+              <div class="site-footer__col site-footer__col--signup" {{ block.shopify_attributes }}>
+                <div class="site-footer__omnisend">{% render block %}</div>
+                  {% render 'footer-social-links' %}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <div class="site-footer__legal-row">
+        <p class="site-footer__legal">&copy; {{ 'now' | date: '%Y' }} Good Era, LLC. All Rights Reserved.</p>
+        <nav class="site-footer__meta" aria-label="{{ 'general.footer.navigation' | t }}">
+          {%- if shop.privacy_policy != blank -%}
+            <a href="{{ shop.privacy_policy.url }}">Privacy Policy</a>
+          {%- endif -%}
+          {%- if shop.terms_of_service != blank -%}
+            <a href="{{ shop.terms_of_service.url }}">Terms</a>
+          {%- endif -%}
+        </nav>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% javascript %}
+  document.querySelectorAll('[data-footer-accordion] .site-footer__trigger, .site-footer .site-footer__trigger').forEach((button) => {
+    button.addEventListener('click', () => {
+      if (window.matchMedia('(min-width: 990px)').matches) return;
+      const col = button.closest('.site-footer__col');
+      if (!col || col.classList.contains('site-footer__col--signup')) return;
+      const open = col.classList.toggle('is-open');
+      button.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "This footer is the same on every page. Menu and Email signup blocks are columns. Drag a block to move it. Heading, supporting text, and button label come from the Email signup block."
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Fallback menu",
+      "info": "Used only when no Menu blocks are added. Nested items become column headings.",
+      "default": "footer"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "signup",
+      "name": "Email signup",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Stay up to date"
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Supporting text"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Join our list",
+          "info": "Used when the theme email form is shown."
+        },
+        {
+          "type": "text",
+          "id": "omnisend_form_id",
+          "label": "Omnisend embedded form ID",
+          "info": "Same ID as the password page form. Leave blank to use the rounded theme form, or add an Omnisend app block instead."
+        },
+        {
+          "type": "html",
+          "id": "omnisend_embed_code",
+          "label": "Omnisend embed code"
+        }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Company"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "info": "Links shown under this heading."
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "max_blocks": 6,
+  "disabled_on": {
+    "templates": ["password"]
+  }
+}
+{% endschema %}
