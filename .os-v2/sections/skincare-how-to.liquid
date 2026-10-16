@@ -41,7 +41,7 @@
   <div class="small-12 columns">
     <div class="ge-skin-howto">
       {%- if howto_image != blank -%}
-        <div class="ge-skin-howto__still">
+        <div class="ge-skin-howto__still how-to-secondary-image">
           {{
             howto_image
             | image_url: width: 1400
@@ -55,7 +55,7 @@
         </div>
       {%- endif -%}
       <div class="ge-skin-howto__video">
-        <div class="shoppable-video-reels" style="--video-aspect-ratio: 0.8;">
+        <div class="shoppable-video-reels" style="--video-aspect-ratio: 0.6897;">
           <div class="shoppable-video-reels--slide is-selected">
             <div class="shoppable-video-reels--video">
               <div class="slideshow__slide-video-bg"{% if section.settings.video != blank %} data-provider="hosted"{% endif %}>
