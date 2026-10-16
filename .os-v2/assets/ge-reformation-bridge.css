@@ -215,3 +215,49 @@ html body .product-card .product-card-color-text {
   line-height: 1.25;
   color: var(--ge-text, #17160f);
 }
+
+/*
+  Header chrome: nav and the centered announcement share one bar.
+  A step up from 12px/400 and 13px/400, and a slightly larger wordmark.
+  These load before the header stylesheet, so specificity plus !important wins.
+*/
+html body.ge-nav-horizontal .site-header .ge-dest-nav__link,
+html body .site-header__announcement .announcement-bar,
+html body .site-header__announcement .announcement-bar--inner,
+html body .site-header__announcement .announcement-bar--item,
+html body .announcement-bar--inner,
+html body .announcement-bar--item {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-size: 0.9375rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em;
+  line-height: 1.25;
+}
+
+html body .site-header__logo img,
+html body .site-header__logo-wordmark img {
+  height: 34px !important;
+  width: auto !important;
+}
+
+html body .site-header__logo-mark img {
+  height: 46px !important;
+  width: auto !important;
+}
+
+@media (min-width: 990px) {
+  html body.ge-nav-horizontal .site-header__logo img,
+  html body.ge-nav-horizontal .header-section .site-header__logo-wordmark img {
+    height: 28px !important;
+  }
+
+  html body.ge-nav-horizontal .site-header[data-desktop-layout='centered_announcement'] .site-header__dest {
+    margin-left: 156px !important;
+  }
+}
+
+@media (max-width: 479px) {
+  html body .site-header__logo-wordmark img {
+    height: 26px !important;
+  }
+}
