@@ -24,6 +24,57 @@
   } else {
     geBreakSundayResetTitle();
   }
+
+  var geSkinPill =
+    '<button type="button" class="ge-paired-nav__btn ge-paired-nav__btn--prev" name="previous" aria-label="Previous slide">' +
+    '<span class="ge-paired-nav__sr">Previous slide</span>' +
+    '<svg fill="none" viewBox="0 0 24 24" height="24" focusable="false" aria-hidden="true">' +
+    '<path d="M19.5 12h-15m0 0 5.625-6M4.5 12l5.625 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>' +
+    '</svg></button>' +
+    '<button type="button" class="ge-paired-nav__btn ge-paired-nav__btn--next" name="next" aria-label="Next slide">' +
+    '<span class="ge-paired-nav__sr">Next slide</span>' +
+    '<svg fill="none" viewBox="0 0 24 24" height="24" focusable="false" aria-hidden="true">' +
+    '<path d="M4.5 12h15m0 0-5.625-6m5.625 6-5.625 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>' +
+    '</svg></button>';
+
+  function geSkinGalleryControls() {
+    var slider = document.querySelector('product-slider-thumbnails');
+    if (!slider || !slider.flkty) return false;
+    if (typeof slider.flkty.resize === 'function') slider.flkty.resize();
+    if (slider.dataset.geSkinNav === 'true') return true;
+    slider.dataset.geSkinNav = 'true';
+    if (!slider.flkty.cells || slider.flkty.cells.length < 2) return true;
+    var nav = document.createElement('div');
+    nav.className = 'ge-paired-nav';
+    nav.setAttribute('data-lll-pl', 'control-group-zest');
+    nav.innerHTML = geSkinPill;
+    slider.appendChild(nav);
+    var prev = nav.querySelector('[name="previous"]');
+    var next = nav.querySelector('[name="next"]');
+    if (prev) prev.addEventListener('click', function (event) {
+      event.preventDefault();
+      slider.flkty.previous();
+    });
+    if (next) next.addEventListener('click', function (event) {
+      event.preventDefault();
+      slider.flkty.next();
+    });
+    window.requestAnimationFrame(function () {
+      if (typeof slider.flkty.resize === 'function') slider.flkty.resize();
+    });
+    return true;
+  }
+
+  function geWatchSkinGallery() {
+    var tries = 0;
+    function tick() {
+      if (geSkinGalleryControls()) return;
+      if (tries++ > 60) return;
+      window.setTimeout(tick, 100);
+    }
+    tick();
+  }
+  geWatchSkinGallery();
 </script>
 {{ 'product-clothing.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product-paired.js' | asset_url }}" defer></script>

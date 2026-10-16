@@ -214,63 +214,88 @@
 }
 
 /*
-  Skincare uses the theme thumbnail column and a square frame.
-  The clothing two-up rules still match this page because it shares that body class.
+  Skincare keeps the clothing buy box, with its own column width so the
+  main photo can be a square. The clothing two-up rules still match this
+  page, so these selectors have to outrank them.
 */
-body.template-product-skincare .ge-product-thumbs-rail {
-  display: block !important;
-}
-
-body.template-product-skincare .product-image-container--thumbnails {
-  position: relative !important;
-  top: auto !important;
-  height: auto !important;
-  min-height: 0 !important;
-}
-
-@media (min-width: 768px) {
-  body.template-product-skincare .product-image-container--thumbnails {
-    padding-left: 90px !important;
+@media (min-width: 1068px) {
+  body.template-product-skincare.template-product-clothing .thb-product-detail {
+    --ge-clothing-info: 560px;
   }
 }
 
-body.template-product-skincare .thb-product-detail .product-images,
-body.template-product-skincare .thb-product-detail .product-images--thumbnails,
-body.template-product-skincare .thb-product-detail .product-images--grid,
-body.template-product-skincare .thb-product-detail .product-images--paired {
+body.template-product-skincare.template-product-clothing .ge-product-thumbs-rail {
   display: block !important;
+}
+
+body.template-product-skincare.template-product-clothing .ge-product-thumbs-next {
+  display: none !important;
+}
+
+body.template-product-skincare.template-product-clothing .product-image-container.product-image-container--thumbnails {
   height: auto !important;
   max-height: none !important;
-  overflow: visible !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  padding: 0 !important;
+}
+
+@media (min-width: 768px) {
+  body.template-product-skincare.template-product-clothing .product-image-container.product-image-container--thumbnails {
+    box-sizing: border-box !important;
+    width: min(100%, calc(100svh - var(--header-height, 56px) + 90px)) !important;
+    padding: 0 90px 0 0 !important;
+  }
+
+  body.template-product-skincare.template-product-clothing .product-image-container--thumbnails scroll-shadow {
+    left: auto !important;
+    right: 0 !important;
+  }
+}
+
+body.template-product-skincare.template-product-clothing .thb-product-detail .product-images.product-images--thumbnails {
+  display: block !important;
+  position: relative !important;
+  width: 100% !important;
+  max-width: none !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: hidden !important;
   gap: 0 !important;
+  padding: 0 !important;
   scroll-snap-type: none !important;
 }
 
-body.template-product-skincare .thb-product-detail .product-images--thumbnails .product-images__slide {
+body.template-product-skincare.template-product-clothing .thb-product-detail .product-images--thumbnails:not(.flickity-enabled) > .product-images__slide {
   display: none !important;
+  width: 100% !important;
+  max-width: none !important;
+  height: auto !important;
+}
+
+body.template-product-skincare.template-product-clothing .thb-product-detail .product-images--thumbnails:not(.flickity-enabled) > .product-images__slide:first-child {
+  display: block !important;
+  position: relative !important;
+}
+
+body.template-product-skincare.template-product-clothing .thb-product-detail .product-images--thumbnails.flickity-enabled .flickity-slider > .product-images__slide {
+  display: block !important;
+  position: absolute !important;
+  left: 0 !important;
   flex: none !important;
   width: 100% !important;
   max-width: none !important;
   height: auto !important;
 }
 
-body.template-product-skincare .thb-product-detail .product-images--thumbnails .flickity-viewport .product-images__slide,
-body.template-product-skincare .thb-product-detail .product-images--thumbnails:not(.flickity-enabled) > .product-images__slide:first-child {
-  display: block !important;
-}
-
-body.template-product-skincare .thb-product-detail .product-images .product-single__media {
-  height: auto !important;
-  max-height: none !important;
-}
-
-body.template-product-skincare .thb-product-detail .product-images .product-single__media-image {
+body.template-product-skincare.template-product-clothing .thb-product-detail .product-images--thumbnails .product-single__media,
+body.template-product-skincare.template-product-clothing .thb-product-detail .product-images--thumbnails .product-single__media-image {
   height: 0 !important;
   max-height: none !important;
   padding-bottom: var(--padding-bottom, 100%) !important;
 }
 
-body.template-product-skincare .thb-product-detail .product-images .product-single__media-image img {
+body.template-product-skincare.template-product-clothing .thb-product-detail .product-images--thumbnails .product-single__media-image img {
   object-fit: cover;
   object-position: center;
 }
