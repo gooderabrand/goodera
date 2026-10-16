@@ -57,8 +57,8 @@
       "settings": {
         "spacer_mobile": 50,
         "spacer_desktop": 125,
-        "border_separator": true,
-        "border_separator_full": true
+        "border_separator": false,
+        "border_separator_full": false
       }
     },
     "166367231494317262": {

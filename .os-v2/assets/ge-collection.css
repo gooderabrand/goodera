@@ -231,6 +231,9 @@
   background: #fff !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
+  border: 0 !important;
+  border-block-end: 0 !important;
+  box-shadow: none !important;
 }
 
 .template-collection .ge-facets-bar__end {
