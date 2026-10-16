@@ -196,6 +196,33 @@
         "label": "Color"
       }
     },
+    "skincare": {
+      "highlight_1": "Blue hyaluronic acid: Delivers intense, long-lasting hydration for visibly firmer skin",
+      "highlight_2": "Squalane and ceramide NP: Reinforce the skin barrier and reduce sensation of dryness",
+      "highlight_3": "Panthenol and niacinamide: Soften skin and promote a more even, radiant complexion",
+      "highlight_4": "Three texture options: Gel, lightweight moisturizer, and intensive cream for personalized hydration",
+      "highlight_5": "Eco-friendly packaging: Refillable jar reduces plastic waste by 70% compared to standard size",
+      "description_sample": "A clinically backed, barrier-boosting cream powered by Korean skincare technology that delivers intense, long-lasting hydration*.",
+      "study_note_sample": "*Based on a 4-week clinical study on 32 women ages 20-45.",
+      "active_ingredient": "Active Ingredient",
+      "product_form": "Product Form",
+      "volume": "Volume",
+      "dispenser_type": "Dispenser Type",
+      "skin_type": "Suitable for Skin Type",
+      "spec_ingredient_sample": "Blue hyaluronic acid, squalane, ceramide NP, panthenol, niacinamide",
+      "spec_form_sample": "Cream",
+      "spec_volume_sample": "50 ml",
+      "spec_dispenser_sample": "Jar",
+      "spec_skin_sample": "All skin types, including dry and sensitive",
+      "routine_heading": "Adding {{ product }} to Your Routine",
+      "explore": "Explore",
+      "how_to": "How to Use",
+      "play": "Play video",
+      "pause": "Pause video",
+      "sound_on": "Turn sound on",
+      "sound_off": "Turn sound off",
+      "results_label": "Participant results"
+    },
     "facets": {
       "apply": "Apply",
       "clear": "Clear",

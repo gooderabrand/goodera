@@ -1,0 +1,141 @@
+{{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
+
+<section class="ge-skin-results" aria-labelledby="SkinResults-{{ section.id }}">
+  <h2 class="ge-skin-sr" id="SkinResults-{{ section.id }}">{{ 'products.skincare.results_label' | t }}</h2>
+  <div class="ge-skin-results__media">
+    {%- if section.settings.image != blank -%}
+      {%- liquid
+        assign results_alt = section.settings.image.alt
+        if section.settings.image_alt != blank
+          assign results_alt = section.settings.image_alt
+        endif
+      -%}
+      {{
+        section.settings.image
+        | image_url: width: 2000
+        | image_tag:
+          loading: 'lazy',
+          sizes: '100vw',
+          widths: '600, 900, 1400, 2000',
+          alt: results_alt
+      }}
+    {%- elsif product.featured_image -%}
+      {{
+        product.featured_image
+        | image_url: width: 2000
+        | image_tag:
+          loading: 'lazy',
+          sizes: '100vw',
+          widths: '600, 900, 1400, 2000',
+          alt: product.featured_image.alt
+      }}
+    {%- else -%}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'ge-skin-results__placeholder' }}
+    {%- endif -%}
+  </div>
+  <div class="ge-skin-results__body">
+    <ul class="ge-skin-results__list">
+      {%- for block in section.blocks -%}
+        <li class="ge-skin-stat" {{ block.shopify_attributes }}>
+          <div class="ge-skin-ring" style="--pct: {{ block.settings.percent }};" aria-hidden="true">
+            <span>{{ block.settings.percent }}%</span>
+          </div>
+          <p>
+            <span class="ge-skin-sr">{{ block.settings.percent }}%. </span>
+            {{ block.settings.text | escape }}
+          </p>
+        </li>
+      {%- endfor -%}
+    </ul>
+    {%- if section.settings.footnote != blank -%}
+      <p class="ge-skin-results__note">{{ section.settings.footnote | escape }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Skincare results",
+  "tag": "section",
+  "class": "section-skincare-results",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text"
+    },
+    {
+      "type": "textarea",
+      "id": "footnote",
+      "label": "Footnote",
+      "default": "*Within an independent consumer perception study of 30 people (ages 18-55), measuring performance immediately."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "result",
+      "name": "Result",
+      "settings": [
+        {
+          "type": "range",
+          "id": "percent",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "label": "Percent",
+          "default": 100
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Statement",
+          "default": "of participants agreed it felt lightweight and comfortable on the skin*"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Skincare results",
+      "blocks": [
+        {
+          "type": "result",
+          "settings": {
+            "percent": 100,
+            "text": "of participants agreed it felt lightweight and comfortable on the skin*"
+          }
+        },
+        {
+          "type": "result",
+          "settings": {
+            "percent": 96,
+            "text": "of participants agreed it did not pill*"
+          }
+        },
+        {
+          "type": "result",
+          "settings": {
+            "percent": 96,
+            "text": "of participants agreed it did not cause breakouts*"
+          }
+        },
+        {
+          "type": "result",
+          "settings": {
+            "percent": 93,
+            "text": "of participants agreed it layered well under makeup*"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

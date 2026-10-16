@@ -1,0 +1,164 @@
+{{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
+{{ 'ge-sunday-reset-type.css' | asset_url | stylesheet_tag }}
+
+<section class="sr-beta__faq ge-skin-faq" id="faq" data-ge-skin-faq aria-labelledby="SkinFaqTitle-{{ section.id }}">
+  <div class="sr-beta__inner sr-beta__faq-grid">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="sr-beta__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h2 class="sr-beta__title" id="SkinFaqTitle-{{ section.id }}">
+        {{ section.settings.heading_line_1 | escape }}<br>
+        <em>{{ section.settings.heading_line_2 | escape }}</em>
+      </h2>
+      {%- if section.settings.lede != blank -%}
+        <p class="sr-beta__lede sr-beta__lede--muted sr-beta__lede--compact">{{ section.settings.lede | escape }}</p>
+      {%- endif -%}
+    </div>
+    <ul class="sr-beta__faq-list">
+      {%- for block in section.blocks -%}
+        {%- assign panel_id = 'SkinFaq-' | append: section.id | append: '-' | append: block.id -%}
+        <li class="sr-beta__faq-item" {{ block.shopify_attributes }}>
+          <button
+            type="button"
+            class="sr-beta__faq-toggle"
+            data-sr-faq-toggle
+            aria-expanded="false"
+            aria-controls="{{ panel_id }}"
+            id="{{ panel_id }}-btn"
+          >
+            <span>{{ block.settings.question | escape }}</span>
+            <span class="sr-beta__faq-chevron" aria-hidden="true"></span>
+          </button>
+          <p class="sr-beta__faq-panel" id="{{ panel_id }}" role="region" aria-labelledby="{{ panel_id }}-btn" hidden>{{ block.settings.answer | escape }}</p>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% javascript %}
+(() => {
+  const bind = (root) => {
+    const scope = root && root.querySelectorAll ? root : document;
+    scope.querySelectorAll('[data-ge-skin-faq] [data-sr-faq-toggle]').forEach((button) => {
+      if (button.dataset.skinFaqBound === 'true') return;
+      button.dataset.skinFaqBound = 'true';
+      const panelId = button.getAttribute('aria-controls');
+      const panel = panelId ? document.getElementById(panelId) : null;
+      if (!panel) return;
+      const setOpen = (open) => {
+        button.setAttribute('aria-expanded', open ? 'true' : 'false');
+        button.classList.toggle('is-open', open);
+        panel.hidden = !open;
+      };
+      setOpen(false);
+      button.addEventListener('click', (event) => {
+        event.stopImmediatePropagation();
+        setOpen(button.getAttribute('aria-expanded') !== 'true');
+      }, true);
+    });
+  };
+  bind(document);
+  document.addEventListener('shopify:section:load', (event) => bind(event.target));
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Skincare FAQ",
+  "tag": "section",
+  "class": "section-skincare-faq",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Good to know"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading line 1",
+      "default": "Your questions,"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading line 2",
+      "default": "answered."
+    },
+    {
+      "type": "textarea",
+      "id": "lede",
+      "label": "Body",
+      "default": "Texture, skin type, and how it fits the rest of your routine."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What does it feel like on skin?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Lightweight and comfortable, and made to sit as the last step in a routine."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Skincare FAQ",
+      "blocks": [
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What does it feel like on skin?",
+            "answer": "Lightweight and comfortable. It is meant to sit as the last step without a heavy finish."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Will it pill under makeup?",
+            "answer": "In an independent consumer study, 96% of participants agreed it did not pill."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Can I use it on sensitive skin?",
+            "answer": "It is suitable for dry and sensitive skin. Stop using it if irritation occurs."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Where does it go in my routine?",
+            "answer": "Cleanse, treat, then moisturize. Apply this as the protect step."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How do I apply it?",
+            "answer": "Apply evenly over skin as the final step. Reapply every two hours when you are in the sun."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

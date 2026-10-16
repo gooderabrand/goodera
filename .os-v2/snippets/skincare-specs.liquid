@@ -1,0 +1,90 @@
+{% doc %}
+  Renders the skincare Specifications rows: active ingredient, product form, volume, dispenser type, and skin type.
+  Reads product metafields in the custom namespace. Volume can also come from a Volume or Size option.
+  Shows the sample rows only when none of those values are set.
+  @param {product} product - Product whose specifications are shown
+  @example
+  {% render 'skincare-specs', product: product %}
+{% enddoc %}
+
+{{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign ingredient = ''
+  assign product_form = ''
+  assign volume = ''
+  assign dispenser = ''
+  assign skin_type = ''
+
+  if product.metafields.custom.active_ingredient != blank
+    assign ingredient = product.metafields.custom.active_ingredient | metafield_text | strip
+  endif
+  if product.metafields.custom.product_form != blank
+    assign product_form = product.metafields.custom.product_form | metafield_text | strip
+  endif
+  if product.metafields.custom.volume != blank
+    assign volume = product.metafields.custom.volume | metafield_text | strip
+  endif
+  if product.metafields.custom.dispenser_type != blank
+    assign dispenser = product.metafields.custom.dispenser_type | metafield_text | strip
+  endif
+  if product.metafields.custom.skin_type != blank
+    assign skin_type = product.metafields.custom.skin_type | metafield_text | strip
+  endif
+
+  if volume == blank
+    for option in product.options_with_values
+      assign option_name = option.name | downcase
+      if option_name == 'volume' or option_name == 'size'
+        if option.position == 1
+          assign volume = product.selected_or_first_available_variant.option1
+        elsif option.position == 2
+          assign volume = product.selected_or_first_available_variant.option2
+        elsif option.position == 3
+          assign volume = product.selected_or_first_available_variant.option3
+        endif
+      endif
+    endfor
+  endif
+
+  if ingredient == blank and product_form == blank and volume == blank and dispenser == blank and skin_type == blank
+    assign ingredient = 'products.skincare.spec_ingredient_sample' | t
+    assign product_form = 'products.skincare.spec_form_sample' | t
+    assign volume = 'products.skincare.spec_volume_sample' | t
+    assign dispenser = 'products.skincare.spec_dispenser_sample' | t
+    assign skin_type = 'products.skincare.spec_skin_sample' | t
+  endif
+-%}
+
+<dl class="ge-skin-specs">
+  {%- if ingredient != blank -%}
+    <div class="ge-skin-specs__row">
+      <dt>{{ 'products.skincare.active_ingredient' | t }}</dt>
+      <dd>{{ ingredient | escape }}</dd>
+    </div>
+  {%- endif -%}
+  {%- if product_form != blank -%}
+    <div class="ge-skin-specs__row">
+      <dt>{{ 'products.skincare.product_form' | t }}</dt>
+      <dd>{{ product_form | escape }}</dd>
+    </div>
+  {%- endif -%}
+  {%- if volume != blank -%}
+    <div class="ge-skin-specs__row">
+      <dt>{{ 'products.skincare.volume' | t }}</dt>
+      <dd>{{ volume | escape }}</dd>
+    </div>
+  {%- endif -%}
+  {%- if dispenser != blank -%}
+    <div class="ge-skin-specs__row">
+      <dt>{{ 'products.skincare.dispenser_type' | t }}</dt>
+      <dd>{{ dispenser | escape }}</dd>
+    </div>
+  {%- endif -%}
+  {%- if skin_type != blank -%}
+    <div class="ge-skin-specs__row">
+      <dt>{{ 'products.skincare.skin_type' | t }}</dt>
+      <dd>{{ skin_type | escape }}</dd>
+    </div>
+  {%- endif -%}
+</dl>

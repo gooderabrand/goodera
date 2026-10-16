@@ -25,7 +25,8 @@
   top: 0.55rem;
 }
 
-.template-page-sunday-reset-3d .sr-beta__faq-toggle {
+.template-page-sunday-reset-3d .sr-beta__faq-toggle,
+.template-product-skincare .sr-beta__faq-toggle {
   padding: 1.35rem 0;
   font-size: 1.7rem;
   font-weight: 500;
@@ -33,13 +34,15 @@
   line-height: 1.15;
 }
 
-.template-page-sunday-reset-3d .sr-beta__faq-panel {
+.template-page-sunday-reset-3d .sr-beta__faq-panel,
+.template-product-skincare .sr-beta__faq-panel {
   margin-bottom: 1.35rem;
   font-size: 1.125rem;
   line-height: 1.5;
 }
 
-.template-page-sunday-reset-3d .sr-beta__faq-chevron {
+.template-page-sunday-reset-3d .sr-beta__faq-chevron,
+.template-product-skincare .sr-beta__faq-chevron {
   width: 0.7rem;
   height: 0.7rem;
 }

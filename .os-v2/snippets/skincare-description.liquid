@@ -1,0 +1,27 @@
+{% doc %}
+  Renders the skincare Description accordion body.
+  Uses the product description when it exists, and appends product.metafields.custom.study_note when that note is set.
+  @param {product} product - Product whose description is shown
+  @example
+  {% render 'skincare-description', product: product %}
+{% enddoc %}
+
+{{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
+
+{%- if product.description != blank -%}
+  {{ product.description }}
+{%- else -%}
+  <p>{{ 'products.skincare.description_sample' | t }}</p>
+{%- endif -%}
+
+{%- liquid
+  assign study_note = ''
+  if product.metafields.custom.study_note != blank
+    assign study_note = product.metafields.custom.study_note | metafield_text | strip
+  elsif product.description == blank
+    assign study_note = 'products.skincare.study_note_sample' | t
+  endif
+-%}
+{%- if study_note != blank -%}
+  <p class="ge-skin-note">{{ study_note | escape }}</p>
+{%- endif -%}
