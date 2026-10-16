@@ -9,23 +9,14 @@
   reads as its own container.
 */
 body.template-product-skincare {
-  --ge-page-edge: 64px;
-  --ge-page-inset: 64px;
-  --ge-section-space: 64px;
+  --ge-page-edge: clamp(18px, 4.45vw, 64px);
+  --ge-page-inset: clamp(16px, 4.45vw, 64px);
+  --ge-section-space: clamp(32px, 4.45vw, 64px);
   --ge-band: #f5f5f7;
-  --ge-shell-gutter: 64px;
+  --ge-shell-gutter: clamp(16px, 4.45vw, 64px);
   --ge-footnote-size: var(--ge-text-xs, 0.6875rem);
   --ge-footnote-line: 1.45;
   --ge-footnote-color: color-mix(in srgb, var(--ge-ink, #17160f) 58%, transparent);
-}
-
-@media (max-width: 989px) {
-  body.template-product-skincare {
-    --ge-page-edge: 16px;
-    --ge-page-inset: 20px;
-    --ge-section-space: 32px;
-    --ge-shell-gutter: 16px;
-  }
 }
 
 .ge-skin-highlights,
@@ -378,7 +369,8 @@ body.template-product-skincare {
 */
 @media (min-width: 1068px) {
   body.template-product-skincare.template-product-clothing .thb-product-detail {
-    --ge-clothing-info: 710px;
+    /* 710px beside a full gallery at 1440. Narrower windows give the square photo back some of that width, and 520px is the floor so the buttons still sit on one row. */
+    --ge-clothing-info: min(710px, max(520px, calc(100vw - 640px)));
   }
 
   body.template-product-skincare.template-product-clothing .thb-product-detail .product-information {
@@ -424,57 +416,76 @@ body.template-product-skincare.template-product-clothing .product-image-containe
   }
 }
 
+@media (min-width: 1068px) and (max-width: 1360px) {
+  body.template-product-skincare.template-product-clothing .thb-product-detail .product-information {
+    padding: 72px 40px !important;
+  }
+}
+
 @media (min-width: 1068px) {
   body.template-product-skincare.template-product-clothing .product-image-container.product-image-container--thumbnails {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 174px;
+    /* Four square thumbs plus their gaps stay inside the primary square. 174px is the cap once the photo is tall enough. */
+    grid-template-columns: minmax(0, 1fr) minmax(56px, min(174px, calc((100% - 42px) / 5)));
     column-gap: 12px;
     align-items: stretch;
     box-sizing: border-box !important;
     width: min(100%, calc(100svh - var(--header-height, 56px) + 186px)) !important;
     max-width: 100% !important;
     height: auto !important;
-    min-height: 500px;
+    min-height: 0;
     padding: 0 !important;
     overflow: visible !important;
   }
 
   body.template-product-skincare.template-product-clothing .ge-product-thumbs-rail {
-    display: flex !important;
+    display: block !important;
     grid-column: 2;
     grid-row: 1;
-    flex-direction: column;
-    width: 174px !important;
-    max-width: 174px;
-    min-width: 174px;
+    width: auto !important;
+    max-width: none;
+    min-width: 0;
     min-height: 0;
+    height: auto;
     position: relative !important;
     z-index: 4 !important;
     align-self: stretch;
-    overflow: visible !important;
+    overflow: hidden !important;
   }
 
   body.template-product-skincare.template-product-clothing .product-image-container--thumbnails scroll-shadow {
-    position: relative !important;
-    inset: auto !important;
-    left: auto !important;
-    right: auto !important;
-    top: auto !important;
+    position: absolute !important;
+    inset: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
     display: block !important;
-    width: 174px !important;
+    width: 100% !important;
     height: 100% !important;
     margin: 0 !important;
   }
 
   body.template-product-skincare.template-product-clothing .product-image-container--thumbnails .product-thumbnail-container {
-    width: 174px !important;
+    position: absolute !important;
+    inset: 0;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 100% !important;
     height: 100% !important;
+    min-height: 0;
     gap: 10px;
+    overflow: hidden;
+    grid-auto-flow: unset;
   }
 
   body.template-product-skincare.template-product-clothing .product-image-container--thumbnails .product-thumbnail {
-    width: 174px !important;
-    max-width: 174px;
+    flex: 0 1 auto;
+    width: 100% !important;
+    max-width: none;
+    min-width: 0;
+    min-height: 0;
     aspect-ratio: 1;
     height: auto !important;
     border-radius: 0 !important;
@@ -545,10 +556,20 @@ body.template-product-skincare.template-product-clothing .thb-product-detail .pr
   padding-bottom: var(--padding-bottom, 100%) !important;
 }
 
+body.template-product-skincare.template-product-clothing .thb-product-detail .product-images--thumbnails,
+body.template-product-skincare.template-product-clothing .thb-product-detail .product-images--thumbnails .flickity-viewport,
+body.template-product-skincare.template-product-clothing .thb-product-detail .product-images--thumbnails .flickity-slider,
+body.template-product-skincare.template-product-clothing .thb-product-detail .product-images--thumbnails .product-images__slide,
+body.template-product-skincare.template-product-clothing .thb-product-detail .product-images--thumbnails .product-single__media,
+body.template-product-skincare.template-product-clothing .thb-product-detail .product-images--thumbnails .product-single__media-image,
+body.template-product-skincare.template-product-clothing .thb-product-detail .product-images--thumbnails .product-single__media-image img {
+  border-radius: 0 !important;
+  clip-path: none !important;
+}
+
 body.template-product-skincare.template-product-clothing .thb-product-detail .product-images--thumbnails .product-single__media-image img {
   object-fit: cover;
   object-position: center;
-  border-radius: 0 !important;
 }
 
 body.template-product-skincare .product-thumbnail,
@@ -673,7 +694,9 @@ body.template-product-skincare .section-skincare-how-to {
 }
 
 @media (max-width: 767px) {
-  body.template-product-skincare .section-skincare-how-to {
+  body.template-product-skincare .section-skincare-how-to,
+  body.template-product-skincare .section-skincare-results,
+  body.template-product-skincare .section-skincare-faq {
     padding: 42px 18px !important;
   }
 }
@@ -694,10 +717,30 @@ body.template-product-skincare .section-skincare-results .ge-skin-split {
   background: var(--ge-band, #f5f5f7);
 }
 
+body.template-product-skincare .section-skincare-results .ge-skin-results {
+  container-type: inline-size;
+  container-name: ge-results;
+}
+
 body.template-product-skincare .section-skincare-results .image-with-text__image,
 body.template-product-skincare .section-skincare-results .image-with-text__content {
   padding: var(--ge-page-inset, 64px);
   box-sizing: border-box;
+}
+
+body.template-product-skincare .section-skincare-results .ge-skin-stat {
+  /* Tracks the band width so the rings shrink with the photo instead of staying desktop-sized in a narrow column. */
+  --ge-ring: clamp(3.25rem, 8cqi, 5.75rem);
+  grid-template-columns: var(--ge-ring) minmax(0, 1fr);
+}
+
+body.template-product-skincare .section-skincare-results .ge-skin-ring {
+  width: var(--ge-ring, 5.75rem);
+  height: var(--ge-ring, 5.75rem);
+}
+
+body.template-product-skincare .section-skincare-results .ge-skin-ring span {
+  font-size: clamp(0.95rem, 1.8cqi, 1.2rem);
 }
 
 body.template-product-skincare .section-skincare-faq .ge-skin-faq,
@@ -749,22 +792,36 @@ body.template-product-skincare .section-skincare-results .ge-skin-ring::before {
     flex: 0 0 auto !important;
   }
 
+  body.template-product-skincare .section-skincare-results .image-with-text__image {
+    padding: 0;
+  }
+
+  body.template-product-skincare .section-skincare-results .image-with-text__image-media {
+    padding-bottom: 100% !important;
+  }
+
   body.template-product-skincare .section-skincare-results .ge-skin-results__list {
     gap: 1.15rem;
   }
 
   body.template-product-skincare .section-skincare-results .ge-skin-stat {
-    grid-template-columns: 4.5rem minmax(0, 1fr);
+    --ge-ring: clamp(4rem, 18vw, 4.75rem);
+    grid-template-columns: var(--ge-ring) minmax(0, 1fr);
     gap: 0.9rem;
   }
 
   body.template-product-skincare .section-skincare-results .ge-skin-ring {
-    width: 4.5rem;
-    height: 4.5rem;
+    --ge-ring: clamp(4rem, 18vw, 4.75rem);
+    width: var(--ge-ring);
+    height: var(--ge-ring);
   }
 
   body.template-product-skincare .section-skincare-results .ge-skin-ring span {
     font-size: 1rem;
+  }
+
+  body.template-product-skincare .section-skincare-results .ge-skin-stat p {
+    font-size: clamp(0.9375rem, 3.6vw, 1.0625rem);
   }
 }
 
@@ -889,6 +946,9 @@ body.template-product-skincare .sr-beta__step.is-current .sr-beta__step-node {
     display: block !important;
     grid-area: 1 / 2;
     min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     text-align: center;
   }
 
@@ -904,17 +964,31 @@ body.template-product-skincare .sr-beta__step.is-current .sr-beta__step-node {
   }
 }
 
+@media (min-width: 990px) and (max-width: 1279px) {
+  body.template-product-skincare .site-header__inner {
+    grid-template-columns: max-content minmax(0, 1fr) max-content !important;
+  }
+
+  body.template-product-skincare .ge-dest-nav {
+    gap: 14px;
+  }
+}
+
 body.template-product-skincare .ge-skin-faq__grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: clamp(1.5rem, 3vw, 3rem);
-  align-items: stretch;
+  align-items: start;
 }
 
 body.template-product-skincare .ge-skin-faq__media {
   position: relative;
+  align-self: start;
+  width: 100%;
   min-width: 0;
-  min-height: 22rem;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  min-height: 0;
   overflow: hidden;
   background: var(--ge-band, #f5f5f7);
 }
