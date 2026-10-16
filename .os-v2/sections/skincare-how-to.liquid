@@ -1,3 +1,5 @@
+{{ 'image-with-text.css' | asset_url | stylesheet_tag }}
+{{ 'shoppable-video-reels.css' | asset_url | stylesheet_tag }}
 {{ 'sunday-reset-beta.css' | asset_url | stylesheet_tag }}
 {{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'video-controls.js' | asset_url }}" defer></script>
@@ -19,34 +21,48 @@
   endif
 -%}
 
-<section class="ge-skin-howto" aria-labelledby="SkinHowTo-{{ section.id }}">
-  <div class="sr-beta__inner ge-skin-howto__inner">
-    <p class="sr-beta__eyebrow">{{ 'products.skincare.how_to' | t }}</p>
-    <h2 class="sr-beta__title" id="SkinHowTo-{{ section.id }}">{{ howto_title | escape }}</h2>
-    <div class="ge-skin-howto__frame">
-      {%- if section.settings.video != blank -%}
-        {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '800x' }}
-        <video-controls>
-          <button id="SkinHowToPlay-{{ section.id }}" type="button" class="ge-skin-howto__btn ge-skin-howto__btn--play video-controls--play-pause" aria-label="{{ 'products.skincare.pause' | t }}">
-            <span class="video-play">{% render 'svg-icons' with 'thb-video-play' %}</span>
-            <span class="video-pause">{% render 'svg-icons' with 'thb-video-pause' %}</span>
-          </button>
-          <button id="SkinHowToSound-{{ section.id }}" type="button" class="ge-skin-howto__btn ge-skin-howto__btn--sound video-controls--sound muted" aria-label="{{ 'products.skincare.sound_on' | t }}">
-            <span class="video-sound-on">{% render 'svg-icons' with 'thb-sound-on' %}</span>
-            <span class="video-sound-off">{% render 'svg-icons' with 'thb-sound-off' %}</span>
-          </button>
-        </video-controls>
-      {%- else -%}
-        {{ 'lifestyle-1' | placeholder_svg_tag: 'ge-skin-howto__placeholder' }}
-      {%- endif -%}
-    </div>
-    {%- if instructions != blank -%}
-      <div class="ge-skin-howto__copy">
-        <p>{{ instructions | escape | newline_to_br }}</p>
+<div class="row full-width-row">
+  <div class="small-12 columns">
+    <div class="image-with-text ge-skin-split ge-skin-howto grid--image-small">
+      <div class="image-with-text__image image-with-text__inner">
+        <div class="shoppable-video-reels">
+        <div class="is-selected">
+          <div class="shoppable-video-reels--video" style="--video-aspect-ratio: 0.5625;">
+            <div class="slideshow__slide-video-bg"{% if section.settings.video != blank %} data-provider="hosted"{% endif %}>
+              {%- if section.settings.video != blank -%}
+                {{ section.settings.video | video_tag: autoplay: true, loop: true, controls: false, muted: true, image_size: '800x' }}
+                <video-controls class="shoppable-video-reels--video-controls">
+                  <button id="SkinHowToPlay-{{ section.id }}" type="button" class="shoppable-video-reels--button shoppable-video-reels--button-play-pause video-controls--play-pause" aria-label="{{ 'products.skincare.pause' | t }}">
+                    <span class="video-play">{% render 'svg-icons' with 'thb-video-play' %}</span>
+                    <span class="video-pause">{% render 'svg-icons' with 'thb-video-pause' %}</span>
+                  </button>
+                  <button id="SkinHowToSound-{{ section.id }}" type="button" class="shoppable-video-reels--button shoppable-video-reels--button-sound video-controls--sound muted" aria-label="{{ 'products.skincare.sound_on' | t }}">
+                    <span class="video-sound-on">{% render 'svg-icons' with 'thb-sound-on' %}</span>
+                    <span class="video-sound-off">{% render 'svg-icons' with 'thb-sound-off' %}</span>
+                  </button>
+                </video-controls>
+              {%- else -%}
+                {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder_svg_tag' }}
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+        </div>
       </div>
-    {%- endif -%}
+      <div class="image-with-text__content image-with-text__inner">
+        <div class="image-with-text__content--inner">
+          <p class="sr-beta__eyebrow">{{ 'products.skincare.how_to' | t }}</p>
+          <h2 class="sr-beta__title" id="SkinHowTo-{{ section.id }}">{{ howto_title | escape }}</h2>
+          {%- if instructions != blank -%}
+            <div class="sr-beta__lede sr-beta__lede--muted rte">
+              <p>{{ instructions | escape | newline_to_br }}</p>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
   </div>
-</section>
+</div>
 
 {% schema %}
 {

@@ -1,58 +1,68 @@
-{{ 'sunday-reset-beta.css' | asset_url | stylesheet_tag }}
+{{ 'image-with-text.css' | asset_url | stylesheet_tag }}
 {{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
 
-<section class="ge-skin-results" aria-labelledby="SkinResults-{{ section.id }}">
-  <h2 class="ge-skin-sr" id="SkinResults-{{ section.id }}">{{ 'products.skincare.results_label' | t }}</h2>
-  <div class="ge-skin-results__media">
-    {%- if section.settings.image != blank -%}
-      {%- liquid
-        assign results_alt = section.settings.image.alt
-        if section.settings.image_alt != blank
-          assign results_alt = section.settings.image_alt
-        endif
-      -%}
-      {{
-        section.settings.image
-        | image_url: width: 2000
-        | image_tag:
-          loading: 'lazy',
-          sizes: '100vw',
-          widths: '600, 900, 1400, 2000',
-          alt: results_alt
-      }}
-    {%- elsif product.featured_image -%}
-      {{
-        product.featured_image
-        | image_url: width: 2000
-        | image_tag:
-          loading: 'lazy',
-          sizes: '100vw',
-          widths: '600, 900, 1400, 2000',
-          alt: product.featured_image.alt
-      }}
-    {%- else -%}
-      {{ 'lifestyle-2' | placeholder_svg_tag: 'ge-skin-results__placeholder' }}
-    {%- endif -%}
+{%- liquid
+  assign results_image = section.settings.image
+  if results_image == blank
+    assign results_image = product.featured_image
+  endif
+  assign ratio = 1
+  if results_image != blank and results_image.aspect_ratio != blank
+    assign ratio = results_image.aspect_ratio
+  endif
+  assign results_alt = ''
+  if results_image != blank
+    assign results_alt = results_image.alt
+  endif
+  if section.settings.image_alt != blank
+    assign results_alt = section.settings.image_alt
+  endif
+-%}
+
+<div class="row full-width-row">
+  <div class="small-12 columns">
+    <div class="image-with-text ge-skin-split ge-skin-results grid--image-medium">
+      <div class="image-with-text__image image-with-text__inner">
+        <div class="image-with-text__image-media aspect-ratio aspect-ratio--adapt" style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;">
+          {%- if results_image != blank -%}
+            {{
+              results_image
+              | image_url: width: 1600
+              | image_tag:
+                loading: 'lazy',
+                sizes: '(min-width: 768px) 50vw, 100vw',
+                widths: '600, 900, 1400, 1600',
+                alt: results_alt
+            }}
+          {%- else -%}
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder_svg_tag' }}
+          {%- endif -%}
+        </div>
+      </div>
+      <div class="image-with-text__content image-with-text__inner">
+        <div class="image-with-text__content--inner">
+          <p class="sr-beta__eyebrow">{{ 'products.skincare.results_label' | t }}</p>
+          <ul class="ge-skin-results__list">
+            {%- for block in section.blocks -%}
+              <li class="ge-skin-stat" {{ block.shopify_attributes }}>
+                <div class="ge-skin-ring" style="--pct: {{ block.settings.percent }};" aria-hidden="true">
+                  <span>{{ block.settings.percent }}%</span>
+                </div>
+                <p>
+                  <span class="ge-skin-sr">{{ block.settings.percent }}%. </span>
+                  {{ block.settings.text | escape }}
+                </p>
+              </li>
+            {%- endfor -%}
+          </ul>
+          {%- if section.settings.footnote != blank -%}
+            <p class="ge-skin-results__note">{{ section.settings.footnote | escape }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="ge-skin-results__body">
-    <ul class="ge-skin-results__list">
-      {%- for block in section.blocks -%}
-        <li class="ge-skin-stat" {{ block.shopify_attributes }}>
-          <div class="ge-skin-ring" style="--pct: {{ block.settings.percent }};" aria-hidden="true">
-            <span>{{ block.settings.percent }}%</span>
-          </div>
-          <p>
-            <span class="ge-skin-sr">{{ block.settings.percent }}%. </span>
-            {{ block.settings.text | escape }}
-          </p>
-        </li>
-      {%- endfor -%}
-    </ul>
-    {%- if section.settings.footnote != blank -%}
-      <p class="ge-skin-results__note">{{ section.settings.footnote | escape }}</p>
-    {%- endif -%}
-  </div>
-</section>
+</div>
 
 {% schema %}
 {
@@ -66,7 +76,8 @@
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Image"
+      "label": "Image",
+      "info": "Leave blank to use the product photo."
     },
     {
       "type": "text",

@@ -69,28 +69,6 @@
   background: var(--ge-bg, #fff);
 }
 
-.ge-skin-results__media {
-  background: var(--ge-surface, #f5f5f7);
-}
-
-.ge-skin-results__media img,
-.ge-skin-results__placeholder {
-  display: block;
-  width: 100%;
-  height: min(46vw, 16rem);
-  object-fit: cover;
-}
-
-.ge-skin-results__placeholder {
-  height: min(46vw, 16rem);
-}
-
-.ge-skin-results__body {
-  max-width: 44rem;
-  margin: 0 auto;
-  padding: 2.5rem var(--ge-shell-gutter, 20px) 2.75rem;
-}
-
 .ge-skin-results__list {
   display: grid;
   gap: 1.65rem;
@@ -163,140 +141,76 @@
   border: 0;
 }
 
-.ge-skin-routine,
-.ge-skin-howto {
+.template-product-skincare .ge-skin-split.image-with-text {
+  display: flex;
+  align-items: center;
   background: var(--ge-bg, #fff);
   border-top: 1px solid rgba(23, 22, 15, 0.08);
+  color: var(--ge-ink, #17160f);
 }
 
-.ge-skin-routine__inner,
-.ge-skin-howto__inner {
-  box-sizing: border-box;
-  width: 100%;
-  margin: 0 auto;
-  padding: 3.25rem var(--ge-shell-gutter, 20px) 3.5rem;
-}
-
-.ge-skin-howto__kicker,
-.ge-skin-howto__title {
+.template-product-skincare .ge-skin-split .image-with-text__content--inner {
+  max-width: 36rem;
   margin: 0;
-  color: var(--ge-ink, #17160f);
-  font-weight: 600;
-  letter-spacing: var(--ge-tracking-tight, -0.03em);
-  line-height: 1.12;
 }
 
-.ge-skin-howto__inner {
-  max-width: 40rem;
-  text-align: center;
+.template-product-skincare .ge-skin-split .sr-beta__eyebrow {
+  margin-bottom: 0.85rem;
 }
 
-.ge-skin-howto__kicker {
-  font-size: clamp(1.55rem, 3vw, 2rem);
-  font-weight: 600;
-}
-
-.ge-skin-howto__title {
-  margin-top: 0.35rem;
-}
-
-.ge-skin-howto__frame {
-  position: relative;
-  width: min(100%, 26rem);
-  margin: 1.5rem auto 0;
-  aspect-ratio: 9 / 16;
-  overflow: hidden;
-  border-radius: 1.25rem;
-  background: var(--ge-surface, #f5f5f7);
-}
-
-.ge-skin-howto__frame video,
-.ge-skin-howto__placeholder {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.ge-skin-howto__frame video-controls {
-  display: contents;
-}
-
-.ge-skin-howto__btn {
-  position: absolute;
-  bottom: 0.85rem;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.35rem;
-  height: 2.35rem;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--ge-ink, #17160f);
-  cursor: pointer;
-}
-
-.ge-skin-howto__btn--sound {
-  right: 3.55rem;
-}
-
-.ge-skin-howto__btn--play {
-  right: 0.85rem;
-}
-
-.ge-skin-howto__btn svg {
-  width: 0.9rem;
-  height: 0.9rem;
-  fill: #17160f;
-  pointer-events: none;
-}
-
-.ge-skin-howto__btn--sound .video-sound-on,
-.ge-skin-howto__btn--play .video-play {
-  display: none;
-}
-
-.ge-skin-howto__btn--sound .video-sound-off,
-.ge-skin-howto__btn--play .video-pause {
-  display: block;
-}
-
-.ge-skin-howto__btn--sound:not(.muted) .video-sound-on {
-  display: block;
-}
-
-.ge-skin-howto__btn--sound:not(.muted) .video-sound-off {
-  display: none;
-}
-
-.ge-skin-howto__btn--play.paused .video-play {
-  display: block;
-}
-
-.ge-skin-howto__btn--play.paused .video-pause {
-  display: none;
-}
-
-.ge-skin-howto__copy {
-  margin: 1.15rem auto 0;
-  max-width: 26rem;
-  color: var(--ge-ink, #17160f);
-  font-size: 1rem;
-  line-height: 1.5;
+.template-product-skincare .ge-skin-split .sr-beta__title {
   text-align: left;
 }
 
-.ge-skin-howto__copy p {
+.template-product-skincare .ge-skin-split .sr-beta__lede {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.template-product-skincare .ge-skin-routine .sr-beta__timeline-scroll {
+  max-width: none;
   margin: 0;
 }
 
-@media (min-width: 990px) {
-  .ge-skin-results__media img,
-  .ge-skin-results__placeholder {
-    height: 24rem;
+.template-product-skincare .ge-skin-routine .image-with-text__image {
+  padding: 2.5rem 1.5rem;
+  box-sizing: border-box;
+}
+
+.template-product-skincare .ge-skin-howto .shoppable-video-reels--video {
+  height: auto;
+  border-radius: 0;
+  clip-path: none;
+  margin-inline: auto;
+  max-width: 22rem;
+}
+
+.template-product-skincare .ge-skin-howto .shoppable-video-reels--button {
+  opacity: 1;
+}
+
+.template-product-skincare .ge-skin-howto .shoppable-video-reels--button svg {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0;
+  opacity: 1;
+  background: transparent;
+}
+
+.template-product-skincare .ge-skin-howto .placeholder_svg_tag {
+  position: static;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  opacity: 1;
+  background: var(--ge-surface, #f5f5f7);
+}
+
+@media (max-width: 767px) {
+  .template-product-skincare .ge-skin-routine.image-with-text.text_first {
+    flex-direction: column-reverse;
   }
 }
 

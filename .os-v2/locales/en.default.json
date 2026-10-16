@@ -215,6 +215,8 @@
       "spec_dispenser_sample": "Jar",
       "spec_skin_sample": "All skin types, including dry and sensitive",
       "routine_heading": "Adding {{ product }} to Your Routine",
+      "routine_eyebrow": "Your routine",
+      "routine_lede": "Where this fits, from the first step through the last.",
       "explore": "Explore",
       "how_to": "How to Use",
       "play": "Play video",

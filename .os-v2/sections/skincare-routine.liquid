@@ -1,3 +1,4 @@
+{{ 'image-with-text.css' | asset_url | stylesheet_tag }}
 {{ 'sunday-reset-beta.css' | asset_url | stylesheet_tag }}
 {{ 'ge-sunday-reset-type.css' | asset_url | stylesheet_tag }}
 
@@ -6,57 +7,77 @@
   if routine_heading == blank
     assign routine_heading = 'products.skincare.routine_heading' | t: product: product.title
   endif
+  assign routine_eyebrow = section.settings.eyebrow
+  if routine_eyebrow == blank
+    assign routine_eyebrow = 'products.skincare.routine_eyebrow' | t
+  endif
+  assign routine_lede = section.settings.lede
+  if routine_lede == blank
+    assign routine_lede = 'products.skincare.routine_lede' | t
+  endif
   assign explore_prefix = section.settings.explore_prefix
 -%}
 
-<section class="sr-beta__experience ge-skin-routine" aria-labelledby="SkinRoutine-{{ section.id }}">
-  <div class="sr-beta__inner">
-    <h2 class="sr-beta__title" id="SkinRoutine-{{ section.id }}">{{ routine_heading | escape }}</h2>
-    <div class="sr-beta__timeline-scroll sr-beta__timeline-scroll--static">
-      <ol class="sr-beta__steps">
-        {%- for block in section.blocks -%}
-          {%- liquid
-            assign step_name = block.settings.name
-            assign step_url = block.settings.link
-            if block.settings.product != blank
-              assign step_name = block.settings.product.title
-              assign step_url = block.settings.product.url
-            endif
-            if step_name == blank
-              assign step_name = product.title
-            endif
-          -%}
-          <li class="sr-beta__step" {{ block.shopify_attributes }}>
-            <div class="sr-beta__step-card">
-              <div class="sr-beta__step-node" aria-hidden="true"></div>
-              <h3 class="sr-beta__step-heading">
-                <span class="sr-beta__step-num">{{ block.settings.label | escape }}</span>
-                <span class="sr-beta__step-name">
-                  {%- if step_url != blank -%}
-                    <a href="{{ step_url }}">
-                      {%- unless block.settings.current -%}
-                        {%- if explore_prefix != blank -%}{{ explore_prefix | escape }} {% endif -%}
-                      {%- endunless -%}
-                      {{ step_name | escape }}
-                    </a>
-                  {%- else -%}
-                    {%- unless block.settings.current -%}
-                      {%- if explore_prefix != blank -%}{{ explore_prefix | escape }} {% endif -%}
-                    {%- endunless -%}
-                    {{ step_name | escape }}
+<div class="row full-width-row">
+  <div class="small-12 columns">
+    <div class="image-with-text text_first ge-skin-split ge-skin-routine grid--image-medium">
+      <div class="image-with-text__image image-with-text__inner">
+        <div class="sr-beta__timeline-scroll sr-beta__timeline-scroll--static">
+          <ol class="sr-beta__steps">
+            {%- for block in section.blocks -%}
+              {%- liquid
+                assign step_name = block.settings.name
+                assign step_url = block.settings.link
+                if block.settings.product != blank
+                  assign step_name = block.settings.product.title
+                  assign step_url = block.settings.product.url
+                endif
+                if step_name == blank
+                  assign step_name = product.title
+                endif
+              -%}
+              <li class="sr-beta__step" {{ block.shopify_attributes }}>
+                <div class="sr-beta__step-card">
+                  <div class="sr-beta__step-node" aria-hidden="true"></div>
+                  <h3 class="sr-beta__step-heading">
+                    <span class="sr-beta__step-num">{{ block.settings.label | escape }}</span>
+                    <span class="sr-beta__step-name">
+                      {%- if step_url != blank -%}
+                        <a href="{{ step_url }}">
+                          {%- unless block.settings.current -%}
+                            {%- if explore_prefix != blank -%}{{ explore_prefix | escape }} {% endif -%}
+                          {%- endunless -%}
+                          {{ step_name | escape }}
+                        </a>
+                      {%- else -%}
+                        {%- unless block.settings.current -%}
+                          {%- if explore_prefix != blank -%}{{ explore_prefix | escape }} {% endif -%}
+                        {%- endunless -%}
+                        {{ step_name | escape }}
+                      {%- endif -%}
+                    </span>
+                  </h3>
+                  {%- if block.settings.text != blank -%}
+                    <p class="sr-beta__step-text">{{ block.settings.text | escape }}</p>
                   {%- endif -%}
-                </span>
-              </h3>
-              {%- if block.settings.text != blank -%}
-                <p class="sr-beta__step-text">{{ block.settings.text | escape }}</p>
-              {%- endif -%}
-            </div>
-          </li>
-        {%- endfor -%}
-      </ol>
+                </div>
+              </li>
+            {%- endfor -%}
+          </ol>
+        </div>
+      </div>
+      <div class="image-with-text__content image-with-text__inner">
+        <div class="image-with-text__content--inner">
+          <p class="sr-beta__eyebrow">{{ routine_eyebrow | escape }}</p>
+          <h2 class="sr-beta__title" id="SkinRoutine-{{ section.id }}">{{ routine_heading | escape }}</h2>
+          {%- if routine_lede != blank -%}
+            <p class="sr-beta__lede sr-beta__lede--muted">{{ routine_lede | escape }}</p>
+          {%- endif -%}
+        </div>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
 {% schema %}
 {
@@ -69,9 +90,19 @@
   "settings": [
     {
       "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "text",
       "id": "heading",
       "label": "Heading",
       "info": "Leave blank to use the product title."
+    },
+    {
+      "type": "textarea",
+      "id": "lede",
+      "label": "Lead-in"
     },
     {
       "type": "text",
@@ -130,29 +161,32 @@
           "type": "step",
           "settings": {
             "label": "Step 1: Cleanse",
-            "name": "Pink Dew Gel Cleanser"
+            "name": "Cleanse",
+            "text": "Start with clean skin."
           }
         },
         {
           "type": "step",
           "settings": {
             "label": "Step 2: Treat",
-            "name": "CC Me Serum"
+            "name": "Treat",
+            "text": "Apply any treatment while skin is still fresh."
           }
         },
         {
           "type": "step",
           "settings": {
             "label": "Step 3: Moisturize",
-            "name": "Cloud Dew Gel Cream Moisturizer"
+            "name": "Moisturize",
+            "text": "Seal the routine before the last step."
           }
         },
         {
           "type": "step",
           "settings": {
-            "label": "Step 4: Protect",
-            "name": "ShadeDrops Mineral Milk Sunscreen",
-            "current": true
+            "label": "Step 4",
+            "current": true,
+            "text": "This is the last step."
           }
         }
       ]

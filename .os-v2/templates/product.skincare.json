@@ -308,7 +308,9 @@
         "step_4"
       ],
       "settings": {
+        "eyebrow": "Your routine",
         "heading": "",
+        "lede": "Where this fits, from the first step through the last.",
         "explore_prefix": "Explore"
       }
     },
