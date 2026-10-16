@@ -45,6 +45,14 @@
   opacity: 0;
   pointer-events: none;
 }
+.template-product-clothing .thb-product-detail .variations .product-form__input--block input[type='radio'] + label {
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.template-product-clothing .thb-product-detail .variations .product-form__input--block input[type='radio']:not(:checked):not(.is-disabled) + label:hover,
+.template-product-clothing .thb-product-detail .variations .product-form__input--block input[type='radio']:not(:checked):not(.is-disabled) + label:focus-visible {
+  border-color: #2a2a2a !important;
+  box-shadow: inset 0 0 0 1px #2a2a2a !important;
+}
 
 /* Shop Pay host is closed shadow DOM - hide the light-DOM element */
 .template-product-clothing .product-form shopify-accelerated-checkout,
@@ -88,6 +96,12 @@
   -webkit-appearance: none !important;
   -apple-pay-button-type: plain;
   -apple-pay-button-style: white-outline;
+  transition: border-color 0.15s ease, filter 0.15s ease;
+}
+.template-product-clothing .product-form__checkout-row .ge-apple-pay:hover,
+.template-product-clothing .product-form__checkout-row .ge-apple-pay:focus-visible {
+  border-color: rgb(176, 176, 176) !important;
+  filter: opacity(0.72);
 }
 @supports not (-webkit-appearance: -apple-pay-button) {
   .template-product-clothing .product-form__checkout-row .ge-apple-pay { display: none; }
