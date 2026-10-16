@@ -66,8 +66,6 @@
 							else
 								if product_template == 'pre-order'
 									assign button_content = 'products.product.pre_order' | t
-								elsif template.suffix == 'clothing'
-									assign button_content = 'Add to bag'
 								else
 									assign button_content = 'products.product.add_to_cart' | t
 								endif

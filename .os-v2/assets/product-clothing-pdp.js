@@ -7,11 +7,15 @@
   var cache = {};
 
   function labelBag() {
-    if (!document.body.classList.contains('template-product-clothing')) return;
-    if (window.theme && theme.variantStrings) theme.variantStrings.addToCart = 'Add to bag';
+    var label = window.theme && theme.variantStrings && theme.variantStrings.addToCart;
+    if (!label) return;
     document.querySelectorAll('.single-add-to-cart-button--text').forEach(function (el) {
       var text = (el.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
-      if (text === 'add to cart') el.textContent = 'Add to bag';
+      if (text === 'add to cart') el.textContent = label;
+    });
+    document.querySelectorAll('[data-quick-add-label]').forEach(function (el) {
+      var text = (el.getAttribute('data-quick-add-label') || '').trim().toLowerCase();
+      if (text === 'add to cart') el.setAttribute('data-quick-add-label', label);
     });
   }
 
