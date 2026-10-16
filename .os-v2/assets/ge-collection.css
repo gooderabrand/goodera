@@ -116,7 +116,8 @@
 .ge-collection-rail {
   position: relative;
   margin-block: 1.35rem 0.35rem;
-  margin-inline-end: calc(-1 * var(--ge-shell-gutter, 20px));
+  margin-inline: calc(-1 * (var(--ge-content-inset, 0px) + var(--ge-shell-gutter, 20px)))
+    calc(-1 * var(--ge-shell-gutter, 20px));
 }
 
 .ge-collection-rail__scroller {
@@ -215,11 +216,36 @@
   background: #f6f6f4;
 }
 
-/* Cards grow to fill the row, so a window between sizes does not leave a gap on the right. */
+/* Title and filters keep the page inset. Product photos run to the screen edge. */
+.template-collection .ge-collection.ge-commerce-section {
+  padding-inline: 0 !important;
+}
+
+.template-collection .ge-collection__grid,
+.template-collection #product-grid.ge-collection__grid {
+  gap: 4px;
+  width: 100%;
+  margin-inline: 0;
+  padding-inline: 0;
+}
+
+.template-collection .ge-collection__grid .product-card--featured-image-link,
+.template-collection .ge-collection__grid .product-featured-image-link,
+.template-collection .ge-collection__grid .product-card--featured-image-link img,
+.template-collection .ge-collection__grid .product-featured-image-link img,
+.template-collection .ge-collection__grid .product-primary-image,
+.template-collection .ge-collection__grid .product-secondary-image {
+  border-radius: 0 !important;
+}
+
+.template-collection .ge-collection__grid .product-card-info {
+  padding-inline: 8px;
+}
+
 @media (min-width: 990px) {
   .template-collection .ge-collection__grid,
   .template-collection #product-grid.ge-collection__grid {
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     justify-content: stretch;
   }
 }
@@ -281,6 +307,8 @@ body.template-collection .main-content {
   top: auto !important;
   z-index: auto;
   margin-block: 0.35rem 1.15rem;
+  padding-inline: calc(var(--ge-content-inset, 0px) + var(--ge-shell-gutter, 20px))
+    var(--ge-shell-gutter, 20px);
   background: transparent !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
@@ -366,101 +394,13 @@ body.template-collection .main-content {
   aspect-ratio: var(--ge-product-aspect, 4 / 5);
   background: #070707;
   overflow: hidden;
+  border-radius: 0;
 }
 
 .template-collection .ge-collection__cell--promo .gallery__item figure::before,
 .template-collection .ge-collection__cell--promo .gallery__item figure::after {
-  content: "" !important;
-  position: absolute;
-  z-index: 1;
-  pointer-events: none;
-  filter: blur(16px);
-}
-
-.template-collection .ge-collection__cell--promo .gallery__item figure::before {
-  width: 72%;
-  height: 58%;
-  left: -8%;
-  top: 22%;
-  border-radius: 62% 38% 54% 46% / 48% 64% 36% 52%;
-  background:
-    radial-gradient(circle at 38% 42%, rgba(255, 255, 255, 0.5), transparent 26%),
-    radial-gradient(circle at 58% 62%, rgba(126, 255, 92, 0.95), rgba(22, 128, 54, 0.28) 48%, transparent 74%);
-  animation: ge-promo-drift 13s ease-in-out infinite;
-}
-
-.template-collection .ge-collection__cell--promo .gallery__item figure::after {
-  width: 46%;
-  height: 40%;
-  right: -6%;
-  bottom: 8%;
-  left: auto;
-  top: auto;
-  z-index: 2;
-  border-radius: 44% 56% 38% 62% / 58% 36% 64% 42%;
-  background:
-    radial-gradient(circle at 40% 45%, rgba(255, 255, 255, 0.75), transparent 24%),
-    radial-gradient(circle at 60% 55%, rgba(176, 255, 140, 0.9), rgba(40, 168, 74, 0.2) 50%, transparent 72%);
-  animation: ge-promo-wisp 9.5s ease-in-out infinite;
-}
-
-@keyframes ge-promo-drift {
-  0% {
-    opacity: 0.45;
-    border-radius: 62% 38% 54% 46% / 48% 64% 36% 52%;
-    transform: translate3d(0, 6%, 0) rotate(-12deg) scale(0.82);
-  }
-  27% {
-    opacity: 0.95;
-    border-radius: 38% 62% 70% 30% / 60% 32% 68% 40%;
-    transform: translate3d(22%, -14%, 0) rotate(16deg) scale(1.08);
-  }
-  53% {
-    opacity: 0.62;
-    border-radius: 74% 26% 40% 60% / 32% 68% 28% 72%;
-    transform: translate3d(58%, 10%, 0) rotate(-6deg) scale(0.9);
-  }
-  76% {
-    opacity: 1;
-    border-radius: 30% 70% 42% 58% / 66% 28% 58% 42%;
-    transform: translate3d(34%, -22%, 0) rotate(22deg) scale(1.16);
-  }
-  100% {
-    opacity: 0.45;
-    border-radius: 62% 38% 54% 46% / 48% 64% 36% 52%;
-    transform: translate3d(0, 6%, 0) rotate(-12deg) scale(0.82);
-  }
-}
-
-@keyframes ge-promo-wisp {
-  0% {
-    opacity: 0.2;
-    border-radius: 44% 56% 38% 62% / 58% 36% 64% 42%;
-    transform: translate3d(10%, 8%, 0) rotate(20deg) scale(0.7);
-  }
-  35% {
-    opacity: 0.9;
-    border-radius: 68% 32% 58% 42% / 36% 70% 30% 64%;
-    transform: translate3d(-46%, -28%, 0) rotate(-14deg) scale(1.15);
-  }
-  68% {
-    opacity: 0.55;
-    border-radius: 32% 68% 46% 54% / 62% 34% 70% 30%;
-    transform: translate3d(-18%, 16%, 0) rotate(8deg) scale(0.84);
-  }
-  100% {
-    opacity: 0.2;
-    border-radius: 44% 56% 38% 62% / 58% 36% 64% 42%;
-    transform: translate3d(10%, 8%, 0) rotate(20deg) scale(0.7);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .template-collection .ge-collection__cell--promo .gallery__item figure::before,
-  .template-collection .ge-collection__cell--promo .gallery__item figure::after {
-    animation: none;
-    opacity: 0.8;
-  }
+  content: none !important;
+  display: none !important;
 }
 
 .template-collection .ge-collection__cell--promo .gallery__item figure > svg,
