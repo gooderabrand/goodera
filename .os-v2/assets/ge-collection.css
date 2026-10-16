@@ -41,7 +41,7 @@
   z-index: 1;
   order: 0;
   width: 100%;
-  padding-block: 0.7rem 0.2rem;
+  padding-block: 0.85rem 1.35rem;
 }
 
 .template-collection .collection-banner--breadcrumbs,
@@ -224,16 +224,116 @@
   }
 }
 
-.template-collection .ge-facets-bar {
+/*
+  Collection header stays a solid white bar. The storefront header otherwise
+  overlays the page with a transparent background, so product photos show
+  through the logo and links.
+*/
+body.template-collection .header-section,
+body.template-collection.ge-nav-horizontal .header-section,
+body.template-collection.ge-nav-horizontal.ge-header-above .header-section,
+body.template-collection.ge-nav-horizontal.ge-header-over-media .header-section,
+body.template-collection.ge-header-above .header-section,
+body.template-collection.ge-header-over-media .header-section {
   position: sticky !important;
-  top: var(--ge-facets-top, var(--header-height, 72px)) !important;
-  z-index: 40 !important;
+  top: 0;
+  z-index: 50;
+  height: auto !important;
+  margin-bottom: 0 !important;
   background: #fff !important;
+  pointer-events: auto;
+}
+
+body.template-collection .site-header,
+body.template-collection .header-section .site-header,
+body.template-collection.ge-nav-horizontal .header-section .site-header,
+body.template-collection.ge-nav-horizontal[data-ge-header-tone='light'] .header-section .site-header,
+body.template-collection.ge-nav-horizontal[data-ge-header-tone='dark'] .header-section .site-header,
+body.template-collection.ge-header-above .site-header,
+body.template-collection.ge-header-over-media .site-header {
+  --site-header-icon: #17160f;
+  --ge-chrome-ink: #17160f;
+  position: relative !important;
+  inset: auto !important;
+  width: 100%;
+  margin: 0 !important;
+  background: #fff !important;
+  color: #17160f !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  transform: none !important;
+}
+
+body.template-collection .site-header__logo-ink {
+  display: block !important;
+}
+
+body.template-collection .site-header__logo-white {
+  display: none !important;
+}
+
+body.template-collection .main-content {
+  padding-top: 0 !important;
+}
+
+.template-collection .ge-facets-bar {
+  position: static !important;
+  top: auto !important;
+  z-index: auto;
+  margin-block: 0.35rem 1.15rem;
+  background: transparent !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   border: 0 !important;
   border-block-end: 0 !important;
   box-shadow: none !important;
+}
+
+.template-collection .ge-facets-bar__form {
+  align-items: flex-end;
+  gap: 0.75rem 1.25rem;
+}
+
+.template-collection .ge-facets-bar__title {
+  display: flex;
+  align-items: flex-end;
+  flex: 1 1 auto;
+  gap: 0.15rem 0.55rem;
+  margin: 0;
+  color: #17160f;
+  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.template-collection .ge-facets-bar__title .ge-collection-count {
+  margin: 0 0 0.28rem;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1;
+  color: #a3a39c;
+}
+
+.template-collection .ge-facets-bar__count {
+  display: none !important;
+}
+
+.template-collection .ge-facets-bar__start:not(:has(a, button, .active-facets__button)) {
+  display: none;
+}
+
+/* Keep the collection SEO copy in the page, but do not show it. */
+.template-collection .rich-text {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
 }
 
 .template-collection .ge-facets-bar__end {

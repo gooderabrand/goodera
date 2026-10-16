@@ -44,7 +44,9 @@
 			</div>
 			{%- endif -%}
 			<div class="collection-banner--content text-{{ text_alignment }}">
-                <h1 class="collection-banner--title{% if section.settings.heading_is_era %} ge-serif ge-serif--statement{% endif %}">{{ title }}{%- if template != 'search' and collection.products_count != nil -%}<span class="ge-collection-count">{{ collection.products_count }}</span>{%- endif -%}</h1>
+				{%- if template == 'search' -%}
+                <h1 class="collection-banner--title{% if section.settings.heading_is_era %} ge-serif ge-serif--statement{% endif %}">{{ title }}</h1>
+				{%- endif -%}
 				{% if template == 'search' %}
 					<form role="search" method="get" class="searchform" action="{{ routes.search_url }}">
 						<fieldset>
@@ -54,7 +56,7 @@
 					</form>
 				{% endif %}
 				{%- if show_collection_description and description != '' -%}
-				<div class="collection-banner--description">
+				<div class="collection-banner--description{% if template != 'search' %} ge-visually-hidden{% endif %}">
 					<p>{{ description }}</p>
 				</div>
 				{%- endif -%}

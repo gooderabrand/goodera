@@ -1,3 +1,11 @@
+{% doc %}
+  Filter and sort row for a collection or search page.
+  On a collection, the title and product count sit on the left of this row.
+  @param {object} results - Collection or search results that own the filters
+  @param {boolean} enable_filtering - Show the Filters control
+  @param {boolean} enable_sorting - Show the Sort control
+  @param {boolean} filter_color_swatches - Color treatment for active filter chips
+{% enddoc %}
 {{ 'ge-collection.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'ge-collection.js' | asset_url }}" defer="defer"></script>
 {%- liquid
@@ -28,6 +36,15 @@
 		{% if results.current_vendor or results.current_type %}
 			<input type="hidden" name="q" value="{{ results.current_vendor }}{{ results.current_type }}">
 		{% endif %}
+
+		{%- if request.page_type == 'collection' -%}
+			<h1 class="ge-facets-bar__title">
+				{{ collection.title }}
+				{%- if collection.products_count != nil -%}
+					<span class="ge-collection-count">{{ collection.products_count }}</span>
+				{%- endif -%}
+			</h1>
+		{%- endif -%}
 
 		<div class="ge-facets-bar__start">
 			{%- if enable_filtering -%}

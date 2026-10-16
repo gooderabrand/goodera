@@ -160,28 +160,4 @@
   document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape' && filtersOpen()) closeFilters();
   });
-
-  function pinFacets() {
-    var bar = document.querySelector('.template-collection .ge-facets-bar');
-    if (!bar) return;
-    var header = document.querySelector('.header-section');
-    var top = 0;
-    if (header) {
-      var pos = window.getComputedStyle(header).position;
-      if (pos === 'sticky' || pos === 'fixed') top = Math.round(header.getBoundingClientRect().height);
-    }
-    if (!top) {
-      top = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 72;
-    }
-    bar.style.setProperty('--ge-facets-top', top + 'px');
-  }
-
-  window.addEventListener('resize', pinFacets);
-  window.addEventListener('load', pinFacets);
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pinFacets);
-  else pinFacets();
-  if (window.ResizeObserver) {
-    var headerEl = document.querySelector('.header-section');
-    if (headerEl) new ResizeObserver(pinFacets).observe(headerEl);
-  }
 })();
