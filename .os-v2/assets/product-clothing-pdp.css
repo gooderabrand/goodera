@@ -567,4 +567,16 @@ body.template-product-clothing .product-image-container--paired {
   .template-product-clothing .product-add-to-cart-sticky--inner .price .badges {
     display: none !important;
   }
+
+  /* Add to bag was eating the row. Give Apple Pay a wider share. */
+  .template-product-clothing .product-form__checkout-row:not(.ge-wallet-hidden) {
+    grid-template-columns: minmax(132px, 2fr) minmax(0, 3fr);
+    gap: 0.65rem;
+  }
+
+  .template-product-clothing .product-form__checkout-row .ge-apple-pay {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
 }
