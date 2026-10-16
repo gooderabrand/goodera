@@ -119,6 +119,7 @@
     var current = document.querySelector('#shopify-section-main-product') || document.querySelector('.thb-product-detail');
     if (!incoming || !current) { window.location.href = url; return; }
     current.replaceWith(incoming);
+    neutralizeHero();
     if (push) history.pushState({ geClothingUrl: url }, '', url);
     document.dispatchEvent(new CustomEvent('shopify:section:load', {
       bubbles: true,
@@ -164,7 +165,15 @@
     loadColor((event.state && event.state.geClothingUrl) || window.location.href, false);
   });
 
+  function neutralizeHero() {
+    document.querySelectorAll('.template-product-clothing [data-header-hero]').forEach(function (el) {
+      el.removeAttribute('data-header-hero');
+      el.removeAttribute('data-header-tone');
+    });
+  }
+
   function init() {
+    neutralizeHero();
     bindSwatches();
     hideWallets();
   }

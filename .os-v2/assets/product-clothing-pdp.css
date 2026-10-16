@@ -1,9 +1,9 @@
 /* Delta styles on top of product-clothing.css */
 
-/* Native ring swatch (28px, 2px outer ring) on the Colour row */
+/* Native ring swatch (40px, 2px outer ring) on the Colour row */
 .template-product-clothing .product-color-siblings__swatch {
-  width: 28px;
-  height: 28px;
+  width: 40px;
+  height: 40px;
   border: 2px solid transparent;
   border-radius: 50%;
 }
@@ -98,3 +98,103 @@
   top: 1px !important;
   transform: rotate(45deg) !important;
 }
+
+.template-product-clothing .product-form__checkout-row .single-add-to-cart-button,
+.template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button {
+  background: #000 !important;
+  background-image: none !important;
+  color: #fff !important;
+  border: 0 !important;
+}
+
+.template-product-clothing .product-form__checkout-row .single-add-to-cart-button .single-add-to-cart-button--text {
+  color: #fff !important;
+}
+
+@media (max-width: 1067px) {
+  .template-product-clothing .product-information,
+  .template-product-clothing .product-title-container {
+    padding-top: 1.75rem;
+  }
+}
+
+.template-product-clothing .ge-paired-nav {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  inset: auto;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  width: 72px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  color: rgb(20, 15, 15);
+  pointer-events: auto;
+  box-shadow: 0 1px 4px rgba(20, 15, 15, 0.1);
+}
+
+.template-product-clothing .ge-paired-nav__btn {
+  position: static;
+  transform: none;
+  flex: 1 1 50%;
+  width: 36px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: rgb(20, 15, 15);
+  cursor: pointer;
+}
+
+.template-product-clothing .ge-paired-nav__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.template-product-clothing .ge-paired-nav__btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.template-product-clothing .thb-product-detail .product-images--paired { cursor: grab; }
+.template-product-clothing .thb-product-detail .product-images--paired.is-dragging { cursor: grabbing; }
+
+body.template-product-clothing .header-section,
+body.template-product-clothing.ge-nav-horizontal .header-section,
+body.template-product-clothing.ge-nav-horizontal.ge-header-above .header-section {
+  position: sticky !important;
+  top: 0;
+  z-index: 62;
+  height: auto !important;
+  margin-bottom: 0 !important;
+  background: #fff !important;
+  pointer-events: auto;
+}
+
+body.template-product-clothing .site-header,
+body.template-product-clothing.ge-nav-horizontal .header-section .site-header,
+body.template-product-clothing.ge-nav-horizontal[data-ge-header-tone='light'] .header-section .site-header,
+body.template-product-clothing.ge-nav-horizontal[data-ge-header-tone='dark'] .header-section .site-header,
+body.template-product-clothing.ge-nav-horizontal.ge-header-above .header-section .site-header,
+body.template-product-clothing.template-product .site-header {
+  --site-header-icon: #17160f;
+  background: #fff !important;
+  color: #17160f !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  transform: none !important;
+}
+
+body.template-product-clothing .site-header.is-nav-hidden {
+  transform: none !important;
+  pointer-events: auto !important;
+}
+
+body.template-product-clothing .site-header__logo-ink { display: block !important; }
+body.template-product-clothing .site-header__logo-white { display: none !important; }

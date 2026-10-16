@@ -87,6 +87,29 @@
         .product-form [aria-label*='Buy with Shop' i] {
           display: none !important;
         }
+        /* Sticky white header — do not overlay gallery under transparent chrome */
+        body.template-product-clothing .header-section,
+        body.template-product-clothing.ge-nav-horizontal .header-section,
+        body.template-product-clothing.ge-nav-horizontal.ge-header-above .header-section {
+          position: sticky !important;
+          top: 0;
+          z-index: 62;
+          height: auto !important;
+          margin-bottom: 0 !important;
+          background: #fff !important;
+        }
+        body.template-product-clothing .site-header,
+        body.template-product-clothing.ge-nav-horizontal .header-section .site-header,
+        body.template-product-clothing.ge-nav-horizontal[data-ge-header-tone='light'] .header-section .site-header,
+        body.template-product-clothing.ge-nav-horizontal[data-ge-header-tone='dark'] .header-section .site-header {
+          --site-header-icon: #17160f;
+          background: #fff !important;
+          color: #17160f !important;
+          -webkit-backdrop-filter: none !important;
+          backdrop-filter: none !important;
+        }
+        body.template-product-clothing .site-header__logo-ink { display: block !important; }
+        body.template-product-clothing .site-header__logo-white { display: none !important; }
       </style>
     {%- endif -%}
     {%- if template.suffix == 'sunday-reset-3d' or template.suffix == 'sunday-reset-application' -%}
