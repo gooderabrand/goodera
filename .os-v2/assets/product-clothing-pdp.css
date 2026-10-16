@@ -437,34 +437,6 @@ body.template-product-clothing .product-image-container--paired {
   filter: brightness(0);
 }
 
-.template-product-clothing .ge-pay-icons {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-top: 0.45rem;
-}
-
-.template-product-clothing .ge-pay-icons__mark {
-  display: inline-flex;
-  align-items: center;
-  line-height: 0;
-}
-
-.template-product-clothing .ge-pay-icons__svg {
-  display: block;
-  height: 14px;
-  width: auto;
-  filter: brightness(0);
-}
-
-.template-product-clothing .ge-pay-icons__word {
-  color: #17160f;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  line-height: 1;
-}
-
 .template-product-clothing .product-information .breadcrumbs {
   display: flex;
   width: 100%;
