@@ -1,0 +1,217 @@
+/*
+  Good Era ↔ Reformation bridge
+  Maps the Reformation (v15) engine CSS variables onto Good Era tokens and
+  applies the Good Era type system (Maison Neue headings + body)
+  so commerce pages read Good Era instead of stock Reformation.
+*/
+
+:root {
+  --color-accent: var(--ge-ink, #17160f);
+  --color-accent-rgb: 23, 22, 15;
+  --color-body: var(--ge-text, #17160f);
+  --color-body-rgb: 23, 22, 15;
+  --bg-body: var(--ge-bg, #ffffff);
+  --bg-body-rgb: 255, 255, 255;
+  --color-border: var(--ge-border, #e5e5ea);
+  --color-form-border: var(--ge-border, #e5e5ea);
+
+  --solid-button-background: var(--ge-ink, #17160f);
+  --solid-button-label: #ffffff;
+  --outline-button-label: var(--ge-ink, #17160f);
+
+  --color-price: var(--ge-ink, #17160f);
+  --color-price-discounted: var(--ge-muted, #6e6e73);
+  --color-dots: var(--ge-ink, #17160f);
+  --color-star: var(--ge-ink, #17160f);
+
+  --color-header-bg: var(--ge-bg, #ffffff);
+  --color-header-text: var(--ge-ink, #17160f);
+  --color-header-links: var(--ge-ink, #17160f);
+  --color-header-icons: var(--ge-ink, #17160f);
+  --color-header-border: var(--ge-border, #e5e5ea);
+
+  --color-footer-text: var(--ge-ink, #17160f);
+  --color-footer-link: var(--ge-ink, #17160f);
+  --color-footer-bg: var(--ge-surface, #f5f5f7);
+  --color-footer-border: var(--ge-border, #e5e5ea);
+}
+
+/* --- Good Era premium type system --------------------------------
+   Maison Neue Demi headings, Book body, and Cormorant expressive accents. */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.logolink.text-logo,
+.heading-font,
+.h1-xlarge,
+.h1-large,
+.customer-addresses .my-address .address-index {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-weight: var(--ge-weight-heading, 600);
+  font-style: normal;
+  letter-spacing: var(--ge-tracking-tight, -0.01em);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ge-serif,
+h1.ge-serif,
+h2.ge-serif,
+h3.ge-serif,
+.h1.ge-serif,
+.h2.ge-serif,
+.h3.ge-serif {
+  font-family: var(--ge-font-serif);
+  font-style: italic;
+  font-weight: var(--ge-serif-weight, 400);
+  letter-spacing: var(--ge-tracking-serif, -0.02em);
+}
+
+.ge-serif--statement {
+  font-weight: var(--ge-serif-weight-statement, 600);
+}
+
+body,
+.body-font {
+  font-family: var(--ge-font-body, 'Maison Neue', system-ui, sans-serif);
+  font-weight: var(--ge-weight-regular, 400);
+  font-style: normal;
+  letter-spacing: var(--ge-tracking-body, 0.005em);
+  font-size: var(--ge-role-body, var(--ge-text-base, 1.0625rem));
+  line-height: var(--ge-lh-relaxed, 1.6);
+  color: var(--ge-text, #17160f);
+}
+
+html body h1 {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-size: var(--ge-role-page-title);
+  font-weight: var(--ge-weight-heading, 600);
+  line-height: var(--ge-lh-tight);
+  letter-spacing: var(--ge-tracking-tight, -0.01em);
+}
+
+html body .h1,
+html body .h1-large,
+html body .h1-xlarge {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-size: var(--ge-role-display);
+  font-weight: var(--ge-weight-heading, 600);
+  line-height: var(--ge-lh-tight);
+  letter-spacing: var(--ge-tracking-tight, -0.01em);
+}
+
+html body .explore-hero__title,
+html body .explore-featured__title,
+html body .explore-category__title,
+html body .discover-hero h1,
+html body .playlist-detail__title {
+  font-size: var(--ge-role-page-title);
+  font-weight: var(--ge-weight-heading, 600);
+}
+
+html body h2,
+html body .h2 {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-size: var(--ge-role-section-title);
+  font-weight: var(--ge-weight-heading, 600);
+  line-height: var(--ge-lh-snug);
+  letter-spacing: var(--ge-tracking-tight, -0.01em);
+}
+
+html body h3,
+html body .h3 {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-size: var(--ge-role-section-title);
+  font-weight: var(--ge-weight-heading, 600);
+  line-height: var(--ge-lh-snug);
+  letter-spacing: var(--ge-tracking-tight, -0.01em);
+}
+
+html body h4,
+html body .h4,
+html body h5,
+html body .h5,
+html body h6,
+html body .h6 {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-size: var(--ge-role-card-title);
+  font-weight: var(--ge-weight-heading, 600);
+  line-height: var(--ge-lh-snug);
+}
+
+.product-title {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-weight: var(--ge-weight-heading, 600);
+  font-size: var(--ge-role-card-title, var(--ge-text-md));
+  letter-spacing: var(--ge-tracking-tight, -0.01em);
+  line-height: var(--ge-lh-snug, 1.25);
+}
+
+/* PDP title is the page heading; cards stay on card-title */
+html body .thb-product-detail .product-title {
+  font-size: var(--ge-role-section-title);
+}
+
+.button,
+input[type='submit'] {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-weight: var(--ge-weight-medium, 500);
+  font-size: var(--ge-role-meta);
+  letter-spacing: var(--ge-tracking-body, 0.005em);
+}
+
+/*
+  Footer columns are chrome, not page titles.
+  html body h2 is section-title — lock these back to meta so two menus + signup fit.
+*/
+html body .site-footer h2,
+html body .site-footer .site-footer__heading,
+html body .site-footer .site-footer__heading-text {
+  font-family: var(--ge-font);
+  font-size: var(--ge-role-meta);
+  font-weight: var(--ge-weight-heading, 600);
+  letter-spacing: var(--ge-tracking-eyebrow, 0.04em);
+  text-transform: uppercase;
+  line-height: var(--ge-lh-snug, 1.25);
+}
+
+html body .site-footer .site-footer__signup-heading {
+  font-size: var(--ge-role-meta);
+  letter-spacing: var(--ge-tracking-eyebrow, 0.04em);
+  text-transform: uppercase;
+}
+
+/* Drawer titles use the same Demi heading face as page headings. */
+html body .side-panel :is(h1, h2, h3, h4, h5, h6) {
+  font-weight: var(--ge-weight-heading, 600);
+}
+
+/* Footer lockup: keep the wordmark, drop the arch mark. */
+html body .site-footer .ge-brand-lockup__mark {
+  display: none !important;
+}
+
+/*
+  Color names under product rails (Light Grey, Black).
+  commerce-ge.css sets these to body size and regular muted weight.
+  This rule loads earlier, so it wins on specificity.
+*/
+html body .product-card .product-card-color-text {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: 0.01em;
+  line-height: 1.25;
+  color: var(--ge-text, #17160f);
+}
