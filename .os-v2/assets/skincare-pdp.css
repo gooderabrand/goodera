@@ -442,51 +442,51 @@ body.template-product-skincare.template-product-clothing .product-image-containe
     display: block !important;
     grid-column: 2;
     grid-row: 1;
-    width: auto !important;
+    width: 100% !important;
     max-width: none;
-    min-width: 0;
+    min-width: 56px;
     min-height: 0;
-    height: auto;
+    height: auto !important;
     position: relative !important;
     z-index: 4 !important;
-    align-self: stretch;
-    overflow: hidden !important;
+    align-self: start;
+    overflow: visible !important;
   }
 
   body.template-product-skincare.template-product-clothing .product-image-container--thumbnails scroll-shadow {
-    position: absolute !important;
-    inset: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    top: 0 !important;
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
     display: block !important;
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
     margin: 0 !important;
   }
 
   body.template-product-skincare.template-product-clothing .product-image-container--thumbnails .product-thumbnail-container {
-    position: absolute !important;
-    inset: 0;
+    position: relative !important;
+    inset: auto;
     display: flex !important;
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
     min-height: 0;
     gap: 10px;
-    overflow: hidden;
+    overflow: visible;
     grid-auto-flow: unset;
   }
 
   body.template-product-skincare.template-product-clothing .product-image-container--thumbnails .product-thumbnail {
-    flex: 0 1 auto;
+    position: relative !important;
+    flex: 0 0 auto;
     width: 100% !important;
     max-width: none;
     min-width: 0;
-    min-height: 0;
-    aspect-ratio: 1;
+    aspect-ratio: 1 / 1;
     height: auto !important;
     border-radius: 0 !important;
     overflow: hidden;
