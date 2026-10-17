@@ -1030,11 +1030,57 @@ body.template-product-skincare.template-product-clothing .product-form__checkout
 }
 
 body.template-product-skincare.template-product-clothing .product-form__checkout-row .ge-apple-pay {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
   width: 100% !important;
   min-width: 0 !important;
   max-width: none !important;
+  padding: 0 8px !important;
+  background-image: none !important;
+  color: #17160f !important;
+  font-size: 17px !important;
+  line-height: 1 !important;
   pointer-events: auto !important;
   cursor: pointer;
+}
+
+body.template-product-skincare .ge-apple-pay__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.22em;
+  color: #17160f !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  font-size: 17px !important;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1 !important;
+  pointer-events: none;
+}
+
+body.template-product-skincare .ge-apple-pay__logo {
+  display: block;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  fill: currentColor;
+}
+
+body.template-product-skincare .ge-apple-pay__word {
+  color: #17160f !important;
+  font-size: 17px !important;
+  line-height: 1 !important;
+}
+
+@supports not (-webkit-appearance: -apple-pay-button) {
+  body.template-product-skincare .product-form__checkout-row .ge-apple-pay {
+    display: flex !important;
+  }
+}
+
+body.template-product-skincare .installment shopify-payment-terms.ge-shop-ink {
+  filter: brightness(0);
 }
 
 body.template-product-skincare.template-product-clothing .product-form__checkout-row .ge-apple-pay:hover,

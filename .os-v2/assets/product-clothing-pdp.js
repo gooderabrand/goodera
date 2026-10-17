@@ -53,20 +53,33 @@
     }).catch(function () { form.submit(); });
   }
 
+  function bindAppleBtn(btn, row) {
+    if (!btn || btn.dataset.geAppleBound === 'true') return;
+    btn.dataset.geAppleBound = 'true';
+    var form = (row && row.closest('form')) || btn.closest('form') || document.querySelector('.product-form form');
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (btn.disabled || btn.classList.contains('is-sold-out') || btn.getAttribute('aria-disabled') === 'true') return;
+      buyApple(form);
+    });
+  }
+
   function addAppleBtn(row) {
-    if (!row || row.querySelector('.ge-apple-pay') || !appleOk()) return;
-    var form = row.closest('form') || document.querySelector('.product-form form');
+    if (!row) return;
+    var existing = row.querySelector('.ge-apple-pay');
+    if (existing) {
+      bindAppleBtn(existing, row);
+      return;
+    }
+    if (!appleOk()) return;
     var btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'ge-apple-pay';
     btn.setAttribute('aria-label', 'Apple Pay');
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-      buyApple(form);
-    });
     var atc = row.querySelector('.single-add-to-cart-button');
     if (atc) row.insertBefore(btn, atc);
     else row.appendChild(btn);
+    bindAppleBtn(btn, row);
   }
 
   function hideWallets() {
