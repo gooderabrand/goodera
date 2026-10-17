@@ -15,6 +15,17 @@
     assign inci = product.metafields.custom.full_inci.value | strip
   endif
   assign highlights = product.metafields.custom.ingredient_highlights.value
+  assign key_image = section.settings.image
+  if key_image == blank and product.featured_image != blank
+    assign key_image = product.featured_image
+  endif
+  assign key_alt = ''
+  if key_image != blank
+    assign key_alt = key_image.alt
+  endif
+  if key_alt == blank
+    assign key_alt = heading
+  endif
 -%}
 
 {%- capture ingredient_rows -%}
@@ -85,11 +96,30 @@
 {%- assign ingredient_rows = ingredient_rows | strip -%}
 
 {%- if ingredient_rows != blank -%}
-  <section class="ge-skin-key" id="key-ingredients" data-ge-key-ingredients aria-labelledby="SkinKeyTitle-{{ section.id }}">
-    <h2 class="ge-skin-key__title" id="SkinKeyTitle-{{ section.id }}">{{ heading | escape }}</h2>
-    <ul class="sr-beta__faq-list">
-      {{ ingredient_rows }}
-    </ul>
+  <section class="ge-skin-key ge-skin-edge" id="key-ingredients" data-ge-key-ingredients aria-labelledby="SkinKeyTitle-{{ section.id }}">
+    <div class="ge-skin-key__grid ge-skin-edge__grid">
+      <div class="ge-skin-key__media ge-skin-edge__media">
+        {%- if key_image != blank -%}
+          {{
+            key_image
+            | image_url: width: 1600
+            | image_tag:
+              loading: 'lazy',
+              sizes: '(min-width: 990px) 50vw, 100vw',
+              widths: '600, 900, 1400, 1600',
+              alt: key_alt
+          }}
+        {%- else -%}
+          {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder_svg_tag' }}
+        {%- endif -%}
+      </div>
+      <div class="ge-skin-key__copy ge-skin-edge__copy">
+        <h2 class="ge-skin-key__title" id="SkinKeyTitle-{{ section.id }}">{{ heading | escape }}</h2>
+        <ul class="sr-beta__faq-list">
+          {{ ingredient_rows }}
+        </ul>
+      </div>
+    </div>
   </section>
 {%- endif -%}
 
@@ -129,6 +159,12 @@
     "templates": ["product"]
   },
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Square photo on the left, flush to the page edge. Leave blank to use the product photo."
+    },
     {
       "type": "text",
       "id": "heading",

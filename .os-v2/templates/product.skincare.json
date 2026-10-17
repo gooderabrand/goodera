@@ -127,8 +127,10 @@
             "returns_text": "Questions about your order? We're here to help.",
             "returns_link": "",
             "support_label": "Need a hand?",
-            "support_text": "Get in touch with Good Era.",
-            "support_link": ""
+            "support_text": "Get in touch with us",
+            "support_link": "",
+            "dispatch_label": "24 hr ships next day",
+            "dispatch_text": ""
           }
         },
         "complementary_cCC3WK": {
