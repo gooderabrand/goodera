@@ -1,8 +1,8 @@
 {% doc %}
   What's in it and what's not, inside the skincare buy box.
-  Contains is a checklist with a green check. Does not contain is a row of pills with an X.
-  Metafields custom.formula_note, custom.contains, and custom.does_not_contain override the fallback.
-  Each list metafield can be a list of single-line text or newline-separated text.
+  The full INCI renders only when custom.ingredients_verified is the boolean true and custom.full_inci is set.
+  Green checks read custom.ingredient_highlights. X pills read custom.formulated_without.
+  Draft ingredient records and empty lists are skipped. The string "false" is not treated as verified.
   @param {product} product - Product whose formula notes are shown
   @example
   {% render 'skincare-formula', product: product %}
@@ -11,106 +11,97 @@
 {{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  assign formula_note = product.metafields.custom.formula_note
-  assign included = product.metafields.custom.contains
-  assign without = product.metafields.custom.does_not_contain
-  assign lede = ''
-  if formula_note != blank
-    assign lede = formula_note | metafield_text | strip
-  elsif product.handle == 'sunday-reset-ritual-kit'
-    assign lede = 'products.skincare.formula_lede_kit' | t
-  elsif product.handle == 'sunday-reset-overnight-glow-mask'
-    assign lede = 'products.skincare.formula_lede_mask' | t
+  assign verified = product.metafields.custom.ingredients_verified.value
+  assign inci = ''
+  assign highlight_count = 0
+  assign without_count = 0
+  if verified == true
+    if product.metafields.custom.full_inci.value != blank
+      assign inci = product.metafields.custom.full_inci.value | strip
+    endif
+    assign highlights = product.metafields.custom.ingredient_highlights
+    if highlights != blank and highlights.value != blank
+      for item in highlights.value
+        assign ingredient_name = ''
+        if item != blank and item.name.value != blank
+          assign ingredient_name = item.name.value | strip
+        endif
+        if ingredient_name != blank
+          assign highlight_count = highlight_count | plus: 1
+        endif
+      endfor
+    endif
+    assign without = product.metafields.custom.formulated_without
+    if without != blank and without.value != blank
+      for item in without.value
+        assign item_text = item | strip
+        if item_text != blank
+          assign without_count = without_count | plus: 1
+        endif
+      endfor
+    endif
   endif
 -%}
 
-<div class="ge-skin-formula">
-  {%- if lede != blank -%}
-    <p class="ge-skin-formula__lede">{{ lede | escape }}</p>
-  {%- endif -%}
-  <div class="ge-skin-formula__grid">
-    <div class="ge-skin-formula__col ge-skin-formula__col--contains">
-      <p class="ge-skin-formula__label">
-        <svg class="ge-skin-formula__mark" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false">
-          <circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
-          <path d="M6.1 10.2 8.7 12.8 13.9 7.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
-        </svg>
-        <span>{{ 'products.skincare.formula_contains' | t }}</span>
-      </p>
-      <ul class="ge-skin-formula__checks">
-        {%- if included.type contains 'list.' and included.value != blank -%}
-          {%- for item in included.value -%}
-            <li>
-              <svg class="ge-skin-formula__check" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
-                <path d="M3.2 8.3 6.4 11.4 12.8 4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+{%- if inci != blank or highlight_count > 0 or without_count > 0 -%}
+  <div class="ge-skin-formula">
+    {%- if inci != blank -%}
+      <p class="ge-skin-formula__inci">{{ inci | escape }}</p>
+    {%- endif -%}
+    {%- if highlight_count > 0 or without_count > 0 -%}
+      <div class="ge-skin-formula__grid{% if highlight_count > 0 and without_count > 0 %} ge-skin-formula__grid--split{% endif %}">
+        {%- if highlight_count > 0 -%}
+          <div class="ge-skin-formula__col ge-skin-formula__col--contains">
+            <p class="ge-skin-formula__label">
+              <svg class="ge-skin-formula__mark" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false">
+                <circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <path d="M6.1 10.2 8.7 12.8 13.9 7.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
               </svg>
-              <span>{{ item | escape }}</span>
-            </li>
-          {%- endfor -%}
-        {%- elsif included.value != blank -%}
-          {%- assign lines = included.value | newline_to_br | split: '<br />' -%}
-          {%- for line in lines -%}
-            {%- assign line_text = line | strip -%}
-            {%- if line_text != blank -%}
-              <li>
-                <svg class="ge-skin-formula__check" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
-                  <path d="M3.2 8.3 6.4 11.4 12.8 4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
-                <span>{{ line_text | escape }}</span>
-              </li>
-            {%- endif -%}
-          {%- endfor -%}
-        {%- elsif product.handle == 'sunday-reset-ritual-kit' -%}
-          <li><svg class="ge-skin-formula__check" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M3.2 8.3 6.4 11.4 12.8 4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>{{ 'products.skincare.kit_in_1' | t }}</span></li>
-          <li><svg class="ge-skin-formula__check" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M3.2 8.3 6.4 11.4 12.8 4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>{{ 'products.skincare.kit_in_2' | t }}</span></li>
-          <li><svg class="ge-skin-formula__check" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M3.2 8.3 6.4 11.4 12.8 4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>{{ 'products.skincare.kit_in_3' | t }}</span></li>
-          <li><svg class="ge-skin-formula__check" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M3.2 8.3 6.4 11.4 12.8 4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>{{ 'products.skincare.kit_in_4' | t }}</span></li>
-        {%- else -%}
-          <li><svg class="ge-skin-formula__check" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M3.2 8.3 6.4 11.4 12.8 4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>{{ 'products.skincare.mask_in_1' | t }}</span></li>
-          <li><svg class="ge-skin-formula__check" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M3.2 8.3 6.4 11.4 12.8 4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>{{ 'products.skincare.mask_in_2' | t }}</span></li>
-          <li><svg class="ge-skin-formula__check" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M3.2 8.3 6.4 11.4 12.8 4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>{{ 'products.skincare.mask_in_3' | t }}</span></li>
-          <li><svg class="ge-skin-formula__check" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M3.2 8.3 6.4 11.4 12.8 4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>{{ 'products.skincare.mask_in_4' | t }}</span></li>
+              <span>{{ 'products.skincare.formula_contains' | t }}</span>
+            </p>
+            <ul class="ge-skin-formula__checks">
+              {%- for item in product.metafields.custom.ingredient_highlights.value -%}
+                {%- assign ingredient_name = '' -%}
+                {%- if item != blank and item.name.value != blank -%}
+                  {%- assign ingredient_name = item.name.value | strip -%}
+                {%- endif -%}
+                {%- if ingredient_name != blank -%}
+                  <li>
+                    <svg class="ge-skin-formula__check" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
+                      <path d="M3.2 8.3 6.4 11.4 12.8 4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <span>{{ ingredient_name | escape }}</span>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
         {%- endif -%}
-      </ul>
-    </div>
-    <div class="ge-skin-formula__col ge-skin-formula__col--without">
-      <p class="ge-skin-formula__label">
-        <svg class="ge-skin-formula__mark ge-skin-formula__mark--x" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false">
-          <circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
-          <path d="M7.2 7.2 12.8 12.8M12.8 7.2 7.2 12.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
-        </svg>
-        <span>{{ 'products.skincare.formula_without' | t }}</span>
-      </p>
-      <ul class="ge-skin-formula__pills">
-        {%- if without.type contains 'list.' and without.value != blank -%}
-          {%- for item in without.value -%}
-            <li>
-              <svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" focusable="false">
-                <path d="M2.6 2.6 9.4 9.4M9.4 2.6 2.6 9.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+        {%- if without_count > 0 -%}
+          <div class="ge-skin-formula__col ge-skin-formula__col--without">
+            <p class="ge-skin-formula__label">
+              <svg class="ge-skin-formula__mark ge-skin-formula__mark--x" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false">
+                <circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                <path d="M7.2 7.2 12.8 12.8M12.8 7.2 7.2 12.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
               </svg>
-              <span>{{ item | escape }}</span>
-            </li>
-          {%- endfor -%}
-        {%- elsif without.value != blank -%}
-          {%- assign lines = without.value | newline_to_br | split: '<br />' -%}
-          {%- for line in lines -%}
-            {%- assign line_text = line | strip -%}
-            {%- if line_text != blank -%}
-              <li>
-                <svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" focusable="false">
-                  <path d="M2.6 2.6 9.4 9.4M9.4 2.6 2.6 9.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
-                </svg>
-                <span>{{ line_text | escape }}</span>
-              </li>
-            {%- endif -%}
-          {%- endfor -%}
-        {%- else -%}
-          <li><svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" focusable="false"><path d="M2.6 2.6 9.4 9.4M9.4 2.6 2.6 9.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg><span>{{ 'products.skincare.without_1' | t }}</span></li>
-          <li><svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" focusable="false"><path d="M2.6 2.6 9.4 9.4M9.4 2.6 2.6 9.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg><span>{{ 'products.skincare.without_2' | t }}</span></li>
-          <li><svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" focusable="false"><path d="M2.6 2.6 9.4 9.4M9.4 2.6 2.6 9.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg><span>{{ 'products.skincare.without_3' | t }}</span></li>
-          <li><svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" focusable="false"><path d="M2.6 2.6 9.4 9.4M9.4 2.6 2.6 9.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg><span>{{ 'products.skincare.without_4' | t }}</span></li>
+              <span>{{ 'products.skincare.formula_without' | t }}</span>
+            </p>
+            <ul class="ge-skin-formula__pills">
+              {%- for item in product.metafields.custom.formulated_without.value -%}
+                {%- assign item_text = item | strip -%}
+                {%- if item_text != blank -%}
+                  <li>
+                    <svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" focusable="false">
+                      <path d="M2.6 2.6 9.4 9.4M9.4 2.6 2.6 9.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+                    </svg>
+                    <span>{{ item_text | escape }}</span>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
         {%- endif -%}
-      </ul>
-    </div>
+      </div>
+    {%- endif -%}
   </div>
-</div>
+{%- endif -%}

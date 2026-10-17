@@ -650,26 +650,34 @@ body.template-product-skincare.template-product-clothing .product-form__checkout
   color: var(--ge-ink, #17160f);
 }
 
-.ge-skin-formula__lede {
-  margin: 0 0 0.9rem;
-  font-size: var(--ge-role-body, 1.0625rem);
+.ge-skin-formula__inci {
+  margin: 0;
+  font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: -0.01em;
-  line-height: 1.4;
+  line-height: 1.5;
+}
+
+.ge-skin-formula__inci + .ge-skin-formula__grid {
+  margin-top: 1rem;
 }
 
 .ge-skin-formula__grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  grid-template-columns: minmax(0, 1fr);
   align-items: start;
 }
 
-.ge-skin-formula__col--contains {
+.ge-skin-formula__grid--split {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+}
+
+.ge-skin-formula__grid--split .ge-skin-formula__col--contains {
   padding-right: 0.9rem;
   border-right: 1px solid var(--ge-border, #e5e5ea);
 }
 
-.ge-skin-formula__col--without {
+.ge-skin-formula__grid--split .ge-skin-formula__col--without {
   padding-left: 0.9rem;
 }
 
@@ -742,19 +750,19 @@ body.template-product-skincare.template-product-clothing .product-form__checkout
 }
 
 @container ge-formula (max-width: 460px) {
-  .ge-skin-formula__grid {
+  .ge-skin-formula__grid--split {
     grid-template-columns: minmax(0, 1fr);
     gap: 1rem;
   }
 
-  .ge-skin-formula__col--contains {
+  .ge-skin-formula__grid--split .ge-skin-formula__col--contains {
     padding-right: 0;
     padding-bottom: 0.15rem;
     border-right: 0;
     border-bottom: 1px solid var(--ge-border, #e5e5ea);
   }
 
-  .ge-skin-formula__col--without {
+  .ge-skin-formula__grid--split .ge-skin-formula__col--without {
     padding-left: 0;
   }
 }
