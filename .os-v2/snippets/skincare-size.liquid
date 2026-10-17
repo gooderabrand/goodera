@@ -1,48 +1,70 @@
 {% doc %}
-  Size row for the skincare buy box.
-  A product with a Size, Volume, or Amount option uses the variant choices. Sold-out choices cannot be selected.
-  A product that still has one fill shows custom.size_label in the same underline row. Empty size labels stay hidden.
+  Size row for the Sunday Reset buy box.
+  The two choices are the Ritual Kit and the full-size Overnight Glow Mask.
+  Each choice links to that product so the price, cards, and bag button follow the click.
+  Sample sizes stay off this row.
   @param {product} product - Product being purchased
   @example
   {% render 'skincare-size', product: product %}
 {% enddoc %}
 
 {%- liquid
-  assign size_option = false
-  for option in product.options_with_values
-    assign option_name = option.name | downcase | strip
-    if option_name == 'size' or option_name == 'volume' or option_name == 'amount'
-      assign size_option = true
+  assign kit_product = all_products['sunday-reset-ritual-kit']
+  assign mask_product = all_products['sunday-reset-overnight-glow-mask']
+  assign mask_full = blank
+  if mask_product != blank
+    for candidate in mask_product.variants
+      assign candidate_title = candidate.title | downcase | strip
+      if candidate_title == '50 ml'
+        assign mask_full = candidate
+        break
+      endif
+    endfor
+  endif
+  assign show_switch = false
+  if kit_product != blank and mask_full != blank
+    if product.handle == kit_product.handle or product.handle == mask_product.handle
+      assign show_switch = true
     endif
-  endfor
-  assign size_label = product.metafields.custom.size_label.value | strip
-  assign size_available = product.selected_or_first_available_variant.available
+  endif
+  assign mask_url = mask_product.url | append: '?variant=' | append: mask_full.id
 -%}
 
-{%- if size_option -%}
-  <script>
-    (function () {
-      var lock = function () {
-        document.querySelectorAll('variant-selects input[type="radio"]').forEach(function (input) {
-          input.disabled = input.classList.contains('is-disabled');
-        });
-      };
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', lock);
-      } else {
-        lock();
-      }
-      window.addEventListener('load', lock);
-      document.addEventListener('product:variant-change', lock);
-    })();
-  </script>
-{%- elsif size_label != blank -%}
-  <div class="ge-skin-size">
+{%- if show_switch -%}
+  <div class="ge-skin-size" data-ge-size-switch>
     <p class="ge-skin-size__heading">{{ 'products.skincare.size' | t }}</p>
-    <div class="ge-skin-size__options" role="radiogroup" aria-label="{{ 'products.skincare.size' | t }}">
-      <span class="ge-skin-size__choice is-selected{% unless size_available %} is-unavailable{% endunless %}">
-        {%- render 'skincare-size-name', value: size_label, with_ounces: true -%}
-      </span>
+    <div class="ge-skin-size__options">
+      <a
+        class="ge-skin-size__choice{% if product.handle == kit_product.handle %} is-selected{% endif %}"
+        href="{{ kit_product.url }}"
+        data-ge-size-choice
+        {% if product.handle == kit_product.handle %}aria-current="true"{% endif %}
+      >8 mL | 0.28 fl oz</a>
+      <a
+        class="ge-skin-size__choice{% if product.handle == mask_product.handle %} is-selected{% endif %}"
+        href="{{ mask_url }}"
+        data-ge-size-choice
+        {% if product.handle == mask_product.handle %}aria-current="true"{% endif %}
+      >50 mL | 1.69 fl oz</a>
     </div>
   </div>
+  <script>
+    (function () {
+      document.querySelectorAll('[data-ge-size-choice]').forEach(function (link) {
+        if (link.dataset.sizeChoiceBound === 'true') return;
+        link.dataset.sizeChoiceBound = 'true';
+        link.addEventListener('click', function (event) {
+          if (link.getAttribute('aria-current') === 'true') {
+            event.preventDefault();
+            return;
+          }
+          var preview = new URL(window.location.href).searchParams.get('preview_theme_id');
+          if (!preview) return;
+          var next = new URL(link.href, window.location.origin);
+          next.searchParams.set('preview_theme_id', preview);
+          link.href = next.toString();
+        });
+      });
+    })();
+  </script>
 {%- endif -%}

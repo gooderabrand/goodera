@@ -17,6 +17,15 @@
   if variant == blank
     assign variant = product.selected_or_first_available_variant
   endif
+  if product.handle == 'sunday-reset-overnight-glow-mask'
+    for candidate in product.variants
+      assign candidate_title = candidate.title | downcase | strip
+      if candidate_title == '50 ml'
+        assign variant = candidate
+        break
+      endif
+    endfor
+  endif
   assign unit_price = variant.price
   assign pair_price = unit_price | times: 2
   assign product_form_id = 'product-form-' | append: section.id

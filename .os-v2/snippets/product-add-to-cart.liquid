@@ -16,6 +16,17 @@
 			if product.metafields.theme.preorder and product.available
 				assign product_template = 'pre-order'
 			endif
+
+      assign buy_variant = product.selected_or_first_available_variant
+      if product.handle == 'sunday-reset-overnight-glow-mask'
+        for candidate in product.variants
+          assign candidate_title = candidate.title | downcase | strip
+          if candidate_title == '50 ml'
+            assign buy_variant = candidate
+            break
+          endif
+        endfor
+      endif
     -%}
   <product-form class="product-form" data-section="{{ section.id }}" data-hide-errors="{{ gift_card_recipient_feature_active }}" template="{{ product_template }}">
 		<div class="product-form__error-message-wrapper form-notification error" role="alert" hidden>
@@ -23,7 +34,7 @@
       <span class="product-form__error-message"></span>
     </div>
 		{%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
-		<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>
+		<input type="hidden" name="id" value="{{ buy_variant.id }}" disabled>
 		{%- if gift_card_recipient_feature_active -%}
       {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
     {%- endif -%}
@@ -44,12 +55,12 @@
 							id="Quantity-{{ section.id }}"
 							name="quantity"
 							class="qty"
-							value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-							min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-							{% if product.selected_or_first_available_variant.quantity_rule.max != null %}
-	              max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+							value="{{ buy_variant.quantity_rule.min }}"
+							min="{{ buy_variant.quantity_rule.min }}"
+							{% if buy_variant.quantity_rule.max != null %}
+	              max="{{ buy_variant.quantity_rule.max }}"
 	            {% endif %}
-							step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+							step="{{ buy_variant.quantity_rule.increment }}"
 							form="{{ product_form_id }}"
 							aria-label="{{ 'products.product.quantity.input_label' | t: product: product.title | escape }}"
 						>
@@ -58,10 +69,10 @@
 				</div>
 				{%- endif -%}
 		    <div class="product-form__checkout-row">
-		    <button type="submit" name="add" id="AddToCart" class="single-add-to-cart-button button{% if block.settings.outline_button %} outline{% endif %} {% unless product.selected_or_first_available_variant.available %}sold-out{% endunless %}" {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+		    <button type="submit" name="add" id="AddToCart" class="single-add-to-cart-button button{% if block.settings.outline_button %} outline{% endif %} {% unless buy_variant.available %}sold-out{% endunless %}" {% if buy_variant.available == false %}disabled{% endif %}>
 					<span class="single-add-to-cart-button--text">
 						{%- liquid
-							if product.selected_or_first_available_variant.available == false
+							if buy_variant.available == false
 								assign button_content = 'products.product.sold_out' | t
 							else
 								if product_template == 'pre-order'
@@ -74,7 +85,7 @@
 						{{- button_content -}}
 					</span>
 					{%- if product.template_suffix == 'skincare' -%}
-						<span class="single-add-to-cart-button--price" data-ge-atc-price>{{ product.selected_or_first_available_variant.price | money }}</span>
+						<span class="single-add-to-cart-button--price" data-ge-atc-price>{{ buy_variant.price | money }}</span>
 					{%- endif -%}
 					<span class="loading-overlay">{%- render 'svg-icons' with 'thb-loading' -%}</span>
 				</button>
@@ -102,18 +113,18 @@
   {%- endif -%}
 	{%- if product != blank -%}
 		{%- form 'product', product, id: 'product-form-installment', class: 'installment' -%}
-			<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+			<input type="hidden" name="id" value="{{ buy_variant.id }}">
 			{{ form | payment_terms }}
 		{%- endform -%}
 	{%- endif -%}
 </div>
 {%- if pickup -%}
-{%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities | where: 'pick_up_enabled', true -%}
+{%- assign pick_up_availabilities = buy_variant.store_availabilities | where: 'pick_up_enabled', true -%}
 <pickup-availability
 	class="pickup-availability-wrapper"
-	{% if product.selected_or_first_available_variant.available and pick_up_availabilities.size > 0 %}available{% endif %}
+	{% if buy_variant.available and pick_up_availabilities.size > 0 %}available{% endif %}
   data-root-url="{{ routes.root_url }}"
-  data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+  data-variant-id="{{ buy_variant.id }}"
   data-has-only-default-variant="{{ product.has_only_default_variant }}"
 >
 	<template>
