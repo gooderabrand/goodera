@@ -355,101 +355,98 @@ body.template-product-skincare .thb-product-detail .variations .ge-skin-sizes in
   margin: 0;
 }
 
-.ge-skin-contents {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: baseline;
-  gap: 0.4rem;
-  margin: 0.85rem 0 0;
-  min-width: 0;
-}
-
-.ge-skin-contents__detail {
-  color: #17160f;
-  font-size: 0.75rem;
-  font-weight: 400;
-  line-height: 1.3;
-  white-space: nowrap;
-}
-
-.ge-skin-contents__volume {
-  color: #6e6e73;
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.ge-skin-contents + .ge-skin-size {
-  margin-top: 0.45rem;
-}
-
 .ge-skin-size {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: baseline;
-  gap: 0.45rem 0.7rem;
+  display: block;
   margin: 0.85rem 0 0.15rem;
+  padding: 0.8rem 0.8rem 0.85rem;
+  border: 1px solid #e6e6ea;
+  border-radius: 16px;
+  background: #fff;
 }
 
 .ge-skin-size__heading {
-  margin: 0;
-  flex: 0 0 auto;
-  color: #6e6e73;
+  margin: 0 0 0.65rem 0.15rem;
+  color: #8e8e93;
   font-size: 0.6875rem;
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   line-height: 1.3;
   text-transform: uppercase;
-  white-space: nowrap;
 }
 
 .ge-skin-size__options {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.65rem;
+}
+
+a.ge-skin-size__card {
   display: flex;
-  flex-wrap: nowrap;
-  align-items: baseline;
-  gap: 0.35rem 1.15rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.55rem;
   min-width: 0;
-}
-
-.ge-skin-size__choice {
-  color: #17160f;
-  font-size: 0.9375rem;
-  font-weight: 400;
-  line-height: 1.35;
-  text-underline-offset: 0.35em;
-  text-decoration-thickness: 1px;
-  white-space: nowrap;
-}
-
-@media (max-width: 749px) {
-  .ge-skin-size {
-    gap: 0.35rem 0.5rem;
-  }
-
-  .ge-skin-size__heading {
-    letter-spacing: 0.08em;
-  }
-
-  .ge-skin-size__options {
-    gap: 0.25rem 0.75rem;
-  }
-
-  .ge-skin-size__choice {
-    font-size: 0.8125rem;
-  }
-}
-
-a.ge-skin-size__choice {
+  min-height: 4.55rem;
+  padding: 0.85rem 0.9rem;
+  border: 1px solid #e4e4e8;
+  border-radius: 12px;
+  background: #fff;
   color: #17160f;
   text-decoration: none;
 }
 
-.ge-skin-size__choice.is-selected,
-a.ge-skin-size__choice.is-selected {
-  text-decoration: underline;
-  text-decoration-color: #17160f;
+a.ge-skin-size__card:hover {
+  background: #fafafa;
+}
+
+.ge-skin-size__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.22rem;
+  min-width: 0;
+}
+
+.ge-skin-size__name {
+  color: #17160f;
+  font-size: 1rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.ge-skin-size__detail {
+  color: #6e6e73;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.ge-skin-size__mark {
+  flex: 0 0 auto;
+  color: #17160f;
+}
+
+@media (max-width: 749px) {
+  .ge-skin-size {
+    padding: 0.7rem;
+  }
+
+  .ge-skin-size__options {
+    gap: 0.45rem;
+  }
+
+  a.ge-skin-size__card {
+    min-height: 4.2rem;
+    padding: 0.7rem 0.65rem;
+  }
+
+  .ge-skin-size__name {
+    font-size: 0.9rem;
+  }
+
+  .ge-skin-size__detail {
+    font-size: 0.75rem;
+  }
 }
 
 body.template-product-skincare .thb-product-detail variant-selects .variations,
@@ -457,14 +454,6 @@ body.template-product-skincare .product-add-to-cart-sticky .variations {
   display: none !important;
 }
 
-.ge-skin-size__choice.is-unavailable {
-  opacity: 0.4;
-  text-decoration: line-through;
-}
-
-.ge-skin-size__choice.is-selected.is-unavailable {
-  text-decoration: underline line-through;
-}
 
 body.open-ge-policy .click-capture,
 body.open-ge-policy #wrapper .click-capture {

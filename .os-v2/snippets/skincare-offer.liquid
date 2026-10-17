@@ -92,7 +92,7 @@
       assign loop_plan_id = loop_allocation.selling_plan.id
     endif
   -%}
-  {"id":{{ offer_variant.id }},"price":{{ offer_variant.price | money | json }},"sub":{{ loop_sub | money | json }},"planId":{% if loop_plan_id == 0 %}null{% else %}{{ loop_plan_id }}{% endif %},"plans":[{%- for allocation in offer_variant.selling_plan_allocations -%}{%- liquid
+  {"id":{{ offer_variant.id }},"price":{{ offer_variant.price | money | json }},"priceCents":{{ offer_variant.price }},"sub":{{ loop_sub | money | json }},"subCents":{{ loop_sub }},"planId":{% if loop_plan_id == 0 %}null{% else %}{{ loop_plan_id }}{% endif %},"plans":[{%- for allocation in offer_variant.selling_plan_allocations -%}{%- liquid
       assign freq_label = ''
       assign freq_option = allocation.selling_plan.options | first
       if freq_option != blank
@@ -101,7 +101,7 @@
       if freq_label == blank
         assign freq_label = allocation.selling_plan.name
       endif
-    -%}{"id":{{ allocation.selling_plan.id }},"price":{{ allocation.price | money | json }},"label":{{ freq_label | json }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]}{%- unless forloop.last -%},{%- endunless -%}
+    -%}{"id":{{ allocation.selling_plan.id }},"price":{{ allocation.price | money | json }},"cents":{{ allocation.price }},"label":{{ freq_label | json }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]}{%- unless forloop.last -%},{%- endunless -%}
 {%- endfor -%}
 ]
 {%- endcapture -%}
@@ -113,6 +113,8 @@
   data-plan-mode="{{ plan_mode }}"
   data-price="{{ unit_price | money | escape }}"
   data-sub-price="{{ sub_price | money | escape }}"
+  data-price-cents="{{ unit_price }}"
+  data-sub-cents="{{ sub_price }}"
   data-plan-id="{{ plan_id }}"
   {{ block.shopify_attributes }}
 >
@@ -171,6 +173,7 @@
                     value="{{ allocation.selling_plan.id }}"
                     data-plan-id="{{ allocation.selling_plan.id }}"
                     data-sub-price="{{ allocation.price | money | escape }}"
+                    data-sub-cents="{{ allocation.price }}"
                     {% if freq_selected %}checked{% endif %}
                   >
                   <span>{{ freq_label | escape }}</span>
@@ -275,6 +278,45 @@
       root.setAttribute('data-plan-mode', value);
       paint();
       writeBag(priceFor(value));
+      syncInstallments();
+    };
+
+    var syncInstallments = function () {
+      var mode = root.getAttribute('data-plan-mode');
+      var cents = mode === 'subscribe' ? root.getAttribute('data-sub-cents') : root.getAttribute('data-price-cents');
+      var dollars = Math.round(Number(cents)) / 100;
+      if (!isFinite(dollars)) return;
+      document.querySelectorAll('shopify-payment-terms').forEach(function (el) {
+        var liveMeta = el.shopifyMeta;
+        var source = el.getAttribute('data-ge-installment-source') || el.getAttribute('shopify-meta') || (typeof liveMeta === 'string' ? liveMeta : '');
+        if (!source && liveMeta && typeof liveMeta === 'object') source = JSON.stringify(liveMeta);
+        if (!source) {
+          var metaScript = el.querySelector('script[type="application/json"]');
+          if (metaScript) source = metaScript.textContent || '';
+        }
+        if (!source) return;
+        if (!el.getAttribute('data-ge-installment-source')) el.setAttribute('data-ge-installment-source', source);
+        var meta;
+        try { meta = JSON.parse(el.getAttribute('data-ge-installment-source')); } catch (error) { return; }
+        var variants = meta.variants || [];
+        var variantId = Number(el.getAttribute('variant-id') || el.variantId || 0);
+        var touched = false;
+        variants.forEach(function (variant) {
+          if (variantId && Number(variant.id) !== variantId) return;
+          var sample = String(variant.full_price || '');
+          var parsed = parseFloat(sample.replace(/[^0-9.]/g, ''));
+          var current = Number(variant.full_price_amount);
+          var nextAmount = dollars;
+          if (isFinite(current) && isFinite(parsed) && parsed > 0 && current > parsed * 20) nextAmount = Math.round(dollars * 100);
+          variant.full_price_amount = nextAmount;
+          if (sample) variant.full_price = sample.replace(/[0-9][0-9.,]*/, dollars.toFixed(2));
+          touched = true;
+        });
+        if (!touched) return;
+        var next = JSON.stringify(meta);
+        if (el.getAttribute('shopify-meta') !== next) el.setAttribute('shopify-meta', next);
+        try { if (el.shopifyMeta !== next) el.shopifyMeta = next; } catch (error) {}
+      });
     };
 
     purchaseRadios().forEach(function (radio) {
@@ -298,6 +340,7 @@
         if (!radio.checked) return;
         root.setAttribute('data-plan-id', radio.getAttribute('data-plan-id') || '');
         root.setAttribute('data-sub-price', radio.getAttribute('data-sub-price') || '');
+        if (radio.getAttribute('data-sub-cents')) root.setAttribute('data-sub-cents', radio.getAttribute('data-sub-cents'));
         var purchase = root.querySelector('input[name^="ge-plan-"][value="subscribe"]');
         if (purchase) purchase.checked = true;
         apply('subscribe');
@@ -311,6 +354,7 @@
       var match = stock.filter(function (item) { return item.id === detail.variant.id; })[0];
       if (!match) return;
       root.setAttribute('data-price', match.price || '');
+      if (match.priceCents) root.setAttribute('data-price-cents', String(match.priceCents));
       var plans = match.plans || [];
       var currentId = root.getAttribute('data-plan-id') || '';
       var picked = null;
@@ -318,16 +362,19 @@
         var id = String(plan.id);
         var input = root.querySelector('.ge-skin-freq input[data-plan-id="' + id + '"]');
         if (input && plan.price) input.setAttribute('data-sub-price', plan.price);
+        if (input && plan.cents) input.setAttribute('data-sub-cents', String(plan.cents));
         if (id === String(currentId)) picked = plan;
       });
       if (!picked && plans.length) picked = plans[0];
       if (picked) {
         root.setAttribute('data-sub-price', picked.price || '');
+        if (picked.cents) root.setAttribute('data-sub-cents', String(picked.cents));
         root.setAttribute('data-plan-id', String(picked.id));
         var freq = root.querySelector('.ge-skin-freq input[data-plan-id="' + String(picked.id) + '"]');
         if (freq) freq.checked = true;
       } else if (match.sub) {
         root.setAttribute('data-sub-price', match.sub);
+        if (match.subCents) root.setAttribute('data-sub-cents', String(match.subCents));
         if (match.planId) root.setAttribute('data-plan-id', String(match.planId));
       }
       var subscribeChoice = root.querySelector('input[name^="ge-plan-"][value="subscribe"]');
@@ -335,7 +382,15 @@
       apply(match.planId ? mode() : 'once');
     });
 
-    var start = function () { apply(root.getAttribute('data-plan-mode') || 'once'); };
+    var start = function () {
+      apply(root.getAttribute('data-plan-mode') || 'once');
+      var tries = 0;
+      var timer = setInterval(function () {
+        tries += 1;
+        syncInstallments();
+        if (tries >= 20) clearInterval(timer);
+      }, 300);
+    };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
     else start();
   })();
