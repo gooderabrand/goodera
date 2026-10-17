@@ -3,6 +3,7 @@
   The selected card sets the product form quantity. There is no separate stepper.
   Prices are the selected variant price, doubled for the two-unit card. No savings line is shown.
   A card can still be selected while the variant is sold out, so the bag price follows the click. The add-to-bag button stays sold out. A card is disabled only when that quantity cannot be bought and another quantity can.
+  When the product has a Shopify selling plan, a one-time or subscribe choice sits above the cards. Subscribing keeps the same cards and quantity, and submits that selling plan with the product form.
   @param {product} product - Product being purchased
   @param {block} block - Theme editor block with the card labels
   @param {section} section - Product section, used for the form id
@@ -41,6 +42,7 @@
     assign bundle_detail = block.settings.kit_bundle_detail
     assign bundle_volume = block.settings.kit_bundle_volume | default: '16 mL | 0.56 fl oz'
     assign bundle_badge = block.settings.kit_badge
+    assign plan_text = block.settings.kit_subscribe_text | default: 'Four Sundays. One little ritual. Delivered every four weeks.'
   else
     assign one_title = block.settings.mask_one_title
     assign one_detail = block.settings.mask_one_detail
@@ -49,7 +51,11 @@
     assign bundle_detail = block.settings.mask_bundle_detail
     assign bundle_volume = block.settings.mask_bundle_volume | default: '100 mL | 3.38 fl oz'
     assign bundle_badge = block.settings.mask_badge
+    assign plan_text = block.settings.mask_subscribe_text | default: 'Delivered every four weeks.'
   endif
+  assign once_label = block.settings.once_label | default: 'One-time'
+  assign subscribe_label = block.settings.subscribe_label | default: 'Subscribe & save'
+  assign plan_disclosure = block.settings.subscribe_disclosure | default: 'Automatic deliveries. Skip, pause, or cancel anytime.'
   assign show_bundle = block.settings.show_bundle
   assign two_buy = false
   assign one_select = true
@@ -73,6 +79,77 @@
       endif
     endif
   endif
+
+  assign plan_allocation = nil
+  assign found_plan = false
+  for allocation in variant.selling_plan_allocations
+    unless found_plan
+      assign plan_name = allocation.selling_plan.name | downcase
+      assign plan_option = allocation.selling_plan.options | first | downcase
+      if forloop.first or plan_name contains '4 week' or plan_option contains '4 week'
+        assign plan_allocation = allocation
+      endif
+      if plan_name contains '4 week' or plan_option contains '4 week'
+        assign found_plan = true
+      endif
+    endunless
+  endfor
+  if product.selected_selling_plan
+    for allocation in variant.selling_plan_allocations
+      if allocation.selling_plan.id == product.selected_selling_plan.id
+        assign plan_allocation = allocation
+        break
+      endif
+    endfor
+  endif
+
+  assign show_plan = false
+  if plan_allocation != blank and block.settings.show_subscribe != false
+    assign show_plan = true
+  endif
+  assign plan_mode = 'once'
+  if show_plan
+    if product.selected_selling_plan and plan_allocation.selling_plan.id == product.selected_selling_plan.id
+      assign plan_mode = 'subscribe'
+    elsif block.settings.subscribe_default == 'subscribe'
+      assign plan_mode = 'subscribe'
+    endif
+  endif
+  assign sub_unit = unit_price
+  assign sub_pair = pair_price
+  assign plan_id = ''
+  assign cadence = ''
+  assign save_label = ''
+  if plan_allocation != blank
+    assign sub_unit = plan_allocation.price
+    assign sub_pair = sub_unit | times: 2
+    assign plan_id = plan_allocation.selling_plan.id
+    assign cadence = plan_allocation.selling_plan.options | first
+    if cadence == blank
+      assign cadence = plan_allocation.selling_plan.name
+    endif
+    for adjustment in plan_allocation.selling_plan.price_adjustments
+      if adjustment.value_type == 'percentage'
+        assign save_value = adjustment.value | round
+        assign save_label = 'Save ' | append: save_value | append: '%'
+      endif
+    endfor
+  endif
+  assign shown_one = unit_price
+  assign shown_two = pair_price
+  if plan_mode == 'subscribe'
+    assign shown_one = sub_unit
+    assign shown_two = sub_pair
+  endif
+  assign show_plan_note = false
+  if show_plan and block.settings.show_subscribe_note != false
+    assign show_plan_note = true
+  endif
+  assign show_savings = false
+  if show_plan and block.settings.show_subscribe_savings != false and save_label != blank
+    assign show_savings = true
+  endif
+  assign plan_count = variant.selling_plan_allocations.size
 -%}
 
 {%- capture offer_stock -%}
@@ -99,8 +176,24 @@
         endif
       endif
     endif
+    assign loop_plan_id = 0
+    assign loop_sub = offer_variant.price
+    assign found_loop_plan = false
+    for allocation in offer_variant.selling_plan_allocations
+      unless found_loop_plan
+        assign loop_name = allocation.selling_plan.name | downcase
+        assign loop_option = allocation.selling_plan.options | first | downcase
+        if forloop.first or loop_name contains '4 week' or loop_option contains '4 week'
+          assign loop_sub = allocation.price
+          assign loop_plan_id = allocation.selling_plan.id
+        endif
+        if loop_name contains '4 week' or loop_option contains '4 week'
+          assign found_loop_plan = true
+        endif
+      endunless
+    endfor
   -%}
-  {"id":{{ offer_variant.id }},"one":{{ stock_one }},"two":{{ stock_two }},"priceOne":{{ offer_variant.price | money | json }},"priceTwo":{{ offer_variant.price | times: 2 | money | json }}}{%- unless forloop.last -%},{%- endunless -%}
+  {"id":{{ offer_variant.id }},"one":{{ stock_one }},"two":{{ stock_two }},"priceOne":{{ offer_variant.price | money | json }},"priceTwo":{{ offer_variant.price | times: 2 | money | json }},"subOne":{{ loop_sub | money | json }},"subTwo":{{ loop_sub | times: 2 | money | json }},"planId":{% if loop_plan_id == 0 %}null{% else %}{{ loop_plan_id }}{% endif %}}{%- unless forloop.last -%},{%- endunless -%}
 {%- endfor -%}
 ]
 {%- endcapture -%}
@@ -109,10 +202,75 @@
   class="ge-skin-offers"
   data-ge-offers
   data-section="{{ section.id }}"
+  data-plan-mode="{{ plan_mode }}"
   data-price-one="{{ unit_price | money | escape }}"
   data-price-two="{{ pair_price | money | escape }}"
+  data-sub-one="{{ sub_unit | money | escape }}"
+  data-sub-two="{{ sub_pair | money | escape }}"
+  data-plan-id="{{ plan_id }}"
   {{ block.shopify_attributes }}
 >
+  {%- if show_plan -%}
+    <div class="ge-skin-plan" data-ge-plan role="radiogroup" aria-label="Purchase type">
+      <label class="ge-skin-plan__choice{% if plan_mode == 'once' %} is-selected{% endif %}">
+        <input type="radio" name="ge-plan-mode-{{ section.id }}" value="once"{% if plan_mode == 'once' %} checked{% endif %}>
+        <span class="ge-skin-plan__label">{{ once_label | escape }}</span>
+      </label>
+      <label class="ge-skin-plan__choice{% if plan_mode == 'subscribe' %} is-selected{% endif %}">
+        <input type="radio" name="ge-plan-mode-{{ section.id }}" value="subscribe"{% if plan_mode == 'subscribe' %} checked{% endif %}>
+        <span class="ge-skin-plan__label">{{ subscribe_label | escape }}</span>
+        {%- if show_savings or cadence != blank -%}
+          <span class="ge-skin-plan__meta">
+            {%- if show_savings -%}
+              <span class="ge-skin-plan__save" data-ge-plan-save>{{ save_label | escape }}</span>
+            {%- endif -%}
+            {%- if cadence != blank -%}
+              <span class="ge-skin-plan__every" data-ge-plan-every>{{ cadence | escape }}</span>
+            {%- endif -%}
+          </span>
+        {%- endif -%}
+      </label>
+    </div>
+    {%- if show_plan_note -%}
+      <div class="ge-skin-plan__note" data-ge-plan-note{% if plan_mode != 'subscribe' %} hidden{% endif %}>
+        {{ plan_text | escape }}
+        <span class="ge-skin-plan__disclosure">{{ plan_disclosure | escape }}</span>
+        {%- if plan_count > 1 -%}
+          <span class="ge-skin-plan__freq" data-ge-plan-freq role="radiogroup" aria-label="Delivery frequency">
+            {%- for allocation in variant.selling_plan_allocations -%}
+              {%- liquid
+                assign freq_label = allocation.selling_plan.options | first
+                if freq_label == blank
+                  assign freq_label = allocation.selling_plan.name
+                endif
+                assign freq_save = ''
+                for adjustment in allocation.selling_plan.price_adjustments
+                  if adjustment.value_type == 'percentage'
+                    assign freq_value = adjustment.value | round
+                    assign freq_save = 'Save ' | append: freq_value | append: '%'
+                  endif
+                endfor
+              -%}
+              <label class="ge-skin-plan__freq-choice">
+                <input
+                  type="radio"
+                  name="ge-plan-freq-{{ section.id }}"
+                  value="{{ allocation.selling_plan.id }}"
+                  data-plan-id="{{ allocation.selling_plan.id }}"
+                  data-sub-one="{{ allocation.price | money | escape }}"
+                  data-sub-two="{{ allocation.price | times: 2 | money | escape }}"
+                  data-cadence="{{ freq_label | escape }}"
+                  data-save="{{ freq_save | escape }}"
+                  {% if allocation.selling_plan.id == plan_allocation.selling_plan.id %}checked{% endif %}
+                >
+                <span>{{ freq_label | escape }}</span>
+              </label>
+            {%- endfor -%}
+          </span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
   <div class="ge-skin-offers__grid" role="radiogroup" aria-label="Purchase options">
     <label class="ge-skin-offer{% if one_select %} is-selected{% else %} is-unavailable{% endif %}" data-qty="1"{% unless one_select %} aria-disabled="true"{% endunless %}>
       <input type="radio" name="ge-offer-{{ section.id }}" value="1"{% if one_select %} checked{% endif %}{% unless one_select %} disabled{% endunless %}>
@@ -129,7 +287,7 @@
           </span>
         {%- endif -%}
       </span>
-      <span class="ge-skin-offer__price">{{ unit_price | money }}</span>
+      <span class="ge-skin-offer__price">{{ shown_one | money }}</span>
     </label>
     {%- if show_bundle -%}
       <label class="ge-skin-offer{% unless two_select %} is-unavailable{% endunless %}" data-qty="2"{% unless two_select %} aria-disabled="true"{% endunless %}>
@@ -150,7 +308,7 @@
             </span>
           {%- endif -%}
         </span>
-        <span class="ge-skin-offer__price">{{ pair_price | money }}</span>
+        <span class="ge-skin-offer__price">{{ shown_two | money }}</span>
       </label>
     {%- endif -%}
   </div>
@@ -162,6 +320,16 @@
     form="{{ product_form_id }}"
     data-ge-offer-qty
   >
+  {%- if show_plan -%}
+    <input
+      type="hidden"
+      name="selling_plan"
+      value="{% if plan_mode == 'subscribe' %}{{ plan_id }}{% endif %}"
+      form="{{ product_form_id }}"
+      data-ge-selling-plan
+      {% if plan_mode != 'subscribe' %}disabled{% endif %}
+    >
+  {%- endif -%}
   <script type="application/json" data-ge-offer-stock>
     {{ offer_stock | strip }}
   </script>
@@ -173,6 +341,7 @@
     if (!root || root.dataset.offerBound === 'true') return;
     root.dataset.offerBound = 'true';
     var qty = root.querySelector('[data-ge-offer-qty]');
+    var planInput = root.querySelector('[data-ge-selling-plan]');
     var stockNode = root.querySelector('[data-ge-offer-stock]');
     var stock = [];
     try { stock = JSON.parse(stockNode ? stockNode.textContent : '[]'); } catch (error) { stock = []; }
@@ -186,7 +355,39 @@
       if (input) input.disabled = !canSelect;
     };
 
+    var planMode = function () {
+      var box = root.querySelector('[data-ge-plan]');
+      if (!box || box.hidden) return 'once';
+      var selected = box.querySelector('input[name^="ge-plan-mode"]:checked');
+      return selected ? selected.value : 'once';
+    };
+
+    var priceFor = function (value) {
+      var subscribe = planMode() === 'subscribe';
+      if (value === '2') return subscribe ? root.getAttribute('data-sub-two') : root.getAttribute('data-price-two');
+      return subscribe ? root.getAttribute('data-sub-one') : root.getAttribute('data-price-one');
+    };
+
+    var paintPrices = function () {
+      var one = root.querySelector('.ge-skin-offer[data-qty="1"] .ge-skin-offer__price');
+      var two = root.querySelector('.ge-skin-offer[data-qty="2"] .ge-skin-offer__price');
+      var onePrice = priceFor('1');
+      var twoPrice = priceFor('2');
+      if (one && onePrice) one.textContent = onePrice;
+      if (two && twoPrice) two.textContent = twoPrice;
+    };
+
+    var writeBag = function (formatted) {
+      var atcPrice = document.querySelector('#product-form-{{ section.id }} [data-ge-atc-price]');
+      if (atcPrice && formatted) atcPrice.textContent = formatted;
+      var sticky = document.getElementById('price-{{ section.id }}--sticky');
+      if (!sticky || !formatted) return;
+      var amount = sticky.querySelector('ins .amount') || sticky.querySelector('.amount');
+      if (amount) amount.textContent = formatted;
+    };
+
     var apply = function (value) {
+      paintPrices();
       var card = root.querySelector('.ge-skin-offer[data-qty="' + value + '"]');
       if (!card || card.classList.contains('is-unavailable')) return;
       if (qty) qty.value = value;
@@ -196,54 +397,92 @@
         item.classList.toggle('is-selected', selected);
         if (input) input.checked = selected;
       });
-      var formatted = value === '2' ? root.getAttribute('data-price-two') : root.getAttribute('data-price-one');
-      var atcPrice = document.querySelector('#product-form-{{ section.id }} [data-ge-atc-price]');
-      if (atcPrice && formatted) atcPrice.textContent = formatted;
-      var sticky = document.getElementById('price-{{ section.id }}--sticky');
-      if (!sticky || !formatted) return;
-      var amount = sticky.querySelector('ins .amount') || sticky.querySelector('.amount');
-      if (amount) amount.textContent = formatted;
+      writeBag(priceFor(value));
+    };
+
+    var setPlan = function (mode) {
+      var box = root.querySelector('[data-ge-plan]');
+      if (box && box.hidden) mode = 'once';
+      if (box) {
+        box.querySelectorAll('input[name^="ge-plan-mode"]').forEach(function (input) {
+          var choice = input.closest('.ge-skin-plan__choice');
+          var selected = input.value === mode;
+          input.checked = selected;
+          if (choice) choice.classList.toggle('is-selected', selected);
+        });
+      }
+      if (planInput) {
+        var planId = mode === 'subscribe' ? (root.getAttribute('data-plan-id') || '') : '';
+        planInput.value = planId;
+        planInput.disabled = planId === '';
+      }
+      var note = root.querySelector('[data-ge-plan-note]');
+      if (note) note.hidden = mode !== 'subscribe';
+      root.setAttribute('data-plan-mode', mode);
+      var checked = root.querySelector('.ge-skin-offer input[type="radio"]:checked');
+      if (checked && !checked.disabled) apply(checked.value);
+      else apply('1');
     };
 
     var sync = function (record) {
       if (!record) return;
       root.setAttribute('data-price-one', record.priceOne);
       root.setAttribute('data-price-two', record.priceTwo);
+      if (record.subOne) root.setAttribute('data-sub-one', record.subOne);
+      if (record.subTwo) root.setAttribute('data-sub-two', record.subTwo);
+      if (record.planId) root.setAttribute('data-plan-id', String(record.planId));
       var one = root.querySelector('.ge-skin-offer[data-qty="1"]');
       var two = root.querySelector('.ge-skin-offer[data-qty="2"]');
       var soldOut = !record.one && !record.two;
       setCard(one, soldOut || record.one);
       setCard(two, soldOut || record.two);
-      if (one) {
-        var onePrice = one.querySelector('.ge-skin-offer__price');
-        if (onePrice) onePrice.textContent = record.priceOne;
-      }
-      if (two) {
-        var twoPrice = two.querySelector('.ge-skin-offer__price');
-        if (twoPrice) twoPrice.textContent = record.priceTwo;
-      }
-      var checked = root.querySelector('input[type="radio"]:checked');
-      if (checked && !checked.disabled) {
-        apply(checked.value);
-        return;
-      }
-      if (soldOut || record.one) apply('1');
-      else if (record.two) apply('2');
-      else if (qty) {
-        qty.value = '1';
-        var atcPrice = document.querySelector('#product-form-{{ section.id }} [data-ge-atc-price]');
-        if (atcPrice && record.priceOne) atcPrice.textContent = record.priceOne;
-        var sticky = document.getElementById('price-{{ section.id }}--sticky');
-        if (sticky && record.priceOne) {
-          var amount = sticky.querySelector('ins .amount') || sticky.querySelector('.amount');
-          if (amount) amount.textContent = record.priceOne;
+      var box = root.querySelector('[data-ge-plan]');
+      if (box) {
+        var hasPlan = !!record.planId;
+        box.hidden = !hasPlan;
+        if (hasPlan) {
+          var freq = root.querySelector('[data-ge-plan-freq] input[value="' + record.planId + '"]');
+          if (freq) freq.checked = true;
         }
       }
+      var checked = root.querySelector('.ge-skin-offer input[type="radio"]:checked');
+      if (!(checked && !checked.disabled)) {
+        if (soldOut || record.one) {
+          if (one) {
+            var oneInput = one.querySelector('input');
+            if (oneInput) oneInput.checked = true;
+          }
+        } else if (record.two && two) {
+          var twoInput = two.querySelector('input');
+          if (twoInput) twoInput.checked = true;
+        }
+      }
+      setPlan(record.planId ? planMode() : 'once');
     };
 
-    root.querySelectorAll('input[type="radio"]').forEach(function (radio) {
+    root.querySelectorAll('.ge-skin-offer input[type="radio"]').forEach(function (radio) {
       radio.addEventListener('change', function () {
         if (radio.checked && !radio.disabled) apply(radio.value);
+      });
+    });
+
+    root.querySelectorAll('[data-ge-plan] input[name^="ge-plan-mode"]').forEach(function (radio) {
+      radio.addEventListener('change', function () {
+        if (radio.checked) setPlan(radio.value);
+      });
+    });
+
+    root.querySelectorAll('[data-ge-plan-freq] input').forEach(function (radio) {
+      radio.addEventListener('change', function () {
+        if (!radio.checked) return;
+        root.setAttribute('data-plan-id', radio.getAttribute('data-plan-id') || '');
+        root.setAttribute('data-sub-one', radio.getAttribute('data-sub-one') || '');
+        root.setAttribute('data-sub-two', radio.getAttribute('data-sub-two') || '');
+        var save = root.querySelector('[data-ge-plan-save]');
+        if (save) save.textContent = radio.getAttribute('data-save') || '';
+        var every = root.querySelector('[data-ge-plan-every]');
+        if (every) every.textContent = radio.getAttribute('data-cadence') || '';
+        setPlan('subscribe');
       });
     });
 
@@ -251,11 +490,13 @@
       var detail = event.detail || {};
       if (detail.sectionId && String(detail.sectionId) !== root.getAttribute('data-section')) return;
       if (!detail.variant) {
-        sync({ one: false, two: false, priceOne: root.getAttribute('data-price-one'), priceTwo: root.getAttribute('data-price-two') });
+        sync({ one: false, two: false, priceOne: root.getAttribute('data-price-one'), priceTwo: root.getAttribute('data-price-two'), subOne: root.getAttribute('data-sub-one'), subTwo: root.getAttribute('data-sub-two'), planId: null });
         return;
       }
       var match = stock.filter(function (item) { return item.id === detail.variant.id; })[0];
       if (match) sync(match);
     });
+
+    setPlan(root.getAttribute('data-plan-mode') || 'once');
   })();
 </script>
