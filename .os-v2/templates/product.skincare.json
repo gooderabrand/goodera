@@ -85,6 +85,22 @@
             "custom_liquid": "{% render 'product-model-fit', product: product %}"
           }
         },
+        "offer": {
+          "type": "skincare_offer",
+          "settings": {
+            "show_bundle": true,
+            "kit_one_title": "One Ritual Kit",
+            "kit_one_detail": "Four sachets",
+            "kit_bundle_title": "Two Ritual Kits",
+            "kit_bundle_detail": "Eight sachets",
+            "kit_badge": "Double the ritual",
+            "mask_one_title": "One Glow Mask",
+            "mask_one_detail": "Full size",
+            "mask_bundle_title": "Two Glow Masks",
+            "mask_bundle_detail": "Two full-size units",
+            "mask_badge": "One for you. One to give."
+          }
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -199,6 +215,7 @@
         "546f2cee-3532-473a-836f-21f14fde7cfe",
         "variant_picker",
         "model_fit",
+        "offer",
         "buy_buttons",
         "reassure",
         "complementary_cCC3WK",
