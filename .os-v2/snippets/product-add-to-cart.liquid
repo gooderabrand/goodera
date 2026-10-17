@@ -73,6 +73,9 @@
 						-%}
 						{{- button_content -}}
 					</span>
+					{%- if product.template_suffix == 'skincare' -%}
+						<span class="single-add-to-cart-button--price" data-ge-atc-price>{{ product.selected_or_first_available_variant.price | money }}</span>
+					{%- endif -%}
 					<span class="loading-overlay">{%- render 'svg-icons' with 'thb-loading' -%}</span>
 				</button>
 				{%- if show_dynamic_checkout -%}

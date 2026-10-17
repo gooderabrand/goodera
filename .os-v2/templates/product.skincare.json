@@ -361,6 +361,13 @@
         "instructions": "Shake well before use. Apply evenly over skin as the final step in your skincare routine. Reapply every two hours when in the sun."
       }
     },
+    "skincare_key_ingredients": {
+      "type": "skincare-key-ingredients",
+      "settings": {
+        "heading": "Key Ingredients",
+        "inci_label": "Full ingredient list"
+      }
+    },
     "skincare_faq": {
       "type": "skincare-faq",
       "blocks": {
@@ -419,6 +426,7 @@
     "skincare_results",
     "skincare_routine",
     "skincare_how_to",
+    "skincare_key_ingredients",
     "skincare_faq",
     "recently_viewed_products_pdPAhT"
   ]

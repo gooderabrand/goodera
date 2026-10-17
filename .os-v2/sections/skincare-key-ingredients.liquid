@@ -1,0 +1,151 @@
+{{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign verified = product.metafields.custom.ingredients_verified.value
+  assign heading = section.settings.heading | strip
+  if heading == blank
+    assign heading = 'Key Ingredients'
+  endif
+  assign inci_label = section.settings.inci_label | strip
+  if inci_label == blank
+    assign inci_label = 'Full ingredient list'
+  endif
+  assign inci = ''
+  if verified == true and product.metafields.custom.full_inci.value != blank
+    assign inci = product.metafields.custom.full_inci.value | strip
+  endif
+  assign highlights = product.metafields.custom.ingredient_highlights.value
+-%}
+
+{%- capture ingredient_rows -%}
+  {%- if verified == true and highlights != blank -%}
+    {%- for item in highlights -%}
+      {%- liquid
+        assign ingredient_name = ''
+        assign meet = ''
+        assign good_for = ''
+        if item != blank and item.name.value != blank
+          assign ingredient_name = item.name.value | strip
+        endif
+        if item.meet_the_ingredient.value != blank
+          assign meet = item.meet_the_ingredient.value | strip
+        endif
+        if item.what_its_good_for.value != blank
+          assign good_for = item.what_its_good_for.value | strip
+        endif
+      -%}
+      {%- if ingredient_name != blank -%}
+        {%- assign panel_id = 'SkinKey-' | append: section.id | append: '-' | append: forloop.index -%}
+        <li class="sr-beta__faq-item">
+          <button
+            type="button"
+            class="sr-beta__faq-toggle"
+            data-sr-faq-toggle
+            aria-expanded="false"
+            aria-controls="{{ panel_id }}"
+            id="{{ panel_id }}-btn"
+          >
+            <span>{{ ingredient_name | escape }}</span>
+            <span class="sr-beta__faq-chevron" aria-hidden="true"></span>
+          </button>
+          {%- if meet != blank or good_for != blank -%}
+            <div class="sr-beta__faq-panel" id="{{ panel_id }}" role="region" aria-labelledby="{{ panel_id }}-btn" hidden>
+              {%- if meet != blank -%}
+                <p>{{ meet | escape | newline_to_br }}</p>
+              {%- endif -%}
+              {%- if good_for != blank -%}
+                <p>{{ good_for | escape | newline_to_br }}</p>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+  {%- if inci != blank -%}
+    {%- assign inci_id = 'SkinKeyInci-' | append: section.id -%}
+    <li class="sr-beta__faq-item">
+      <button
+        type="button"
+        class="sr-beta__faq-toggle"
+        data-sr-faq-toggle
+        aria-expanded="false"
+        aria-controls="{{ inci_id }}"
+        id="{{ inci_id }}-btn"
+      >
+        <span>{{ inci_label | escape }}</span>
+        <span class="sr-beta__faq-chevron" aria-hidden="true"></span>
+      </button>
+      <div class="sr-beta__faq-panel" id="{{ inci_id }}" role="region" aria-labelledby="{{ inci_id }}-btn" hidden>
+        <p>{{ inci | escape }}</p>
+      </div>
+    </li>
+  {%- endif -%}
+{%- endcapture -%}
+{%- assign ingredient_rows = ingredient_rows | strip -%}
+
+{%- if ingredient_rows != blank -%}
+  <section class="ge-skin-key" id="key-ingredients" data-ge-key-ingredients aria-labelledby="SkinKeyTitle-{{ section.id }}">
+    <h2 class="ge-skin-key__title" id="SkinKeyTitle-{{ section.id }}">{{ heading | escape }}</h2>
+    <ul class="sr-beta__faq-list">
+      {{ ingredient_rows }}
+    </ul>
+  </section>
+
+  {% javascript %}
+  (() => {
+    const bind = (root) => {
+      const scope = root && root.querySelectorAll ? root : document;
+      scope.querySelectorAll('[data-ge-key-ingredients] [data-sr-faq-toggle]').forEach((button) => {
+        if (button.dataset.keyIngredientBound === 'true') return;
+        button.dataset.keyIngredientBound = 'true';
+        const panelId = button.getAttribute('aria-controls');
+        const panel = panelId ? document.getElementById(panelId) : null;
+        if (!panel) return;
+        const setOpen = (open) => {
+          button.setAttribute('aria-expanded', open ? 'true' : 'false');
+          button.classList.toggle('is-open', open);
+          panel.hidden = !open;
+        };
+        setOpen(false);
+        button.addEventListener('click', (event) => {
+          event.stopImmediatePropagation();
+          setOpen(button.getAttribute('aria-expanded') !== 'true');
+        }, true);
+      });
+    };
+    bind(document);
+    document.addEventListener('shopify:section:load', (event) => bind(event.target));
+  })();
+  {% endjavascript %}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Skincare key ingredients",
+  "tag": "section",
+  "class": "section-skincare-key-ingredients",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Key Ingredients"
+    },
+    {
+      "type": "text",
+      "id": "inci_label",
+      "label": "Full ingredient list label",
+      "default": "Full ingredient list"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Skincare key ingredients"
+    }
+  ]
+}
+{% endschema %}

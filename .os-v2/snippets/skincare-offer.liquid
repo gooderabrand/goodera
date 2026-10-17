@@ -175,11 +175,13 @@
         item.classList.toggle('is-selected', selected);
         if (input) input.checked = selected;
       });
-      var sticky = document.getElementById('price-{{ section.id }}--sticky');
-      if (!sticky) return;
       var formatted = value === '2' ? root.getAttribute('data-price-two') : root.getAttribute('data-price-one');
+      var atcPrice = document.querySelector('#product-form-{{ section.id }} [data-ge-atc-price]');
+      if (atcPrice && formatted) atcPrice.textContent = formatted;
+      var sticky = document.getElementById('price-{{ section.id }}--sticky');
+      if (!sticky || !formatted) return;
       var amount = sticky.querySelector('ins .amount') || sticky.querySelector('.amount');
-      if (amount && formatted) amount.textContent = formatted;
+      if (amount) amount.textContent = formatted;
     };
 
     var sync = function (record) {
