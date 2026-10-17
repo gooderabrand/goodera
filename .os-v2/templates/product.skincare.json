@@ -104,14 +104,18 @@
           "settings": {
             "show_bundle": true,
             "kit_one_title": "One Ritual Kit",
-            "kit_one_detail": "4 single-use sachets · 8 mL | 0.28 fl oz",
+            "kit_one_detail": "4 single-use sachets",
+            "kit_one_volume": "8 mL | 0.28 fl oz",
             "kit_bundle_title": "Two Ritual Kits",
-            "kit_bundle_detail": "4 single-use sachets · 8 mL | 0.28 fl oz",
+            "kit_bundle_detail": "8 single-use sachets",
+            "kit_bundle_volume": "16 mL | 0.56 fl oz",
             "kit_badge": "Double the ritual",
             "mask_one_title": "One Glow Mask",
-            "mask_one_detail": "50 mL | 1.69 fl oz",
+            "mask_one_detail": "",
+            "mask_one_volume": "50 mL | 1.69 fl oz",
             "mask_bundle_title": "Two Glow Masks",
-            "mask_bundle_detail": "50 mL | 1.69 fl oz",
+            "mask_bundle_detail": "",
+            "mask_bundle_volume": "100 mL | 3.38 fl oz",
             "mask_badge": "One for you. One to give."
           }
         },

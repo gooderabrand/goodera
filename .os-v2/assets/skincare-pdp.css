@@ -53,10 +53,19 @@ body.template-product-skincare {
   border-radius: 14px;
   background: #fff;
   cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
 }
 
-.ge-skin-offer.is-selected {
+.ge-skin-offer:hover,
+.ge-skin-offer:focus-within {
   border-color: #17160f;
+  background: #fafafa;
+}
+
+.ge-skin-offer.is-selected,
+.ge-skin-offer.is-selected:hover {
+  border-color: #17160f;
+  background: #fff;
   box-shadow: inset 0 0 0 1px #17160f;
 }
 
@@ -66,34 +75,58 @@ body.template-product-skincare {
   pointer-events: none;
 }
 
-.ge-skin-offer__copy,
-.ge-skin-offer__name,
-.ge-skin-offer__detail,
-.ge-skin-offer__badge,
-.ge-skin-offer__status {
+.ge-skin-offer__copy {
+  display: block;
+  min-width: 0;
+  line-height: 1.35;
+}
+
+.ge-skin-offer__badge {
   display: block;
 }
 
 .ge-skin-offer__name {
+  display: block;
   font-size: 0.95rem;
   font-weight: 650;
   letter-spacing: -0.02em;
   line-height: 1.25;
 }
 
-.ge-skin-offer__detail,
-.ge-skin-offer__price {
-  margin-top: 0.15rem;
+.ge-skin-offer__meta {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-top: 0.2rem;
+  min-width: 0;
+}
+
+.ge-skin-offer__detail {
   color: var(--ge-muted, #6e6e73);
-  font-size: 0.84rem;
-  line-height: 1.35;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.ge-skin-offer__volume {
+  color: #6e6e73;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1;
+  vertical-align: super;
+  white-space: nowrap;
 }
 
 .ge-skin-offer__price {
   flex: 0 0 auto;
   margin-top: 0;
   color: #17160f;
+  font-size: 0.84rem;
   font-weight: 600;
+  line-height: 1.35;
   white-space: nowrap;
 }
 
