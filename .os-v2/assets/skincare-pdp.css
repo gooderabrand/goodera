@@ -283,9 +283,20 @@ body.template-product-skincare .thb-product-detail .variations .ge-skin-sizes in
   text-decoration-thickness: 1px;
 }
 
-.ge-skin-size__choice.is-selected {
+a.ge-skin-size__choice {
+  color: #17160f;
+  text-decoration: none;
+}
+
+.ge-skin-size__choice.is-selected,
+a.ge-skin-size__choice.is-selected {
   text-decoration: underline;
   text-decoration-color: #17160f;
+}
+
+body.template-product-skincare .thb-product-detail variant-selects .variations,
+body.template-product-skincare .product-add-to-cart-sticky .variations {
+  display: none !important;
 }
 
 .ge-skin-size__choice.is-unavailable {

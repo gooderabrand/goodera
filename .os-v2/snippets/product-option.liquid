@@ -55,7 +55,10 @@
 						name="{{ option.name | append: appended }}"
 						value="{{ value | escape }}"
 						form="{{ product_form_id }}"
-						{% if option.selected_value == value %}checked{% endif %}
+						{% if product.handle == 'sunday-reset-overnight-glow-mask' and skincare_size %}
+							{% assign value_down = value | downcase | strip %}
+							{% if value_down == '50 ml' %}checked{% endif %}
+						{% elsif option.selected_value == value %}checked{% endif %}
 			>
 			<label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}{{ appended }}"{% if skincare_size %} class="ge-skin-size__choice"{% endif %}>
 				<span>
