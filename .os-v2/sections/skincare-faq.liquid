@@ -3,20 +3,6 @@
 {{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  assign faq_image = section.settings.image
-  if faq_image == blank and product.images.size > 1
-    assign faq_image = product.images[1]
-  endif
-  if faq_image == blank
-    assign faq_image = product.featured_image
-  endif
-  assign faq_alt = ''
-  if faq_image != blank
-    assign faq_alt = faq_image.alt
-  endif
-  if faq_alt == blank
-    assign faq_alt = product.title
-  endif
   assign closer_heading = section.settings.closer_heading
   if closer_heading == blank
     assign closer_heading = 'products.skincare.closer_look' | t: product: product.title
@@ -31,31 +17,15 @@
   endif
 -%}
 
-<section class="sr-beta__faq ge-skin-faq ge-skin-edge" id="faq" data-ge-skin-faq aria-labelledby="SkinFaqTitle-{{ section.id }}">
-  <div class="ge-skin-faq__grid ge-skin-edge__grid">
-    <div class="ge-skin-faq__media ge-skin-edge__media">
-      {%- if faq_image != blank -%}
-        {{
-          faq_image
-          | image_url: width: 1600
-          | image_tag:
-            loading: 'lazy',
-            sizes: '(min-width: 990px) 46vw, 100vw',
-            widths: '600, 900, 1400, 1600',
-            alt: faq_alt
-        }}
-      {%- else -%}
-        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder_svg_tag' }}
-      {%- endif -%}
-    </div>
-    <div class="ge-skin-faq__copy ge-skin-edge__copy">
-      {%- if faq_label != blank -%}
-        <p class="ge-skin-faq__label">{{ faq_label | escape }}</p>
-      {%- endif -%}
-      <h2 class="ge-skin-faq__title" id="SkinFaqTitle-{{ section.id }}">{{ closer_heading | escape }}</h2>
-      {%- if closer_sub != blank -%}
-        <p class="ge-skin-faq__sub">{{ closer_sub | escape }}</p>
-      {%- endif -%}
+<section class="sr-beta__faq ge-skin-faq" id="faq" data-ge-skin-faq aria-labelledby="SkinFaqTitle-{{ section.id }}">
+  <div class="ge-skin-faq__inner">
+    {%- if faq_label != blank -%}
+      <p class="ge-skin-faq__label">{{ faq_label | escape }}</p>
+    {%- endif -%}
+    <h2 class="ge-skin-faq__title" id="SkinFaqTitle-{{ section.id }}">{{ closer_heading | escape }}</h2>
+    {%- if closer_sub != blank -%}
+      <p class="ge-skin-faq__sub">{{ closer_sub | escape }}</p>
+    {%- endif -%}
     <ul class="sr-beta__faq-list">
       {%- for block in section.blocks -%}
         {%- assign panel_id = 'SkinFaq-' | append: section.id | append: '-' | append: block.id -%}
@@ -75,7 +45,6 @@
         </li>
       {%- endfor -%}
     </ul>
-    </div>
   </div>
 </section>
 
@@ -115,12 +84,6 @@
     "templates": ["product"]
   },
   "settings": [
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Image",
-      "info": "Square photo on the left, flush to the page edge. Leave blank to use a product photo."
-    },
     {
       "type": "text",
       "id": "faq_label",

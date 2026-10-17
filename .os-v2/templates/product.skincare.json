@@ -137,7 +137,7 @@
             "support_text": "Get in touch with us",
             "support_link": "",
             "dispatch_label": "Ships Next Day",
-            "dispatch_text": ""
+            "dispatch_text": "Order today. On its way tomorrow."
           }
         },
         "complementary_cCC3WK": {
@@ -427,7 +427,6 @@
         "faq_5"
       ],
       "settings": {
-        "image": "shopify://shop_images/Sunday_Reset_Routine_Coffee.png",
         "faq_label": "",
         "closer_heading": "",
         "subheading": "Texture, skin type, and how it fits the rest of your routine."
