@@ -1,11 +1,11 @@
 {% doc %}
   Size row for the skincare buy box.
-  A product with a Size, Volume, or Amount option uses the variant picker, so this row stays hidden and those values stay real variants with their own price and stock.
-  A product that still has one fill shows custom.size_label as the selected chip. Empty size labels stay hidden.
-  Trial and full size, such as 15 ml and 50 ml, belong on this product as a Size option. They are not separate products.
+  A product with a Size, Volume, or Amount option uses those variants. Each variant has its own price and stock, and its own custom.size_label for the net weight or volume line.
+  A product that still has one fill shows the product custom.size_label as the selected chip. Empty labels stay hidden.
   @param {product} product - Product being purchased
+  @param {section} section - Product section, used to match the variant change event
   @example
-  {% render 'skincare-size', product: product %}
+  {% render 'skincare-size', product: product, section: section %}
 {% enddoc %}
 
 {%- liquid
@@ -17,9 +17,48 @@
     endif
   endfor
   assign size_label = product.metafields.custom.size_label.value | strip
+  assign selected_variant = product.selected_or_first_available_variant
+  assign selected_note = selected_variant.metafields.custom.size_label.value | strip
 -%}
 
-{%- if size_option == false and size_label != blank -%}
+{%- if size_option -%}
+  <p class="ge-skin-size-note" data-ge-size-note data-section="{{ section.id }}"{% if selected_note == blank %} hidden{% endif %}>{{ selected_note | escape }}</p>
+  <script type="application/json" data-ge-size-labels data-section="{{ section.id }}">
+    {
+      {%- for variant in product.variants -%}
+        "{{ variant.id }}": {{ variant.metafields.custom.size_label.value | default: '' | strip | json }}{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    }
+  </script>
+  <script>
+    (function () {
+      var sectionId = {{ section.id | json }};
+      var note = document.querySelector('[data-ge-size-note][data-section="' + sectionId + '"]');
+      var dataNode = document.querySelector('[data-ge-size-labels][data-section="' + sectionId + '"]');
+      if (!note || !dataNode || note.dataset.sizeBound === 'true') return;
+      note.dataset.sizeBound = 'true';
+      var labels = {};
+      try { labels = JSON.parse(dataNode.textContent); } catch (error) { labels = {}; }
+
+      var show = function (variantId) {
+        var text = labels[String(variantId)] || '';
+        note.textContent = text;
+        note.hidden = text === '';
+      };
+
+      document.addEventListener('product:variant-change', function (event) {
+        var detail = event.detail || {};
+        if (detail.sectionId && String(detail.sectionId) !== String(sectionId)) return;
+        if (!detail.variant) {
+          note.textContent = '';
+          note.hidden = true;
+          return;
+        }
+        show(detail.variant.id);
+      });
+    })();
+  </script>
+{%- elsif size_label != blank -%}
   <div class="ge-skin-size">
     <div class="form__label">
       {{ 'products.skincare.size' | t }}

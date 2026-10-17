@@ -176,6 +176,13 @@ body.template-product-skincare {
   gap: 0.5rem;
 }
 
+.ge-skin-size-note {
+  margin: 0.35rem 0 0.85rem;
+  color: var(--ge-muted, #6e6e73);
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
 .ge-skin-size__chip {
   display: inline-flex;
   align-items: center;

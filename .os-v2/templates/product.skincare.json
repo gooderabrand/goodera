@@ -89,7 +89,7 @@
         "size": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "{% render 'skincare-size', product: product %}"
+            "custom_liquid": "{% render 'skincare-size', product: product, section: section %}"
           }
         },
         "offer": {
@@ -221,8 +221,8 @@
         "color_swatches",
         "546f2cee-3532-473a-836f-21f14fde7cfe",
         "variant_picker",
-        "model_fit",
         "size",
+        "model_fit",
         "offer",
         "buy_buttons",
         "reassure",
