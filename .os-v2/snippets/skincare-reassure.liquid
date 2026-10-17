@@ -1,0 +1,76 @@
+{% doc %}
+  Compact shipping, returns, and support links under the skincare add-to-bag button.
+  Blank links fall back to the shop shipping policy, refund policy, and contact page.
+  @param {block} block - Theme editor block with labels and links
+  @example
+  {% render 'skincare-reassure', block: block %}
+{% enddoc %}
+
+{{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign ship_url = block.settings.shipping_link
+  if ship_url == blank and shop.shipping_policy != blank
+    assign ship_url = shop.shipping_policy.url
+  endif
+  assign return_url = block.settings.returns_link
+  if return_url == blank and shop.refund_policy != blank
+    assign return_url = shop.refund_policy.url
+  endif
+  assign help_url = block.settings.support_link
+  if help_url == blank
+    assign help_url = shop.url | append: '/pages/contact'
+  endif
+-%}
+
+<ul class="ge-skin-reassure" {{ block.shopify_attributes }}>
+  {%- if block.settings.shipping_label != blank -%}
+    <li>
+      <a href="{{ ship_url | default: '#' }}">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+          <path d="M3 7.5h11v8H3zM14 10h3.2L20 13.2V15.5h-6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+          <circle cx="7" cy="17.5" r="1.6" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+          <circle cx="17" cy="17.5" r="1.6" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+        </svg>
+        <span>
+          <span class="ge-skin-reassure__label">{{ block.settings.shipping_label | escape }}</span>
+          {%- if block.settings.shipping_text != blank -%}
+            <span class="ge-skin-reassure__text">{{ block.settings.shipping_text | escape }}</span>
+          {%- endif -%}
+        </span>
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if block.settings.returns_label != blank -%}
+    <li>
+      <a href="{{ return_url | default: '#' }}">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+          <path d="M4 8.5 8.5 4 13 8.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M8.5 4v7.5a5 5 0 0 0 5 5H20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+        </svg>
+        <span>
+          <span class="ge-skin-reassure__label">{{ block.settings.returns_label | escape }}</span>
+          {%- if block.settings.returns_text != blank -%}
+            <span class="ge-skin-reassure__text">{{ block.settings.returns_text | escape }}</span>
+          {%- endif -%}
+        </span>
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if block.settings.support_label != blank -%}
+    <li>
+      <a href="{{ help_url }}">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+          <path d="M6 16.5 4.5 19.5c2.2-.4 3.6-1.3 4.4-2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+          <path d="M7 15.5a6.5 6.5 0 1 1 2.6 2.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+        </svg>
+        <span>
+          <span class="ge-skin-reassure__label">{{ block.settings.support_label | escape }}</span>
+          {%- if block.settings.support_text != blank -%}
+            <span class="ge-skin-reassure__text">{{ block.settings.support_text | escape }}</span>
+          {%- endif -%}
+        </span>
+      </a>
+    </li>
+  {%- endif -%}
+</ul>

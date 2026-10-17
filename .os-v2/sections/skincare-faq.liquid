@@ -58,6 +58,18 @@
       {%- endif -%}
     <ul class="sr-beta__faq-list">
       {%- for block in section.blocks -%}
+        {%- liquid
+          assign show_for = block.settings.show_for | default: 'both'
+          assign show_question = true
+          if show_for == 'kit' and product.handle != 'sunday-reset-ritual-kit'
+            assign show_question = false
+          elsif show_for == 'mask' and product.handle != 'sunday-reset-overnight-glow-mask'
+            assign show_question = false
+          endif
+        -%}
+        {%- unless show_question -%}
+          {%- continue -%}
+        {%- endunless -%}
         {%- assign panel_id = 'SkinFaq-' | append: section.id | append: '-' | append: block.id -%}
         <li class="sr-beta__faq-item" {{ block.shopify_attributes }}>
           <button
@@ -155,6 +167,17 @@
           "id": "answer",
           "label": "Answer",
           "default": "Lightweight and comfortable, and made to sit as the last step in a routine."
+        },
+        {
+          "type": "select",
+          "id": "show_for",
+          "label": "Show on",
+          "default": "both",
+          "options": [
+            { "value": "both", "label": "Kit and full size" },
+            { "value": "kit", "label": "Ritual Kit only" },
+            { "value": "mask", "label": "Full-size mask only" }
+          ]
         }
       ]
     }

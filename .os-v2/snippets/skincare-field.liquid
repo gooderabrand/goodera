@@ -27,7 +27,7 @@
     {%- when 'subtitle' -%}
       {%- assign text = product.metafields.descriptors.subtitle.value | strip -%}
       {%- if text != blank -%}
-        <p class="ge-skin-field__text">{{ text | escape }}</p>
+        <p class="ge-skin-field__text ge-skin-field__text--eyebrow">{{ text | escape }}</p>
       {%- endif -%}
     {%- when 'short_description' -%}
       {%- assign text = product.metafields.custom.short_description.value | strip -%}
