@@ -1,0 +1,56 @@
+{% doc %}
+  Renders the skincare Highlights accordion body.
+  Uses product.metafields.custom.highlights when it is set (list, rich text, or multi-line).
+  Otherwise shows the sample highlight list.
+  @param {product} product - Product whose highlights are shown
+  @example
+  {% render 'skincare-highlights', product: product %}
+{% enddoc %}
+
+{{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign highlights = product.metafields.custom.highlights
+-%}
+
+{%- if highlights.type contains 'list.' and highlights.value != blank -%}
+  <ul class="ge-skin-highlights">
+    {%- for item in highlights.value -%}
+      <li>{{ item | escape }}</li>
+    {%- endfor -%}
+  </ul>
+{%- elsif highlights.type == 'rich_text_field' and highlights.value != blank -%}
+  <div class="ge-skin-highlights ge-skin-highlights--rich">
+    {{ highlights | metafield_tag }}
+  </div>
+{%- elsif highlights.value != blank -%}
+  <ul class="ge-skin-highlights">
+    {%- assign lines = highlights.value | newline_to_br | split: '<br />' -%}
+    {%- for line in lines -%}
+      {%- assign line_text = line | strip -%}
+      {%- if line_text != blank -%}
+        <li>{{ line_text | escape }}</li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+{%- else -%}
+  <ul class="ge-skin-highlights">
+    {%- if product.handle == 'sunday-reset-overnight-glow-mask' -%}
+      <li>{{ 'products.skincare.mask_highlight_1' | t }}</li>
+      <li>{{ 'products.skincare.mask_highlight_2' | t }}</li>
+      <li>{{ 'products.skincare.mask_highlight_3' | t }}</li>
+      <li>{{ 'products.skincare.mask_highlight_4' | t }}</li>
+    {%- elsif product.handle == 'sunday-reset-ritual-kit' -%}
+      <li>{{ 'products.skincare.kit_highlight_1' | t }}</li>
+      <li>{{ 'products.skincare.kit_highlight_2' | t }}</li>
+      <li>{{ 'products.skincare.kit_highlight_3' | t }}</li>
+      <li>{{ 'products.skincare.kit_highlight_4' | t }}</li>
+    {%- else -%}
+      <li>{{ 'products.skincare.highlight_1' | t }}</li>
+      <li>{{ 'products.skincare.highlight_2' | t }}</li>
+      <li>{{ 'products.skincare.highlight_3' | t }}</li>
+      <li>{{ 'products.skincare.highlight_4' | t }}</li>
+      <li>{{ 'products.skincare.highlight_5' | t }}</li>
+    {%- endif -%}
+  </ul>
+{%- endif -%}

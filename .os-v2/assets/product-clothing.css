@@ -1,0 +1,760 @@
+/**
+ * Clothing PDP — match Lululemon: two-up gallery, outlined size rects,
+ * color name with swatches underneath. Skincare PDP is unchanged.
+ */
+
+.template-product-clothing .thb-product-detail {
+  /* Lululemon aside[data-pdp-buy-box]: width 440px, padding 0 24px */
+  --ge-clothing-info: 440px;
+  --ge-clothing-info-pad: 24px;
+}
+
+/* Desktop: gallery fills the left; buy box is a 440px column hugging the right */
+@media (min-width: 1068px) {
+  .template-product-clothing .thb-product-detail > .row,
+  .template-product-clothing .section-main-product .row,
+  .template-product-clothing .product-section-container .row {
+    padding-inline: 0 !important;
+    max-width: none;
+    width: 100%;
+  }
+
+  .template-product-clothing .thb-product-detail .product-grid-container,
+  .template-product-clothing.template-product .thb-product-detail .product-grid-container {
+    display: grid;
+    width: 100%;
+    max-width: none;
+    grid-template-columns: minmax(0, 1fr) var(--ge-clothing-info);
+    justify-content: stretch;
+    justify-items: stretch;
+    align-items: start;
+    grid-gap: 0;
+  }
+
+  .template-product-clothing .thb-product-detail .product-information {
+    grid-column: 2;
+    grid-row: 1;
+    width: var(--ge-clothing-info);
+    max-width: var(--ge-clothing-info);
+    min-width: 0;
+    justify-self: end;
+    box-sizing: border-box;
+    padding: 0 var(--ge-clothing-info-pad) !important;
+    margin-inline: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .template-product-clothing .product-grid-container > [id^='MediaGallery-'] {
+    align-self: stretch;
+    height: auto;
+  }
+
+  .template-product-clothing .product-grid-container {
+    align-items: stretch;
+  }
+
+  .template-product-clothing .thb-product-detail .product-information--inner,
+  .template-product-clothing .thb-product-detail .product-information--inner.production-information--sticky,
+  .template-product-clothing .thb-product-detail .production-information--sticky {
+    position: relative;
+    top: auto;
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    padding-inline-end: 0 !important;
+    box-sizing: border-box;
+  }
+
+  .template-product-clothing .thb-product-detail .product-images .product-single__media-image {
+    height: calc(100svh - var(--header-height, 56px)) !important;
+    padding-bottom: 0 !important;
+  }
+
+  .template-product-clothing .thb-product-detail .product-images .product-single__media-image img {
+    object-fit: cover;
+    object-position: center top;
+  }
+}
+
+/* ——— Two-up slider (uses native grid layout, not thumbnails/Flickity) ——— */
+.template-product-clothing .ge-product-thumbs-rail,
+.template-product-clothing .product-images-buttons {
+  display: none !important;
+}
+
+.template-product-clothing .product-image-container,
+.template-product-clothing .product-image-container--grid,
+.template-product-clothing .product-image-container--paired {
+  position: relative;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  padding: 0 !important;
+}
+
+@media (min-width: 1068px) {
+  .template-product-clothing .product-image-container,
+  .template-product-clothing .product-image-container--grid,
+  .template-product-clothing .product-image-container--paired {
+    position: sticky;
+    top: var(--header-height, 56px);
+    align-self: start;
+    z-index: 1;
+  }
+}
+
+.template-product-clothing .thb-product-detail .product-images,
+.template-product-clothing .thb-product-detail .product-images--grid,
+.template-product-clothing .thb-product-detail .product-images--paired {
+  display: flex !important;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100% !important;
+  max-width: none !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  background: transparent;
+  border-radius: 0 !important;
+  gap: 3px;
+  padding: 0 !important;
+}
+
+.template-product-clothing .thb-product-detail .product-images .product-images__slide,
+.template-product-clothing .thb-product-detail .product-images .product-single__media,
+.template-product-clothing .thb-product-detail .product-images .product-single__media-image,
+.template-product-clothing .thb-product-detail .product-images img {
+  border-radius: 0 !important;
+}
+
+.template-product-clothing .thb-product-detail .product-images::-webkit-scrollbar {
+  display: none;
+}
+
+.template-product-clothing .thb-product-detail .product-images .product-images__slide,
+.template-product-clothing .thb-product-detail .product-images--grid .product-images__slide {
+  flex: 0 0 calc(50% - 1.5px);
+  width: calc(50% - 1.5px) !important;
+  max-width: calc(50% - 1.5px) !important;
+  scroll-snap-align: start;
+  display: block !important;
+  position: relative !important;
+  left: auto !important;
+}
+
+.template-product-clothing .thb-product-detail .product-images .product-images__slide-item--variant:not(.is-active) {
+  display: none !important;
+}
+
+.template-product-clothing .thb-product-detail .product-images img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0 !important;
+}
+
+/* Lululemon-style pill, bottom-right of the gallery */
+.template-product-clothing .ge-paired-nav {
+  position: absolute;
+  top: auto;
+  left: auto;
+  right: 24px;
+  bottom: 24px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 96px;
+  height: 40px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: #f4f4f4;
+  color: rgb(20, 15, 15);
+  pointer-events: auto;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(20, 15, 15, 0.14);
+}
+
+.template-product-clothing .ge-paired-nav__btn {
+  pointer-events: auto;
+  position: static;
+  transform: none;
+  flex: 1 1 50%;
+  width: auto;
+  height: 100%;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: rgb(20, 15, 15);
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.template-product-clothing .ge-paired-nav__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.template-product-clothing .ge-paired-nav__btn:disabled {
+  opacity: 0.28;
+  cursor: default;
+}
+
+.template-product-clothing .ge-paired-nav__btn:focus-visible {
+  outline: 2px solid rgb(20, 15, 15);
+  outline-offset: -2px;
+}
+
+.template-product-clothing .ge-paired-nav__btn svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.template-product-clothing .thb-product-detail .product-images--paired {
+  cursor: grab;
+}
+
+.template-product-clothing .thb-product-detail .product-images--paired.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+}
+
+@media (max-width: 1067px) {
+  .template-product-clothing .thb-product-detail .product-images .product-images__slide,
+  .template-product-clothing .thb-product-detail .product-images--grid .product-images__slide {
+    flex-basis: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* ——— Colour name, then circular swatches underneath ——— */
+.template-product-clothing .product-color-siblings {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.65rem;
+  margin: 0 0 1.15rem;
+}
+
+.template-product-clothing .product-color-siblings .form__label,
+.template-product-clothing .thb-product-detail .form__label {
+  font-family: var(--ge-font, inherit) !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 0.8125rem !important;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+
+.template-product-clothing .product-color-siblings .form__label__value,
+.template-product-clothing .thb-product-detail .form__label__value {
+  font-family: var(--ge-font, inherit) !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+}
+
+.template-product-clothing .product-color-siblings__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+/* Ring swatch — 40px so the colour chips read at a glance */
+.template-product-clothing .product-color-siblings__swatch {
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid transparent;
+  box-shadow: none;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  text-indent: -9999px;
+  overflow: visible;
+}
+
+.template-product-clothing .product-color-siblings__swatch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border-radius: 50%;
+  background-color: var(--option-color, #d4d4d8);
+  background-image: var(--option-color-image, none);
+  background-size: cover;
+  background-position: center;
+  box-shadow: inset 0 0 0 1px var(--ge-hair, rgba(23, 22, 15, 0.12));
+}
+
+.template-product-clothing .product-color-siblings__swatch.is-active,
+.template-product-clothing .product-color-siblings__swatch[aria-current='true'] {
+  border-color: var(--ge-text, #17160f);
+  box-shadow: none;
+}
+
+.template-product-clothing .product-color-siblings__swatch:hover::after {
+  transform: none;
+}
+
+.template-product-clothing .product-color-siblings__swatch:focus-visible {
+  outline: 2px solid var(--ge-accent, #6e7b5e);
+  outline-offset: 2px;
+}
+
+.template-product-clothing .product-color-siblings__swatch.is-sold-out {
+  opacity: 0.4;
+}
+
+/* Native Color / siblings rows under Colour — hide; top swatches replace them */
+.template-product-clothing .thb-product-detail .variations .product-form__input--color,
+.template-product-clothing .thb-product-detail .variations .product-form__input[data-handle='color'],
+.template-product-clothing .thb-product-detail .variations .product-form__input[data-handle='colour'],
+.template-product-clothing .thb-product-detail .product-form__input--siblings,
+.template-product-clothing .thb-product-detail .variations--siblings .product-form__input--siblings {
+  display: none !important;
+}
+
+/* ——— Rectangular size chips: 4-up grid like Lululemon, outline when selected ——— */
+.template-product-clothing .thb-product-detail .variations .product-form__input--block {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+  padding: 0 !important;
+  width: 100%;
+  position: relative;
+}
+
+.template-product-clothing .thb-product-detail .variations .product-form__input--block > .form__label {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin: 0 0 0.45rem;
+}
+
+/* Radios are fieldset children and would steal a size-tile cell */
+.template-product-clothing .thb-product-detail .variations .product-form__input--block > input[type='radio'] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.template-product-clothing .thb-product-detail .variations .product-form__input--block input[type='radio'] + label,
+.template-product-clothing
+  .thb-product-detail
+  .variations
+  .product-form__input--block
+  input[type='radio']
+  + label
+  span {
+  font-family: var(--ge-font, inherit) !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+}
+
+.template-product-clothing .thb-product-detail .variations .product-form__input--block input[type='radio'] + label {
+  box-sizing: border-box;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 2.75rem !important;
+  padding: 0 0.5rem !important;
+  margin: 0 !important;
+  border-radius: 8px !important;
+  border: 1px solid #d2d2d7 !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8125rem !important;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--ge-text, #17160f) !important;
+}
+
+.template-product-clothing
+  .thb-product-detail
+  .variations
+  .product-form__input--block
+  input[type='radio']:checked
+  + label {
+  background: #fff !important;
+  border-color: var(--ge-text, #17160f) !important;
+  border-width: 1.5px !important;
+  color: var(--ge-text, #17160f) !important;
+  box-shadow: none !important;
+}
+
+.template-product-clothing
+  .thb-product-detail
+  .variations
+  .product-form__input--block
+  input[type='radio'].is-disabled
+  + label {
+  opacity: 0.35;
+  text-decoration: line-through;
+}
+
+.template-product-clothing
+  .thb-product-detail
+  .variations
+  .product-form__input--block
+  input[type='radio']:focus-visible
+  + label {
+  outline: 2px solid var(--ge-accent, #6e7b5e);
+  outline-offset: 2px;
+  transform: none;
+}
+
+/* ——— ATC + Apple Pay on one row; more-options / terms sit full-width below ——— */
+.template-product-clothing .add_to_cart_holder {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.template-product-clothing .product-form__checkout-row {
+  display: grid;
+  grid-template-columns: 100px minmax(0, 1fr);
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+/* Flatten the wallet wrapper so the button sits beside ATC and the
+   “More payment options” link drops to its own full-width row. */
+.template-product-clothing .product-form__checkout-row .shopify-payment-button {
+  display: contents;
+  margin: 0 !important;
+  width: auto;
+}
+
+.template-product-clothing .product-form__checkout-row .single-add-to-cart-button,
+.template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button {
+  order: 2;
+  min-width: 0;
+  margin: 0 !important;
+  min-height: 3rem;
+  height: 3rem;
+  background: #000 !important;
+  background-image: none !important;
+  color: #fff !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.template-product-clothing .product-form__checkout-row .single-add-to-cart-button .single-add-to-cart-button--text,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button--text {
+  color: #fff !important;
+}
+
+/* Reformation slides a white :before across .button on hover. Remove it so
+   Add to bag darkens instead of flashing white. */
+.template-product-clothing .single-add-to-cart-button.button:before,
+.template-product-clothing .single-add-to-cart-button.button::before,
+.template-product-clothing .single-add-to-cart-button.button:hover:before,
+.template-product-clothing .single-add-to-cart-button.button:hover::before,
+.template-product-clothing .single-add-to-cart-button.button:focus:before,
+.template-product-clothing .single-add-to-cart-button.button:focus::before,
+.template-product-clothing .single-add-to-cart-button.button:focus-visible:before,
+.template-product-clothing .single-add-to-cart-button.button:focus-visible::before,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button:before,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button::before,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button:hover:before,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button:hover::before {
+  content: none !important;
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  background: #2a2a2a !important;
+  background-color: #2a2a2a !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+.template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button:hover,
+.template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button:focus,
+.template-product-clothing .product-form__checkout-row .single-add-to-cart-button.button:focus-visible,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button:hover,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button:focus,
+.template-product-clothing .product-add-to-cart-sticky .single-add-to-cart-button.button:focus-visible,
+.template-product-clothing #AddToCart:hover,
+.template-product-clothing #AddToCart:focus,
+.template-product-clothing #AddToCartSticky:hover,
+.template-product-clothing #AddToCartSticky:focus {
+  background: #2a2a2a !important;
+  background-color: #2a2a2a !important;
+  background-image: none !important;
+  color: #fff !important;
+  border-color: #2a2a2a !important;
+  opacity: 1 !important;
+}
+
+.template-product-clothing .single-add-to-cart-button:hover .single-add-to-cart-button--text,
+.template-product-clothing .single-add-to-cart-button:focus .single-add-to-cart-button--text {
+  color: #fff !important;
+  opacity: 1 !important;
+}
+
+.template-product-clothing .product-form__checkout-row .shopify-payment-button__button,
+.template-product-clothing .product-form__checkout-row shopify-accelerated-checkout,
+.template-product-clothing .product-form__checkout-row shopify-accelerated-checkout-cart {
+  order: 1;
+  width: 100%;
+  min-width: 0;
+  min-height: 3rem;
+  height: 3rem;
+  margin: 0 !important;
+}
+
+.template-product-clothing .product-form__checkout-row .shopify-payment-button__more-options {
+  order: 3;
+  grid-column: 1 / -1;
+  display: block;
+  width: 100%;
+  margin: 0.65rem 0 0;
+  text-align: left;
+  font-size: 0.75rem;
+  letter-spacing: 0.01em;
+  color: var(--ge-muted, #6e6e73);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.template-product-clothing .installment,
+.template-product-clothing .thb-product-detail shopify-payment-terms {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin-top: 0.65rem;
+  padding-bottom: 0;
+  border-bottom: 0;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  color: var(--ge-muted, #6e6e73);
+}
+
+.template-product-clothing .product-form__checkout-row.ge-wallet-hidden {
+  grid-template-columns: 1fr;
+}
+
+.template-product-clothing {
+  --shopify-accelerated-checkout-button-block-size: 48px;
+  --shopify-accelerated-checkout-button-inline-size: 100%;
+}
+
+/*
+ * Shop Pay lives in a closed shadow DOM — inner CSS cannot hide just that
+ * wallet. Hide the light-DOM host on clothing PDPs and use the Apple Pay
+ * button we inject. Shop Pay stays enabled in Admin / checkout.
+ */
+.template-product-clothing .product-form shopify-accelerated-checkout,
+.template-product-clothing .product-form shopify-accelerated-checkout-cart,
+.template-product-clothing .product-form .shopify-payment-button__button--shop-pay,
+.template-product-clothing .product-form .shopify-payment-button__button--branded,
+.template-product-clothing .product-form [class*='shop-pay'],
+.template-product-clothing .product-form [class*='ShopPay'],
+.template-product-clothing .product-form [aria-label*='Shop Pay' i],
+.template-product-clothing .product-form [aria-label*='shopPay' i],
+.template-product-clothing .product-form [aria-label*='Buy with Shop' i] {
+  display: none !important;
+}
+
+.template-product-clothing .product-form__checkout-row .ge-apple-pay {
+  order: 1;
+  box-sizing: border-box;
+  width: 100px;
+  min-width: 100px;
+  max-width: 100px;
+  height: 44px;
+  min-height: 44px;
+  margin: 0;
+  padding: 0 7px;
+  border: 1px solid rgb(117, 117, 117);
+  border-radius: 1000px;
+  background-color: #fff;
+  background-image: -webkit-named-image(apple-pay-logo-black);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: auto 14px !important;
+  color: transparent;
+  font-size: 0;
+  line-height: 0;
+  cursor: pointer;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -apple-pay-button-type: plain;
+  -apple-pay-button-style: white-outline;
+}
+
+@supports not (-webkit-appearance: -apple-pay-button) {
+  .template-product-clothing .product-form__checkout-row .ge-apple-pay {
+    display: none;
+  }
+}
+
+@media (max-width: 479px) {
+  .template-product-clothing .thb-product-detail .variations .product-form__input--block {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* ——— Chevrons: right when closed, down when open (not down/up) ——— */
+.template-product-clothing .thb-product-detail .accordion summary span,
+.template-product-clothing .thb-product-detail .product__accordion summary span,
+.template-product-clothing .thb-product-detail .product--accordion summary span {
+  width: 12px;
+  height: 12px;
+  right: 0;
+}
+
+.template-product-clothing .thb-product-detail .accordion summary span:before,
+.template-product-clothing .thb-product-detail .product__accordion summary span:before,
+.template-product-clothing .thb-product-detail .product--accordion summary span:before {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  transform: none !important;
+}
+
+.template-product-clothing .thb-product-detail .accordion summary span:after,
+.template-product-clothing .thb-product-detail .product__accordion summary span:after,
+.template-product-clothing .thb-product-detail .product--accordion summary span:after {
+  content: '' !important;
+  display: block !important;
+  box-sizing: border-box;
+  width: 8px !important;
+  height: 8px !important;
+  top: 2px !important;
+  left: 2px !important;
+  border: 0 !important;
+  border-right: 1.5px solid var(--ge-text, #17160f) !important;
+  border-bottom: 1.5px solid var(--ge-text, #17160f) !important;
+  background: none !important;
+  /* Closed: points right */
+  transform: rotate(-45deg) !important;
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.template-product-clothing .thb-product-detail .accordion details[open] summary span:after,
+.template-product-clothing .thb-product-detail .product__accordion details[open] summary span:after,
+.template-product-clothing .thb-product-detail .product--accordion details[open] summary span:after {
+  top: 1px !important;
+  /* Open: points down */
+  transform: rotate(45deg) !important;
+}
+
+/* ——— Model fit ——— */
+.template-product-clothing .product-model-fit {
+  margin: 0 0 0.85rem;
+  font-family: var(--ge-font, inherit);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  color: var(--ge-muted, #6e6e73);
+}
+
+/* Mobile: air between the gallery and the product title */
+@media (max-width: 1067px) {
+  .template-product-clothing .product-information,
+  .template-product-clothing .product-title-container {
+    padding-top: 1.75rem;
+  }
+
+  .template-product-clothing .product-title {
+    margin-top: 0;
+  }
+}
+
+/*
+ * Clothing PDP header: sticky white bar. The storewide horizontal header
+ * uses a negative margin so media runs underneath a transparent chrome.
+ * Images then collide with the logo and links. Keep this template in flow.
+ */
+body.template-product-clothing .header-section,
+body.template-product-clothing.ge-nav-horizontal .header-section,
+body.template-product-clothing.ge-nav-horizontal.ge-header-above .header-section,
+body.template-product-clothing.ge-header-above .header-section {
+  position: sticky !important;
+  top: 0;
+  z-index: 62;
+  height: auto !important;
+  margin-bottom: 0 !important;
+  background: #fff !important;
+  pointer-events: auto;
+}
+
+body.template-product-clothing .site-header,
+body.template-product-clothing .header-section .site-header,
+body.template-product-clothing.ge-nav-horizontal .header-section .site-header,
+body.template-product-clothing.ge-nav-horizontal[data-ge-header-tone='light'] .header-section .site-header,
+body.template-product-clothing.ge-nav-horizontal[data-ge-header-tone='dark'] .header-section .site-header,
+body.template-product-clothing.ge-nav-horizontal.ge-header-above .header-section .site-header,
+body.template-product-clothing.ge-nav-horizontal.ge-header-above[data-ge-header-tone='dark'] .header-section .site-header,
+body.template-product-clothing.ge-header-above .site-header,
+body.template-product-clothing.template-product .site-header {
+  --site-header-icon: #17160f;
+  --ge-chrome-ink: #17160f;
+  position: sticky !important;
+  top: 0;
+  inset: auto;
+  width: 100%;
+  background: #fff !important;
+  color: #17160f !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  transform: none !important;
+}
+
+body.template-product-clothing .site-header.is-nav-hidden,
+body.template-product-clothing .header-section:has(.site-header.is-nav-hidden) {
+  transform: none !important;
+  pointer-events: auto !important;
+}
+
+body.template-product-clothing .site-header__logo-ink,
+body.template-product-clothing.ge-nav-horizontal .header-section .site-header__logo-ink {
+  display: block !important;
+}
+
+body.template-product-clothing .site-header__logo-white,
+body.template-product-clothing.ge-nav-horizontal .header-section .site-header__logo-white {
+  display: none !important;
+}
+
+body.template-product-clothing .site-header__cart .thb-item-count {
+  background: #17160f !important;
+  color: #fff !important;
+}
+
+body.template-product-clothing #MainContent,
+body.template-product-clothing .main-content {
+  padding-top: 0;
+}

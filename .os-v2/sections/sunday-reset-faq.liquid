@@ -1,0 +1,78 @@
+{{ 'sunday-reset-beta.css' | asset_url | stylesheet_tag }}
+{{ 'ge-sunday-reset-type.css' | asset_url | stylesheet_tag }}
+
+<section class="sr-beta__faq" id="faq" aria-labelledby="SrBetaFaqTitle-{{ section.id }}">
+  <div class="sr-beta__inner sr-beta__faq-grid">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="sr-beta__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h2 class="sr-beta__title" id="SrBetaFaqTitle-{{ section.id }}">
+        {{ section.settings.heading_line_1 | escape }}<br>
+        <em>{{ section.settings.heading_line_2 | escape }}</em>
+      </h2>
+      {%- if section.settings.lede != blank -%}
+        <p class="sr-beta__lede sr-beta__lede--muted sr-beta__lede--compact">{{ section.settings.lede | escape }}</p>
+      {%- endif -%}
+    </div>
+    <ul class="sr-beta__faq-list">
+      {%- for block in section.blocks -%}
+        {%- assign panel_id = 'SrBetaFaq-' | append: section.id | append: '-' | append: block.id -%}
+        <li class="sr-beta__faq-item" {{ block.shopify_attributes }}>
+          <button
+            type="button"
+            class="sr-beta__faq-toggle"
+            data-sr-faq-toggle
+            aria-expanded="false"
+            aria-controls="{{ panel_id }}"
+            id="{{ panel_id }}-btn"
+          >
+            <span>{{ block.settings.question | escape }}</span>
+            <span class="sr-beta__faq-chevron" data-sr-faq-icon aria-hidden="true"></span>
+          </button>
+          <p class="sr-beta__faq-panel" id="{{ panel_id }}" role="region" aria-labelledby="{{ panel_id }}-btn" hidden>{{ block.settings.answer | escape }}</p>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SR — FAQ",
+  "tag": "section",
+  "class": "section-sunday-reset-faq",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "04 / GOOD TO KNOW" },
+    { "type": "text", "id": "heading_line_1", "label": "Heading line 1", "default": "Your questions," },
+    { "type": "text", "id": "heading_line_2", "label": "Heading line 2 (italic)", "default": "answered." },
+    { "type": "textarea", "id": "lede", "label": "Body", "default": "Everything you need to know before joining us." }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "What comes in the Ritual Kit?" },
+        { "type": "textarea", "id": "answer", "label": "Answer", "default": "Four individually packed single-use sachets of Sunday Reset Overnight Glow Moisturizer." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SR — FAQ",
+      "blocks": [
+        { "type": "faq", "settings": { "question": "What comes in the Ritual Kit?", "answer": "Four individually packed single-use sachets of Sunday Reset Overnight Glow Moisturizer." } },
+        { "type": "faq", "settings": { "question": "How often should I use it?", "answer": "We invite testers to experience one sachet weekly across approximately four weeks. Detailed instructions will come with your kit." } },
+        { "type": "faq", "settings": { "question": "Can I use it on another day?", "answer": "Yes. Sunday Reset is a ritual, not a rule. Use it on a day that fits your schedule, following the supplied product directions." } },
+        { "type": "faq", "settings": { "question": "Is this the full-size moisturizer?", "answer": "No. This is the four-use Ritual Kit. The full-size Overnight Glow Moisturizer is a separate future product." } },
+        { "type": "faq", "settings": { "question": "How do I become a beta tester?", "answer": "Apply through our short application, and we will select approximately 50 participants based on a thoughtful mix of skin types, routines, and ability to share feedback." } },
+        { "type": "faq", "settings": { "question": "Do I have to post photos or reviews?", "answer": "No. We request two short product-feedback check-ins. Before-and-after selfies are optional; public testimonials and sharing rights are separate and optional." } },
+        { "type": "faq", "settings": { "question": "What if I have sensitive skin?", "answer": "Let us know in your application. Selected testers receive a full ingredient list and instructions before using the product. Stop using it if irritation occurs." } },
+        { "type": "faq", "settings": { "question": "When will kits arrive?", "answer": "Selected participants will receive details once kits are ready. No shipping date is promised." } },
+        { "type": "faq", "settings": { "question": "Where can I find ingredients and safety documentation?", "answer": "The full INCI list will be available before use. Contact Good Era to request the Safety Data Sheet or product specification information." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

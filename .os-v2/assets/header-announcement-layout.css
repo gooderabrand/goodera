@@ -1,0 +1,70 @@
+.site-header__announcement { display: none; }
+
+/* The bar is a desktop header slot. On mobile it stays in its own section. */
+@media (max-width: 989px) {
+  .announcement-bar-section {
+    display: none !important;
+  }
+}
+
+@media (min-width: 990px) {
+  body.ge-nav-horizontal .site-header[data-desktop-layout="centered_announcement"] .site-header__inner {
+    grid-template-columns: minmax(320px, 1fr) minmax(0, 1fr) minmax(320px, 1fr);
+    column-gap: 16px;
+  }
+  body.ge-nav-horizontal .site-header[data-desktop-layout="centered_announcement"] .site-header__logo {
+    grid-area: 1 / 1;
+  }
+  body.ge-nav-horizontal .site-header[data-desktop-layout="centered_announcement"] .site-header__dest {
+    grid-area: 1 / 1;
+    justify-self: start;
+    margin-left: 128px;
+    justify-content: flex-start;
+  }
+  body.ge-nav-horizontal .site-header[data-desktop-layout="centered_announcement"] .ge-dest-nav {
+    gap: 18px;
+  }
+  body.ge-nav-horizontal .site-header[data-desktop-layout="centered_announcement"] .site-header__right {
+    grid-area: 1 / 3;
+  }
+  body.ge-nav-horizontal .site-header[data-desktop-layout="centered_announcement"] .site-header__announcement {
+    display: block;
+    grid-area: 1 / 2;
+    min-width: 0;
+    color: inherit;
+  }
+  .site-header__announcement .announcement-bar {
+    padding: 8px 0;
+    background: transparent;
+    color: inherit;
+    line-height: 1.3;
+  }
+  .site-header__announcement .announcement-bar .announcement-bar--inner,
+  .site-header__announcement .announcement-bar--crossfade .announcement-bar--item {
+    padding-inline: 0;
+  }
+  .site-header__announcement .announcement-bar--item a { color: inherit; }
+  .site-header__announcement .announcement-bar--item svg { fill: currentColor; }
+}
+
+/* One line at a time. The outgoing message finishes fading out before the next fades in. */
+html body .announcement-bar--crossfade .announcement-bar--item {
+  animation: none !important;
+  opacity: 0;
+  transition: opacity 0.22s linear;
+}
+
+html body .announcement-bar--crossfade .announcement-bar--item:first-child,
+html body .announcement-bar--crossfade .announcement-bar--item.is-on {
+  opacity: 1;
+}
+
+html body .announcement-bar--crossfade.is-cycling .announcement-bar--item:first-child:not(.is-on) {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body .announcement-bar--crossfade .announcement-bar--item {
+    transition: none;
+  }
+}

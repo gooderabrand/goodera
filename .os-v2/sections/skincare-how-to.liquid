@@ -1,0 +1,144 @@
+{{ 'image-with-text.css' | asset_url | stylesheet_tag }}
+{{ 'shoppable-video-reels.css' | asset_url | stylesheet_tag }}
+{{ 'sunday-reset-beta.css' | asset_url | stylesheet_tag }}
+{{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'video-controls.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign howto_title = section.settings.title
+  if howto_title == blank
+    assign howto_title = product.title
+  endif
+  assign howto_lead = ''
+  assign howto_rest = howto_title
+  if howto_title contains 'Sunday Reset®'
+    assign howto_lead = 'Sunday Reset®'
+    assign howto_rest = howto_title | remove_first: 'Sunday Reset®' | strip
+  elsif howto_title contains 'Sunday Reset'
+    assign howto_lead = 'Sunday Reset'
+    assign howto_rest = howto_title | remove_first: 'Sunday Reset' | strip
+  endif
+  assign instructions = ''
+  if product.metafields.custom.how_to != blank
+    assign instructions = product.metafields.custom.how_to | metafield_text | strip
+  elsif product.handle == 'sunday-reset-overnight-glow-mask'
+    assign instructions = 'products.skincare.mask_how_to' | t
+  elsif product.handle == 'sunday-reset-ritual-kit'
+    assign instructions = 'products.skincare.kit_how_to' | t
+  else
+    assign instructions = section.settings.instructions
+  endif
+  assign howto_image = section.settings.image
+  if howto_image == blank and product.images.size > 1
+    assign howto_image = product.images[2]
+  endif
+  if howto_image == blank
+    assign howto_image = product.featured_image
+  endif
+-%}
+
+<div class="row full-width-row">
+  <div class="small-12 columns">
+    <div class="ge-skin-howto">
+      {%- if howto_image != blank -%}
+        <div class="ge-skin-howto__still how-to-secondary-image">
+          {{
+            howto_image
+            | image_url: width: 1400
+            | image_tag:
+              loading: 'lazy',
+              class: 'ge-skin-howto__still-img',
+              sizes: '(min-width: 990px) 30vw, 1px',
+              widths: '400, 700, 1000, 1400',
+              alt: howto_image.alt
+          }}
+        </div>
+      {%- endif -%}
+      <div class="ge-skin-howto__video">
+        <div class="shoppable-video-reels" style="--video-aspect-ratio: 0.6897;">
+          <div class="shoppable-video-reels--slide is-selected">
+            <div class="shoppable-video-reels--video">
+              <div class="slideshow__slide-video-bg"{% if section.settings.video != blank %} data-provider="hosted"{% endif %}>
+                {%- if section.settings.video != blank -%}
+                  {{ section.settings.video | video_tag: autoplay: true, loop: true, controls: false, muted: true, image_size: '800x' }}
+                  <video-controls class="shoppable-video-reels--video-controls">
+                    <button id="SkinHowToPlay-{{ section.id }}" type="button" class="shoppable-video-reels--button shoppable-video-reels--button-play-pause video-controls--play-pause" aria-label="{{ 'products.skincare.pause' | t }}">
+                      <span class="video-play">{% render 'svg-icons' with 'thb-video-play' %}</span>
+                      <span class="video-pause">{% render 'svg-icons' with 'thb-video-pause' %}</span>
+                    </button>
+                    <button id="SkinHowToSound-{{ section.id }}" type="button" class="shoppable-video-reels--button shoppable-video-reels--button-sound video-controls--sound muted" aria-label="{{ 'products.skincare.sound_on' | t }}">
+                      <span class="video-sound-on">{% render 'svg-icons' with 'thb-sound-on' %}</span>
+                      <span class="video-sound-off">{% render 'svg-icons' with 'thb-sound-off' %}</span>
+                    </button>
+                  </video-controls>
+                {%- else -%}
+                  {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder_svg_tag' }}
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ge-skin-howto__copy">
+        <div class="ge-skin-howto__copy-inner">
+          <p class="sr-beta__eyebrow">{{ 'products.skincare.how_to' | t }}</p>
+          <h2 class="sr-beta__title" id="SkinHowTo-{{ section.id }}">
+            {%- if howto_lead != blank -%}
+              {{ howto_lead | escape }}<br>
+              {{ howto_rest | escape }}
+            {%- else -%}
+              {{ howto_title | escape }}
+            {%- endif -%}
+          </h2>
+          {%- if instructions != blank -%}
+            <div class="sr-beta__lede sr-beta__lede--muted rte">
+              <p>{{ instructions | escape | newline_to_br }}</p>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Skincare how to use",
+  "tag": "section",
+  "class": "section-skincare-how-to",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Product name",
+      "info": "Leave blank to use the product title."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Still image",
+      "info": "Wide screens only. Leave blank to use a product photo."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Vertical video"
+    },
+    {
+      "type": "textarea",
+      "id": "instructions",
+      "label": "Instructions",
+      "info": "A product metafield named custom.how_to replaces this text.",
+      "default": "Shake well before use. Apply evenly over skin as the final step in your skincare routine. Reapply every two hours when in the sun."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Skincare how to use"
+    }
+  ]
+}
+{% endschema %}

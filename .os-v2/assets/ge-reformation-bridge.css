@@ -1,0 +1,359 @@
+/*
+  Good Era ↔ Reformation bridge
+  Maps the Reformation (v15) engine CSS variables onto Good Era tokens and
+  applies the Good Era type system (Maison Neue headings + body)
+  so commerce pages read Good Era instead of stock Reformation.
+*/
+
+:root {
+  --color-accent: var(--ge-ink, #17160f);
+  --color-accent-rgb: 23, 22, 15;
+  --color-body: var(--ge-text, #17160f);
+  --color-body-rgb: 23, 22, 15;
+  --bg-body: var(--ge-bg, #ffffff);
+  --bg-body-rgb: 255, 255, 255;
+  --color-border: var(--ge-border, #e5e5ea);
+  --color-form-border: var(--ge-border, #e5e5ea);
+
+  --solid-button-background: var(--ge-ink, #17160f);
+  --solid-button-label: #ffffff;
+  --outline-button-label: var(--ge-ink, #17160f);
+
+  --color-price: var(--ge-ink, #17160f);
+  --color-price-discounted: var(--ge-muted, #6e6e73);
+  --color-dots: var(--ge-ink, #17160f);
+  --color-star: var(--ge-ink, #17160f);
+
+  --color-header-bg: var(--ge-bg, #ffffff);
+  --color-header-text: var(--ge-ink, #17160f);
+  --color-header-links: var(--ge-ink, #17160f);
+  --color-header-icons: var(--ge-ink, #17160f);
+  --color-header-border: var(--ge-border, #e5e5ea);
+
+  --color-footer-text: var(--ge-ink, #17160f);
+  --color-footer-link: var(--ge-ink, #17160f);
+  --color-footer-bg: var(--ge-surface, #f5f5f7);
+  --color-footer-border: var(--ge-border, #e5e5ea);
+}
+
+/* --- Good Era premium type system --------------------------------
+   Maison Neue Demi headings, Book body, and Cormorant expressive accents. */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.logolink.text-logo,
+.heading-font,
+.h1-xlarge,
+.h1-large,
+.customer-addresses .my-address .address-index {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-weight: var(--ge-weight-heading, 600);
+  font-style: normal;
+  letter-spacing: var(--ge-tracking-tight, -0.01em);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ge-serif,
+h1.ge-serif,
+h2.ge-serif,
+h3.ge-serif,
+.h1.ge-serif,
+.h2.ge-serif,
+.h3.ge-serif {
+  font-family: var(--ge-font-serif);
+  font-style: italic;
+  font-weight: var(--ge-serif-weight, 400);
+  letter-spacing: var(--ge-tracking-serif, -0.02em);
+}
+
+.ge-serif--statement {
+  font-weight: var(--ge-serif-weight-statement, 600);
+}
+
+body,
+.body-font {
+  font-family: var(--ge-font-body, 'Maison Neue', system-ui, sans-serif);
+  font-weight: var(--ge-weight-regular, 400);
+  font-style: normal;
+  letter-spacing: var(--ge-tracking-body, 0.005em);
+  font-size: var(--ge-role-body, var(--ge-text-base, 1.0625rem));
+  line-height: var(--ge-lh-relaxed, 1.6);
+  color: var(--ge-text, #17160f);
+}
+
+html body h1 {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-size: var(--ge-role-page-title);
+  font-weight: var(--ge-weight-heading, 600);
+  line-height: var(--ge-lh-tight);
+  letter-spacing: var(--ge-tracking-tight, -0.01em);
+}
+
+html body .h1,
+html body .h1-large,
+html body .h1-xlarge {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-size: var(--ge-role-display);
+  font-weight: var(--ge-weight-heading, 600);
+  line-height: var(--ge-lh-tight);
+  letter-spacing: var(--ge-tracking-tight, -0.01em);
+}
+
+html body .explore-hero__title,
+html body .explore-featured__title,
+html body .explore-category__title,
+html body .discover-hero h1,
+html body .playlist-detail__title {
+  font-size: var(--ge-role-page-title);
+  font-weight: var(--ge-weight-heading, 600);
+}
+
+html body h2,
+html body .h2 {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-size: var(--ge-role-section-title);
+  font-weight: var(--ge-weight-heading, 600);
+  line-height: var(--ge-lh-snug);
+  letter-spacing: var(--ge-tracking-tight, -0.01em);
+}
+
+html body h3,
+html body .h3 {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-size: var(--ge-role-section-title);
+  font-weight: var(--ge-weight-heading, 600);
+  line-height: var(--ge-lh-snug);
+  letter-spacing: var(--ge-tracking-tight, -0.01em);
+}
+
+html body h4,
+html body .h4,
+html body h5,
+html body .h5,
+html body h6,
+html body .h6 {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-size: var(--ge-role-card-title);
+  font-weight: var(--ge-weight-heading, 600);
+  line-height: var(--ge-lh-snug);
+}
+
+.product-title {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-weight: var(--ge-weight-heading, 600);
+  font-size: var(--ge-role-card-title, var(--ge-text-md));
+  letter-spacing: var(--ge-tracking-tight, -0.01em);
+  line-height: var(--ge-lh-snug, 1.25);
+}
+
+/* PDP title is the page heading; cards stay on card-title */
+html body .thb-product-detail .product-title {
+  font-size: var(--ge-role-section-title);
+}
+
+.button,
+input[type='submit'] {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-weight: var(--ge-weight-medium, 500);
+  font-size: var(--ge-role-meta);
+  letter-spacing: var(--ge-tracking-body, 0.005em);
+}
+
+/*
+  Footer columns are chrome, not page titles.
+  html body h2 is section-title — lock these back to meta so two menus + signup fit.
+*/
+html body .site-footer h2,
+html body .site-footer .site-footer__heading,
+html body .site-footer .site-footer__heading-text {
+  font-family: var(--ge-font);
+  font-size: var(--ge-role-meta);
+  font-weight: var(--ge-weight-heading, 600);
+  letter-spacing: var(--ge-tracking-eyebrow, 0.04em);
+  text-transform: uppercase;
+  line-height: var(--ge-lh-snug, 1.25);
+}
+
+html body .site-footer .site-footer__signup-heading {
+  font-size: var(--ge-role-meta);
+  letter-spacing: var(--ge-tracking-eyebrow, 0.04em);
+  text-transform: uppercase;
+}
+
+/* Drawer titles use the same Demi heading face as page headings. */
+html body .side-panel :is(h1, h2, h3, h4, h5, h6) {
+  font-weight: var(--ge-weight-heading, 600);
+}
+
+/* Footer lockup: keep the wordmark, drop the arch mark. */
+html body .site-footer .ge-brand-lockup__mark {
+  display: none !important;
+}
+
+/*
+  Color names under product rails (Light Grey, Black).
+  commerce-ge.css sets these to body size and regular muted weight.
+  This rule loads earlier, so it wins on specificity.
+*/
+html body .product-card .product-card-color-text {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: 0.01em;
+  line-height: 1.25;
+  color: var(--ge-text, #17160f);
+}
+
+/*
+  Mobile has no sidebar, so the 60px shell gutter reads as a frame.
+  Pull the header and page copy toward the screen edge.
+*/
+@media (max-width: 989px) {
+  :root {
+    --ge-shell-gutter: 16px;
+  }
+
+  .site-header__inner,
+  .site-header .ge-inset-x {
+    padding-inline: 16px;
+  }
+
+  /* Standalone announcement is a desktop header slot. */
+  .announcement-bar-section {
+    display: none !important;
+  }
+
+  /*
+    Homepage product rails meet the screen edge, the way the product
+    gallery does. Titles keep a small pad so they don't sit on the bezel.
+  */
+  .template-index .ge-commerce-section {
+    padding-inline: 0 !important;
+  }
+
+  .template-index .ge-commerce-section .section-header,
+  .template-index .section-featured-collection .section-header,
+  .template-index .section-recently-viewed-products .section-header {
+    padding-inline: 16px;
+  }
+
+  .template-index .ge-rail__scroller {
+    padding-inline: 0 !important;
+    scroll-padding-inline: 0 !important;
+  }
+
+  .template-index .ge-commerce-section .product-card .product-card--featured-image,
+  .template-index .ge-commerce-section .product-card figure.product-card--featured-image,
+  .template-index .ge-commerce-section .product-card .product-card--featured-image-link,
+  .template-index .ge-commerce-section .product-card a.product-card--featured-image-link,
+  .template-index .ge-commerce-section .product-card .product-featured-image-link,
+  .template-index .ge-commerce-section .product-card .product-card--featured-image-link img,
+  .template-index .ge-commerce-section .product-card .product-featured-image-link img,
+  .template-index .ge-commerce-section .product-card .product-primary-image,
+  .template-index .ge-commerce-section .product-card .product-secondary-image {
+    border-radius: 0 !important;
+  }
+
+  .template-index .ge-commerce-section .product-card-info {
+    padding-inline: 8px;
+  }
+
+  html body .site-footer {
+    padding-inline: 8px !important;
+  }
+}
+
+/*
+  Homepage and Sunday Reset keep a transparent bar over their hero, then
+  turn solid once that hero has scrolled away. Every other page is a
+  white bar from the start so black type never sits on the content.
+*/
+body.ge-nav-horizontal .site-header.is-past-hero,
+body.ge-nav-horizontal .header-section:has(.site-header.is-past-hero) {
+  background: #fff !important;
+  color: #17160f !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+body.ge-nav-horizontal:not(.template-index):not(.ge-page-sunday-reset) .header-section {
+  position: sticky !important;
+  top: 0;
+  z-index: 50;
+  height: auto !important;
+  margin-bottom: 0 !important;
+  background: #fff !important;
+}
+
+body.ge-nav-horizontal:not(.template-index):not(.ge-page-sunday-reset) .site-header,
+body.ge-nav-horizontal:not(.template-index):not(.ge-page-sunday-reset) .header-section .site-header {
+  --site-header-icon: #17160f;
+  --ge-chrome-ink: #17160f;
+  position: relative !important;
+  inset: auto !important;
+  width: 100%;
+  margin: 0 !important;
+  background: #fff !important;
+  color: #17160f !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  transform: none !important;
+}
+
+body.ge-nav-horizontal:not(.template-index):not(.ge-page-sunday-reset) .site-header__logo-ink {
+  display: block !important;
+}
+
+body.ge-nav-horizontal:not(.template-index):not(.ge-page-sunday-reset) .site-header__logo-white {
+  display: none !important;
+}
+
+/*
+  Shop menu rows use the filter-drawer type: large, medium, tight.
+  Parent "Shop" stays the accordion title. Everything under it
+  (Explore, group labels, collection links) matches that scale.
+*/
+html body .site-header .ge-mobile-menu__explore,
+html body .site-header .ge-mobile-menu__section-label,
+html body .site-header .ge-mobile-menu__link,
+html body .site-header .ge-mobile-menu__link--emphasis,
+html body.ge-nav-horizontal .ge-mega--horizontal .ge-mega__label,
+html body.ge-nav-horizontal .ge-mega--horizontal .ge-mega__heading,
+html body.ge-nav-horizontal .ge-mega--horizontal .ge-mega__link,
+html body.ge-nav-horizontal .ge-mega--horizontal .ge-mega__column:first-child .ge-mega__link,
+html body.ge-nav-horizontal .ge-mega--horizontal .ge-mega__column:first-child .ge-mega__heading {
+  font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
+  font-size: 1.7rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  text-transform: none;
+  color: #17160f;
+}
+
+html body .site-header .ge-mobile-menu__explore,
+html body .site-header .ge-mobile-menu__link,
+html body .site-header .ge-mobile-menu__link--emphasis {
+  padding-block: 0.65rem;
+}
+
+html body .site-header .ge-mobile-menu__section-label {
+  margin: 0.85rem 0 0.15rem;
+  padding-block: 0.65rem 0.2rem;
+}
+
+html body.ge-nav-horizontal .ge-mega--horizontal .ge-mega__link {
+  padding-block: 0.4rem;
+}

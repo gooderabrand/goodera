@@ -1,0 +1,153 @@
+{{ 'image-with-text.css' | asset_url | stylesheet_tag }}
+{{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign results_image = section.settings.image
+  if results_image == blank
+    assign results_image = product.featured_image
+  endif
+  assign ratio = 1
+  if results_image != blank and results_image.aspect_ratio != blank
+    assign ratio = results_image.aspect_ratio
+  endif
+  assign results_alt = ''
+  if results_image != blank
+    assign results_alt = results_image.alt
+  endif
+  if section.settings.image_alt != blank
+    assign results_alt = section.settings.image_alt
+  endif
+-%}
+
+<div class="row full-width-row">
+  <div class="small-12 columns">
+    <div class="image-with-text ge-skin-split ge-skin-results grid--image-medium">
+      <div class="image-with-text__image image-with-text__inner">
+        <div class="image-with-text__image-media aspect-ratio aspect-ratio--adapt" style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;">
+          {%- if results_image != blank -%}
+            {{
+              results_image
+              | image_url: width: 1600
+              | image_tag:
+                loading: 'lazy',
+                sizes: '(min-width: 768px) 50vw, 100vw',
+                widths: '600, 900, 1400, 1600',
+                alt: results_alt
+            }}
+          {%- else -%}
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder_svg_tag' }}
+          {%- endif -%}
+        </div>
+      </div>
+      <div class="image-with-text__content image-with-text__inner">
+        <div class="image-with-text__content--inner">
+          <h2 class="ge-skin-results__label">{{ 'products.skincare.results_label' | t }}</h2>
+          <ul class="ge-skin-results__list">
+            {%- for block in section.blocks -%}
+              <li class="ge-skin-stat" {{ block.shopify_attributes }}>
+                <div class="ge-skin-ring" style="--pct: {{ block.settings.percent }};" aria-hidden="true">
+                  <span>{{ block.settings.percent }}%</span>
+                </div>
+                <p>
+                  <span class="ge-skin-sr">{{ block.settings.percent }}%. </span>
+                  {{ block.settings.text | escape }}
+                </p>
+              </li>
+            {%- endfor -%}
+          </ul>
+          {%- if section.settings.footnote != blank -%}
+            <p class="ge-skin-results__note">{{ section.settings.footnote | escape }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Skincare results",
+  "tag": "section",
+  "class": "section-skincare-results",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Leave blank to use the product photo."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text"
+    },
+    {
+      "type": "textarea",
+      "id": "footnote",
+      "label": "Footnote",
+      "default": "*Within an independent consumer perception study of 30 people (ages 18-55), measuring performance immediately."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "result",
+      "name": "Result",
+      "settings": [
+        {
+          "type": "range",
+          "id": "percent",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "label": "Percent",
+          "default": 100
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Statement",
+          "default": "of participants agreed it felt lightweight and comfortable on the skin*"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Skincare results",
+      "blocks": [
+        {
+          "type": "result",
+          "settings": {
+            "percent": 100,
+            "text": "of participants agreed it felt lightweight and comfortable on the skin*"
+          }
+        },
+        {
+          "type": "result",
+          "settings": {
+            "percent": 96,
+            "text": "of participants agreed it did not pill*"
+          }
+        },
+        {
+          "type": "result",
+          "settings": {
+            "percent": 96,
+            "text": "of participants agreed it did not cause breakouts*"
+          }
+        },
+        {
+          "type": "result",
+          "settings": {
+            "percent": 93,
+            "text": "of participants agreed it layered well under makeup*"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

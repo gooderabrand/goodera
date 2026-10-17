@@ -1,0 +1,71 @@
+{% doc %}
+  Stars and benefit chips under the product title.
+  Stars render only when a review app has a rating above zero.
+  Chips use product.metafields.custom.benefits when it is a list or newline text.
+  Otherwise the Sunday Reset products show the sample row.
+  @param {product} product - Product whose rating and benefits are shown
+  @example
+  {% render 'skincare-benefits', product: product %}
+{% enddoc %}
+
+{{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign rating_number = 0
+  assign rating_count = 0
+  assign rating_value = product.metafields.reviews.rating.value.rating
+  if rating_value != blank
+    assign rating_number = rating_value | plus: 0
+  endif
+  if product.metafields.reviews.rating_count.value != blank
+    assign rating_count = product.metafields.reviews.rating_count.value
+  elsif product.metafields.reviews.rating_count != blank
+    assign rating_count = product.metafields.reviews.rating_count
+  endif
+  if rating_number == 0
+    assign badge = product.metafields.judgeme.badge.value
+    if badge != blank
+      assign badge_rating = badge | split: "data-average-rating='" | last | split: "'" | first | plus: 0
+      assign badge_count = badge | split: "data-number-of-reviews='" | last | split: "'" | first | plus: 0
+      if badge_rating > 0
+        assign rating_number = badge_rating
+        assign rating_count = badge_count
+      endif
+    endif
+  endif
+  assign benefits = product.metafields.custom.benefits
+-%}
+
+<div class="ge-skin-buy-meta">
+  {%- if rating_number > 0 -%}
+    <p class="ge-skin-stars">
+      <span class="star-rating" style="--star-rating: {{ rating_number }};" aria-hidden="true"></span>
+      <span>{{ 'products.product.reviews' | t: count: rating_count }}</span>
+    </p>
+  {%- endif -%}
+
+  {%- if benefits.type contains 'list.' and benefits.value != blank -%}
+    <ul class="ge-skin-benefits">
+      {%- for item in benefits.value -%}
+        <li>{{ item | escape }}</li>
+      {%- endfor -%}
+    </ul>
+  {%- elsif benefits.value != blank -%}
+    <ul class="ge-skin-benefits">
+      {%- assign lines = benefits.value | newline_to_br | split: '<br />' -%}
+      {%- for line in lines -%}
+        {%- assign line_text = line | strip -%}
+        {%- if line_text != blank -%}
+          <li>{{ line_text | escape }}</li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  {%- elsif product.handle == 'sunday-reset-overnight-glow-mask' or product.handle == 'sunday-reset-ritual-kit' -%}
+    <ul class="ge-skin-benefits">
+      <li>{{ 'products.skincare.benefit_texture' | t }}</li>
+      <li>{{ 'products.skincare.benefit_smoothing' | t }}</li>
+      <li>{{ 'products.skincare.benefit_glowing' | t }}</li>
+      <li>{{ 'products.skincare.benefit_moisturizing' | t }}</li>
+    </ul>
+  {%- endif -%}
+</div>

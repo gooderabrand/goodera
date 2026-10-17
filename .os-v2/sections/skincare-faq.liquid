@@ -1,0 +1,205 @@
+{{ 'sunday-reset-beta.css' | asset_url | stylesheet_tag }}
+{{ 'ge-sunday-reset-type.css' | asset_url | stylesheet_tag }}
+{{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign faq_image = section.settings.image
+  if faq_image == blank and product.images.size > 1
+    assign faq_image = product.images[1]
+  endif
+  if faq_image == blank
+    assign faq_image = product.featured_image
+  endif
+  assign faq_alt = ''
+  if faq_image != blank
+    assign faq_alt = faq_image.alt
+  endif
+  if faq_alt == blank
+    assign faq_alt = product.title
+  endif
+  assign closer_heading = section.settings.closer_heading
+  if closer_heading == blank
+    assign closer_heading = 'products.skincare.closer_look' | t: product: product.title
+  endif
+  assign closer_sub = section.settings.subheading
+  if closer_sub == blank
+    assign closer_sub = 'products.skincare.closer_sub' | t
+  endif
+  assign faq_label = section.settings.faq_label
+  if faq_label == blank
+    assign faq_label = 'products.skincare.faq_label' | t
+  endif
+-%}
+
+<section class="sr-beta__faq ge-skin-faq" id="faq" data-ge-skin-faq aria-labelledby="SkinFaqTitle-{{ section.id }}">
+  <div class="ge-skin-faq__grid">
+    <div class="ge-skin-faq__media">
+      {%- if faq_image != blank -%}
+        {{
+          faq_image
+          | image_url: width: 1600
+          | image_tag:
+            loading: 'lazy',
+            sizes: '(min-width: 990px) 46vw, 100vw',
+            widths: '600, 900, 1400, 1600',
+            alt: faq_alt
+        }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder_svg_tag' }}
+      {%- endif -%}
+    </div>
+    <div class="ge-skin-faq__copy">
+      {%- if faq_label != blank -%}
+        <p class="ge-skin-faq__label">{{ faq_label | escape }}</p>
+      {%- endif -%}
+      <h2 class="ge-skin-faq__title" id="SkinFaqTitle-{{ section.id }}">{{ closer_heading | escape }}</h2>
+      {%- if closer_sub != blank -%}
+        <p class="ge-skin-faq__sub">{{ closer_sub | escape }}</p>
+      {%- endif -%}
+    <ul class="sr-beta__faq-list">
+      {%- for block in section.blocks -%}
+        {%- assign panel_id = 'SkinFaq-' | append: section.id | append: '-' | append: block.id -%}
+        <li class="sr-beta__faq-item" {{ block.shopify_attributes }}>
+          <button
+            type="button"
+            class="sr-beta__faq-toggle"
+            data-sr-faq-toggle
+            aria-expanded="false"
+            aria-controls="{{ panel_id }}"
+            id="{{ panel_id }}-btn"
+          >
+            <span>{{ block.settings.question | escape }}</span>
+            <span class="sr-beta__faq-chevron" aria-hidden="true"></span>
+          </button>
+          <p class="sr-beta__faq-panel" id="{{ panel_id }}" role="region" aria-labelledby="{{ panel_id }}-btn" hidden>{{ block.settings.answer | escape }}</p>
+        </li>
+      {%- endfor -%}
+    </ul>
+    </div>
+  </div>
+</section>
+
+{% javascript %}
+(() => {
+  const bind = (root) => {
+    const scope = root && root.querySelectorAll ? root : document;
+    scope.querySelectorAll('[data-ge-skin-faq] [data-sr-faq-toggle]').forEach((button) => {
+      if (button.dataset.skinFaqBound === 'true') return;
+      button.dataset.skinFaqBound = 'true';
+      const panelId = button.getAttribute('aria-controls');
+      const panel = panelId ? document.getElementById(panelId) : null;
+      if (!panel) return;
+      const setOpen = (open) => {
+        button.setAttribute('aria-expanded', open ? 'true' : 'false');
+        button.classList.toggle('is-open', open);
+        panel.hidden = !open;
+      };
+      setOpen(false);
+      button.addEventListener('click', (event) => {
+        event.stopImmediatePropagation();
+        setOpen(button.getAttribute('aria-expanded') !== 'true');
+      }, true);
+    });
+  };
+  bind(document);
+  document.addEventListener('shopify:section:load', (event) => bind(event.target));
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Skincare FAQ",
+  "tag": "section",
+  "class": "section-skincare-faq",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Beside the questions on a wide screen. Hidden on mobile. Leave blank to use a product photo."
+    },
+    {
+      "type": "text",
+      "id": "faq_label",
+      "label": "FAQ label",
+      "info": "Sits above the heading. Leave blank for “Frequently asked questions”."
+    },
+    {
+      "type": "text",
+      "id": "closer_heading",
+      "label": "Heading",
+      "info": "Leave blank for “A closer look at” plus the product title."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What does it feel like on skin?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Lightweight and comfortable, and made to sit as the last step in a routine."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Skincare FAQ",
+      "blocks": [
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What does it feel like on skin?",
+            "answer": "Lightweight and comfortable. It is meant to sit as the last step without a heavy finish."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Will it pill under makeup?",
+            "answer": "In an independent consumer study, 96% of participants agreed it did not pill."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Can I use it on sensitive skin?",
+            "answer": "It is suitable for dry and sensitive skin. Stop using it if irritation occurs."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Where does it go in my routine?",
+            "answer": "Cleanse, treat, then moisturize. Apply this as the protect step."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How do I apply it?",
+            "answer": "Apply evenly over skin as the final step. Reapply every two hours when you are in the sun."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

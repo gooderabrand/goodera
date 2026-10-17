@@ -1,0 +1,30 @@
+{%- if enable_sorting -%}
+	{%- assign ge_sort_by = results.sort_by | default: results.default_sort_by -%}
+	<div class="side-panel facet-drawer ge-facet-drawer" id="Sort-Drawer" tabindex="-1">
+		<div class="side-panel-inner">
+			<div class="side-panel-header">
+				<div>
+					<h4 class="body-font">{{ 'products.facets.sort_by_label' | t }}</h4>
+					<side-panel-close class="side-panel-close">{%- render 'svg-icons' with 'close' -%}</side-panel-close>
+				</div>
+			</div>
+			<div class="side-panel-content">
+				<ul class="ge-sort-drawer__list" role="listbox" aria-label="{{ 'products.facets.sort_by_label' | t }}">
+					{%- for option in results.sort_options -%}
+						<li>
+							<button
+								type="button"
+								class="ge-sort-drawer__option{% if option.value == ge_sort_by %} is-active{% endif %}"
+								data-sort-value="{{ option.value | escape }}"
+								role="option"
+								aria-selected="{% if option.value == ge_sort_by %}true{% else %}false{% endif %}"
+							>
+								{{ option.name | escape }}
+							</button>
+						</li>
+					{%- endfor -%}
+				</ul>
+			</div>
+		</div>
+	</div>
+{%- endif -%}
