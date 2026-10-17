@@ -1,36 +1,31 @@
 /*
-  Sunday Reset timeline + FAQ use the same large row type as the
-  collection filter drawer (Sort By, Variant, Product type).
+  Sunday Reset page only. The skincare product page has its own scale in
+  skincare-pdp.css, so these rows cannot enlarge Key Ingredients or the FAQ.
 */
 
-.template-page-sunday-reset-3d .sr-beta__step-heading,
-.template-product-skincare .sr-beta__step-heading {
+.template-page-sunday-reset-3d .sr-beta__step-heading {
   font-size: 1.7rem;
   font-weight: 500;
   letter-spacing: -0.03em;
   line-height: 1.15;
 }
 
-.template-page-sunday-reset-3d .sr-beta__step-num,
-.template-product-skincare .sr-beta__step-num {
+.template-page-sunday-reset-3d .sr-beta__step-num {
   font-size: 0.95rem;
   letter-spacing: 0.06em;
 }
 
-.template-page-sunday-reset-3d .sr-beta__step-text,
-.template-product-skincare .sr-beta__step-text {
+.template-page-sunday-reset-3d .sr-beta__step-text {
   margin-top: 0.8rem;
   font-size: 1.125rem;
   line-height: 1.5;
 }
 
-.template-page-sunday-reset-3d .sr-beta__step-node,
-.template-product-skincare .sr-beta__step-node {
+.template-page-sunday-reset-3d .sr-beta__step-node {
   top: 0.55rem;
 }
 
-.template-page-sunday-reset-3d .sr-beta__faq-toggle,
-.template-product-skincare .sr-beta__faq-toggle {
+.template-page-sunday-reset-3d .sr-beta__faq-toggle {
   padding: 1.35rem 0;
   font-size: 1.7rem;
   font-weight: 500;
@@ -38,15 +33,13 @@
   line-height: 1.15;
 }
 
-.template-page-sunday-reset-3d .sr-beta__faq-panel,
-.template-product-skincare .sr-beta__faq-panel {
+.template-page-sunday-reset-3d .sr-beta__faq-panel {
   margin-bottom: 1.35rem;
   font-size: 1.125rem;
   line-height: 1.5;
 }
 
-.template-page-sunday-reset-3d .sr-beta__faq-chevron,
-.template-product-skincare .sr-beta__faq-chevron {
+.template-page-sunday-reset-3d .sr-beta__faq-chevron {
   width: 0.7rem;
   height: 0.7rem;
 }
