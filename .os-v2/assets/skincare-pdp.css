@@ -121,7 +121,16 @@ body.template-product-skincare {
   box-shadow: none;
   cursor: default;
   pointer-events: none;
-  opacity: 0.38;
+  opacity: 1;
+}
+
+.ge-skin-offer.is-unavailable .ge-skin-offer__name,
+.ge-skin-offer.is-unavailable .ge-skin-offer__price {
+  color: #17160f;
+}
+
+.ge-skin-offer.is-unavailable .ge-skin-offer__detail {
+  color: #6e6e73;
 }
 
 .ge-skin-reassure {
