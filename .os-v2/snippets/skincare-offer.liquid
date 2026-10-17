@@ -36,18 +36,18 @@
   if is_kit
     assign one_title = block.settings.kit_one_title
     assign one_detail = block.settings.kit_one_detail
-    assign one_volume = block.settings.kit_one_volume
+    assign one_volume = block.settings.kit_one_volume | default: '8 mL | 0.28 fl oz'
     assign bundle_title = block.settings.kit_bundle_title
     assign bundle_detail = block.settings.kit_bundle_detail
-    assign bundle_volume = block.settings.kit_bundle_volume
+    assign bundle_volume = block.settings.kit_bundle_volume | default: '16 mL | 0.56 fl oz'
     assign bundle_badge = block.settings.kit_badge
   else
     assign one_title = block.settings.mask_one_title
     assign one_detail = block.settings.mask_one_detail
-    assign one_volume = block.settings.mask_one_volume
+    assign one_volume = block.settings.mask_one_volume | default: '50 mL | 1.69 fl oz'
     assign bundle_title = block.settings.mask_bundle_title
     assign bundle_detail = block.settings.mask_bundle_detail
-    assign bundle_volume = block.settings.mask_bundle_volume
+    assign bundle_volume = block.settings.mask_bundle_volume | default: '100 mL | 3.38 fl oz'
     assign bundle_badge = block.settings.mask_badge
   endif
   assign show_bundle = block.settings.show_bundle
