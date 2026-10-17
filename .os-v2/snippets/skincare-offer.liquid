@@ -207,7 +207,16 @@
       }
       if (record.one) apply('1');
       else if (record.two) apply('2');
-      else if (qty) qty.value = '1';
+      else if (qty) {
+        qty.value = '1';
+        var atcPrice = document.querySelector('#product-form-{{ section.id }} [data-ge-atc-price]');
+        if (atcPrice && record.priceOne) atcPrice.textContent = record.priceOne;
+        var sticky = document.getElementById('price-{{ section.id }}--sticky');
+        if (sticky && record.priceOne) {
+          var amount = sticky.querySelector('ins .amount') || sticky.querySelector('.amount');
+          if (amount) amount.textContent = record.priceOne;
+        }
+      }
     };
 
     root.querySelectorAll('input[type="radio"]').forEach(function (radio) {
