@@ -1,6 +1,7 @@
 {% doc %}
-  Compact shipping, returns, and support buttons under the skincare add-to-bag button.
+  Compact shipping, returns, support, and dispatch buttons under the skincare add-to-bag button.
   Each button opens a drawer. Shipping and returns load the shop policies. Help loads the contact page.
+  Dispatch shows its own short line.
   The short line on the button is the fallback when that policy or page has no body.
   @param {block} block - Theme editor block with labels and detail lines
   @example
@@ -75,6 +76,22 @@
       </button>
     </li>
   {%- endif -%}
+  {%- if block.settings.dispatch_label != blank -%}
+    <li>
+      <button type="button" data-ge-policy-open="dispatch" aria-haspopup="dialog" aria-controls="GePolicyDrawer">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+          <path d="M12 8.25V12l2.75 1.75" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <span>
+          <span class="ge-skin-reassure__label">{{ block.settings.dispatch_label | escape }}</span>
+          {%- if block.settings.dispatch_text != blank -%}
+            <span class="ge-skin-reassure__text">{{ block.settings.dispatch_text | escape }}</span>
+          {%- endif -%}
+        </span>
+      </button>
+    </li>
+  {%- endif -%}
 </ul>
 
 <div class="side-panel ge-policy-drawer" id="GePolicyDrawer" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="GePolicyTitle">
@@ -109,6 +126,13 @@
           {{ help_body }}
         {%- elsif block.settings.support_text != blank -%}
           <p>{{ block.settings.support_text | escape }}</p>
+        {%- endif -%}
+      </div>
+      <div class="rte ge-policy-drawer__panel" data-ge-policy-panel="dispatch" hidden>
+        {%- if block.settings.dispatch_text != blank -%}
+          <p>{{ block.settings.dispatch_text | escape }}</p>
+        {%- elsif block.settings.dispatch_label != blank -%}
+          <p>{{ block.settings.dispatch_label | escape }}</p>
         {%- endif -%}
       </div>
     </div>

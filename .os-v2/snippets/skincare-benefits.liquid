@@ -1,8 +1,9 @@
 {% doc %}
-  Stars and benefit chips under the product title.
+  Stars, benefit chips, then the short description under the product title.
   Stars render only when a review app has a rating above zero.
   Chips read product.metafields.custom.benefit_highlights.
   An empty list hides the chips.
+  The short description reads product.metafields.custom.short_description and stays under the chips.
   @param {product} product - Product whose rating and benefits are shown
   @example
   {% render 'skincare-benefits', product: product %}
@@ -32,6 +33,10 @@
     endif
   endif
   assign benefits = product.metafields.custom.benefit_highlights
+  assign intro = ''
+  if product.template_suffix == 'skincare'
+    assign intro = product.metafields.custom.short_description.value | strip
+  endif
 -%}
 
 {%- capture benefit_items -%}
@@ -46,7 +51,7 @@
 {%- endcapture -%}
 {%- assign benefit_items = benefit_items | strip -%}
 
-{%- if rating_number > 0 or benefit_items != blank -%}
+{%- if rating_number > 0 or benefit_items != blank or intro != blank -%}
   {{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
   <div class="ge-skin-buy-meta">
     {%- if rating_number > 0 -%}
@@ -59,6 +64,9 @@
       <ul class="ge-skin-benefits">
         {{ benefit_items }}
       </ul>
+    {%- endif -%}
+    {%- if intro != blank -%}
+      <p class="ge-skin-intro">{{ intro | escape | newline_to_br }}</p>
     {%- endif -%}
   </div>
 {%- endif -%}

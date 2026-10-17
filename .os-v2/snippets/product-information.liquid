@@ -50,12 +50,6 @@
             {%- endif -%}
           {%- endif -%}
         </div>
-        {%- if product.template_suffix == 'skincare' -%}
-          {%- assign ge_intro = product.metafields.custom.short_description.value | strip -%}
-          {%- if ge_intro != blank -%}
-            <p class="ge-skin-intro">{{ ge_intro | escape | newline_to_br }}</p>
-          {%- endif -%}
-        {%- endif -%}
         {%- comment -%} Ratings hidden for now — low review volume; re-enable via block setting later {%- endcomment -%}
       </div>
     {%- when 'description' -%}
