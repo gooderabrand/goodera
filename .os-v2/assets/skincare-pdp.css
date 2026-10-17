@@ -3,7 +3,7 @@
   --ge-page-edge is that edge. Text, the product rail, and an image that
   sits on the white page (the how-to video) start there.
   --ge-page-inset is the extra step inside a gray band. The band itself
-  still ends on the page edge. The results photo and the routine steps
+  still ends on the page edge.   The results photo, the routine steps, and the FAQ
   use this inner step so they share one line.
   --ge-section-space is the white gap around a section, so a gray band
   reads as its own container.
@@ -540,7 +540,7 @@ body.open-ge-policy #wrapper .click-capture {
 
 .template-product-skincare .ge-skin-howto {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.4fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   align-items: start;
 }
@@ -576,14 +576,14 @@ body.open-ge-policy #wrapper .click-capture {
   box-sizing: border-box;
   aspect-ratio: 1 / 1.45;
   overflow: hidden;
-  padding: clamp(1.15rem, 2vw, 2rem) clamp(1rem, 1.5vw, 1.35rem);
+  padding: clamp(1.5rem, 3vw, 3rem);
   background: var(--ge-band, #f5f5f7);
   text-align: center;
 }
 
 .template-product-skincare .ge-skin-howto__copy-inner {
   width: 100%;
-  max-width: none;
+  max-width: 28rem;
 }
 
 .template-product-skincare .ge-skin-howto__copy .sr-beta__eyebrow,
@@ -1131,7 +1131,8 @@ body.template-product-skincare.template-product-clothing .product-form__checkout
 
 body.template-product-skincare .section-skincare-results,
 body.template-product-skincare .section-skincare-routine,
-body.template-product-skincare .section-skincare-how-to {
+body.template-product-skincare .section-skincare-how-to,
+body.template-product-skincare .section-skincare-faq {
   box-sizing: border-box;
   width: auto;
   max-width: none;
@@ -1141,8 +1142,7 @@ body.template-product-skincare .section-skincare-how-to {
   border: 0;
 }
 
-body.template-product-skincare .section-skincare-key-ingredients,
-body.template-product-skincare .section-skincare-faq {
+body.template-product-skincare .section-skincare-key-ingredients {
   box-sizing: border-box;
   width: auto;
   max-width: none;
@@ -1164,7 +1164,8 @@ body.template-product-skincare .section-recently-viewed-products {
 
 body.template-product-skincare .section-skincare-results,
 body.template-product-skincare .section-skincare-routine,
-body.template-product-skincare .section-skincare-how-to {
+body.template-product-skincare .section-skincare-how-to,
+body.template-product-skincare .section-skincare-faq {
   padding-block: var(--ge-section-space, 64px);
 }
 
@@ -1174,8 +1175,7 @@ body.template-product-skincare .section-skincare-how-to {
     padding: 42px 18px !important;
   }
 
-  body.template-product-skincare .section-skincare-key-ingredients,
-  body.template-product-skincare .section-skincare-faq {
+  body.template-product-skincare .section-skincare-key-ingredients {
     padding: 0 !important;
   }
 }
@@ -1226,8 +1226,16 @@ body.template-product-skincare .section-skincare-results .ge-skin-ring span {
 body.template-product-skincare .section-skincare-faq .ge-skin-faq,
 body.template-product-skincare .section-skincare-faq .sr-beta__inner,
 body.template-product-skincare .section-skincare-faq .sr-beta__faq {
+  display: block;
+  min-height: 0;
+  height: auto;
   padding: 0;
   background: transparent;
+}
+
+body.template-product-skincare .ge-skin-faq__inner {
+  box-sizing: border-box;
+  padding: var(--ge-page-inset, 64px);
 }
 
 body.template-product-skincare .section-recently-viewed-products .ge-commerce-section {
@@ -1447,18 +1455,16 @@ body.template-product-skincare .sr-beta__step.is-current .sr-beta__step-node {
   }
 }
 
-body.template-product-skincare .ge-skin-faq__grid,
 body.template-product-skincare .ge-skin-key__grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 0;
-  align-items: stretch;
+  align-items: center;
 }
 
-body.template-product-skincare .ge-skin-faq__media,
 body.template-product-skincare .ge-skin-key__media {
   position: relative;
-  align-self: stretch;
+  align-self: center;
   width: 100%;
   min-width: 0;
   aspect-ratio: 1 / 1;
@@ -1468,8 +1474,6 @@ body.template-product-skincare .ge-skin-key__media {
   background: var(--ge-band, #f5f5f7);
 }
 
-body.template-product-skincare .ge-skin-faq__media img,
-body.template-product-skincare .ge-skin-faq__media svg,
 body.template-product-skincare .ge-skin-key__media img,
 body.template-product-skincare .ge-skin-key__media svg {
   position: absolute;
@@ -1479,13 +1483,12 @@ body.template-product-skincare .ge-skin-key__media svg {
   object-fit: cover;
 }
 
-body.template-product-skincare .ge-skin-faq__copy,
 body.template-product-skincare .ge-skin-key__copy {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-self: center;
   min-width: 0;
-  min-height: 100%;
   padding: clamp(2rem, 4vw, 4.5rem) clamp(1.75rem, 4vw, 4.75rem);
   box-sizing: border-box;
 }
@@ -1610,12 +1613,10 @@ body.template-product-skincare .section-skincare-key-ingredients .sr-beta__faq-t
 }
 
 @media (max-width: 989px) {
-  body.template-product-skincare .ge-skin-faq__grid,
   body.template-product-skincare .ge-skin-key__grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  body.template-product-skincare .ge-skin-faq__copy,
   body.template-product-skincare .ge-skin-key__copy {
     padding: 1.75rem 18px 2.5rem;
   }

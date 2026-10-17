@@ -1,12 +1,18 @@
 /*
  * ------------------------------------------------------------
- * Skincare PDP — the clothing product page, plus highlights,
- * specifications, results, routine, how-to video, and FAQ.
- * Assigned via product template suffix "skincare".
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
 {
   "sections": {
+    "skincare_bridge": {
+      "type": "skincare-pdp-bridge",
+      "settings": {}
+    },
     "breadcrumbs": {
       "type": "breadcrumbs",
       "disabled": true,
@@ -77,19 +83,20 @@
             "sizing_guide_variant": "Size",
             "sizing_guide_text": "",
             "sizing_guide_icon": "none",
-            "sizing_guide_page": ""
-          }
-        },
-        "model_fit": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "{% render 'product-model-fit', product: product %}"
+            "sizing_guide_page": "",
+            "custom_liquid": ""
           }
         },
         "size": {
           "type": "custom_liquid",
           "settings": {
             "custom_liquid": "{% render 'skincare-size', product: product %}"
+          }
+        },
+        "model_fit": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'product-model-fit', product: product %}"
           }
         },
         "offer": {
@@ -120,7 +127,7 @@
         "reassure": {
           "type": "skincare_reassure",
           "settings": {
-            "shipping_label": "Free shipping over $50",
+            "shipping_label": "FREE delivery",
             "shipping_text": "A little more good, delivered.",
             "shipping_link": "",
             "returns_label": "Returns & Support",
@@ -129,8 +136,8 @@
             "support_label": "Need a hand?",
             "support_text": "Get in touch with us",
             "support_link": "",
-            "dispatch_label": "24 hr ships next day",
-            "dispatch_text": ""
+            "dispatch_label": "Ships Next Day",
+            "dispatch_text": "Order today. On its way tomorrow."
           }
         },
         "complementary_cCC3WK": {
@@ -138,6 +145,16 @@
           "settings": {
             "block_heading": "Pairs well with",
             "product_list_limit": 3
+          }
+        },
+        "highlights": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Highlights",
+            "open": true,
+            "content": "",
+            "page": "",
+            "custom_liquid": "{% render 'skincare-highlights', product: product %}"
           }
         },
         "0041f1e3-030f-4c9d-ae87-ddb7c2fa4b2b": {
@@ -150,16 +167,26 @@
             "custom_liquid": "{% render 'skincare-description', product: product %}"
           }
         },
+        "specifications": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Specifications",
+            "open": false,
+            "content": "",
+            "page": "",
+            "custom_liquid": "{% render 'skincare-specs', product: product %}"
+          }
+        },
         "1c29dd76-669f-4b4a-9883-a577855921eb": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "heading": "Fit and Fabric",
             "open": false,
             "content": "",
             "page": "",
             "custom_liquid": "{% if product.metafields.custom.fabric_fit != blank %}{{ product.metafields.custom.fabric_fit | metafield_tag }}{% else %}<p>Fit and fabric details coming soon.</p>{% endif %}"
-          },
-          "disabled": true
+          }
         },
         "e49f0a1b-c60d-4e4a-b3c1-100c37771e4a": {
           "type": "collapsible_tab",
@@ -193,26 +220,6 @@
           "type": "share",
           "disabled": true,
           "settings": {}
-        },
-        "highlights": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Highlights",
-            "open": true,
-            "content": "",
-            "page": "",
-            "custom_liquid": "{% render 'skincare-highlights', product: product %}"
-          }
-        },
-        "specifications": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Specifications",
-            "open": false,
-            "content": "",
-            "page": "",
-            "custom_liquid": "{% render 'skincare-specs', product: product %}"
-          }
         }
       },
       "block_order": [
@@ -248,24 +255,10 @@
         "display_captions": false,
         "hide_variants": false,
         "lightbox": false,
+        "lightbox_thumbnails": true,
+        "lightbox_product_info": true,
         "enable_video_looping": false
       }
-    },
-    "recently_viewed_products_pdPAhT": {
-      "type": "recently-viewed-products",
-      "settings": {
-        "heading": "Recently Viewed",
-        "heading_left": true,
-        "description": "",
-        "full_width": true,
-        "mobile_swipe": true,
-        "disable_top_spacing": false,
-        "disable_bottom_spacing": false
-      }
-    },
-    "skincare_bridge": {
-      "type": "skincare-pdp-bridge",
-      "settings": {}
     },
     "skincare_results": {
       "type": "skincare-results",
@@ -318,6 +311,8 @@
           "settings": {
             "label": "Step 1",
             "name": "Cleanse",
+            "product": "",
+            "link": "",
             "text": "Start with clean skin.",
             "current": false
           }
@@ -327,6 +322,8 @@
           "settings": {
             "label": "Step 2",
             "name": "Treat",
+            "product": "",
+            "link": "",
             "text": "Apply any treatment while skin is still fresh.",
             "current": false
           }
@@ -336,6 +333,8 @@
           "settings": {
             "label": "Step 3",
             "name": "Moisturize",
+            "product": "",
+            "link": "",
             "text": "Seal the routine before the last step.",
             "current": false
           }
@@ -345,6 +344,8 @@
           "settings": {
             "label": "Step 4",
             "name": "",
+            "product": "",
+            "link": "",
             "text": "This is the last step.",
             "current": true
           }
@@ -374,6 +375,7 @@
     "skincare_key_ingredients": {
       "type": "skincare-key-ingredients",
       "settings": {
+        "image": "shopify://shop_images/Barrier_shield_cream_2_webp.jpg",
         "heading": "Key Ingredients",
         "inci_label": "Full ingredient list"
       }
@@ -425,7 +427,20 @@
         "faq_5"
       ],
       "settings": {
+        "faq_label": "",
+        "closer_heading": "",
         "subheading": "Texture, skin type, and how it fits the rest of your routine."
+      }
+    },
+    "recently_viewed_products_pdPAhT": {
+      "type": "recently-viewed-products",
+      "settings": {
+        "heading": "Recently Viewed",
+        "heading_is_era": false,
+        "editorial_line": "",
+        "description": "",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
       }
     }
   },

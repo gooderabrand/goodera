@@ -11,10 +11,6 @@
   "type": "footer",
   "name": "Footer group",
   "sections": {
-    "179209888464a85cda": {
-      "type": "apps",
-      "settings": {}
-    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -104,7 +100,6 @@
     }
   },
   "order": [
-    "179209888464a85cda",
     "footer",
     "destination_switcher"
   ]

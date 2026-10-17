@@ -44,6 +44,22 @@
       </button>
     </li>
   {%- endif -%}
+  {%- if block.settings.dispatch_label != blank -%}
+    <li>
+      <button type="button" data-ge-policy-open="dispatch" aria-haspopup="dialog" aria-controls="GePolicyDrawer">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+          <path d="M12 8.25V12l2.75 1.75" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <span>
+          <span class="ge-skin-reassure__label">{{ block.settings.dispatch_label | escape }}</span>
+          {%- if block.settings.dispatch_text != blank -%}
+            <span class="ge-skin-reassure__text">{{ block.settings.dispatch_text | escape }}</span>
+          {%- endif -%}
+        </span>
+      </button>
+    </li>
+  {%- endif -%}
   {%- if block.settings.returns_label != blank -%}
     <li>
       <button type="button" data-ge-policy-open="returns" aria-haspopup="dialog" aria-controls="GePolicyDrawer">
@@ -71,22 +87,6 @@
           <span class="ge-skin-reassure__label">{{ block.settings.support_label | escape }}</span>
           {%- if block.settings.support_text != blank -%}
             <span class="ge-skin-reassure__text">{{ block.settings.support_text | escape }}</span>
-          {%- endif -%}
-        </span>
-      </button>
-    </li>
-  {%- endif -%}
-  {%- if block.settings.dispatch_label != blank -%}
-    <li>
-      <button type="button" data-ge-policy-open="dispatch" aria-haspopup="dialog" aria-controls="GePolicyDrawer">
-        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
-          <circle cx="12" cy="12" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
-          <path d="M12 8.25V12l2.75 1.75" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-        </svg>
-        <span>
-          <span class="ge-skin-reassure__label">{{ block.settings.dispatch_label | escape }}</span>
-          {%- if block.settings.dispatch_text != blank -%}
-            <span class="ge-skin-reassure__text">{{ block.settings.dispatch_text | escape }}</span>
           {%- endif -%}
         </span>
       </button>
