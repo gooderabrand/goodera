@@ -27,91 +27,6 @@ body.template-product-skincare {
   line-height: 1.45;
 }
 
-.ge-skin-field__text--eyebrow {
-  margin: 0 0 0.2rem;
-  color: var(--ge-muted, #6e6e73);
-  font-size: var(--ge-role-meta, 0.8125rem);
-  font-weight: 500;
-  letter-spacing: 0.01em;
-}
-
-.ge-skin-offers {
-  margin: 0.85rem 0 0.75rem;
-}
-
-.ge-skin-offers__grid {
-  display: grid;
-  gap: 8px;
-}
-
-@media (min-width: 750px) {
-  .ge-skin-offers__grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.ge-skin-offer {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin: 0;
-  padding: 0.85rem 0.9rem;
-  border: 1px solid var(--ge-border, #e5e5ea);
-  border-radius: 14px;
-  background: #fff;
-  cursor: pointer;
-}
-
-.ge-skin-offer.is-selected {
-  border-color: #17160f;
-  box-shadow: inset 0 0 0 1px #17160f;
-}
-
-.ge-skin-offer input {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.ge-skin-offer__copy,
-.ge-skin-offer__name,
-.ge-skin-offer__detail,
-.ge-skin-offer__badge {
-  display: block;
-}
-
-.ge-skin-offer__name {
-  font-size: 0.95rem;
-  font-weight: 650;
-  letter-spacing: -0.02em;
-  line-height: 1.25;
-}
-
-.ge-skin-offer__detail,
-.ge-skin-offer__price {
-  margin-top: 0.15rem;
-  color: var(--ge-muted, #6e6e73);
-  font-size: 0.84rem;
-  line-height: 1.35;
-}
-
-.ge-skin-offer__price {
-  flex: 0 0 auto;
-  margin-top: 0;
-  color: #17160f;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.ge-skin-offer__badge {
-  margin-bottom: 0.25rem;
-  color: #17160f;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
 .ge-skin-reassure {
   display: flex;
   flex-wrap: wrap;
@@ -149,81 +64,6 @@ body.template-product-skincare {
   color: var(--ge-muted, #6e6e73);
   font-size: 0.78rem;
   line-height: 1.35;
-}
-
-.ge-skin-format {
-  margin: 0.85rem 0 0;
-  color: var(--ge-muted, #6e6e73);
-  font-size: 0.88rem;
-  line-height: 1.4;
-}
-
-.ge-skin-format a {
-  color: #17160f;
-  font-weight: 600;
-}
-
-.ge-skin-format__meta {
-  display: block;
-  margin-top: 0.15rem;
-}
-
-.ge-skin-good__intro {
-  max-width: 38rem;
-  margin-bottom: 1.25rem;
-}
-
-.ge-skin-good__intro h2 {
-  margin: 0 0 0.4rem;
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  font-weight: 650;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-}
-
-.ge-skin-good__intro p,
-.ge-skin-good__card p,
-.ge-skin-story__support {
-  margin: 0;
-  color: var(--ge-muted, #6e6e73);
-  font-size: 0.98rem;
-  line-height: 1.45;
-}
-
-.ge-skin-good__grid {
-  display: grid;
-  gap: 12px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-@media (min-width: 750px) {
-  .ge-skin-good__grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-.ge-skin-good__card {
-  padding: 1.1rem 1rem 1.2rem;
-  background: var(--ge-band, #f5f5f7);
-}
-
-.ge-skin-good__card h3 {
-  margin: 0.7rem 0 0.35rem;
-  font-size: 1.05rem;
-  font-weight: 650;
-  letter-spacing: -0.02em;
-}
-
-.ge-skin-good__icon {
-  display: grid;
-  place-items: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  border: 1px solid var(--ge-border, #e5e5ea);
-  border-radius: 999px;
-  background: #fff;
 }
 
 .ge-skin-field__list {
@@ -1013,9 +853,7 @@ body.template-product-skincare.template-product-clothing .product-form__checkout
 body.template-product-skincare .section-skincare-results,
 body.template-product-skincare .section-skincare-routine,
 body.template-product-skincare .section-skincare-how-to,
-body.template-product-skincare .section-skincare-faq,
-body.template-product-skincare .section-skincare-editorial,
-body.template-product-skincare .section-skincare-good-for {
+body.template-product-skincare .section-skincare-faq {
   box-sizing: border-box;
   width: auto;
   max-width: none;
@@ -1037,18 +875,14 @@ body.template-product-skincare .section-recently-viewed-products {
 
 body.template-product-skincare .section-skincare-results,
 body.template-product-skincare .section-skincare-routine,
-body.template-product-skincare .section-skincare-how-to,
-body.template-product-skincare .section-skincare-editorial,
-body.template-product-skincare .section-skincare-good-for {
+body.template-product-skincare .section-skincare-how-to {
   padding-block: var(--ge-section-space, 64px);
 }
 
 @media (max-width: 767px) {
   body.template-product-skincare .section-skincare-how-to,
   body.template-product-skincare .section-skincare-results,
-  body.template-product-skincare .section-skincare-faq,
-  body.template-product-skincare .section-skincare-editorial,
-  body.template-product-skincare .section-skincare-good-for {
+  body.template-product-skincare .section-skincare-faq {
     padding: 42px 18px !important;
   }
 }
