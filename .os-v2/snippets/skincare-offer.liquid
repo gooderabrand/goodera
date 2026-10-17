@@ -2,6 +2,7 @@
   Buy One and optional two-unit cards for the skincare buy box.
   The selected card sets the product form quantity. There is no separate stepper.
   Prices are the selected variant price, doubled for the two-unit card. No savings line is shown.
+  A card is disabled when that quantity cannot be bought: the variant is sold out, tracked inventory is below the quantity, or a quantity rule caps the order.
   @param {product} product - Product being purchased
   @param {block} block - Theme editor block with the card labels
   @param {section} section - Product section, used for the form id
@@ -12,7 +13,10 @@
 {{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  assign variant = product.selected_or_first_available_variant
+  assign variant = product.selected_variant
+  if variant == blank
+    assign variant = product.selected_or_first_available_variant
+  endif
   assign unit_price = variant.price
   assign pair_price = unit_price | times: 2
   assign product_form_id = 'product-form-' | append: section.id
@@ -34,7 +38,58 @@
     assign bundle_badge = block.settings.mask_badge
   endif
   assign show_bundle = block.settings.show_bundle
+  assign one_ok = false
+  assign two_ok = false
+  if variant.available
+    assign one_ok = true
+    assign two_ok = true
+    if variant.quantity_rule.max != blank and variant.quantity_rule.max < 1
+      assign one_ok = false
+    endif
+    if variant.quantity_rule.max != blank and variant.quantity_rule.max < 2
+      assign two_ok = false
+    endif
+    if variant.inventory_management != blank and variant.inventory_policy != 'continue'
+      if variant.inventory_quantity < 1
+        assign one_ok = false
+      endif
+      if variant.inventory_quantity < 2
+        assign two_ok = false
+      endif
+    endif
+  endif
+  assign sold_out_label = 'products.product.sold_out' | t
 -%}
+
+{%- capture offer_stock -%}
+[
+{%- for offer_variant in product.variants -%}
+  {%- liquid
+    assign stock_one = false
+    assign stock_two = false
+    if offer_variant.available
+      assign stock_one = true
+      assign stock_two = true
+      if offer_variant.quantity_rule.max != blank and offer_variant.quantity_rule.max < 1
+        assign stock_one = false
+      endif
+      if offer_variant.quantity_rule.max != blank and offer_variant.quantity_rule.max < 2
+        assign stock_two = false
+      endif
+      if offer_variant.inventory_management != blank and offer_variant.inventory_policy != 'continue'
+        if offer_variant.inventory_quantity < 1
+          assign stock_one = false
+        endif
+        if offer_variant.inventory_quantity < 2
+          assign stock_two = false
+        endif
+      endif
+    endif
+  -%}
+  {"id":{{ offer_variant.id }},"one":{{ stock_one }},"two":{{ stock_two }},"priceOne":{{ offer_variant.price | money | json }},"priceTwo":{{ offer_variant.price | times: 2 | money | json }}}{%- unless forloop.last -%},{%- endunless -%}
+{%- endfor -%}
+]
+{%- endcapture -%}
 
 <div
   class="ge-skin-offers"
@@ -42,12 +97,14 @@
   data-section="{{ section.id }}"
   data-price-one="{{ unit_price | money | escape }}"
   data-price-two="{{ pair_price | money | escape }}"
+  data-sold-out-label="{{ sold_out_label | escape }}"
   {{ block.shopify_attributes }}
 >
   <div class="ge-skin-offers__grid" role="radiogroup" aria-label="Purchase options">
-    <label class="ge-skin-offer is-selected">
-      <input type="radio" name="ge-offer-{{ section.id }}" value="1" checked>
+    <label class="ge-skin-offer{% if one_ok %} is-selected{% else %} is-unavailable{% endif %}" data-qty="1"{% unless one_ok %} aria-disabled="true"{% endunless %}>
+      <input type="radio" name="ge-offer-{{ section.id }}" value="1"{% if one_ok %} checked{% endif %}{% unless one_ok %} disabled{% endunless %}>
       <span class="ge-skin-offer__copy">
+        <span class="ge-skin-offer__status"{% if one_ok %} hidden{% endif %}>{{ sold_out_label | escape }}</span>
         <span class="ge-skin-offer__name">{{ one_title | escape }}</span>
         {%- if one_detail != blank -%}
           <span class="ge-skin-offer__detail">{{ one_detail | escape }}</span>
@@ -56,11 +113,12 @@
       <span class="ge-skin-offer__price">{{ unit_price | money }}</span>
     </label>
     {%- if show_bundle -%}
-      <label class="ge-skin-offer">
-        <input type="radio" name="ge-offer-{{ section.id }}" value="2">
+      <label class="ge-skin-offer{% unless two_ok %} is-unavailable{% endunless %}" data-qty="2"{% unless two_ok %} aria-disabled="true"{% endunless %}>
+        <input type="radio" name="ge-offer-{{ section.id }}" value="2"{% unless two_ok %} disabled{% endunless %}>
         <span class="ge-skin-offer__copy">
+          <span class="ge-skin-offer__status"{% if two_ok %} hidden{% endif %}>{{ sold_out_label | escape }}</span>
           {%- if bundle_badge != blank -%}
-            <span class="ge-skin-offer__badge">{{ bundle_badge | escape }}</span>
+            <span class="ge-skin-offer__badge"{% unless two_ok %} hidden{% endunless %}>{{ bundle_badge | escape }}</span>
           {%- endif -%}
           <span class="ge-skin-offer__name">{{ bundle_title | escape }}</span>
           {%- if bundle_detail != blank -%}
@@ -79,6 +137,9 @@
     form="{{ product_form_id }}"
     data-ge-offer-qty
   >
+  <script type="application/json" data-ge-offer-stock>
+    {{ offer_stock | strip }}
+  </script>
 </div>
 
 <script>
@@ -87,23 +148,83 @@
     if (!root || root.dataset.offerBound === 'true') return;
     root.dataset.offerBound = 'true';
     var qty = root.querySelector('[data-ge-offer-qty]');
-    var radios = root.querySelectorAll('input[type="radio"]');
-    var sticky = document.getElementById('price-{{ section.id }}--sticky');
-    var apply = function (value) {
-      if (qty) qty.value = value;
-      root.querySelectorAll('.ge-skin-offer').forEach(function (card) {
-        var input = card.querySelector('input');
-        card.classList.toggle('is-selected', input && input.value === value);
-      });
-      if (!sticky) return;
-      var formatted = value === '2' ? root.getAttribute('data-price-two') : root.getAttribute('data-price-one');
-      var amount = sticky.querySelector('ins .amount') || sticky.querySelector('.amount');
-      if (amount && formatted) amount.textContent = formatted;
+    var stockNode = root.querySelector('[data-ge-offer-stock]');
+    var stock = [];
+    try { stock = JSON.parse(stockNode ? stockNode.textContent : '[]'); } catch (error) { stock = []; }
+
+    var setCard = function (card, available) {
+      if (!card) return;
+      var input = card.querySelector('input');
+      card.classList.toggle('is-unavailable', !available);
+      if (available) card.removeAttribute('aria-disabled');
+      else card.setAttribute('aria-disabled', 'true');
+      if (input) input.disabled = !available;
+      var status = card.querySelector('.ge-skin-offer__status');
+      var badge = card.querySelector('.ge-skin-offer__badge');
+      if (status) status.hidden = available;
+      if (badge) badge.hidden = !available;
     };
-    radios.forEach(function (radio) {
-      radio.addEventListener('change', function () {
-        if (radio.checked) apply(radio.value);
+
+    var apply = function (value) {
+      var card = root.querySelector('.ge-skin-offer[data-qty="' + value + '"]');
+      if (!card || card.classList.contains('is-unavailable')) return;
+      if (qty) qty.value = value;
+      root.querySelectorAll('.ge-skin-offer').forEach(function (item) {
+        var input = item.querySelector('input');
+        var selected = input && input.value === value && !input.disabled;
+        item.classList.toggle('is-selected', selected);
+        if (input) input.checked = selected;
       });
+      var formatted = value === '2' ? root.getAttribute('data-price-two') : root.getAttribute('data-price-one');
+      var atcPrice = document.querySelector('#product-form-{{ section.id }} [data-ge-atc-price]');
+      if (atcPrice && formatted) atcPrice.textContent = formatted;
+      var sticky = document.getElementById('price-{{ section.id }}--sticky');
+      if (!sticky || !formatted) return;
+      var amount = sticky.querySelector('ins .amount') || sticky.querySelector('.amount');
+      if (amount) amount.textContent = formatted;
+    };
+
+    var sync = function (record) {
+      if (!record) return;
+      root.setAttribute('data-price-one', record.priceOne);
+      root.setAttribute('data-price-two', record.priceTwo);
+      var one = root.querySelector('.ge-skin-offer[data-qty="1"]');
+      var two = root.querySelector('.ge-skin-offer[data-qty="2"]');
+      setCard(one, record.one);
+      setCard(two, record.two);
+      if (one) {
+        var onePrice = one.querySelector('.ge-skin-offer__price');
+        if (onePrice) onePrice.textContent = record.priceOne;
+      }
+      if (two) {
+        var twoPrice = two.querySelector('.ge-skin-offer__price');
+        if (twoPrice) twoPrice.textContent = record.priceTwo;
+      }
+      var checked = root.querySelector('input[type="radio"]:checked');
+      if (checked && !checked.disabled) {
+        apply(checked.value);
+        return;
+      }
+      if (record.one) apply('1');
+      else if (record.two) apply('2');
+      else if (qty) qty.value = '1';
+    };
+
+    root.querySelectorAll('input[type="radio"]').forEach(function (radio) {
+      radio.addEventListener('change', function () {
+        if (radio.checked && !radio.disabled) apply(radio.value);
+      });
+    });
+
+    document.addEventListener('product:variant-change', function (event) {
+      var detail = event.detail || {};
+      if (detail.sectionId && String(detail.sectionId) !== root.getAttribute('data-section')) return;
+      if (!detail.variant) {
+        sync({ one: false, two: false, priceOne: root.getAttribute('data-price-one'), priceTwo: root.getAttribute('data-price-two') });
+        return;
+      }
+      var match = stock.filter(function (item) { return item.id === detail.variant.id; })[0];
+      if (match) sync(match);
     });
   })();
 </script>

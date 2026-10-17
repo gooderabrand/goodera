@@ -14,36 +14,12 @@
     "main-product": {
       "type": "main-product",
       "blocks": {
-        "subtitle": {
-          "type": "skincare_field",
-          "settings": {
-            "field": "subtitle",
-            "heading": "",
-            "open": false
-          }
-        },
         "title": {
           "type": "title",
           "settings": {
             "uppercase": false,
             "show_products_rating": false,
             "show_custom_badges": true
-          }
-        },
-        "size_label": {
-          "type": "skincare_field",
-          "settings": {
-            "field": "size_label",
-            "heading": "",
-            "open": false
-          }
-        },
-        "short_description": {
-          "type": "skincare_field",
-          "settings": {
-            "field": "short_description",
-            "heading": "",
-            "open": false
           }
         },
         "benefits": {
@@ -73,7 +49,6 @@
         },
         "color_swatches": {
           "type": "custom_liquid",
-          "disabled": true,
           "settings": {
             "custom_liquid": "{% render 'product-color-siblings', product: product %}"
           }
@@ -149,15 +124,6 @@
             "support_link": ""
           }
         },
-        "format_link": {
-          "type": "skincare_format",
-          "settings": {
-            "kit_lead": "Prefer the full size?",
-            "kit_label": "Explore Overnight Glow Mask.",
-            "mask_lead": "Start with four rituals.",
-            "mask_label": "Explore the Ritual Kit."
-          }
-        },
         "complementary_cCC3WK": {
           "type": "complementary",
           "settings": {
@@ -189,7 +155,7 @@
         "e49f0a1b-c60d-4e4a-b3c1-100c37771e4a": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "The Good Inside",
+            "heading": "What's in it and what's not",
             "open": false,
             "content": "",
             "page": "",
@@ -241,10 +207,7 @@
         }
       },
       "block_order": [
-        "subtitle",
         "title",
-        "size_label",
-        "short_description",
         "benefits",
         "0b3e272b-c86a-4dba-946c-c6912251371c",
         "siblings_Czmpgn",
@@ -255,7 +218,6 @@
         "offer",
         "buy_buttons",
         "reassure",
-        "format_link",
         "complementary_cCC3WK",
         "highlights",
         "0041f1e3-030f-4c9d-ae87-ddb7c2fa4b2b",
@@ -302,28 +264,28 @@
           "type": "result",
           "settings": {
             "percent": 100,
-            "text": "Skin feels moisturized"
+            "text": "of participants agreed it felt lightweight and comfortable on the skin*"
           }
         },
         "result_2": {
           "type": "result",
           "settings": {
             "percent": 96,
-            "text": "Skin feels softer"
+            "text": "of participants agreed it did not pill*"
           }
         },
         "result_3": {
           "type": "result",
           "settings": {
             "percent": 96,
-            "text": "Skin looks refreshed"
+            "text": "of participants agreed it did not cause breakouts*"
           }
         },
         "result_4": {
           "type": "result",
           "settings": {
             "percent": 93,
-            "text": "The ritual fits my evening"
+            "text": "of participants agreed it layered well under makeup*"
           }
         }
       },
@@ -335,7 +297,7 @@
       ],
       "settings": {
         "image_alt": "",
-        "footnote": "Design filler from the existing layout. These figures are not current product evidence."
+        "footnote": "*Within an independent consumer perception study of 30 people (ages 18-55), measuring performance immediately."
       }
     },
     "skincare_routine": {
@@ -344,31 +306,51 @@
         "step_1": {
           "type": "step",
           "settings": {
-            "label": "Earlier",
-            "name": "Your usual steps",
-            "text": "Cleanse as usual, then follow the directions for any products you already use.",
+            "label": "Step 1",
+            "name": "Cleanse",
+            "text": "Start with clean skin.",
             "current": false
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
-            "label": "Last",
-            "name": "Sunday Reset",
-            "text": "Finish with the overnight cream mask. Leave it on overnight.",
+            "label": "Step 2",
+            "name": "Treat",
+            "text": "Apply any treatment while skin is still fresh.",
+            "current": false
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "label": "Step 3",
+            "name": "Moisturize",
+            "text": "Seal the routine before the last step.",
+            "current": false
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "label": "Step 4",
+            "name": "",
+            "text": "This is the last step.",
             "current": true
           }
         }
       },
       "block_order": [
         "step_1",
-        "step_2"
+        "step_2",
+        "step_3",
+        "step_4"
       ],
       "settings": {
-        "eyebrow": "Designed for your evening ritual.",
-        "heading": "Where it fits",
-        "lede": "Cleanse as usual, follow any earlier skincare steps according to their directions, then finish with Sunday Reset.",
-        "explore_prefix": ""
+        "eyebrow": "Your routine",
+        "heading": "",
+        "lede": "Where this fits, from the first step through the last.",
+        "explore_prefix": "Explore"
       }
     },
     "skincare_how_to": {
@@ -379,47 +361,11 @@
         "instructions": "Shake well before use. Apply evenly over skin as the final step in your skincare routine. Reapply every two hours when in the sun."
       }
     },
-    "skincare_editorial": {
-      "type": "skincare-editorial",
+    "skincare_key_ingredients": {
+      "type": "skincare-key-ingredients",
       "settings": {
-        "eyebrow": "Why we made it",
-        "heading": "One last good thing before bed.",
-        "support": "Restocked. Refreshed. Ready to rest.",
-        "image_alt": ""
-      }
-    },
-    "skincare_good_for": {
-      "type": "skincare-good-for",
-      "blocks": {
-        "card_1": {
-          "type": "card",
-          "settings": {
-            "icon": "droplet",
-            "title": "Replenish your moisture.",
-            "text": "Hyaluronic acid, polyglutamic acid and glycerin help attract and retain hydration."
-          }
-        },
-        "card_2": {
-          "type": "card",
-          "settings": {
-            "icon": "shield",
-            "title": "Hold on to the good.",
-            "text": "Squalane helps keep skin soft and supports the skin's moisture barrier."
-          }
-        },
-        "card_3": {
-          "type": "card",
-          "settings": {
-            "icon": "spark",
-            "title": "Bring back the glow.",
-            "text": "Replenishing moisture helps dry, dull-looking skin appear fresher, more supple and radiant."
-          }
-        }
-      },
-      "block_order": ["card_1", "card_2", "card_3"],
-      "settings": {
-        "heading": "What it's good for",
-        "intro": "Power up your beauty sleep with moisture-binding ingredients and softening squalane."
+        "heading": "Key Ingredients",
+        "inci_label": "Full ingredient list"
       }
     },
     "skincare_faq": {
@@ -428,81 +374,36 @@
         "faq_1": {
           "type": "faq",
           "settings": {
-            "question": "What is Sunday Reset Overnight Glow Mask?",
-            "answer": "An overnight cream moisturizer worn as a leave-on face mask. It helps replenish moisture and soften skin as the final step of your evening skincare routine.",
-            "show_for": "both"
+            "question": "What does it feel like on skin?",
+            "answer": "Lightweight and comfortable. It is meant to sit as the last step without a heavy finish."
           }
         },
         "faq_2": {
           "type": "faq",
           "settings": {
-            "question": "Is it a sheet mask?",
-            "answer": "No. It's a cream you apply directly to your skin and leave on overnight. No sheet to unfold.",
-            "show_for": "both"
+            "question": "Will it pill under makeup?",
+            "answer": "In an independent consumer study, 96% of participants agreed it did not pill."
           }
         },
         "faq_3": {
           "type": "faq",
           "settings": {
-            "question": "When does it go in my routine?",
-            "answer": "Use it as your final skincare step in the evening, on clean, dry skin. Follow the directions for any earlier products in your routine.",
-            "show_for": "both"
+            "question": "Can I use it on sensitive skin?",
+            "answer": "It is suitable for dry and sensitive skin. Stop using it if irritation occurs."
           }
         },
         "faq_4": {
           "type": "faq",
           "settings": {
-            "question": "Do I rinse it off after applying?",
-            "answer": "No. Allow it to absorb and leave it on overnight.",
-            "show_for": "both"
+            "question": "Where does it go in my routine?",
+            "answer": "Cleanse, treat, then moisturize. Apply this as the last step."
           }
         },
         "faq_5": {
           "type": "faq",
           "settings": {
-            "question": "Do I have to use it on Sunday?",
-            "answer": "Sunday is the inspiration, not a rule. Make it part of the evening that works for you, following the product directions. Beta testers should follow their welcome-guide schedule.",
-            "show_for": "both"
-          }
-        },
-        "faq_6": {
-          "type": "faq",
-          "settings": {
-            "question": "What's inside the Ritual Kit?",
-            "answer": "Four individually packed uses of Sunday Reset Overnight Glow Mask. Every sachet contains the same cream.",
-            "show_for": "kit"
-          }
-        },
-        "faq_7": {
-          "type": "faq",
-          "settings": {
-            "question": "How long does the Ritual Kit last?",
-            "answer": "There are four single-use sachets. Use one each Sunday for four weekly rituals, or follow the schedule supplied with your kit.",
-            "show_for": "kit"
-          }
-        },
-        "faq_8": {
-          "type": "faq",
-          "settings": {
-            "question": "Are these four different skincare steps?",
-            "answer": "No. The Ritual Kit contains four uses of one cream mask, rather than four different products.",
-            "show_for": "kit"
-          }
-        },
-        "faq_9": {
-          "type": "faq",
-          "settings": {
-            "question": "How is the kit different from the full size?",
-            "answer": "The Ritual Kit introduces Sunday Reset in four individually packed uses. The full-size mask is the larger format for your routine.",
-            "show_for": "both"
-          }
-        },
-        "faq_10": {
-          "type": "faq",
-          "settings": {
-            "question": "Where can I learn about the ingredients?",
-            "answer": "Explore The Good Inside on this page. The ingredient library link will be added when that page exists.",
-            "show_for": "both"
+            "question": "How do I apply it?",
+            "answer": "Apply evenly over skin as the final step. Leave an overnight mask on overnight. Reapply a daytime product every two hours when you are in the sun."
           }
         }
       },
@@ -511,17 +412,10 @@
         "faq_2",
         "faq_3",
         "faq_4",
-        "faq_5",
-        "faq_6",
-        "faq_7",
-        "faq_8",
-        "faq_9",
-        "faq_10"
+        "faq_5"
       ],
       "settings": {
-        "faq_label": "Good to Know",
-        "closer_heading": "Good to Know",
-        "subheading": "A few things to know before you make it your ritual."
+        "subheading": "Texture, skin type, and how it fits the rest of your routine."
       }
     }
   },
@@ -529,11 +423,10 @@
     "skincare_bridge",
     "breadcrumbs",
     "main-product",
-    "skincare_editorial",
-    "skincare_good_for",
     "skincare_results",
     "skincare_routine",
     "skincare_how_to",
+    "skincare_key_ingredients",
     "skincare_faq",
     "recently_viewed_products_pdPAhT"
   ]
