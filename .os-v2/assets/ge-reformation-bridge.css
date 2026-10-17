@@ -81,6 +81,11 @@ h3.ge-serif,
   font-weight: var(--ge-serif-weight-statement, 600);
 }
 
+:root {
+  --ge-role-nav: 1.0625rem;
+  --ge-text-sm: 0.9375rem;
+}
+
 body,
 .body-font {
   font-family: var(--ge-font-body, 'Maison Neue', system-ui, sans-serif);
@@ -203,13 +208,12 @@ html body .site-footer .ge-brand-lockup__mark {
 
 /*
   Color names under product rails (Light Grey, Black).
-  commerce-ge.css sets these to body size and regular muted weight.
-  This rule loads earlier, so it wins on specificity.
+  Keep them at body size. This selector is more specific than commerce-ge.css.
 */
 html body .product-card .product-card-color-text {
   font-family: var(--ge-font, 'Maison Neue', system-ui, sans-serif);
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: var(--ge-role-body, 1.0625rem);
+  font-weight: 500;
   font-style: normal;
   letter-spacing: 0.01em;
   line-height: 1.25;
@@ -356,4 +360,27 @@ html body .site-header .ge-mobile-menu__section-label {
 
 html body.ge-nav-horizontal .ge-mega--horizontal .ge-mega__link {
   padding-block: 0.4rem;
+}
+
+html body .site-header .ge-dest-nav__link,
+html body .ge-dest-nav__link {
+  font-size: var(--ge-role-nav, 1.0625rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+html body .ge-commerce-section .section-header .rte,
+html body .section-featured-collection .section-header .rte,
+html body .section-recently-viewed-products .section-header .rte,
+html body .ge-commerce-section .section-header .rte p,
+html body .section-featured-collection .section-header .rte p {
+  font-size: var(--ge-role-body, 1.0625rem);
+  line-height: 1.45;
+}
+
+html body .product-card .product-card-title,
+html body .product-card .product-card-info .price,
+html body .product-card .product-card-info .price * {
+  font-size: var(--ge-role-body, 1.0625rem);
 }
