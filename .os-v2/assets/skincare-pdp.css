@@ -226,7 +226,7 @@ body.template-product-skincare:has([data-ge-offers]) [data-shopify-subscriptions
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.85rem 1rem;
   margin: 0.85rem 0 0;
-  padding: 0;
+  padding: 0 0 2rem;
   list-style: none;
 }
 
@@ -1252,11 +1252,11 @@ body.template-product-skincare.template-product-clothing .product-form__checkout
 body.template-product-skincare.template-product-clothing .product-form__checkout-row .ge-apple-pay.is-sold-out.is-pressed {
   pointer-events: none !important;
   cursor: default !important;
-  opacity: 0.38;
-  filter: grayscale(1);
+  opacity: 1 !important;
+  filter: none !important;
   transform: none !important;
-  background-color: #f5f5f7 !important;
-  border-color: #d2d2d7 !important;
+  background-color: #fff !important;
+  border-color: rgb(117, 117, 117) !important;
 }
 
 .ge-skin-buy-meta {
@@ -1533,7 +1533,7 @@ body.template-product-skincare .ge-skin-faq__questions {
 }
 
 body.template-product-skincare .section-recently-viewed-products .ge-commerce-section {
-  padding-inline: var(--ge-page-edge, 64px);
+  padding-inline: 0;
   background: transparent;
 }
 
@@ -1551,6 +1551,46 @@ body.template-product-skincare .section-recently-viewed-products .ge-rail__scrol
 body.template-product-skincare .section-recently-viewed-products .ge-rail__scroller > :first-child {
   padding-left: 0;
   margin-left: 0;
+}
+
+body.template-product-skincare .section-recently-viewed-products .section-header,
+body.template-product-skincare .section-recently-viewed-products .discover-section__header {
+  padding-inline: var(--ge-page-edge, 64px);
+}
+
+body.template-product-skincare .section-recently-viewed-products .ge-rail__scroller {
+  gap: 4px;
+}
+
+body.template-product-skincare .section-recently-viewed-products .ge-rail__item,
+body.template-product-skincare .section-recently-viewed-products .ge-rail__item--card-lg,
+body.template-product-skincare .section-recently-viewed-products .ge-rail__item--card-md {
+  width: calc((100% - 4px) / 2);
+  max-width: none;
+  flex: 0 0 auto;
+}
+
+body.template-product-skincare .section-recently-viewed-products .product-card-info {
+  padding-inline: 8px;
+}
+
+@media (min-width: 990px) {
+  body.template-product-skincare .section-recently-viewed-products .ge-rail__item,
+  body.template-product-skincare .section-recently-viewed-products .ge-rail__item--card-lg,
+  body.template-product-skincare .section-recently-viewed-products .ge-rail__item--card-md {
+    width: calc((100% - 12px) / 4);
+  }
+}
+
+@media (max-width: 767px) {
+  body.template-product-skincare .section-recently-viewed-products .section-header,
+  body.template-product-skincare .section-recently-viewed-products .discover-section__header {
+    padding-inline: 16px;
+  }
+
+  body.template-product-skincare .section-recently-viewed-products .product-card-info {
+    padding-inline: 8px;
+  }
 }
 
 body.template-product-skincare .section-skincare-results .ge-skin-ring::before {
@@ -1855,6 +1895,27 @@ body.template-product-skincare .product-form__checkout-row .single-add-to-cart-b
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+body.template-product-skincare .product-form__checkout-row .single-add-to-cart-button.button[disabled],
+body.template-product-skincare .product-form__checkout-row .single-add-to-cart-button.sold-out,
+body.template-product-skincare .product-add-to-cart-sticky .single-add-to-cart-button.button[disabled],
+body.template-product-skincare .product-add-to-cart-sticky .single-add-to-cart-button.sold-out {
+  opacity: 1 !important;
+  background: #000 !important;
+  background-color: #000 !important;
+  color: #fff !important;
+  border: 0 !important;
+  cursor: default !important;
+  pointer-events: none !important;
+}
+
+body.template-product-skincare .product-form__checkout-row .single-add-to-cart-button.button[disabled] span,
+body.template-product-skincare .product-form__checkout-row .single-add-to-cart-button.sold-out span,
+body.template-product-skincare .product-add-to-cart-sticky .single-add-to-cart-button.button[disabled] span,
+body.template-product-skincare .product-add-to-cart-sticky .single-add-to-cart-button.sold-out span {
+  opacity: 1 !important;
+  color: #fff !important;
 }
 
 body.template-product-skincare .section-skincare-key-ingredients .ge-skin-key__title {
