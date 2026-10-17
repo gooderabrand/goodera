@@ -254,24 +254,31 @@ body.template-product-skincare .thb-product-detail .variations .ge-skin-sizes in
 }
 
 .ge-skin-size {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  gap: 0.45rem 0.7rem;
   margin: 0.85rem 0 0.15rem;
 }
 
 .ge-skin-size__heading {
-  margin: 0 0 0.35rem;
+  margin: 0;
+  flex: 0 0 auto;
   color: #6e6e73;
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   line-height: 1.3;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .ge-skin-size__options {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: baseline;
-  gap: 0.45rem 1.35rem;
+  gap: 0.35rem 1.15rem;
+  min-width: 0;
 }
 
 .ge-skin-size__choice {
@@ -281,6 +288,25 @@ body.template-product-skincare .thb-product-detail .variations .ge-skin-sizes in
   line-height: 1.35;
   text-underline-offset: 0.35em;
   text-decoration-thickness: 1px;
+  white-space: nowrap;
+}
+
+@media (max-width: 749px) {
+  .ge-skin-size {
+    gap: 0.35rem 0.5rem;
+  }
+
+  .ge-skin-size__heading {
+    letter-spacing: 0.08em;
+  }
+
+  .ge-skin-size__options {
+    gap: 0.25rem 0.75rem;
+  }
+
+  .ge-skin-size__choice {
+    font-size: 0.8125rem;
+  }
 }
 
 a.ge-skin-size__choice {
