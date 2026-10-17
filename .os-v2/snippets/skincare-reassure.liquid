@@ -1,7 +1,6 @@
 {% doc %}
-  Compact shipping, returns, support, and dispatch buttons under the skincare add-to-bag button.
-  Each button opens a drawer. Shipping and returns load the shop policies. Help loads the contact page.
-  Dispatch shows its own short line.
+  Compact shipping, returns, dispatch, and subscribe lines under the skincare add-to-bag button.
+  Shipping, returns, and dispatch open a drawer. The subscribe line is text and does not open a drawer.
   The short line on the button is the fallback when that policy or page has no body.
   @param {block} block - Theme editor block with labels and detail lines
   @example
@@ -78,10 +77,10 @@
   {%- endif -%}
   {%- if block.settings.support_label != blank -%}
     <li>
-      <button type="button" data-ge-policy-open="help" aria-haspopup="dialog" aria-controls="GePolicyDrawer">
+      <div class="ge-skin-reassure__static">
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
-          <path d="M6 16.5 4.5 19.5c2.2-.4 3.6-1.3 4.4-2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-          <path d="M7 15.5a6.5 6.5 0 1 1 2.6 2.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+          <path d="M16.8 8.4A5.5 5.5 0 1 0 17.3 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+          <path d="M16.2 4.9v3.6H19.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
         <span>
           <span class="ge-skin-reassure__label">{{ block.settings.support_label | escape }}</span>
@@ -89,7 +88,7 @@
             <span class="ge-skin-reassure__text">{{ block.settings.support_text | escape }}</span>
           {%- endif -%}
         </span>
-      </button>
+      </div>
     </li>
   {%- endif -%}
 </ul>
