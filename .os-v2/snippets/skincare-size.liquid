@@ -28,9 +28,37 @@
     endif
   endif
   assign mask_url = mask_product.url | append: '?variant=' | append: mask_full.id
+  assign contents_detail = ''
+  assign contents_volume = ''
+  if product.handle == 'sunday-reset-ritual-kit'
+    assign contents_detail = '4 single-use sachets'
+    assign contents_volume = '8 mL | 0.28 fl oz'
+  elsif product.handle == 'sunday-reset-overnight-glow-mask'
+    assign contents_volume = '50 mL | 1.69 fl oz'
+  endif
+  if section.blocks != blank
+    for offer_block in section.blocks
+      if offer_block.type == 'skincare_offer'
+        if product.handle == 'sunday-reset-ritual-kit'
+          assign contents_detail = offer_block.settings.kit_one_detail | default: contents_detail
+          assign contents_volume = offer_block.settings.kit_one_volume | default: contents_volume
+        elsif product.handle == 'sunday-reset-overnight-glow-mask'
+          assign contents_detail = ''
+          assign contents_volume = offer_block.settings.mask_one_volume | default: contents_volume
+        endif
+        break
+      endif
+    endfor
+  endif
 -%}
 
 {%- if show_switch -%}
+  {%- if contents_detail != blank or contents_volume != blank -%}
+    <p class="ge-skin-contents">
+      {%- if contents_detail != blank -%}<span class="ge-skin-contents__detail">{{ contents_detail | escape }}</span>{%- endif -%}
+      {%- if contents_volume != blank -%}<span class="ge-skin-contents__volume">{{ contents_volume | escape }}</span>{%- endif -%}
+    </p>
+  {%- endif -%}
   <div class="ge-skin-size" data-ge-size-switch>
     <p class="ge-skin-size__heading">{{ 'products.skincare.size' | t }}:</p>
     <div class="ge-skin-size__options">
