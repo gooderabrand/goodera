@@ -82,12 +82,11 @@
     <div class="side-panel-header">
       <div>
         <h4 class="body-font" id="GePolicyTitle" data-ge-policy-title></h4>
-        <side-panel-close class="side-panel-close">
+        <button type="button" class="ge-policy-drawer__close" data-ge-policy-close aria-label="{{ 'accessibility.close' | t }}">
           <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">
             <path d="M3.2 3.2 12.8 12.8M12.8 3.2 3.2 12.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
           </svg>
-          <span class="visually-hidden">{{ 'accessibility.close' | t }}</span>
-        </side-panel-close>
+        </button>
       </div>
     </div>
     <div class="side-panel-content">
@@ -128,37 +127,54 @@
     });
     document.body.appendChild(drawer);
 
-    var show = function (key) {
-      var button = root.querySelector('[data-ge-policy-open="' + key + '"]');
+    var opener = null;
+
+    var closeDrawer = function () {
+      drawer.classList.remove('active');
+      document.body.classList.remove('open-ge-policy');
+      if (!document.body.classList.contains('open-cart') && !document.body.classList.contains('open-quick-view')) {
+        document.body.classList.remove('open-cc');
+      }
+      if (opener) opener.focus();
+    };
+
+    var show = function (key, button) {
       var label = button ? button.querySelector('.ge-skin-reassure__label') : null;
       var title = drawer.querySelector('[data-ge-policy-title]');
+      opener = button || null;
       drawer.querySelectorAll('[data-ge-policy-panel]').forEach(function (panel) {
         panel.hidden = panel.getAttribute('data-ge-policy-panel') !== key;
       });
       if (title) title.textContent = label ? label.textContent : '';
       document.body.classList.add('open-cc', 'open-ge-policy');
       drawer.classList.add('active');
-      drawer.focus();
-    };
-
-    var hideBlur = function () {
-      document.body.classList.remove('open-ge-policy');
+      var closeButton = drawer.querySelector('[data-ge-policy-close]');
+      if (closeButton) closeButton.focus();
     };
 
     root.querySelectorAll('[data-ge-policy-open]').forEach(function (button) {
       button.addEventListener('click', function (event) {
         event.preventDefault();
-        show(button.getAttribute('data-ge-policy-open'));
+        show(button.getAttribute('data-ge-policy-open'), button);
       });
+    });
+
+    drawer.addEventListener('click', function (event) {
+      if (!event.target.closest('[data-ge-policy-close]')) return;
+      event.preventDefault();
+      closeDrawer();
     });
 
     if (!window.__gePolicyBlurBound) {
       window.__gePolicyBlurBound = true;
       document.addEventListener('click', function (event) {
         if (!document.body.classList.contains('open-ge-policy')) return;
-        if (event.target.closest('side-panel-close') || event.target.closest('.click-capture')) hideBlur();
-      }, true);
-      document.addEventListener('panel:close', hideBlur);
+        if (event.target.closest('.click-capture')) closeDrawer();
+      });
+      document.addEventListener('keydown', function (event) {
+        if (event.key !== 'Escape' || !document.body.classList.contains('open-ge-policy')) return;
+        closeDrawer();
+      });
     }
   })();
 </script>
