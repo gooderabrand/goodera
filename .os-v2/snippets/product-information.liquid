@@ -172,6 +172,13 @@
     {%- endif -%}
     {%- when 'collapsible_tab' -%}
       {%- if block.settings.heading != blank -%}
+        {%- capture collapsible_body -%}
+          {{ block.settings.content }}
+          {{ block.settings.page.content }}
+          {{ block.settings.custom_liquid }}
+        {%- endcapture -%}
+        {%- assign collapsible_body = collapsible_body | strip -%}
+        {%- if collapsible_body != blank -%}
       <collapsible-row class="product__accordion accordion" {{ block.shopify_attributes }}>
         <details id="Details-{{ block.id }}-{{ section.id }}" {% if block.settings.open %}open{% endif %}>
           <summary>
@@ -179,12 +186,11 @@
             <span></span>
           </summary>
           <div class="collapsible__content accordion__content rte" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
-            {{ block.settings.content }}
-            {{ block.settings.page.content }}
-            {{ block.settings.custom_liquid }}
+            {{ collapsible_body }}
           </div>
         </details>
       </collapsible-row>
+        {%- endif -%}
       {%- endif -%}
     {%- when 'complementary' -%}
       <product-recommendations class="complementary-products" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ block.settings.product_list_limit }}&intent=complementary">

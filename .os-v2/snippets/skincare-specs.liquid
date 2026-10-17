@@ -1,13 +1,11 @@
 {% doc %}
   Renders the skincare Specifications rows: active ingredient, product form, volume, dispenser type, and skin type.
-  Reads product metafields in the custom namespace. Volume can also come from a Volume or Size option.
-  Shows the sample rows only when none of those values are set.
+  Reads product metafields in the custom namespace.
+  A row renders only when that metafield has a value. Empty metafields, including a missing volume, render nothing.
   @param {product} product - Product whose specifications are shown
   @example
   {% render 'skincare-specs', product: product %}
 {% enddoc %}
-
-{{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
   assign ingredient = ''
@@ -31,42 +29,10 @@
   if product.metafields.custom.skin_type != blank
     assign skin_type = product.metafields.custom.skin_type | metafield_text | strip
   endif
-
-  if volume == blank
-    for option in product.options_with_values
-      assign option_name = option.name | downcase
-      if option_name == 'volume' or option_name == 'size'
-        if option.position == 1
-          assign volume = product.selected_or_first_available_variant.option1
-        elsif option.position == 2
-          assign volume = product.selected_or_first_available_variant.option2
-        elsif option.position == 3
-          assign volume = product.selected_or_first_available_variant.option3
-        endif
-      endif
-    endfor
-  endif
-
-  if ingredient == blank and product_form == blank and volume == blank and dispenser == blank and skin_type == blank
-    if product.handle == 'sunday-reset-overnight-glow-mask'
-      assign product_form = 'products.skincare.mask_form' | t
-      assign volume = 'products.skincare.mask_volume' | t
-      assign skin_type = 'products.skincare.mask_skin' | t
-    elsif product.handle == 'sunday-reset-ritual-kit'
-      assign product_form = 'products.skincare.kit_form' | t
-      assign volume = 'products.skincare.kit_volume' | t
-      assign dispenser = 'products.skincare.kit_dispenser' | t
-      assign skin_type = 'products.skincare.kit_skin' | t
-    else
-      assign ingredient = 'products.skincare.spec_ingredient_sample' | t
-      assign product_form = 'products.skincare.spec_form_sample' | t
-      assign volume = 'products.skincare.spec_volume_sample' | t
-      assign dispenser = 'products.skincare.spec_dispenser_sample' | t
-      assign skin_type = 'products.skincare.spec_skin_sample' | t
-    endif
-  endif
 -%}
 
+{%- if ingredient != blank or product_form != blank or volume != blank or dispenser != blank or skin_type != blank -%}
+{{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
 <dl class="ge-skin-specs">
   {%- if ingredient != blank -%}
     <div class="ge-skin-specs__row">
@@ -99,3 +65,4 @@
     </div>
   {%- endif -%}
 </dl>
+{%- endif -%}

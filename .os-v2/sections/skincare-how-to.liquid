@@ -19,7 +19,9 @@
     assign howto_rest = howto_title | remove_first: 'Sunday Reset' | strip
   endif
   assign instructions = ''
-  if product.metafields.custom.how_to != blank
+  if product.metafields.custom.how_to_use.value != blank
+    assign instructions = product.metafields.custom.how_to_use.value | strip
+  elsif product.metafields.custom.how_to != blank
     assign instructions = product.metafields.custom.how_to | metafield_text | strip
   elsif product.handle == 'sunday-reset-overnight-glow-mask'
     assign instructions = 'products.skincare.mask_how_to' | t
@@ -131,7 +133,7 @@
       "type": "textarea",
       "id": "instructions",
       "label": "Instructions",
-      "info": "A product metafield named custom.how_to replaces this text.",
+      "info": "custom.how_to_use replaces this text when that product metafield has text. custom.how_to is used if how_to_use is empty.",
       "default": "Shake well before use. Apply evenly over skin as the final step in your skincare routine. Reapply every two hours when in the sun."
     }
   ],
