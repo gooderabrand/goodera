@@ -950,7 +950,32 @@
         { "type": "text", "id": "mask_bundle_title", "label": "Two-unit title", "default": "Two Glow Masks" },
         { "type": "text", "id": "mask_bundle_detail", "label": "Two-unit detail", "default": "" },
         { "type": "text", "id": "mask_bundle_volume", "label": "Two-unit volume", "default": "100 mL | 3.38 fl oz" },
-        { "type": "text", "id": "mask_badge", "label": "Two-unit badge", "default": "One for you. One to give." }
+        { "type": "text", "id": "mask_badge", "label": "Two-unit badge", "default": "One for you. One to give." },
+        { "type": "header", "content": "Subscribe & save" },
+        {
+          "type": "checkbox",
+          "id": "show_subscribe",
+          "label": "Show subscribe and save",
+          "default": true,
+          "info": "Appears only when this product has a Shopify selling plan. The one and two cards stay in place."
+        },
+        {
+          "type": "select",
+          "id": "subscribe_default",
+          "label": "Selected purchase type",
+          "options": [
+            { "value": "once", "label": "One-time" },
+            { "value": "subscribe", "label": "Subscribe and save" }
+          ],
+          "default": "once"
+        },
+        { "type": "text", "id": "once_label", "label": "One-time label", "default": "One-time" },
+        { "type": "text", "id": "subscribe_label", "label": "Subscribe label", "default": "Subscribe & save" },
+        { "type": "checkbox", "id": "show_subscribe_savings", "label": "Show savings", "default": true },
+        { "type": "checkbox", "id": "show_subscribe_note", "label": "Show subscription note", "default": true },
+        { "type": "text", "id": "kit_subscribe_text", "label": "Ritual Kit note", "default": "Four Sundays. One little ritual. Delivered every four weeks." },
+        { "type": "text", "id": "mask_subscribe_text", "label": "Glow Mask note", "default": "Delivered every four weeks." },
+        { "type": "text", "id": "subscribe_disclosure", "label": "Subscription disclosure", "default": "Automatic deliveries. Skip, pause, or cancel anytime." }
       ]
     },
     {

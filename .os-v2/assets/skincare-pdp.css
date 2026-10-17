@@ -31,6 +31,111 @@ body.template-product-skincare {
   margin: 0.85rem 0 0.75rem;
 }
 
+.ge-skin-plan {
+  display: flex;
+  gap: 3px;
+  margin: 0 0 8px;
+  padding: 3px;
+  border: 1px solid var(--ge-border, #e5e5ea);
+  border-radius: 14px;
+  background: #fff;
+}
+
+.ge-skin-plan[hidden] {
+  display: none;
+}
+
+.ge-skin-plan__choice {
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.15rem;
+  min-height: 3.05rem;
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  border-radius: 11px;
+  background: transparent;
+  color: #17160f;
+  cursor: pointer;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ge-skin-plan__choice input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ge-skin-plan__choice:hover,
+.ge-skin-plan__choice:focus-within {
+  background: #fafafa;
+}
+
+.ge-skin-plan__choice.is-selected,
+.ge-skin-plan__choice.is-selected:hover {
+  background: #fff;
+  box-shadow: inset 0 0 0 1px #17160f;
+}
+
+.ge-skin-plan__label {
+  font-size: 0.84rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.ge-skin-plan__meta,
+.ge-skin-plan__freq {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.ge-skin-plan__meta {
+  color: #6e6e73;
+  font-size: 0.68rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.ge-skin-plan__note {
+  margin: 0 0 8px;
+  color: #6e6e73;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.ge-skin-plan__note[hidden] {
+  display: none;
+}
+
+.ge-skin-plan__disclosure {
+  display: block;
+}
+
+.ge-skin-plan__freq {
+  margin-top: 0.4rem;
+}
+
+.ge-skin-plan__freq-choice {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #17160f;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+body.template-product-skincare:has([data-ge-plan]) .shopify_subscriptions_app_container,
+body.template-product-skincare:has([data-ge-plan]) .shopify_subscriptions_fieldset,
+body.template-product-skincare:has([data-ge-plan]) [data-shopify-subscriptions-form] {
+  display: none !important;
+}
+
 .ge-skin-offers__grid {
   display: grid;
   gap: 8px;
