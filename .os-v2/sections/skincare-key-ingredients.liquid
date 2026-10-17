@@ -102,11 +102,11 @@
         {%- if key_image != blank -%}
           {{
             key_image
-            | image_url: width: 1600
+            | image_url: width: 900
             | image_tag:
               loading: 'lazy',
-              sizes: '(min-width: 990px) 50vw, 100vw',
-              widths: '600, 900, 1400, 1600',
+              sizes: '(min-width: 990px) 26rem, 100vw',
+              widths: '400, 600, 900',
               alt: key_alt
           }}
         {%- else -%}
@@ -163,7 +163,7 @@
       "type": "image_picker",
       "id": "image",
       "label": "Image",
-      "info": "Square photo on the left, flush to the page edge. Leave blank to use the product photo."
+      "info": "Square photo on the left, held to 26rem so it stays at the page edge without growing with the screen. Leave blank to use the product photo."
     },
     {
       "type": "text",
