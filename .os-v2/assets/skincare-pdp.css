@@ -116,18 +116,12 @@ body.template-product-skincare {
 }
 
 .ge-skin-offer.is-unavailable {
-  background: #f5f5f7;
+  background: #fff;
   border-color: #d2d2d7;
   box-shadow: none;
   cursor: default;
   pointer-events: none;
-}
-
-.ge-skin-offer.is-unavailable .ge-skin-offer__name,
-.ge-skin-offer.is-unavailable .ge-skin-offer__detail,
-.ge-skin-offer.is-unavailable .ge-skin-offer__price,
-.ge-skin-offer.is-unavailable .ge-skin-offer__badge {
-  color: #86868b;
+  opacity: 0.38;
 }
 
 .ge-skin-reassure {
