@@ -880,6 +880,49 @@
         }
       ]
     },
+    {
+      "type": "skincare_field",
+      "name": "Skincare field",
+      "settings": [
+        {
+          "type": "select",
+          "id": "field",
+          "label": "Product field",
+          "info": "Reads a metafield already saved on the product. The block stays hidden when that field is empty. Full ingredients, formulated without, and ingredient highlights also stay hidden until ingredients verified is true.",
+          "default": "short_description",
+          "options": [
+            { "value": "subtitle", "label": "Subtitle" },
+            { "value": "short_description", "label": "Short description" },
+            { "value": "description", "label": "Product description" },
+            { "value": "benefit_highlights", "label": "Benefit highlights" },
+            { "value": "skin_needs", "label": "Skin needs" },
+            { "value": "skin_types", "label": "Skin types" },
+            { "value": "size_label", "label": "Size label" },
+            { "value": "ritual_moment", "label": "Routine placement" },
+            { "value": "whats_inside", "label": "What's inside" },
+            { "value": "how_to_use", "label": "How to use" },
+            { "value": "good_to_know", "label": "Good to know" },
+            { "value": "why_we_made_it", "label": "Why we made it" },
+            { "value": "experience", "label": "Experience" },
+            { "value": "ingredient_highlights", "label": "Ingredient highlights" },
+            { "value": "full_inci", "label": "Full ingredients" },
+            { "value": "formulated_without", "label": "Formulated without" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "info": "Optional. A heading puts the field in an accordion. Leave it blank to show the field on its own."
+        },
+        {
+          "type": "checkbox",
+          "id": "open",
+          "label": "Open accordion",
+          "default": false
+        }
+      ]
+    },
 		{
       "type": "side_panel",
       "name": "Information side panel",

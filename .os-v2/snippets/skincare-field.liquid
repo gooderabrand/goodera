@@ -1,0 +1,170 @@
+{% doc %}
+  Renders one skincare product block from a metafield the merchant chose in the theme editor.
+  The block outputs nothing when that field is empty.
+  Ingredient highlights, the full INCI, and Formulated Without also stay hidden unless custom.ingredients_verified is the boolean true.
+  Does not read custom.editorial_notes.
+  @param {product} product - Product whose metafield is shown
+  @param {block} block - Theme editor block with field, heading, and open settings
+  @param {section} section - Section that contains the block
+  @example
+  {% render 'skincare-field', product: product, block: block, section: section %}
+{% enddoc %}
+
+{{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign field = block.settings.field
+  assign verified = product.metafields.custom.ingredients_verified.value
+  if field == 'ingredient_highlights' or field == 'full_inci' or field == 'formulated_without'
+    if verified != true
+      assign field = ''
+    endif
+  endif
+-%}
+
+{%- capture field_html -%}
+  {%- case field -%}
+    {%- when 'subtitle' -%}
+      {%- assign text = product.metafields.descriptors.subtitle.value | strip -%}
+      {%- if text != blank -%}
+        <p class="ge-skin-field__text">{{ text | escape }}</p>
+      {%- endif -%}
+    {%- when 'short_description' -%}
+      {%- assign text = product.metafields.custom.short_description.value | strip -%}
+      {%- if text != blank -%}
+        <div class="ge-skin-field__text">{{ text | escape | newline_to_br }}</div>
+      {%- endif -%}
+    {%- when 'ritual_moment' -%}
+      {%- assign text = product.metafields.custom.ritual_moment.value | strip -%}
+      {%- if text != blank -%}
+        <p class="ge-skin-field__text">{{ text | escape }}</p>
+      {%- endif -%}
+    {%- when 'how_to_use' -%}
+      {%- assign text = product.metafields.custom.how_to_use.value | strip -%}
+      {%- if text != blank -%}
+        <div class="ge-skin-field__text">{{ text | escape | newline_to_br }}</div>
+      {%- endif -%}
+    {%- when 'good_to_know' -%}
+      {%- assign text = product.metafields.custom.good_to_know.value | strip -%}
+      {%- if text != blank -%}
+        <div class="ge-skin-field__text">{{ text | escape | newline_to_br }}</div>
+      {%- endif -%}
+    {%- when 'whats_inside' -%}
+      {%- assign text = product.metafields.custom.whats_inside.value | strip -%}
+      {%- if text != blank -%}
+        <div class="ge-skin-field__text">{{ text | escape | newline_to_br }}</div>
+      {%- endif -%}
+    {%- when 'why_we_made_it' -%}
+      {%- assign text = product.metafields.custom.why_we_made_it.value | strip -%}
+      {%- if text != blank -%}
+        <div class="ge-skin-field__text">{{ text | escape | newline_to_br }}</div>
+      {%- endif -%}
+    {%- when 'experience' -%}
+      {%- assign text = product.metafields.custom.experience.value | strip -%}
+      {%- if text != blank -%}
+        <div class="ge-skin-field__text">{{ text | escape | newline_to_br }}</div>
+      {%- endif -%}
+    {%- when 'size_label' -%}
+      {%- assign text = product.metafields.custom.size_label.value | strip -%}
+      {%- if text != blank -%}
+        <p class="ge-skin-field__text">{{ text | escape }}</p>
+      {%- endif -%}
+    {%- when 'full_inci' -%}
+      {%- assign text = product.metafields.custom.full_inci.value | strip -%}
+      {%- if text != blank -%}
+        <p class="ge-skin-field__text">{{ text | escape | newline_to_br }}</p>
+      {%- endif -%}
+    {%- when 'benefit_highlights' -%}
+      {%- assign items = product.metafields.custom.benefit_highlights.value -%}
+      {%- if items != blank -%}
+        <ul class="ge-skin-field__list">
+          {%- for item in items -%}
+            {%- assign item_text = item | strip -%}
+            {%- if item_text != blank -%}
+              <li>{{ item_text | escape }}</li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    {%- when 'skin_needs' -%}
+      {%- assign items = product.metafields.custom.skin_needs.value -%}
+      {%- if items != blank -%}
+        <ul class="ge-skin-field__list">
+          {%- for item in items -%}
+            {%- assign item_text = item | strip -%}
+            {%- if item_text != blank -%}
+              <li>{{ item_text | escape }}</li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    {%- when 'skin_types' -%}
+      {%- assign items = product.metafields.custom.skin_types.value -%}
+      {%- if items != blank -%}
+        <ul class="ge-skin-field__list">
+          {%- for item in items -%}
+            {%- assign item_text = item | strip -%}
+            {%- if item_text != blank -%}
+              <li>{{ item_text | escape }}</li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    {%- when 'formulated_without' -%}
+      {%- assign items = product.metafields.custom.formulated_without.value -%}
+      {%- if items != blank -%}
+        <ul class="ge-skin-field__list">
+          {%- for item in items -%}
+            {%- assign item_text = item | strip -%}
+            {%- if item_text != blank -%}
+              <li>{{ item_text | escape }}</li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    {%- when 'ingredient_highlights' -%}
+      {%- assign items = product.metafields.custom.ingredient_highlights.value -%}
+      {%- if items != blank -%}
+        <ul class="ge-skin-field__list">
+          {%- for item in items -%}
+            {%- assign ingredient_name = '' -%}
+            {%- if item != blank and item.name.value != blank -%}
+              {%- assign ingredient_name = item.name.value | strip -%}
+            {%- endif -%}
+            {%- if ingredient_name != blank -%}
+              <li>{{ ingredient_name | escape }}</li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    {%- when 'description' -%}
+      {%- if product.description != blank -%}
+        <div class="ge-skin-field__text rte">{{ product.description }}</div>
+      {%- endif -%}
+  {%- endcase -%}
+{%- endcapture -%}
+
+{%- assign field_html = field_html | strip -%}
+{%- unless field_html contains '<li' or field_html contains '<p' or field_html contains '<div' -%}
+  {%- assign field_html = '' -%}
+{%- endunless -%}
+{%- if field_html != blank -%}
+  {%- assign field_heading = block.settings.heading | strip -%}
+  {%- if field_heading != blank -%}
+    <collapsible-row class="product__accordion accordion" {{ block.shopify_attributes }}>
+      <details id="Details-{{ block.id }}-{{ section.id }}" {% if block.settings.open %}open{% endif %}>
+        <summary>
+          {{ field_heading | escape }}
+          <span></span>
+        </summary>
+        <div class="collapsible__content accordion__content rte" id="SkincareField-{{ block.id }}-{{ section.id }}">
+          {{ field_html }}
+        </div>
+      </details>
+    </collapsible-row>
+  {%- else -%}
+    <div class="ge-skin-field" {{ block.shopify_attributes }}>
+      {{ field_html }}
+    </div>
+  {%- endif -%}
+{%- endif -%}

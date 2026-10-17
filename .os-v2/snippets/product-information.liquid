@@ -301,6 +301,8 @@
         </div>
         <link rel="stylesheet" href="{{ 'product-fit.css' | asset_url }}" media="print" onload="this.media='all'">
       </div>
+    {%- when 'skincare_field' -%}
+      {%- render 'skincare-field', product: product, block: block, section: section -%}
     {%- when 'payment_icons' -%}
       <div class="payment-icons">
       {%- unless shop.enabled_payment_types == empty -%}

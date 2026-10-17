@@ -19,6 +19,29 @@ body.template-product-skincare {
   --ge-footnote-color: color-mix(in srgb, var(--ge-ink, #17160f) 58%, transparent);
 }
 
+.ge-skin-field__text {
+  margin: 0.35rem 0 0;
+  font-size: var(--ge-role-body, 1.0625rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.45;
+}
+
+.ge-skin-field__list {
+  margin: 0.35rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ge-skin-field__list li {
+  margin: 0;
+  padding: 0.45rem 0;
+  border-top: 1px solid var(--ge-hair, rgba(23, 22, 15, 0.08));
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
 .ge-skin-highlights,
 .ge-skin-specs,
 .ge-skin-results,
