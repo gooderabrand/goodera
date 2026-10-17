@@ -1,0 +1,32 @@
+{% doc %}
+  Size row for the skincare buy box.
+  A product with a Size, Volume, or Amount option uses the variant picker, so this row stays hidden and those values stay real variants with their own price and stock.
+  A product that still has one fill shows custom.size_label as the selected chip. Empty size labels stay hidden.
+  Trial and full size, such as 15 ml and 50 ml, belong on this product as a Size option. They are not separate products.
+  @param {product} product - Product being purchased
+  @example
+  {% render 'skincare-size', product: product %}
+{% enddoc %}
+
+{%- liquid
+  assign size_option = false
+  for option in product.options_with_values
+    assign option_name = option.name | downcase | strip
+    if option_name == 'size' or option_name == 'volume' or option_name == 'amount'
+      assign size_option = true
+    endif
+  endfor
+  assign size_label = product.metafields.custom.size_label.value | strip
+-%}
+
+{%- if size_option == false and size_label != blank -%}
+  <div class="ge-skin-size">
+    <div class="form__label">
+      {{ 'products.skincare.size' | t }}
+      <span class="form__label__value">{{ size_label | escape }}</span>
+    </div>
+    <div class="ge-skin-size__options" role="radiogroup" aria-label="{{ 'products.skincare.size' | t }}">
+      <span class="ge-skin-size__chip is-selected" aria-current="true">{{ size_label | escape }}</span>
+    </div>
+  </div>
+{%- endif -%}

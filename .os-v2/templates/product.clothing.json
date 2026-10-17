@@ -8,6 +8,7 @@
   "sections": {
     "breadcrumbs": {
       "type": "breadcrumbs",
+      "disabled": true,
       "settings": {}
     },
     "main-product": {

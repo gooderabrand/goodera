@@ -249,7 +249,8 @@
       "closer_sub": "Texture, skin type, and how it fits the rest of your routine.",
       "faq_label": "Frequently asked questions",
       "formula_contains": "Contains",
-      "formula_without": "Does not contain"
+      "formula_without": "Does not contain",
+      "size": "Size"
     },
     "facets": {
       "apply": "Apply",
