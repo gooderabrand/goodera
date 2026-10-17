@@ -150,11 +150,31 @@ body.template-product-skincare {
 .ge-skin-format {
   margin: 0 0 0.45rem;
   color: var(--ge-muted, #6e6e73);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
   line-height: 1.3;
-  text-transform: uppercase;
+  text-transform: lowercase;
+}
+
+.template-product-skincare .product-title-container .product-price-container {
+  display: none !important;
+}
+
+.template-product-skincare .thb-product-detail .variations .product-form__input--block > .form__label {
+  display: none !important;
+}
+
+.template-product-skincare .thb-product-detail .variations .product-form__input--block input[type='radio'].is-disabled + label,
+.template-product-skincare .thb-product-detail .variations .product-form__input--block input[type='radio'].is-disabled:checked + label {
+  background: #fff !important;
+  border: 1px solid #d2d2d7 !important;
+  color: #17160f !important;
+  opacity: 0.38 !important;
+  text-decoration: none !important;
+  cursor: default;
+  pointer-events: none !important;
+  box-shadow: none !important;
 }
 
 .ge-skin-intro {
@@ -174,13 +194,6 @@ body.template-product-skincare {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-}
-
-.ge-skin-size-note {
-  margin: 0.35rem 0 0.85rem;
-  color: var(--ge-muted, #6e6e73);
-  font-size: 0.8125rem;
-  line-height: 1.35;
 }
 
 .ge-skin-size__chip {
@@ -216,22 +229,75 @@ body.open-ge-policy #wrapper .click-capture {
 
 .ge-policy-drawer.side-panel {
   z-index: 90;
-  width: min(440px, calc(100vw - 24px));
+  width: min(480px, calc(100vw - 24px));
   transition: transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.ge-policy-drawer .side-panel-header {
+  height: auto;
+  padding: 1.75rem 2.5rem 1.35rem;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.ge-policy-drawer .side-panel-header h4 {
+  font-size: 1.85rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  text-transform: none;
+}
+
+.ge-policy-drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-right: -0.65rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #17160f;
+  cursor: pointer;
+}
+
 .ge-policy-drawer .side-panel-content {
-  padding: 0 1.35rem 2.5rem;
+  padding: 1.5rem 2.5rem 3rem;
 }
 
 .ge-policy-drawer .rte {
   color: var(--ge-ink, #17160f);
-  font-size: 0.9375rem;
-  line-height: 1.55;
+  font-size: 1.0625rem;
+  line-height: 1.65;
 }
 
 .ge-policy-drawer .rte > :first-child {
   margin-top: 0;
+}
+
+.ge-policy-drawer .rte h1,
+.ge-policy-drawer .rte h2,
+.ge-policy-drawer .rte h3,
+.ge-policy-drawer .rte h4 {
+  margin: 1.85rem 0 0.7rem;
+  color: #17160f;
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  text-transform: none;
+}
+
+.ge-policy-drawer .rte p,
+.ge-policy-drawer .rte li {
+  margin-bottom: 0.95rem;
+}
+
+.ge-policy-drawer .rte ul,
+.ge-policy-drawer .rte ol {
+  margin: 0.35rem 0 1.35rem;
+  padding-left: 1.2rem;
 }
 
 .ge-skin-reassure svg {

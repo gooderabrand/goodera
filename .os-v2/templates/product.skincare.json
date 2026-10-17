@@ -89,7 +89,7 @@
         "size": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "{% render 'skincare-size', product: product, section: section %}"
+            "custom_liquid": "{% render 'skincare-size', product: product %}"
           }
         },
         "offer": {
