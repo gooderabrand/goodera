@@ -91,34 +91,34 @@
       {{ ingredient_rows }}
     </ul>
   </section>
-
-  {% javascript %}
-  (() => {
-    const bind = (root) => {
-      const scope = root && root.querySelectorAll ? root : document;
-      scope.querySelectorAll('[data-ge-key-ingredients] [data-sr-faq-toggle]').forEach((button) => {
-        if (button.dataset.keyIngredientBound === 'true') return;
-        button.dataset.keyIngredientBound = 'true';
-        const panelId = button.getAttribute('aria-controls');
-        const panel = panelId ? document.getElementById(panelId) : null;
-        if (!panel) return;
-        const setOpen = (open) => {
-          button.setAttribute('aria-expanded', open ? 'true' : 'false');
-          button.classList.toggle('is-open', open);
-          panel.hidden = !open;
-        };
-        setOpen(false);
-        button.addEventListener('click', (event) => {
-          event.stopImmediatePropagation();
-          setOpen(button.getAttribute('aria-expanded') !== 'true');
-        }, true);
-      });
-    };
-    bind(document);
-    document.addEventListener('shopify:section:load', (event) => bind(event.target));
-  })();
-  {% endjavascript %}
 {%- endif -%}
+
+{% javascript %}
+(() => {
+  const bind = (root) => {
+    const scope = root && root.querySelectorAll ? root : document;
+    scope.querySelectorAll('[data-ge-key-ingredients] [data-sr-faq-toggle]').forEach((button) => {
+      if (button.dataset.keyIngredientBound === 'true') return;
+      button.dataset.keyIngredientBound = 'true';
+      const panelId = button.getAttribute('aria-controls');
+      const panel = panelId ? document.getElementById(panelId) : null;
+      if (!panel) return;
+      const setOpen = (open) => {
+        button.setAttribute('aria-expanded', open ? 'true' : 'false');
+        button.classList.toggle('is-open', open);
+        panel.hidden = !open;
+      };
+      setOpen(false);
+      button.addEventListener('click', (event) => {
+        event.stopImmediatePropagation();
+        setOpen(button.getAttribute('aria-expanded') !== 'true');
+      }, true);
+    });
+  };
+  bind(document);
+  document.addEventListener('shopify:section:load', (event) => bind(event.target));
+})();
+{% endjavascript %}
 
 {% schema %}
 {
