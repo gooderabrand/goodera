@@ -1154,6 +1154,12 @@ body.template-product-skincare .section-skincare-faq .sr-beta__faq-toggle {
   line-height: var(--ge-lh-snug, 1.25);
 }
 
+body.template-product-skincare .section-skincare-faq .sr-beta__faq-chevron,
+body.template-product-skincare .section-skincare-faq .sr-beta__faq-toggle[aria-expanded='true'] .sr-beta__faq-chevron,
+body.template-product-skincare .section-skincare-faq .sr-beta__faq-toggle.is-open .sr-beta__faq-chevron {
+  transform: rotate(-45deg);
+}
+
 @media (max-width: 989px) {
   body.template-product-skincare .ge-skin-faq__grid {
     grid-template-columns: minmax(0, 1fr);
