@@ -930,52 +930,20 @@
       "settings": [
         {
           "type": "checkbox",
-          "id": "show_bundle",
-          "label": "Show the two-unit option",
-          "default": true,
-          "info": "Buy One stays selected. Turning this off leaves a single purchase and quantity one."
-        },
-        { "type": "header", "content": "Ritual Kit" },
-        { "type": "text", "id": "kit_one_title", "label": "Buy one title", "default": "One Ritual Kit" },
-        { "type": "text", "id": "kit_one_detail", "label": "Buy one detail", "default": "4 single-use sachets" },
-        { "type": "text", "id": "kit_one_volume", "label": "Buy one volume", "default": "8 mL | 0.28 fl oz" },
-        { "type": "text", "id": "kit_bundle_title", "label": "Two-unit title", "default": "Two Ritual Kits" },
-        { "type": "text", "id": "kit_bundle_detail", "label": "Two-unit detail", "default": "8 single-use sachets" },
-        { "type": "text", "id": "kit_bundle_volume", "label": "Two-unit volume", "default": "16 mL | 0.56 fl oz" },
-        { "type": "text", "id": "kit_badge", "label": "Two-unit badge", "default": "Double the ritual" },
-        { "type": "header", "content": "Overnight Glow Mask" },
-        { "type": "text", "id": "mask_one_title", "label": "Buy one title", "default": "One Glow Mask" },
-        { "type": "text", "id": "mask_one_detail", "label": "Buy one detail", "default": "" },
-        { "type": "text", "id": "mask_one_volume", "label": "Buy one volume", "default": "50 mL | 1.69 fl oz" },
-        { "type": "text", "id": "mask_bundle_title", "label": "Two-unit title", "default": "Two Glow Masks" },
-        { "type": "text", "id": "mask_bundle_detail", "label": "Two-unit detail", "default": "" },
-        { "type": "text", "id": "mask_bundle_volume", "label": "Two-unit volume", "default": "100 mL | 3.38 fl oz" },
-        { "type": "text", "id": "mask_badge", "label": "Two-unit badge", "default": "One for you. One to give." },
-        { "type": "header", "content": "Subscribe & save" },
-        {
-          "type": "checkbox",
           "id": "show_subscribe",
           "label": "Show subscribe and save",
           "default": true,
-          "info": "Appears only when this product has a Shopify selling plan. The one and two cards stay in place."
+          "info": "Uses this product's Shopify selling plan. One-time purchase stays available. Quantity stays at one."
         },
-        {
-          "type": "select",
-          "id": "subscribe_default",
-          "label": "Selected purchase type",
-          "options": [
-            { "value": "once", "label": "One-time" },
-            { "value": "subscribe", "label": "Subscribe and save" }
-          ],
-          "default": "once"
-        },
-        { "type": "text", "id": "once_label", "label": "One-time label", "default": "One-time" },
-        { "type": "text", "id": "subscribe_label", "label": "Subscribe label", "default": "Subscribe & save" },
-        { "type": "checkbox", "id": "show_subscribe_savings", "label": "Show savings", "default": true },
-        { "type": "checkbox", "id": "show_subscribe_note", "label": "Show subscription note", "default": true },
-        { "type": "text", "id": "kit_subscribe_text", "label": "Ritual Kit note", "default": "Four Sundays. One little ritual. Delivered every four weeks." },
-        { "type": "text", "id": "mask_subscribe_text", "label": "Glow Mask note", "default": "Delivered every four weeks." },
-        { "type": "text", "id": "subscribe_disclosure", "label": "Subscription disclosure", "default": "Automatic deliveries. Skip, pause, or cancel anytime." }
+        { "type": "text", "id": "once_label", "label": "One-time label", "default": "One-time purchase" },
+        { "type": "text", "id": "once_text", "label": "One-time line", "default": "A little reset, whenever you need it." },
+        { "type": "text", "id": "subscribe_text", "label": "Subscribe line", "default": "Your ritual, on repeat." },
+        { "type": "text", "id": "subscribe_check", "label": "Subscribe check line", "default": "Automatic deliveries. Skip, pause, or cancel." },
+        { "type": "header", "content": "Ritual Kit" },
+        { "type": "text", "id": "kit_one_detail", "label": "Kit detail", "default": "4 single-use sachets" },
+        { "type": "text", "id": "kit_one_volume", "label": "Kit volume", "default": "8 mL | 0.28 fl oz" },
+        { "type": "header", "content": "Overnight Glow Mask" },
+        { "type": "text", "id": "mask_one_volume", "label": "Mask volume", "default": "50 mL | 1.69 fl oz" }
       ]
     },
     {
@@ -989,9 +957,8 @@
         { "type": "text", "id": "returns_label", "label": "Returns label", "default": "Returns & Support" },
         { "type": "text", "id": "returns_text", "label": "Returns detail", "default": "Have questions? We're here to help." },
         { "type": "url", "id": "returns_link", "label": "Returns link", "info": "Leave blank to use the shop refund policy." },
-        { "type": "text", "id": "support_label", "label": "Support label", "default": "Need a hand?" },
-        { "type": "text", "id": "support_text", "label": "Support detail", "default": "Get in touch with us" },
-        { "type": "url", "id": "support_link", "label": "Support link", "info": "Leave blank to use the contact page." },
+        { "type": "text", "id": "support_label", "label": "Subscribe label", "default": "Subscribe & save" },
+        { "type": "text", "id": "support_text", "label": "Subscribe detail", "default": "Skip, pause, or cancel anytime.", "info": "Shown as text. It does not open a drawer." },
         { "type": "text", "id": "dispatch_label", "label": "Dispatch label", "default": "Ships Next Day" },
         { "type": "text", "id": "dispatch_text", "label": "Dispatch detail", "default": "Order today. On its way tomorrow.", "info": "Line under the label. The drawer uses this line." }
       ]

@@ -102,30 +102,14 @@
         "offer": {
           "type": "skincare_offer",
           "settings": {
-            "show_bundle": true,
-            "kit_one_title": "One Ritual Kit",
+            "show_subscribe": true,
+            "once_label": "One-time purchase",
+            "once_text": "A little reset, whenever you need it.",
+            "subscribe_text": "Your ritual, on repeat.",
+            "subscribe_check": "Automatic deliveries. Skip, pause, or cancel.",
             "kit_one_detail": "4 single-use sachets",
             "kit_one_volume": "8 mL | 0.28 fl oz",
-            "kit_bundle_title": "Two Ritual Kits",
-            "kit_bundle_detail": "8 single-use sachets",
-            "kit_bundle_volume": "16 mL | 0.56 fl oz",
-            "kit_badge": "Double the ritual",
-            "mask_one_title": "One Glow Mask",
-            "mask_one_detail": "",
-            "mask_one_volume": "50 mL | 1.69 fl oz",
-            "mask_bundle_title": "Two Glow Masks",
-            "mask_bundle_detail": "",
-            "mask_bundle_volume": "100 mL | 3.38 fl oz",
-            "mask_badge": "One for you. One to give.",
-            "show_subscribe": true,
-            "subscribe_default": "once",
-            "once_label": "One-time",
-            "subscribe_label": "Subscribe & save",
-            "show_subscribe_savings": true,
-            "show_subscribe_note": true,
-            "kit_subscribe_text": "Four Sundays. One little ritual. Delivered every four weeks.",
-            "mask_subscribe_text": "Delivered every four weeks.",
-            "subscribe_disclosure": "Automatic deliveries. Skip, pause, or cancel anytime."
+            "mask_one_volume": "50 mL | 1.69 fl oz"
           }
         },
         "buy_buttons": {
@@ -146,8 +130,8 @@
             "returns_label": "Returns & Support",
             "returns_text": "Have questions? We're here to help.",
             "returns_link": "",
-            "support_label": "Need a hand?",
-            "support_text": "Get in touch with us",
+            "support_label": "Subscribe & save",
+            "support_text": "Skip, pause, or cancel anytime.",
             "support_link": "",
             "dispatch_label": "Ships Next Day",
             "dispatch_text": "Order today. On its way tomorrow."
