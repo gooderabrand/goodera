@@ -1,6 +1,6 @@
 {% doc %}
   What's in it and what's not, inside the skincare buy box.
-  The full INCI renders only when custom.ingredients_verified is the boolean true and custom.full_inci is set.
+  The full INCI lives in the Key Ingredients section.
   Green checks read custom.ingredient_highlights. X pills read custom.formulated_without.
   Draft ingredient records and empty lists are skipped. The string "false" is not treated as verified.
   @param {product} product - Product whose formula notes are shown
@@ -12,13 +12,9 @@
 
 {%- liquid
   assign verified = product.metafields.custom.ingredients_verified.value
-  assign inci = ''
   assign highlight_count = 0
   assign without_count = 0
   if verified == true
-    if product.metafields.custom.full_inci.value != blank
-      assign inci = product.metafields.custom.full_inci.value | strip
-    endif
     assign highlights = product.metafields.custom.ingredient_highlights
     if highlights != blank and highlights.value != blank
       for item in highlights.value
@@ -43,12 +39,8 @@
   endif
 -%}
 
-{%- if inci != blank or highlight_count > 0 or without_count > 0 -%}
+{%- if highlight_count > 0 or without_count > 0 -%}
   <div class="ge-skin-formula">
-    {%- if inci != blank -%}
-      <p class="ge-skin-formula__inci">{{ inci | escape }}</p>
-    {%- endif -%}
-    {%- if highlight_count > 0 or without_count > 0 -%}
       <div class="ge-skin-formula__grid{% if highlight_count > 0 and without_count > 0 %} ge-skin-formula__grid--split{% endif %}">
         {%- if highlight_count > 0 -%}
           <div class="ge-skin-formula__col ge-skin-formula__col--contains">
@@ -102,6 +94,5 @@
           </div>
         {%- endif -%}
       </div>
-    {%- endif -%}
   </div>
 {%- endif -%}

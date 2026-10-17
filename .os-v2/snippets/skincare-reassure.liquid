@@ -1,7 +1,8 @@
 {% doc %}
-  Compact shipping, returns, and support links under the skincare add-to-bag button.
-  Blank links fall back to the shop shipping policy, refund policy, and contact page.
-  @param {block} block - Theme editor block with labels and links
+  Compact shipping, returns, and support buttons under the skincare add-to-bag button.
+  Each button opens a drawer. Shipping and returns load the shop policies. Help loads the contact page.
+  The short line on the button is the fallback when that policy or page has no body.
+  @param {block} block - Theme editor block with labels and detail lines
   @example
   {% render 'skincare-reassure', block: block %}
 {% enddoc %}
@@ -9,24 +10,25 @@
 {{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  assign ship_url = block.settings.shipping_link
-  if ship_url == blank and shop.shipping_policy != blank
-    assign ship_url = shop.shipping_policy.url
+  assign ship_body = ''
+  assign return_body = ''
+  assign help_body = ''
+  if shop.shipping_policy != blank and shop.shipping_policy.body != blank
+    assign ship_body = shop.shipping_policy.body
   endif
-  assign return_url = block.settings.returns_link
-  if return_url == blank and shop.refund_policy != blank
-    assign return_url = shop.refund_policy.url
+  if shop.refund_policy != blank and shop.refund_policy.body != blank
+    assign return_body = shop.refund_policy.body
   endif
-  assign help_url = block.settings.support_link
-  if help_url == blank
-    assign help_url = shop.url | append: '/pages/contact'
+  assign help_page = pages['contact']
+  if help_page != blank and help_page.content != blank
+    assign help_body = help_page.content
   endif
 -%}
 
-<ul class="ge-skin-reassure" {{ block.shopify_attributes }}>
+<ul class="ge-skin-reassure" data-ge-reassure {{ block.shopify_attributes }}>
   {%- if block.settings.shipping_label != blank -%}
     <li>
-      <a href="{{ ship_url | default: '#' }}">
+      <button type="button" data-ge-policy-open="shipping" aria-haspopup="dialog" aria-controls="GePolicyDrawer">
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
           <path d="M3 7.5h11v8H3zM14 10h3.2L20 13.2V15.5h-6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
           <circle cx="7" cy="17.5" r="1.6" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
@@ -38,12 +40,12 @@
             <span class="ge-skin-reassure__text">{{ block.settings.shipping_text | escape }}</span>
           {%- endif -%}
         </span>
-      </a>
+      </button>
     </li>
   {%- endif -%}
   {%- if block.settings.returns_label != blank -%}
     <li>
-      <a href="{{ return_url | default: '#' }}">
+      <button type="button" data-ge-policy-open="returns" aria-haspopup="dialog" aria-controls="GePolicyDrawer">
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
           <path d="M4 8.5 8.5 4 13 8.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
           <path d="M8.5 4v7.5a5 5 0 0 0 5 5H20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
@@ -54,12 +56,12 @@
             <span class="ge-skin-reassure__text">{{ block.settings.returns_text | escape }}</span>
           {%- endif -%}
         </span>
-      </a>
+      </button>
     </li>
   {%- endif -%}
   {%- if block.settings.support_label != blank -%}
     <li>
-      <a href="{{ help_url }}">
+      <button type="button" data-ge-policy-open="help" aria-haspopup="dialog" aria-controls="GePolicyDrawer">
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
           <path d="M6 16.5 4.5 19.5c2.2-.4 3.6-1.3 4.4-2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
           <path d="M7 15.5a6.5 6.5 0 1 1 2.6 2.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
@@ -70,7 +72,93 @@
             <span class="ge-skin-reassure__text">{{ block.settings.support_text | escape }}</span>
           {%- endif -%}
         </span>
-      </a>
+      </button>
     </li>
   {%- endif -%}
 </ul>
+
+<div class="side-panel ge-policy-drawer" id="GePolicyDrawer" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="GePolicyTitle">
+  <div class="side-panel-inner">
+    <div class="side-panel-header">
+      <div>
+        <h4 class="body-font" id="GePolicyTitle" data-ge-policy-title></h4>
+        <side-panel-close class="side-panel-close">
+          <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">
+            <path d="M3.2 3.2 12.8 12.8M12.8 3.2 3.2 12.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+          </svg>
+          <span class="visually-hidden">{{ 'accessibility.close' | t }}</span>
+        </side-panel-close>
+      </div>
+    </div>
+    <div class="side-panel-content">
+      <div class="rte ge-policy-drawer__panel" data-ge-policy-panel="shipping" hidden>
+        {%- if ship_body != blank -%}
+          {{ ship_body }}
+        {%- elsif block.settings.shipping_text != blank -%}
+          <p>{{ block.settings.shipping_text | escape }}</p>
+        {%- endif -%}
+      </div>
+      <div class="rte ge-policy-drawer__panel" data-ge-policy-panel="returns" hidden>
+        {%- if return_body != blank -%}
+          {{ return_body }}
+        {%- elsif block.settings.returns_text != blank -%}
+          <p>{{ block.settings.returns_text | escape }}</p>
+        {%- endif -%}
+      </div>
+      <div class="rte ge-policy-drawer__panel" data-ge-policy-panel="help" hidden>
+        {%- if help_body != blank -%}
+          {{ help_body }}
+        {%- elsif block.settings.support_text != blank -%}
+          <p>{{ block.settings.support_text | escape }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.querySelector('[data-ge-reassure]');
+    var drawer = document.getElementById('GePolicyDrawer');
+    if (!root || !drawer || root.dataset.reassureBound === 'true') return;
+    root.dataset.reassureBound = 'true';
+
+    document.querySelectorAll('#GePolicyDrawer').forEach(function (node) {
+      if (node !== drawer) node.remove();
+    });
+    document.body.appendChild(drawer);
+
+    var show = function (key) {
+      var button = root.querySelector('[data-ge-policy-open="' + key + '"]');
+      var label = button ? button.querySelector('.ge-skin-reassure__label') : null;
+      var title = drawer.querySelector('[data-ge-policy-title]');
+      drawer.querySelectorAll('[data-ge-policy-panel]').forEach(function (panel) {
+        panel.hidden = panel.getAttribute('data-ge-policy-panel') !== key;
+      });
+      if (title) title.textContent = label ? label.textContent : '';
+      document.body.classList.add('open-cc', 'open-ge-policy');
+      drawer.classList.add('active');
+      drawer.focus();
+    };
+
+    var hideBlur = function () {
+      document.body.classList.remove('open-ge-policy');
+    };
+
+    root.querySelectorAll('[data-ge-policy-open]').forEach(function (button) {
+      button.addEventListener('click', function (event) {
+        event.preventDefault();
+        show(button.getAttribute('data-ge-policy-open'));
+      });
+    });
+
+    if (!window.__gePolicyBlurBound) {
+      window.__gePolicyBlurBound = true;
+      document.addEventListener('click', function (event) {
+        if (!document.body.classList.contains('open-ge-policy')) return;
+        if (event.target.closest('side-panel-close') || event.target.closest('.click-capture')) hideBlur();
+      }, true);
+      document.addEventListener('panel:close', hideBlur);
+    }
+  })();
+</script>
