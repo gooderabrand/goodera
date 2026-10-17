@@ -276,6 +276,80 @@ html body .product-card .product-card-color-text {
 }
 
 /*
+  Collection product tiles are four across, 4px apart, and run to the
+  screen edge. Homepage shop rails and the same rails elsewhere
+  (recently viewed, recommendations) use that tile width.
+*/
+@media (min-width: 990px) {
+  .section-featured-collection .ge-commerce-section,
+  .section-recently-viewed-products .ge-commerce-section,
+  .section-product-recommendations .ge-commerce-section {
+    padding-inline: 0 !important;
+  }
+
+  .section-featured-collection .ge-commerce-section .section-header,
+  .section-recently-viewed-products .ge-commerce-section .section-header,
+  .section-product-recommendations .ge-commerce-section .section-header,
+  .section-featured-collection .discover-section__header,
+  .section-recently-viewed-products .discover-section__header,
+  .section-product-recommendations .discover-section__header {
+    padding-inline: calc(var(--ge-content-inset, 0px) + var(--ge-shell-gutter, 20px))
+      var(--ge-shell-gutter, 20px);
+  }
+
+  .section-featured-collection .ge-rail__scroller,
+  .section-recently-viewed-products .ge-rail__scroller,
+  .section-product-recommendations .ge-rail__scroller {
+    gap: 4px;
+    padding-inline: 0 !important;
+    scroll-padding-inline: 0 !important;
+  }
+
+  .section-featured-collection .ge-rail__item--card-lg,
+  .section-recently-viewed-products .ge-rail__item--card-lg,
+  .section-product-recommendations .ge-rail__item--card-lg {
+    width: calc((100vw - 12px) / 4);
+    max-width: none;
+  }
+
+  .section-featured-collection .ge-rail .product-card .product-card--featured-image,
+  .section-featured-collection .ge-rail .product-card figure.product-card--featured-image,
+  .section-featured-collection .ge-rail .product-card .product-card--featured-image-link,
+  .section-featured-collection .ge-rail .product-card a.product-card--featured-image-link,
+  .section-featured-collection .ge-rail .product-card .product-featured-image-link,
+  .section-featured-collection .ge-rail .product-card .product-card--featured-image-link img,
+  .section-featured-collection .ge-rail .product-card .product-featured-image-link img,
+  .section-featured-collection .ge-rail .product-card .product-primary-image,
+  .section-featured-collection .ge-rail .product-card .product-secondary-image,
+  .section-recently-viewed-products .ge-rail .product-card .product-card--featured-image,
+  .section-recently-viewed-products .ge-rail .product-card figure.product-card--featured-image,
+  .section-recently-viewed-products .ge-rail .product-card .product-card--featured-image-link,
+  .section-recently-viewed-products .ge-rail .product-card a.product-card--featured-image-link,
+  .section-recently-viewed-products .ge-rail .product-card .product-featured-image-link,
+  .section-recently-viewed-products .ge-rail .product-card .product-card--featured-image-link img,
+  .section-recently-viewed-products .ge-rail .product-card .product-featured-image-link img,
+  .section-recently-viewed-products .ge-rail .product-card .product-primary-image,
+  .section-recently-viewed-products .ge-rail .product-card .product-secondary-image,
+  .section-product-recommendations .ge-rail .product-card .product-card--featured-image,
+  .section-product-recommendations .ge-rail .product-card figure.product-card--featured-image,
+  .section-product-recommendations .ge-rail .product-card .product-card--featured-image-link,
+  .section-product-recommendations .ge-rail .product-card a.product-card--featured-image-link,
+  .section-product-recommendations .ge-rail .product-card .product-featured-image-link,
+  .section-product-recommendations .ge-rail .product-card .product-card--featured-image-link img,
+  .section-product-recommendations .ge-rail .product-card .product-featured-image-link img,
+  .section-product-recommendations .ge-rail .product-card .product-primary-image,
+  .section-product-recommendations .ge-rail .product-card .product-secondary-image {
+    border-radius: 0 !important;
+  }
+
+  .section-featured-collection .ge-rail .product-card-info,
+  .section-recently-viewed-products .ge-rail .product-card-info,
+  .section-product-recommendations .ge-rail .product-card-info {
+    padding-inline: 8px;
+  }
+}
+
+/*
   Homepage and Sunday Reset keep a transparent bar over their hero, then
   turn solid once that hero has scrolled away. Every other page is a
   white bar from the start so black type never sits on the content.
