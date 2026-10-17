@@ -180,6 +180,40 @@ body.template-product-skincare {
   flex: 0 0 auto;
 }
 
+.ge-skin-choice__freqs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.95rem;
+  margin-top: 0.28rem;
+}
+
+.ge-skin-freq {
+  position: relative;
+  display: inline-flex;
+  margin: 0;
+  color: #6e6e73;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.35;
+  cursor: pointer;
+}
+
+.ge-skin-freq span {
+  text-underline-offset: 0.28em;
+  text-decoration-thickness: 1px;
+}
+
+.ge-skin-freq.is-selected,
+.ge-skin-freq:has(input:checked) {
+  color: #17160f;
+}
+
+.ge-skin-freq.is-selected span,
+.ge-skin-freq:has(input:checked) span {
+  text-decoration: underline;
+}
+
 body.template-product-skincare:has([data-ge-offers]) .shopify_subscriptions_app_container,
 body.template-product-skincare:has([data-ge-offers]) .shopify_subscriptions_fieldset,
 body.template-product-skincare:has([data-ge-offers]) .shopify_subscriptions_purchase_options,
@@ -319,6 +353,36 @@ body.template-product-skincare .thb-product-detail .variations .ge-skin-sizes in
 
 .ge-skin-buy-meta .ge-skin-intro {
   margin: 0;
+}
+
+.ge-skin-contents {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin: 0.85rem 0 0;
+  min-width: 0;
+}
+
+.ge-skin-contents__detail {
+  color: #17160f;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.ge-skin-contents__volume {
+  color: #6e6e73;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.ge-skin-contents + .ge-skin-size {
+  margin-top: 0.45rem;
 }
 
 .ge-skin-size {

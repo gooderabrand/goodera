@@ -27,17 +27,6 @@
   endif
   assign unit_price = variant.price
   assign product_form_id = 'product-form-' | append: section.id
-  assign is_kit = false
-  if product.handle == 'sunday-reset-ritual-kit'
-    assign is_kit = true
-  endif
-  if is_kit
-    assign detail = block.settings.kit_one_detail | default: '4 single-use sachets'
-    assign volume = block.settings.kit_one_volume | default: '8 mL | 0.28 fl oz'
-  else
-    assign detail = block.settings.mask_one_detail | default: ''
-    assign volume = block.settings.mask_one_volume | default: '50 mL | 1.69 fl oz'
-  endif
   assign once_label = block.settings.once_label | default: 'One-time purchase'
   assign once_text = block.settings.once_text | default: 'A little reset, whenever you need it.'
   assign subscribe_text = block.settings.subscribe_text | default: 'Your ritual, on repeat.'
@@ -68,10 +57,14 @@
   assign plan_id = ''
   assign cadence = ''
   assign save_value = ''
+  assign plan_count = variant.selling_plan_allocations.size
   if plan_allocation != blank
     assign sub_price = plan_allocation.price
     assign plan_id = plan_allocation.selling_plan.id
-    assign cadence = plan_allocation.selling_plan.options | first
+    assign plan_option = plan_allocation.selling_plan.options | first
+    if plan_option != blank
+      assign cadence = plan_option.value
+    endif
     if cadence == blank
       assign cadence = plan_allocation.selling_plan.name
     endif
@@ -99,7 +92,16 @@
       assign loop_plan_id = loop_allocation.selling_plan.id
     endif
   -%}
-  {"id":{{ offer_variant.id }},"price":{{ offer_variant.price | money | json }},"sub":{{ loop_sub | money | json }},"planId":{% if loop_plan_id == 0 %}null{% else %}{{ loop_plan_id }}{% endif %}}{%- unless forloop.last -%},{%- endunless -%}
+  {"id":{{ offer_variant.id }},"price":{{ offer_variant.price | money | json }},"sub":{{ loop_sub | money | json }},"planId":{% if loop_plan_id == 0 %}null{% else %}{{ loop_plan_id }}{% endif %},"plans":[{%- for allocation in offer_variant.selling_plan_allocations -%}{%- liquid
+      assign freq_label = ''
+      assign freq_option = allocation.selling_plan.options | first
+      if freq_option != blank
+        assign freq_label = freq_option.value
+      endif
+      if freq_label == blank
+        assign freq_label = allocation.selling_plan.name
+      endif
+    -%}{"id":{{ allocation.selling_plan.id }},"price":{{ allocation.price | money | json }},"label":{{ freq_label | json }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]}{%- unless forloop.last -%},{%- endunless -%}
 {%- endfor -%}
 ]
 {%- endcapture -%}
@@ -128,17 +130,11 @@
         {%- if once_text != blank -%}
           <span class="ge-skin-choice__line">{{ once_text | escape }}</span>
         {%- endif -%}
-        {%- if detail != blank or volume != blank -%}
-          <span class="ge-skin-choice__meta">
-            {%- if detail != blank -%}<span class="ge-skin-choice__detail">{{ detail | escape }}</span>{%- endif -%}
-            {%- if volume != blank -%}<span class="ge-skin-choice__volume">{{ volume | escape }}</span>{%- endif -%}
-          </span>
-        {%- endif -%}
       </span>
     </label>
     {%- if show_plan -%}
-      <label class="ge-skin-choice{% if plan_mode == 'subscribe' %} is-selected{% endif %}">
-        <input type="radio" name="ge-plan-{{ section.id }}" value="subscribe"{% if plan_mode == 'subscribe' %} checked{% endif %}>
+      <div class="ge-skin-choice{% if plan_mode == 'subscribe' %} is-selected{% endif %}">
+        <input type="radio" name="ge-plan-{{ section.id }}" value="subscribe" aria-label="{{ subscribe_label | escape }}"{% if plan_mode == 'subscribe' %} checked{% endif %}>
         <span class="ge-skin-choice__radio" aria-hidden="true"></span>
         <span class="ge-skin-choice__main">
           <span class="ge-skin-choice__head">
@@ -151,13 +147,37 @@
           {%- if subscribe_text != blank -%}
             <span class="ge-skin-choice__line">{{ subscribe_text | escape }}</span>
           {%- endif -%}
-          {%- if detail != blank or volume != blank -%}
-            <span class="ge-skin-choice__meta">
-              {%- if detail != blank -%}<span class="ge-skin-choice__detail">{{ detail | escape }}</span>{%- endif -%}
-              {%- if volume != blank -%}<span class="ge-skin-choice__volume">{{ volume | escape }}</span>{%- endif -%}
+          {%- if plan_count > 1 -%}
+            <span class="ge-skin-choice__freqs" role="radiogroup" aria-label="Delivery frequency">
+              {%- for allocation in variant.selling_plan_allocations -%}
+                {%- liquid
+                  assign freq_label = ''
+                  assign freq_option = allocation.selling_plan.options | first
+                  if freq_option != blank
+                    assign freq_label = freq_option.value
+                  endif
+                  if freq_label == blank
+                    assign freq_label = allocation.selling_plan.name
+                  endif
+                  assign freq_selected = false
+                  if allocation.selling_plan.id == plan_id
+                    assign freq_selected = true
+                  endif
+                -%}
+                <label class="ge-skin-freq{% if freq_selected %} is-selected{% endif %}">
+                  <input
+                    type="radio"
+                    name="ge-freq-{{ section.id }}"
+                    value="{{ allocation.selling_plan.id }}"
+                    data-plan-id="{{ allocation.selling_plan.id }}"
+                    data-sub-price="{{ allocation.price | money | escape }}"
+                    {% if freq_selected %}checked{% endif %}
+                  >
+                  <span>{{ freq_label | escape }}</span>
+                </label>
+              {%- endfor -%}
             </span>
-          {%- endif -%}
-          {%- if cadence != blank -%}
+          {%- elsif cadence != blank -%}
             <span class="ge-skin-choice__cadence">{{ cadence | escape }}</span>
           {%- endif -%}
           {%- if subscribe_check != blank -%}
@@ -169,7 +189,7 @@
             </span>
           {%- endif -%}
         </span>
-      </label>
+      </div>
     {%- endif -%}
   </div>
   <input type="hidden" name="quantity" value="1" min="1" form="{{ product_form_id }}" data-ge-offer-qty>
@@ -200,9 +220,20 @@
     try { stock = JSON.parse(stockNode ? stockNode.textContent : '[]'); } catch (error) { stock = []; }
     if (qty) qty.value = '1';
 
+    var purchaseRadios = function () {
+      return root.querySelectorAll('input[name^="ge-plan-"]');
+    };
+
     var mode = function () {
-      var selected = root.querySelector('.ge-skin-choice input[type="radio"]:checked');
+      var selected = root.querySelector('input[name^="ge-plan-"]:checked');
       return selected ? selected.value : 'once';
+    };
+
+    var markFreqs = function () {
+      root.querySelectorAll('.ge-skin-freq').forEach(function (item) {
+        var input = item.querySelector('input');
+        item.classList.toggle('is-selected', !!(input && input.checked));
+      });
     };
 
     var priceFor = function (value) {
@@ -229,12 +260,13 @@
     };
 
     var apply = function (value) {
-      root.querySelectorAll('.ge-skin-choice').forEach(function (choice) {
-        var input = choice.querySelector('input[type="radio"]');
-        var selected = input && input.value === value;
-        if (input) input.checked = selected;
-        choice.classList.toggle('is-selected', selected);
+      purchaseRadios().forEach(function (input) {
+        var selected = input.value === value;
+        input.checked = selected;
+        var choice = input.closest('.ge-skin-choice');
+        if (choice) choice.classList.toggle('is-selected', selected);
       });
+      markFreqs();
       if (planInput) {
         var planId = value === 'subscribe' ? (root.getAttribute('data-plan-id') || '') : '';
         planInput.value = planId;
@@ -245,9 +277,30 @@
       writeBag(priceFor(value));
     };
 
-    root.querySelectorAll('.ge-skin-choice input[type="radio"]').forEach(function (radio) {
+    purchaseRadios().forEach(function (radio) {
       radio.addEventListener('change', function () {
         if (radio.checked) apply(radio.value);
+      });
+    });
+
+    root.querySelectorAll('.ge-skin-choice').forEach(function (choice) {
+      choice.addEventListener('click', function (event) {
+        if (event.target.closest('.ge-skin-choice__freqs')) return;
+        var input = choice.querySelector('input[name^="ge-plan-"]');
+        if (!input || input.checked) return;
+        input.checked = true;
+        apply(input.value);
+      });
+    });
+
+    root.querySelectorAll('.ge-skin-freq input').forEach(function (radio) {
+      radio.addEventListener('change', function () {
+        if (!radio.checked) return;
+        root.setAttribute('data-plan-id', radio.getAttribute('data-plan-id') || '');
+        root.setAttribute('data-sub-price', radio.getAttribute('data-sub-price') || '');
+        var purchase = root.querySelector('input[name^="ge-plan-"][value="subscribe"]');
+        if (purchase) purchase.checked = true;
+        apply('subscribe');
       });
     });
 
@@ -258,9 +311,26 @@
       var match = stock.filter(function (item) { return item.id === detail.variant.id; })[0];
       if (!match) return;
       root.setAttribute('data-price', match.price || '');
-      if (match.sub) root.setAttribute('data-sub-price', match.sub);
-      if (match.planId) root.setAttribute('data-plan-id', String(match.planId));
-      var subscribeChoice = root.querySelector('.ge-skin-choice input[value="subscribe"]');
+      var plans = match.plans || [];
+      var currentId = root.getAttribute('data-plan-id') || '';
+      var picked = null;
+      plans.forEach(function (plan) {
+        var id = String(plan.id);
+        var input = root.querySelector('.ge-skin-freq input[data-plan-id="' + id + '"]');
+        if (input && plan.price) input.setAttribute('data-sub-price', plan.price);
+        if (id === String(currentId)) picked = plan;
+      });
+      if (!picked && plans.length) picked = plans[0];
+      if (picked) {
+        root.setAttribute('data-sub-price', picked.price || '');
+        root.setAttribute('data-plan-id', String(picked.id));
+        var freq = root.querySelector('.ge-skin-freq input[data-plan-id="' + String(picked.id) + '"]');
+        if (freq) freq.checked = true;
+      } else if (match.sub) {
+        root.setAttribute('data-sub-price', match.sub);
+        if (match.planId) root.setAttribute('data-plan-id', String(match.planId));
+      }
+      var subscribeChoice = root.querySelector('input[name^="ge-plan-"][value="subscribe"]');
       if (subscribeChoice) subscribeChoice.closest('.ge-skin-choice').hidden = !match.planId;
       apply(match.planId ? mode() : 'once');
     });
