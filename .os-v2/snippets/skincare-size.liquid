@@ -1,7 +1,7 @@
 {% doc %}
   Size row for the skincare buy box.
-  A product with a Size, Volume, or Amount option uses the variant chips. Sold-out chips cannot be selected.
-  A product that still has one fill shows custom.size_label as the selected chip. Empty size labels stay hidden.
+  A product with a Size, Volume, or Amount option uses the variant choices. Sold-out choices cannot be selected.
+  A product that still has one fill shows custom.size_label in the same underline row. Empty size labels stay hidden.
   @param {product} product - Product being purchased
   @example
   {% render 'skincare-size', product: product %}
@@ -16,6 +16,7 @@
     endif
   endfor
   assign size_label = product.metafields.custom.size_label.value | strip
+  assign size_available = product.selected_or_first_available_variant.available
 -%}
 
 {%- if size_option -%}
@@ -37,8 +38,11 @@
   </script>
 {%- elsif size_label != blank -%}
   <div class="ge-skin-size">
+    <p class="ge-skin-size__heading">{{ 'products.skincare.size' | t }}</p>
     <div class="ge-skin-size__options" role="radiogroup" aria-label="{{ 'products.skincare.size' | t }}">
-      <span class="ge-skin-size__chip is-selected" aria-current="true">{{ size_label | escape }}</span>
+      <span class="ge-skin-size__choice is-selected{% unless size_available %} is-unavailable{% endunless %}">
+        {%- render 'skincare-size-name', value: size_label, with_ounces: true -%}
+      </span>
     </div>
   </div>
 {%- endif -%}

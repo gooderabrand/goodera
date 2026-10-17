@@ -161,20 +161,83 @@ body.template-product-skincare {
   display: none !important;
 }
 
-.template-product-skincare .thb-product-detail .variations .product-form__input--block > .form__label {
+body.template-product-skincare .thb-product-detail .variations .product-form__input--block.ge-skin-sizes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 1.35rem;
+  row-gap: 0.45rem;
+  width: 100%;
+  margin: 0.85rem 0 0.15rem;
+  padding: 0 !important;
+}
+
+body.template-product-skincare .thb-product-detail .variations .product-form__input--block.ge-skin-sizes > .form__label {
+  display: block !important;
+  flex: 1 0 100%;
+  width: 100%;
+  margin: 0 0 0.2rem;
+  color: #6e6e73;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+body.template-product-skincare .thb-product-detail .variations .ge-skin-sizes .form__label__value {
   display: none !important;
 }
 
-.template-product-skincare .thb-product-detail .variations .product-form__input--block input[type='radio'].is-disabled + label,
-.template-product-skincare .thb-product-detail .variations .product-form__input--block input[type='radio'].is-disabled:checked + label {
-  background: #fff !important;
-  border: 1px solid #d2d2d7 !important;
+body.template-product-skincare .thb-product-detail .variations .ge-skin-sizes input[type='radio'] + label,
+body.template-product-skincare .thb-product-detail .variations .ge-skin-sizes input[type='radio']:checked + label,
+body.template-product-skincare .thb-product-detail .variations .ge-skin-sizes input[type='radio']:not(:checked):not(.is-disabled) + label:hover,
+body.template-product-skincare .thb-product-detail .variations .ge-skin-sizes input[type='radio']:not(:checked):not(.is-disabled) + label:focus-visible {
+  box-sizing: border-box;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: flex-start;
+  width: auto !important;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 0 0.15rem !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
   color: #17160f !important;
-  opacity: 0.38 !important;
+  font-size: 0.9375rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.35 !important;
   text-decoration: none !important;
+  text-underline-offset: 0.35em;
+  text-decoration-thickness: 1px;
+  opacity: 1 !important;
+  cursor: pointer;
+}
+
+body.template-product-skincare .thb-product-detail .variations .ge-skin-sizes input[type='radio']:checked + label {
+  text-decoration: underline !important;
+  text-decoration-color: #17160f;
+}
+
+body.template-product-skincare .thb-product-detail .variations .ge-skin-sizes input[type='radio'].is-disabled + label,
+body.template-product-skincare .thb-product-detail .variations .ge-skin-sizes input[type='radio'].is-disabled:checked + label {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #17160f !important;
+  opacity: 0.4 !important;
+  text-decoration: line-through !important;
   cursor: default;
   pointer-events: none !important;
-  box-shadow: none !important;
+}
+
+body.template-product-skincare .thb-product-detail .variations .ge-skin-sizes input[type='radio'].is-disabled:checked + label {
+  text-decoration: underline line-through !important;
 }
 
 .ge-skin-intro {
@@ -191,28 +254,47 @@ body.template-product-skincare {
 }
 
 .ge-skin-size {
-  margin: 0.9rem 0 0.15rem;
+  margin: 0.85rem 0 0.15rem;
+}
+
+.ge-skin-size__heading {
+  margin: 0 0 0.35rem;
+  color: #6e6e73;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1.3;
+  text-transform: uppercase;
 }
 
 .ge-skin-size__options {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  align-items: baseline;
+  gap: 0.45rem 1.35rem;
 }
 
-.ge-skin-size__chip {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.75rem;
-  padding: 0.45rem 0.9rem;
-  border: 1.5px solid #17160f;
-  border-radius: 8px;
-  background: #fff;
+.ge-skin-size__choice {
   color: #17160f;
-  font-size: 0.8125rem;
-  line-height: 1.25;
-  text-align: center;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.35;
+  text-underline-offset: 0.35em;
+  text-decoration-thickness: 1px;
+}
+
+.ge-skin-size__choice.is-selected {
+  text-decoration: underline;
+  text-decoration-color: #17160f;
+}
+
+.ge-skin-size__choice.is-unavailable {
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+.ge-skin-size__choice.is-selected.is-unavailable {
+  text-decoration: underline line-through;
 }
 
 body.open-ge-policy .click-capture,
@@ -1233,7 +1315,15 @@ body.template-product-skincare .section-skincare-faq .sr-beta__faq {
   background: transparent;
 }
 
-body.template-product-skincare .ge-skin-faq__inner {
+body.template-product-skincare .ge-skin-faq__split {
+  display: flex;
+  align-items: center;
+}
+
+body.template-product-skincare .ge-skin-faq__intro,
+body.template-product-skincare .ge-skin-faq__questions {
+  flex: 1 1 50%;
+  min-width: 0;
   box-sizing: border-box;
   padding: var(--ge-page-inset, 64px);
 }
@@ -1514,11 +1604,29 @@ body.template-product-skincare .ge-skin-faq__title {
 }
 
 body.template-product-skincare .ge-skin-faq__sub {
-  margin: 0.65rem 0 1.35rem;
+  margin: 0.65rem 0 0;
+  max-width: 28rem;
   color: var(--ge-muted, #6e6e73);
   font-size: var(--ge-role-body, 1.0625rem);
   font-weight: 400;
   line-height: var(--ge-lh-normal, 1.5);
+}
+
+@media (max-width: 989px) {
+  body.template-product-skincare .ge-skin-faq__split {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  body.template-product-skincare .ge-skin-faq__intro,
+  body.template-product-skincare .ge-skin-faq__questions {
+    flex-basis: auto;
+    width: 100%;
+  }
+
+  body.template-product-skincare .ge-skin-faq__questions {
+    padding-top: 0;
+  }
 }
 
 body.template-product-skincare .product-form__checkout-row .single-add-to-cart-button {

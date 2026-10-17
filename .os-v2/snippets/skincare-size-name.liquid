@@ -1,0 +1,20 @@
+{% doc %}
+  Visible skincare size name.
+  A row of sizes keeps each option value. A single jar also shows fluid ounces.
+  Other labels, including the sachet line, stay as written.
+  The radio value is unchanged, so variant selection still uses the option value.
+  @param {string} value - Option value or size label to display
+  @param {boolean} [with_ounces] - Append fluid ounces when the value is a volume
+  @example
+  {% render 'skincare-size-name', value: value, with_ounces: false %}
+{% enddoc %}
+
+{%- liquid
+  assign shown = value
+  assign volume = value | downcase | replace: 'ml', '' | strip | plus: 0
+  if with_ounces and volume > 0
+    assign ounces = volume | times: 0.033814 | round: 2
+    assign shown = volume | append: ' ml | ' | append: ounces | append: ' fl oz'
+  endif
+-%}
+{{- shown -}}
