@@ -120,7 +120,7 @@
         "reassure": {
           "type": "skincare_reassure",
           "settings": {
-            "shipping_label": "Free shipping over $50",
+            "shipping_label": "FREE delivery",
             "shipping_text": "A little more good, delivered.",
             "shipping_link": "",
             "returns_label": "Returns & Support",
@@ -129,7 +129,7 @@
             "support_label": "Need a hand?",
             "support_text": "Get in touch with us",
             "support_link": "",
-            "dispatch_label": "24 hr ships next day",
+            "dispatch_label": "Ships Next Day",
             "dispatch_text": ""
           }
         },
