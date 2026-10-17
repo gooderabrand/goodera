@@ -69,7 +69,8 @@ body.template-product-skincare {
 .ge-skin-offer__copy,
 .ge-skin-offer__name,
 .ge-skin-offer__detail,
-.ge-skin-offer__badge {
+.ge-skin-offer__badge,
+.ge-skin-offer__status {
   display: block;
 }
 
@@ -96,12 +97,37 @@ body.template-product-skincare {
   white-space: nowrap;
 }
 
-.ge-skin-offer__badge {
+.ge-skin-offer__badge,
+.ge-skin-offer__status {
   margin-bottom: 0.25rem;
   color: #17160f;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.02em;
+}
+
+.ge-skin-offer__status {
+  color: #86868b;
+}
+
+.ge-skin-offer__badge[hidden],
+.ge-skin-offer__status[hidden] {
+  display: none;
+}
+
+.ge-skin-offer.is-unavailable {
+  background: #f5f5f7;
+  border-color: #d2d2d7;
+  box-shadow: none;
+  cursor: default;
+  pointer-events: none;
+}
+
+.ge-skin-offer.is-unavailable .ge-skin-offer__name,
+.ge-skin-offer.is-unavailable .ge-skin-offer__detail,
+.ge-skin-offer.is-unavailable .ge-skin-offer__price,
+.ge-skin-offer.is-unavailable .ge-skin-offer__badge {
+  color: #86868b;
 }
 
 .ge-skin-reassure {
