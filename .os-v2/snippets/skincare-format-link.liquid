@@ -1,0 +1,36 @@
+{% doc %}
+  Small link between the Ritual Kit and the full-size Overnight Glow Mask.
+  These are separate products. The link shows the other product's availability and price.
+  @param {product} product - Current product
+  @param {block} block - Theme editor block
+  @example
+  {% render 'skincare-format-link', product: product, block: block %}
+{% enddoc %}
+
+{{ 'skincare-pdp.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign alternate = blank
+  assign lead = ''
+  assign link_label = ''
+  if product.handle == 'sunday-reset-ritual-kit'
+    assign alternate = all_products['sunday-reset-overnight-glow-mask']
+    assign lead = block.settings.kit_lead
+    assign link_label = block.settings.kit_label
+  elsif product.handle == 'sunday-reset-overnight-glow-mask'
+    assign alternate = all_products['sunday-reset-ritual-kit']
+    assign lead = block.settings.mask_lead
+    assign link_label = block.settings.mask_label
+  endif
+-%}
+
+{%- if alternate != blank and alternate.id != blank -%}
+  <p class="ge-skin-format" {{ block.shopify_attributes }}>
+    {{ lead | escape }}
+    <a href="{{ alternate.url }}">{{ link_label | escape }}</a>
+    <span class="ge-skin-format__meta">
+      {{ alternate.price | money }}
+      {%- unless alternate.available %} · {{ 'products.product.sold_out' | t }}{% endunless -%}
+    </span>
+  </p>
+{%- endif -%}
