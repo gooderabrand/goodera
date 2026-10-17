@@ -58,9 +58,7 @@
     if (!document.body.classList.contains('template-product-skincare')) return;
     document.querySelectorAll('.ge-apple-pay').forEach(function (btn) {
       var soldOut = geAppleSoldOut(btn);
-      var marked = btn.classList.contains('is-sold-out');
-      if (btn.disabled === soldOut && marked === soldOut) return;
-      btn.disabled = soldOut;
+      btn.disabled = false;
       btn.classList.toggle('is-sold-out', soldOut);
       btn.setAttribute('aria-disabled', soldOut ? 'true' : 'false');
       if (soldOut) btn.setAttribute('tabindex', '-1');
@@ -105,6 +103,14 @@
     tick();
   }
   geWatchSkinGallery();
+
+  function geKickShopInk() {
+    if (typeof window.geStartShopInk === 'function') window.geStartShopInk();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', geKickShopInk);
+  else window.setTimeout(geKickShopInk, 0);
+  window.setTimeout(geKickShopInk, 600);
+  window.setTimeout(geKickShopInk, 1800);
 </script>
 {{ 'product-clothing.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product-paired.js' | asset_url }}" defer></script>
