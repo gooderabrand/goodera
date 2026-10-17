@@ -950,6 +950,7 @@ body.template-product-skincare.template-product-clothing .product-form__checkout
 body.template-product-skincare .section-skincare-results,
 body.template-product-skincare .section-skincare-routine,
 body.template-product-skincare .section-skincare-how-to,
+body.template-product-skincare .section-skincare-key-ingredients,
 body.template-product-skincare .section-skincare-faq {
   box-sizing: border-box;
   width: auto;
@@ -972,13 +973,15 @@ body.template-product-skincare .section-recently-viewed-products {
 
 body.template-product-skincare .section-skincare-results,
 body.template-product-skincare .section-skincare-routine,
-body.template-product-skincare .section-skincare-how-to {
+body.template-product-skincare .section-skincare-how-to,
+body.template-product-skincare .section-skincare-key-ingredients {
   padding-block: var(--ge-section-space, 64px);
 }
 
 @media (max-width: 767px) {
   body.template-product-skincare .section-skincare-how-to,
   body.template-product-skincare .section-skincare-results,
+  body.template-product-skincare .section-skincare-key-ingredients,
   body.template-product-skincare .section-skincare-faq {
     padding: 42px 18px !important;
   }
@@ -1313,6 +1316,84 @@ body.template-product-skincare .ge-skin-faq__sub {
   line-height: var(--ge-lh-normal, 1.5);
 }
 
+body.template-product-skincare .product-form__checkout-row .single-add-to-cart-button {
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-inline: 1.15rem;
+}
+
+body.template-product-skincare .product-form__checkout-row .single-add-to-cart-button--price {
+  margin-left: auto;
+  color: #fff !important;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+body.template-product-skincare .product-form__checkout-row .single-add-to-cart-button .loading-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.template-product-skincare .section-skincare-key-ingredients .ge-skin-key__title {
+  margin: 0 0 0.35rem;
+  font-size: var(--ge-role-section-title, clamp(1.6rem, 3vw, 2.2rem));
+  font-weight: var(--ge-weight-heading, 500);
+  letter-spacing: var(--ge-tracking-tight, -0.03em);
+  line-height: 1.1;
+}
+
+body.template-product-skincare .section-skincare-key-ingredients .sr-beta__faq-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--ge-hair, rgba(23, 22, 15, 0.12));
+}
+
+body.template-product-skincare .section-skincare-key-ingredients .sr-beta__faq-item {
+  border-bottom: 1px solid var(--ge-hair, rgba(23, 22, 15, 0.12));
+}
+
+body.template-product-skincare .section-skincare-key-ingredients .sr-beta__faq-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.05rem 0;
+  background: transparent;
+  border: 0;
+  color: var(--ge-ink, #17160f);
+  font-size: var(--ge-role-card-title, 1.0625rem);
+  font-weight: var(--ge-weight-heading, 500);
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+  text-align: left;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+body.template-product-skincare .section-skincare-key-ingredients .sr-beta__faq-panel {
+  margin: 0 0 1.05rem;
+  max-width: 40rem;
+  color: var(--ge-ink, #17160f);
+  font-size: var(--ge-role-body, 1.0625rem);
+  line-height: 1.5;
+}
+
+body.template-product-skincare .section-skincare-key-ingredients .sr-beta__faq-panel p {
+  margin: 0;
+}
+
+body.template-product-skincare .section-skincare-key-ingredients .sr-beta__faq-panel p + p {
+  margin-top: 0.65rem;
+}
+
 body.template-product-skincare .section-skincare-faq .sr-beta__faq-toggle {
   padding: 0.7rem 0;
   font-size: var(--ge-role-card-title, 1.0625rem);
@@ -1323,7 +1404,10 @@ body.template-product-skincare .section-skincare-faq .sr-beta__faq-toggle {
 
 body.template-product-skincare .section-skincare-faq .sr-beta__faq-chevron,
 body.template-product-skincare .section-skincare-faq .sr-beta__faq-toggle[aria-expanded='true'] .sr-beta__faq-chevron,
-body.template-product-skincare .section-skincare-faq .sr-beta__faq-toggle.is-open .sr-beta__faq-chevron {
+body.template-product-skincare .section-skincare-faq .sr-beta__faq-toggle.is-open .sr-beta__faq-chevron,
+body.template-product-skincare .section-skincare-key-ingredients .sr-beta__faq-chevron,
+body.template-product-skincare .section-skincare-key-ingredients .sr-beta__faq-toggle[aria-expanded='true'] .sr-beta__faq-chevron,
+body.template-product-skincare .section-skincare-key-ingredients .sr-beta__faq-toggle.is-open .sr-beta__faq-chevron {
   transform: rotate(-45deg);
 }
 
